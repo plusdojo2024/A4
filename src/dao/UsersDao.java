@@ -40,8 +40,8 @@ public class UsersDao {
 			//rs.nextで表の次の行にフォーカスが合う　もう行がなければfalseが返ってきて終わり
 				user = new User();
 				user.setUserName(rs.getString("user_name"));
-				user.setUserId(rs.getString("user_id"));
 				user.setUserEmail(rs.getString("user_email"));
+				user.setUserId(rs.getInt("user_id"));
 			}
 		}
 		catch (SQLException e) {
