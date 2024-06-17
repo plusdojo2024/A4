@@ -17,14 +17,14 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//JSPに処理を委譲
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/◯◯.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
 		dispatcher.forward(request, response);
 
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//JSPに処理を委譲
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/◯◯.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
 		dispatcher.forward(request, response);
 
 	}
