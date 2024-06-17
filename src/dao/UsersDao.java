@@ -10,7 +10,7 @@ import java.util.List;
 
 import model.Bc;
 
-public class BacknumberDao {
+public class UsersDao {
 	// 引数で検索項目を指定し、検索結果のリストを返す
 
 	public List<Bc> select(Bc card) {	//自分が検索欄で入力したものがcardに入る
