@@ -9,7 +9,7 @@ public class User implements Serializable {
 	private String userPassword;	//パスワード
 	private String userName;		//ユーザーネーム
 	private String userImg;			//アイコン画像
-	private int uPrivcyFlg;			//ユーザー公開・非公開フラグ
+	private int uPrivacyFlg;			//ユーザー公開・非公開フラグ
 	private String uCreatedAt;		//ユーザー作成日時
 	private String uUpdatedAt;		//ユーサー更新日時
 	//followsテーブル
