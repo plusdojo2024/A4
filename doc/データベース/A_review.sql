@@ -109,7 +109,7 @@ CREATE TABLE BACKNUMBERS
 CREATE TABLE FOLLOWS
 (
     follow_id INTEGER AUTO_INCREMENT, /*フォローID*/
-    userl_id INTEGER, /*ユーザー１ID*/
+    user1_id INTEGER, /*ユーザー１ID*/
     user2_id INTEGER, /*ユーザー２ID*/
     created_at VARCHAR, /*作成日時*/
     updated_at VARCHAR, /*更新日時*/
