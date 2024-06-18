@@ -30,6 +30,18 @@ public class User implements Serializable {
 		this.fCreatedAt = "";
 		this.fUpdatedAt = "";
 	}
+	
+	public User(int userId, String userEmail, String userPassword, String userName, String userImg,
+		String uCreatedAt, String uUpdatedAt) {
+		super();
+		this.userId = userId;
+		this.userEmail = userEmail;
+		this.userPassword = userPassword;
+		this.userName = userName;
+		this.userImg = userImg;
+		this.uCreatedAt = uCreatedAt;
+		this.uUpdatedAt = uUpdatedAt;
+	}
 
 
 	public int getUserId() {
