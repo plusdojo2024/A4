@@ -22,7 +22,7 @@ header .headline{
     font-size: 30px;
     margin-left: 100px;
 }
-.tabu-list {
+.tab {
     line-height: 100px;
     float: left;
     margin-left: 450px;
@@ -34,6 +34,13 @@ header .headline{
   display: inline-block;
   margin: 0 75px;
 }
+.tabu-list-item {
+  font-size: 25px;
+  list-style: none;
+  display: inline-block;
+  margin: 0 75px;
+}
+
 
 /* マイアイコン */
 .icon-circle{
@@ -93,4 +100,64 @@ ul,li{
 }
 .main-menu li ul li a {
 	border-width:0 1px 1px 1px;
+}
+/*tabの形状*/
+.tab{
+	display: flex;
+	flex-wrap: wrap;
+}
+.tab li a{
+	display: block;
+	background:#fff4e0;
+	margin:0 2px;
+	padding:10px 20px;
+}
+/*liにactiveクラスがついた時の形状*/
+.tab li.active a{
+	background:#ffc679;
+}
+
+
+/*エリアの表示非表示と形状*/
+.area {
+	display: none;/*はじめは非表示*/
+	opacity: 0;/*透過0*/
+	background: #ffc679;
+	padding:50px 20px;
+}
+
+@keyframes displayAnime{
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+/*========= レイアウトのためのCSS ===============*/
+
+ul{
+  list-style:none;
+}
+
+a{
+  color:#333;
+  text-decoration: none;
+}
+
+.wrapper{
+  width:100%;
+  max-width: 960px;
+  margin:30px auto;
+    background:#fefefe;
+}
+
+.area h2{
+  font-size:1.3rem;
+  margin:0 0 20px 10px;
+}
+
+.area li{
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
 }
