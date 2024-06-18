@@ -1,0 +1,96 @@
+@charset "UTF-8";
+
+/* body */
+body {
+	background-color:#fff4e0;
+}
+
+/* ヘッダー */
+* {
+  margin:0; padding:0;
+}
+header {
+  height: 100px;
+  width: 100%;
+  padding: 15px 0;
+  background-color: #ffc679;
+  color: black;
+}
+header .headline{
+    line-height: 100px;
+    float: left;
+    font-size: 30px;
+    margin-left: 100px;
+}
+.tabu-list {
+    line-height: 100px;
+    float: left;
+    margin-left: 450px;
+    list-style: none;
+}
+.tabu-list-item {
+  font-size: 25px;
+  list-style: none;
+  display: inline-block;
+  margin: 0 75px;
+}
+
+/* マイアイコン */
+.icon-circle{
+  width: 50px;
+  height: 50px;
+  border-radius: 100px;
+  overflow: hidden;
+  position: relative;
+}
+.icon-circle img{
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+.my {
+	text-align: center;/* 中央寄せ */
+}
+/* プルダウンメニュー */
+ul,li{
+	padding:0;
+	margin:0;
+}
+.main-menu li{
+	position: relative;
+	display:inline-block;
+	width:auto;
+}
+.sub-menu {
+	display:none;
+	position: absolute;
+	top: 100%;
+	left: 0;
+}
+.main-menu li:hover
+
+.sub-menu {
+	display:
+	 block;
+}
+.main-menu li a {
+	border:1px solid #ccc;
+	font-weight: normal;
+	color: #12c;
+	display: block;
+	text-decoration: none;
+	margin: 0;
+	padding:2px 18px;
+}
+.main-menu li a:hover {
+	background-color: #039;
+	color:#fff;
+}
+.main-menu li ul li a {
+	border-width:0 1px 1px 1px;
+}
