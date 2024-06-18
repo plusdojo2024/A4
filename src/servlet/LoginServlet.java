@@ -8,6 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import dao.UsersDao;
 
 @WebServlet("/LoginServlet")//ここを変える
 public class LoginServlet extends HttpServlet {
@@ -21,8 +24,25 @@ public class LoginServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 
 	}
-
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// ユーザーが入力したメールアドレスとパスワードを取得
+		request.setCharacterEncoding("UTF-8");
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+
+		// UsersDao をインスタンス化
+		UsersDao usersDao = new UsersDao();
+		boolean boo = usersDao.isLoginOK(email, password);
+		if (boo) {
+			usersDao.UserLogin(email , password);
+		}
+
+		HttpSession session = request.getSession();
+		session.setAttribute("boo", boo);
+
 		//JSPに処理を委譲
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
 		dispatcher.forward(request, response);
