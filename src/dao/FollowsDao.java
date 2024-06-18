@@ -91,10 +91,8 @@ public class FollowsDao {
 			pStmt.setString(3,in.getfCreatedAt());
 			pStmt.setString(4,in.getfUpdatedAt());
 
-			// SQL文を実行する
-			if (pStmt.executeUpdate() == 1) {
-				num = 1;
-			}
+			// 何個インサートできたか数える
+			num = pStmt.executeUpdate();
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
@@ -134,10 +132,8 @@ public class FollowsDao {
 			// SQL文を完成させる
 			pStmt.setInt(1, number);
 
-			// SQL文を実行する
-			if (pStmt.executeUpdate() == 1) {
-				num = 1;
-			}
+			// 何個デリートできたか数える
+			num = pStmt.executeUpdate();
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
