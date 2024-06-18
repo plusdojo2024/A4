@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import model.List;
 import model.Review;
 
-public class ReviewsDao{
+public class SubReviewsDao{
 
 	public int selectId() {
 		int reviewId= 0;
