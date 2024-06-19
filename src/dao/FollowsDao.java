@@ -41,11 +41,18 @@ public class FollowsDao {
 
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
-				User record = new User( //recordという枝豆のさや
-				rs.getInt("US.user_id"),
-				rs.getString("US.user_name"),
-				rs.getString("US.user_img")
-				);
+				//コンストラクタを使った書き方
+//				User record = new User( //recordという枝豆のさや
+//				rs.getInt("US.user_id"),
+//				rs.getString("US.user_name"),
+//				rs.getString("US.user_img")
+//				);
+				//セッターを使った書き方
+				User record = new User();
+				record.setUser2Id(rs.getInt("US.user_id"));
+				record.setUserName(rs.getString("US.user_name"));
+				record.setUserImg(rs.getString("US.user_img"));
+				
 				list.add(record);			
 				}
 		}
@@ -82,14 +89,12 @@ public class FollowsDao {
 			Class.forName("org.h2.Driver");
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/4Adb", "sa", "");
 
-			String sql = "INSERT INTO Follows VALUES (NULL, ?, ?, ?, ?)";
+			String sql = "INSERT INTO Follows(user1_id,user2_id) VALUES (?, ?)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
 			pStmt.setInt(1,in.getUser1Id());
 			pStmt.setInt(2,in.getUser2Id());
-			pStmt.setString(3,in.getfCreatedAt());
-			pStmt.setString(4,in.getfUpdatedAt());
 
 			// 何個インサートできたか数える
 			num = pStmt.executeUpdate();

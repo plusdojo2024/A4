@@ -1,5 +1,6 @@
 package model;
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 public class User implements Serializable {
 
@@ -10,14 +11,14 @@ public class User implements Serializable {
 	private String userName;		//ユーザーネーム
 	private String userImg;			//アイコン画像
 	private int uPrivacyFlg;		//ユーザー公開・非公開フラグ
-	private String uCreatedAt;		//ユーザー作成日時
-	private String uUpdatedAt;		//ユーサー更新日時
+	private Timestamp uCreatedAt;		//ユーザー作成日時
+	private Timestamp uUpdatedAt;		//ユーサー更新日時
 	//followsテーブル
 	private int followId;			//フォローID
 	private int user1Id;			//ユーザー1ID
 	private int user2Id;			//ユーザー2ID
-	private String fCreatedAt;		//フォロー作成日時
-	private String fUpdatedAt;		//フォロー更新日時
+	private Timestamp fCreatedAt;		//フォロー作成日時
+	private Timestamp fUpdatedAt;		//フォロー更新日時
 
 	
 	public User() {
@@ -25,10 +26,6 @@ public class User implements Serializable {
 		this.userPassword = "";
 		this.userName = "";
 		this.userImg = "";
-		this.uCreatedAt = "";
-		this.uUpdatedAt = "";
-		this.fCreatedAt = "";
-		this.fUpdatedAt = "";
 	}
 	
 	public User(int userId, String userName, String userImg) {
@@ -37,135 +34,110 @@ public class User implements Serializable {
 		this.userName = userName;
 		this.userImg = userImg;
 	}
-	
+
 	public int getUserId() {
 		return userId;
 	}
-
 
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 
-
 	public String getUserEmail() {
 		return userEmail;
 	}
-
 
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
 	}
 
-
 	public String getUserPassword() {
 		return userPassword;
 	}
-
 
 	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
 	}
 
-
 	public String getUserName() {
 		return userName;
 	}
-
 
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
 
-
 	public String getUserImg() {
 		return userImg;
 	}
-
 
 	public void setUserImg(String userImg) {
 		this.userImg = userImg;
 	}
 
-
-	public int getuPrivcyFlg() {
+	public int getuPrivacyFlg() {
 		return uPrivacyFlg;
 	}
 
-
-	public void setuPrivcyFlg(int uPrivcyFlg) {
-		this.uPrivacyFlg = uPrivcyFlg;
+	public void setuPrivacyFlg(int uPrivacyFlg) {
+		this.uPrivacyFlg = uPrivacyFlg;
 	}
 
-
-	public String getuCreatedAt() {
+	public Timestamp getuCreatedAt() {
 		return uCreatedAt;
 	}
 
-
-	public void setuCreatedAt(String uCreatedAt) {
+	public void setuCreatedAt(Timestamp uCreatedAt) {
 		this.uCreatedAt = uCreatedAt;
 	}
 
-
-	public String getuUpdatedAt() {
+	public Timestamp getuUpdatedAt() {
 		return uUpdatedAt;
 	}
 
-
-	public void setuUpdatedAt(String uUpdatedAt) {
+	public void setuUpdatedAt(Timestamp uUpdatedAt) {
 		this.uUpdatedAt = uUpdatedAt;
 	}
-
 
 	public int getFollowId() {
 		return followId;
 	}
 
-
 	public void setFollowId(int followId) {
 		this.followId = followId;
 	}
-
 
 	public int getUser1Id() {
 		return user1Id;
 	}
 
-
 	public void setUser1Id(int user1Id) {
 		this.user1Id = user1Id;
 	}
-
 
 	public int getUser2Id() {
 		return user2Id;
 	}
 
-
 	public void setUser2Id(int user2Id) {
 		this.user2Id = user2Id;
 	}
 
-
-	public String getfCreatedAt() {
+	public Timestamp getfCreatedAt() {
 		return fCreatedAt;
 	}
 
-
-	public void setfCreatedAt(String fCreatedAt) {
+	public void setfCreatedAt(Timestamp fCreatedAt) {
 		this.fCreatedAt = fCreatedAt;
 	}
 
-
-	public String getfUpdatedAt() {
+	public Timestamp getfUpdatedAt() {
 		return fUpdatedAt;
 	}
 
-
-	public void setfUpdatedAt(String fUpdatedAt) {
+	public void setfUpdatedAt(Timestamp fUpdatedAt) {
 		this.fUpdatedAt = fUpdatedAt;
 	}
-	
-	
 }
+	
+	
