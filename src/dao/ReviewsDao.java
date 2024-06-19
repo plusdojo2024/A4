@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import model.List;
 import model.Review;
 
-public class ReviewsDao{
+public class ReviewsDAO{
 
 	public int selectId() {
 		int reviewId= 0;
@@ -90,9 +90,9 @@ public class ReviewsDao{
 			//引数にH2に繋ぐためのアドレスを入れている(地図)＝simpleBCの部分が作るときで変わる、そのユーザのid,pw
 
 
-			String sql = "SELECT reviews.user_id,reviews.review_name,reviews.review_price,reviews.review_comment,"
+			String sql = "SELECT reviews.review_id,reviews.category2_id,reviews.review_name,reviews.review_price,reviews.review_comment,"
 					+ "reviews.privacy_flg,reviews.delete_flg,reviews.created_at,reviews.updated_at, "
-					+ "review_img.review_img_id,review_img.review_img,review_img.delete_flg,review_img.created_at,review_img.updated_at,"
+					+ "reviews_imgs.review_img_id,reviews_imgs.review_img,reviews_imgs.delete_flg,reviews_imgs.created_at,reviews_imgs.updated_at,"
 					+ "reviews_item.review_item_id,reviews_item.review_item1,reviews_item.review_item2,reviews_item.review_item3,reviews_item.review_item4,reviews_item.review_item5,"
 					+ "reviews_item.created_at,reviews_item.updated_at,"
 					+ "reviews_scores.review_score_id,reviews_scores.review_item_id,"
@@ -100,14 +100,14 @@ public class ReviewsDao{
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
 					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.,users.user_email,users.user_password,users.user_name,users.user_img,users.privcy_flg,users.created_at,users.updated_at FROM reviews "
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privcy_flg,users.created_at,users.updated_at FROM reviews "
 					+ "JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
 					+ "JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
 					+ "JOIN reviews_items ON categorys2.category2_id = reviews_item.category2_id "
 					+ "JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
 					+ "JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
 					+ "JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
-					+ "JOIN users ON user_id = reviews.user_id "
+					+ "JOIN users ON users.user_id = reviews.user_id "
 					+ " WHERE reviews.user_id = ? ";
 					if(category2Id != 0) {
 						sql += " and categorys2.category2_id = ? ";
@@ -319,9 +319,9 @@ public class ReviewsDao{
 			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4DB",id,pw);
 
 			// SELECT文を準備する
-			String sql = "SELECT reviews.user_id,reviews.review_name,reviews.review_price,reviews.review_comment,"
+			String sql = "SELECT reviews.review_id,reviews.category2_id,reviews.review_name,reviews.review_price,reviews.review_comment,"
 					+ "reviews.privacy_flg,reviews.delete_flg,reviews.created_at,reviews.updated_at, "
-					+ "review_img.review_img_id,review_img.review_img,review_img.delete_flg,review_img.created_at,review_img.updated_at,"
+					+ "reviews_imgs.review_img_id,reviews_imgs.review_img,reviews_imgs.delete_flg,reviews_imgs.created_at,reviews_imgs.updated_at,"
 					+ "reviews_item.review_item_id,reviews_item.review_item1,reviews_item.review_item2,reviews_item.review_item3,reviews_item.review_item4,reviews_item.review_item5,"
 					+ "reviews_item.created_at,reviews_item.updated_at,"
 					+ "reviews_scores.review_score_id,reviews_scores.review_item_id,"
@@ -336,21 +336,64 @@ public class ReviewsDao{
 					+ "JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
 					+ "JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
 					+ "JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
-					+ "JOIN users ON user_id = reviews.user_id ";
+					+ "JOIN users ON users.user_id = reviews.user_id ";
+
 			PreparedStatement pStmt = conn.prepareStatement(sql);
+
 			pStmt.setInt(1, 1);//引数sqlにsetStringしてる
-
-			// SQL文を実行し、結果表を取得する	検索して結果の表をrsに入れる構文
 			ResultSet rs = pStmt.executeQuery();
-
 
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
 			//rs.nextで表の次の行にフォーカスが合う　もう行がなければfalseが返ってきて終わり
 				li = new Review();
-				li.setUserId(rs.getInt("user_id"));
-				li.setReviewName(rs.getString("review_name"));
-				li.set(rs.getInt(""));
+				li.setReviewId(rs.getInt("reviews.review_id"));
+				li.setReviewName(rs.getString("reviews.category2_id"));
+				li.setReviewName(rs.getString("reviews.review_name"));
+				li.setReviewPrice(rs.getInt("reviews.review_price"));
+				li.setReviewComment(rs.getString("reviews.review_comment"));
+				li.setrPrivacyFlg(rs.getInt("reviews.privacy_flg"));
+				li.setrDeleteFlg(rs.getInt("reviews.delete_flg"));
+				li.setrCreatedAt(rs.getString("reviews.created_at"));
+				li.setrUpdatedAt(rs.getString("reviews.updated_at"));
+				li.setReviewImgId(rs.getInt("reviews_imgs.review_img_id"));
+				li.setReviewImg(rs.getString("reviews_imgs.review_img"));
+				li.setRimDeleteFlg(rs.getInt("reviews_imgs.delete_flg"));
+				li.setRimCreatedAt(rs.getString("reviews_imgs.created_at"));
+				li.setRimUpdatedAt(rs.getString("reviews_imgs.updated_at"));
+				li.setReviewItemId(rs.getInt("reviews_item.review_item_id"));
+				li.setReviewItem1(rs.getString("reviews_item.review_item1"));
+				li.setReviewItem2(rs.getString("reviews_item.review_item2"));
+				li.setReviewItem3(rs.getString("reviews_item.review_item3"));
+				li.setReviewItem4(rs.getString("reviews_item.review_item4"));
+				li.setReviewItem5(rs.getString("reviews_item.review_item5"));
+				li.setRitCreatedAt(rs.getString("reviews_item.created_at"));
+				li.setRitUpdatedAt(rs.getString("reviews_item.updated_at"));
+				li.setReviewScoreId(rs.getInt("reviews_scores.review_score_id"));
+				li.set(rs.getInt("reviews_scores.review_item_id"));//★ここーーー
+				li.setReviewItem1Score(rs.getInt("reviews_scores.review_item1_score"));
+				li.setReviewItem2Score(rs.getInt("reviews_scores.review_item2_score"));
+				li.setReviewItem3Score(rs.getInt("reviews_scores.review_item3_score"));
+				li.setReviewItem4Score(rs.getInt("reviews_scores.review_item4_score"));
+				li.setReviewItem5Score(rs.getInt("reviews_scores.review_item5_score"));
+				li.setScoreAvg(rs.getInt("reviews_scores.score_avg"));
+				li.setRsCreatedAt(rs.getString("reviews_scores.created_at"));
+				li.setRsUpdatedAt(rs.getString("reviews_scores.updated_at"));
+				li.setBacknumberId(rs.getInt("backnumbers.backnumber_id"));
+				li.setBacknumberContent(rs.getString("backnumbers.backnumber_content"));
+				li.setbDeleteFlg(rs.getInt("backnumbers.delete_flg"));
+				li.setbCreatedAt(rs.getString("backnumbers.created_at"));
+				li.setbUpdatedAt(rs.getString("backnumbers.updated_at"));
+				li.setLrListId(rs.getInt("list_reviews.list_id"));
+				li.setLrCreatedAt(rs.getString("list_reviews.created_at"));
+				li.setLrUpdatedAt(rs.getString("list_reviews.updated_at"));
+				li.setUserEmail(rs.getString("users.user_email"));
+				li.set(rs.getString("users.user_password"));
+				li.set(rs.getString("users.user_name"));
+				li.set(rs.getString("users.user_img"));
+				li.set(rs.getInt("users.privcy_flg"));
+				li.set(rs.getString("users.created_at"));
+				li.set(rs.getString("users.updated_at"));
 
 				al.add(li);
 			}
