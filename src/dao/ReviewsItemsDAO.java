@@ -76,7 +76,7 @@ public class ReviewsItemsDAO {
 			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4DB",id,pw);
 
 			// SELECT文を準備する
-			String sql = "UPDATE reviews_items SET review_item1=?, review_item2=? review_item3=? review_item4=? review_item5=? WHERE review_item_id=?";
+			String sql = "UPDATE reviews_items SET review_item1=?, review_item2=?, review_item3=?, review_item4=?, review_item5=? WHERE review_item_id=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, reviewItem1);
 			pStmt.setString(2, reviewItem2);

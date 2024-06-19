@@ -1,5 +1,6 @@
 package model;
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 public class List implements Serializable {
 	//レビューテーブル
@@ -11,31 +12,25 @@ public class List implements Serializable {
 	private int userId;              //ユーザーID
 	private int rPrivacyFlg;         //レビュー公開・非公開フラグ
 	private int rDeleteFlg;          //レビュー削除フラグ
-	private String rCreatedAt;       //レビュー作成日時
-	private String rUpdatedAt;       //レビュー更新日時
+	private Timestamp rCreatedAt;       //レビュー作成日時
+	private Timestamp rUpdatedAt;       //レビュー更新日時
 
 	//リストテーブル
 	private int listId;             //リストID
 	private String listName;        //リスト名
 	private int lDeleteFlg;         //リスト削除フラグ
-	private String lCreatedAt;      //リスト作成日時
-	private String lUpdatedAt;      //リスト更新日時
+	private Timestamp lCreatedAt;      //リスト作成日時
+	private Timestamp lUpdatedAt;      //リスト更新日時
 
 	//リストレビューテーブル
 	private int listReviewId;       //リストレビューID
-	private String lrCreatedAt;     //リストレビュー作成日時
-	private String lrUpdatedAt;     //リストレビュー更新日時
+	private Timestamp lrCreatedAt;     //リストレビュー作成日時
+	private Timestamp lrUpdatedAt;     //リストレビュー更新日時
 
 	public List() {
 		this.reviewName = "";
 		this.reviewComment = "";
-		this.rCreatedAt = "";
-		this.rUpdatedAt = "";
 		this.listName = "";
-		this.lCreatedAt = "";
-		this.lUpdatedAt = "";
-		this.lrCreatedAt = "";
-		this.lrUpdatedAt = "";
 	}
 
 	public int getReviewId() {
@@ -86,16 +81,16 @@ public class List implements Serializable {
 	public void setrDeleteFlg(int rDeleteFlg) {
 		this.rDeleteFlg = rDeleteFlg;
 	}
-	public String getrCreatedAt() {
+	public Timestamp getrCreatedAt() {
 		return rCreatedAt;
 	}
-	public void setrCreatedAt(String rCreatedAt) {
+	public void setrCreatedAt(Timestamp rCreatedAt) {
 		this.rCreatedAt = rCreatedAt;
 	}
-	public String getrUpdatedAt() {
+	public Timestamp getrUpdatedAt() {
 		return rUpdatedAt;
 	}
-	public void setrUpdatedAt(String rUpdatedAt) {
+	public void setrUpdatedAt(Timestamp rUpdatedAt) {
 		this.rUpdatedAt = rUpdatedAt;
 	}
 	public int getListId() {
@@ -116,16 +111,16 @@ public class List implements Serializable {
 	public void setlDeleteFlg(int lDeleteFlg) {
 		this.lDeleteFlg = lDeleteFlg;
 	}
-	public String getlCreatedAt() {
+	public Timestamp getlCreatedAt() {
 		return lCreatedAt;
 	}
-	public void setlCreatedAt(String lCreatedAt) {
+	public void setlCreatedAt(Timestamp lCreatedAt) {
 		this.lCreatedAt = lCreatedAt;
 	}
-	public String getlUpdatedAt() {
+	public Timestamp getlUpdatedAt() {
 		return lUpdatedAt;
 	}
-	public void setlUpdatedAt(String lUpdatedAt) {
+	public void setlUpdatedAt(Timestamp lUpdatedAt) {
 		this.lUpdatedAt = lUpdatedAt;
 	}
 	public int getListReviewId() {
@@ -134,16 +129,16 @@ public class List implements Serializable {
 	public void setListReviewId(int listReviewId) {
 		this.listReviewId = listReviewId;
 	}
-	public String getLrCreatedAt() {
+	public Timestamp getLrCreatedAt() {
 		return lrCreatedAt;
 	}
-	public void setLrCreatedAt(String lrCreatedAt) {
+	public void setLrCreatedAt(Timestamp lrCreatedAt) {
 		this.lrCreatedAt = lrCreatedAt;
 	}
-	public String getLrUpdatedAt() {
+	public Timestamp getLrUpdatedAt() {
 		return lrUpdatedAt;
 	}
-	public void setLrUpdatedAt(String lrUpdatedAt) {
+	public void setLrUpdatedAt(Timestamp lrUpdatedAt) {
 		this.lrUpdatedAt = lrUpdatedAt;
 	}
 

@@ -63,7 +63,7 @@ public class ReviewsScoresDAO {
 		return num;
 	}
 
-	public int update(int reviewScoreId, int reviewItem1Score, int reviewItem2Score, int reviewItem3Score, ) {
+	public int update(int reviewScoreId, int reviewItem1Score, int reviewItem2Score, int reviewItem3Score, int reviewItem4Score, int reviewItem5Score, int scoreAvg) {
 		int num = 0;
 		Connection conn = null;
 
@@ -78,14 +78,15 @@ public class ReviewsScoresDAO {
 			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4DB",id,pw);
 
 			// SELECT文を準備する
-			String sql = "UPDATE reviews_scores SET review_item1=? review_item2=? review_item3=? review_item4=? review_item5=? WHERE review_item_id=?";
+			String sql = "UPDATE reviews_scores SET review_item1_score=?, review_item2_score=?, review_item3_score=?, review_item4_score=?, review_item5_score=?, score_avg=? WHERE review_score_id=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setString(1, reviewItem1);
-			pStmt.setString(2, reviewItem2);
-			pStmt.setString(3, reviewItem3);
-			pStmt.setString(4, reviewItem4);
-			pStmt.setString(5, reviewItem5);
-			pStmt.setInt(6, reviewItemId);
+			pStmt.setInt(1, reviewItem1Score);
+			pStmt.setInt(2, reviewItem2Score);
+			pStmt.setInt(3, reviewItem3Score);
+			pStmt.setInt(4, reviewItem4Score);
+			pStmt.setInt(5, reviewItem5Score);
+			pStmt.setInt(6, scoreAvg);
+			pStmt.setInt(7, reviewScoreId);
 
 
 			// SQL文を実行し、結果表を取得する	検索して結果の表をrsに入れる構文
@@ -113,7 +114,7 @@ public class ReviewsScoresDAO {
 		return num;
 	}
 
-	public Review viewItem1(int category2Id) {
+	public Review viewScore1(int reviewId, int reviewItemId) {
 		Review review = null;
 		Connection conn = null;
 
@@ -128,12 +129,15 @@ public class ReviewsScoresDAO {
 			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4DB",id,pw);
 
 			// SELECT文を準備する
-			String sql = "SELECT review_item1 FROM reviews_items "
-					+ "WHERE category2_id=? "
+			String sql = "SELECT review_item1_score FROM reviews_scores "
+					+ "WHERE review_id=? "
 					+ "and "
-					+ "reviews_items_id =(select  max(reviews_items_id) from reviews_items)";
+					+ "review_item_id=?"
+					+ "and"
+					+ "reviews_scores_id =(select  max(reviews_scores_id) from reviews_scores)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setInt(1, category2Id);
+			pStmt.setInt(1, reviewId);
+			pStmt.setInt(2, reviewItemId);
 
 			// SQL文を実行し、結果表を取得する	検索して結果の表をrsに入れる構文
 			ResultSet rs = pStmt.executeQuery();
@@ -143,7 +147,7 @@ public class ReviewsScoresDAO {
 			while (rs.next()) {
 			//rs.nextで表の次の行にフォーカスが合う　もう行がなければfalseが返ってきて終わり
 				review = new Review();
-				review.setReviewItem1(rs.getString("review_item1"));
+				review.setReviewItem1Score(rs.getInt("review_item1_score"));
 			}
 		}
 		catch (SQLException e) {
@@ -171,7 +175,7 @@ public class ReviewsScoresDAO {
 		return review;//返ってきた結果をサーブレットに渡す(この後スコープに渡してjspに渡して表示)
 	}
 
-	public Review viewItem2(int category2Id) {
+	public Review viewScore2(int reviewId, int reviewItemId) {
 		Review review = null;
 		Connection conn = null;
 
@@ -186,12 +190,15 @@ public class ReviewsScoresDAO {
 			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4DB",id,pw);
 
 			// SELECT文を準備する
-			String sql = "SELECT review_item2 FROM reviews_items "
-					+ "WHERE category2_id=? "
+			String sql = "SELECT review_item2_score FROM reviews_scores "
+					+ "WHERE review_id=? "
 					+ "and "
-					+ "reviews_items_id =(select  max(reviews_items_id) from reviews_items)";
+					+ "review_item_id=?"
+					+ "and"
+					+ "reviews_scores_id =(select  max(reviews_scores_id) from reviews_scores)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setInt(1, category2Id);
+			pStmt.setInt(1, reviewId);
+			pStmt.setInt(2, reviewItemId);
 
 			// SQL文を実行し、結果表を取得する	検索して結果の表をrsに入れる構文
 			ResultSet rs = pStmt.executeQuery();
@@ -201,7 +208,7 @@ public class ReviewsScoresDAO {
 			while (rs.next()) {
 			//rs.nextで表の次の行にフォーカスが合う　もう行がなければfalseが返ってきて終わり
 				review = new Review();
-				review.setReviewItem2(rs.getString("review_item2"));
+				review.setReviewItem2Score(rs.getInt("review_item2_score"));
 			}
 		}
 		catch (SQLException e) {
@@ -229,7 +236,7 @@ public class ReviewsScoresDAO {
 		return review;//返ってきた結果をサーブレットに渡す(この後スコープに渡してjspに渡して表示)
 	}
 
-	public Review viewItem3(int category2Id) {
+	public Review viewScore3(int reviewId, int reviewItemId) {
 		Review review = null;
 		Connection conn = null;
 
@@ -244,12 +251,15 @@ public class ReviewsScoresDAO {
 			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4DB",id,pw);
 
 			// SELECT文を準備する
-			String sql = "SELECT review_item3 FROM reviews_items "
-					+ "WHERE category2_id=? "
+			String sql = "SELECT review_item3_score FROM reviews_scores "
+					+ "WHERE review_id=? "
 					+ "and "
-					+ "reviews_items_id =(select  max(reviews_items_id) from reviews_items)";
+					+ "review_item_id=?"
+					+ "and"
+					+ "reviews_scores_id =(select  max(reviews_scores_id) from reviews_scores)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setInt(1, category2Id);
+			pStmt.setInt(1, reviewId);
+			pStmt.setInt(2, reviewItemId);
 
 			// SQL文を実行し、結果表を取得する	検索して結果の表をrsに入れる構文
 			ResultSet rs = pStmt.executeQuery();
@@ -259,7 +269,7 @@ public class ReviewsScoresDAO {
 			while (rs.next()) {
 			//rs.nextで表の次の行にフォーカスが合う　もう行がなければfalseが返ってきて終わり
 				review = new Review();
-				review.setReviewItem3(rs.getString("review_item3"));
+				review.setReviewItem3Score(rs.getInt("review_item3_score"));
 			}
 		}
 		catch (SQLException e) {
@@ -287,7 +297,7 @@ public class ReviewsScoresDAO {
 		return review;//返ってきた結果をサーブレットに渡す(この後スコープに渡してjspに渡して表示)
 	}
 
-	public Review viewItem4(int category2Id) {
+	public Review viewScore4(int reviewId, int reviewItemId) {
 		Review review = null;
 		Connection conn = null;
 
@@ -302,12 +312,15 @@ public class ReviewsScoresDAO {
 			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4DB",id,pw);
 
 			// SELECT文を準備する
-			String sql = "SELECT review_item4 FROM reviews_items "
-					+ "WHERE category2_id=? "
+			String sql = "SELECT review_item4_score FROM reviews_scores "
+					+ "WHERE review_id=? "
 					+ "and "
-					+ "reviews_items_id =(select  max(reviews_items_id) from reviews_items)";
+					+ "review_item_id=?"
+					+ "and"
+					+ "reviews_scores_id =(select  max(reviews_scores_id) from reviews_scores)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setInt(1, category2Id);
+			pStmt.setInt(1, reviewId);
+			pStmt.setInt(2, reviewItemId);
 
 			// SQL文を実行し、結果表を取得する	検索して結果の表をrsに入れる構文
 			ResultSet rs = pStmt.executeQuery();
@@ -317,7 +330,7 @@ public class ReviewsScoresDAO {
 			while (rs.next()) {
 			//rs.nextで表の次の行にフォーカスが合う　もう行がなければfalseが返ってきて終わり
 				review = new Review();
-				review.setReviewItem4(rs.getString("review_item4"));
+				review.setReviewItem4Score(rs.getInt("review_item4_score"));
 			}
 		}
 		catch (SQLException e) {
@@ -345,7 +358,7 @@ public class ReviewsScoresDAO {
 		return review;//返ってきた結果をサーブレットに渡す(この後スコープに渡してjspに渡して表示)
 	}
 
-	public Review viewItem5(int category2Id) {
+	public Review viewScore5(int reviewId, int reviewItemId) {
 		Review review = null;
 		Connection conn = null;
 
@@ -360,12 +373,15 @@ public class ReviewsScoresDAO {
 			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4DB",id,pw);
 
 			// SELECT文を準備する
-			String sql = "SELECT review_item5 FROM reviews_items "
-					+ "WHERE category2_id=? "
+			String sql = "SELECT review_item5_score FROM reviews_scores "
+					+ "WHERE review_id=? "
 					+ "and "
-					+ "reviews_items_id =(select  max(reviews_items_id) from reviews_items)";
+					+ "review_item_id=?"
+					+ "and"
+					+ "reviews_scores_id =(select  max(reviews_scores_id) from reviews_scores)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setInt(1, category2Id);
+			pStmt.setInt(1, reviewId);
+			pStmt.setInt(2, reviewItemId);
 
 			// SQL文を実行し、結果表を取得する	検索して結果の表をrsに入れる構文
 			ResultSet rs = pStmt.executeQuery();
@@ -375,7 +391,7 @@ public class ReviewsScoresDAO {
 			while (rs.next()) {
 			//rs.nextで表の次の行にフォーカスが合う　もう行がなければfalseが返ってきて終わり
 				review = new Review();
-				review.setReviewItem5(rs.getString("review_item5"));
+				review.setReviewItem5Score(rs.getInt("review_item5_score"));
 			}
 		}
 		catch (SQLException e) {
