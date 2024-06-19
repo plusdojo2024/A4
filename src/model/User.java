@@ -10,7 +10,7 @@ public class User implements Serializable {
 	private String userPassword;	//パスワード
 	private String userName;		//ユーザーネーム
 	private String userImg;			//アイコン画像
-	private int uPrivacyFlg;		//ユーザー公開・非公開フラグ
+	private int uPrivcyFlg;		//ユーザー公開・非公開フラグ
 	private Timestamp uCreatedAt;		//ユーザー作成日時
 	private Timestamp uUpdatedAt;		//ユーサー更新日時
 	//followsテーブル
@@ -75,12 +75,12 @@ public class User implements Serializable {
 		this.userImg = userImg;
 	}
 
-	public int getuPrivacyFlg() {
-		return uPrivacyFlg;
+	public int getuPrivcyFlg() {
+		return uPrivcyFlg;
 	}
 
-	public void setuPrivacyFlg(int uPrivacyFlg) {
-		this.uPrivacyFlg = uPrivacyFlg;
+	public void setuPrivacyFlg(int uPrivcyFlg) {
+		this.uPrivcyFlg = uPrivcyFlg;
 	}
 
 	public Timestamp getuCreatedAt() {

@@ -16,8 +16,8 @@ import java.util.List;
 import model.User;
 
 public class FollowsDao {
-	//フォローしてる人のアイコン、なまえ、IDを持ってくる、引数いらない
-	public List<User> selectfoll(User foll) { //follにはログインしてるユーザーIDを入れる
+	//フォローしてる人のアイコン、なまえ、IDを持ってくる
+	public List<User> selectfoll(User foll) { //follにはログインしてるユーザーIDを入れてくる
 		Connection conn = null;
 		ArrayList<User> list = new ArrayList<User>(); 
 
@@ -106,7 +106,6 @@ public class FollowsDao {
 			e.printStackTrace();
 		}
 		finally {
-			// データベースを切断
 			if (conn != null) {
 				try {
 					conn.close();
@@ -116,8 +115,6 @@ public class FollowsDao {
 				}
 			}
 		}
-
-		// 結果を返す
 		return num;
 	}
 	
@@ -130,14 +127,11 @@ public class FollowsDao {
 			Class.forName("org.h2.Driver");
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/4Adb", "sa", "");
 
-			// SQL文を準備する
 			String sql = "DELETE FROM Follows WHERE follow_id=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-			// SQL文を完成させる
 			pStmt.setInt(1, number);
 
-			// 何個デリートできたか数える
 			num = pStmt.executeUpdate();
 		}
 		catch (SQLException e) {
@@ -147,7 +141,6 @@ public class FollowsDao {
 			e.printStackTrace();
 		}
 		finally {
-			// データベースを切断
 			if (conn != null) {
 				try {
 					conn.close();
@@ -157,8 +150,6 @@ public class FollowsDao {
 				}
 			}
 		}
-
-		// 結果を返す
 		return num;
 	}
 
