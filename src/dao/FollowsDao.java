@@ -16,49 +16,53 @@ import java.util.List;
 import model.User;
 
 public class FollowsDao {
-	//フォローしてる人のアイコン、なまえ、IDを持ってくる、引数いらない
-	public List<User> selectAll() {
+	//フォローしてる人のアイコン、なまえ、IDを持ってくる
+	public List<User> selectfoll(User foll) { //follにはログインしてるユーザーIDを入れてくる
 		Connection conn = null;
-		ArrayList<User> follList = new ArrayList<User>(); 
+		ArrayList<User> list = new ArrayList<User>(); 
 
 		try {
 			// JDBCドライバを読み込む
 			Class.forName("org.h2.Driver");
 
-			String id="sa";
-			String pw="";
 
 			// データベースに接続する
-			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4DB",id,pw);
+			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4db","sa","");
 
 			// SELECT文を準備する
-			String sql = "SELECT US.user_id, US.user_name, US.user_img "
-					+ "FROM Users AS US INNER JOIN Follows AS F "
-					+ "ON F.user2Id = US.userId "
-					+ "WHERE ";
+			String sql = "SELECT US.user_id, US.user_name, US.user_img "//Usersテーブルのuser_id、user_name、user_imgを持ってくる
+					+ "FROM Users AS US INNER JOIN Follows AS F "		//UsersをUSに、FollowsをFに改名して内部結合
+					+ "ON F.user2_id = US.user_id "						//Followsテーブルのuser2_idとUsersテーブルのuser_idが同じになるように内部結合
+					+ "WHERE F.user1_id = ?";							//Followsのuser1_idが自分のidと一緒という条件
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setString(1, email);//引数sqlにsetStringしてる
-			pStmt.setString(2, password);
+			pStmt.setInt(1, foll.getUser1Id());							//上の?に取ってきた自分のidを入れる
 
-			// SQL文を実行し、結果表を取得する	検索して結果の表をrsに入れる構文
 			ResultSet rs = pStmt.executeQuery();
-
 
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
+				//コンストラクタを使った書き方
+//				User record = new User( //recordという枝豆のさや
+//				rs.getInt("US.user_id"),
+//				rs.getString("US.user_name"),
+//				rs.getString("US.user_img")
+//				);
+				//セッターを使った書き方
 				User record = new User();
-				rs.setUserName(rs.getString("user_name"));
-				rs.setUserEmail(rs.getString("user_email"));
-				rs.setUserId(rs.getInt("user_id"));
-			}
+				record.setUser2Id(rs.getInt("US.user_id"));
+				record.setUserName(rs.getString("US.user_name"));
+				record.setUserImg(rs.getString("US.user_img"));
+				
+				list.add(record);			
+				}
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
-			user = null;
+			list = null;
 		}
 		catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			user = null;
+			list = null;
 		}
 		finally {
 			// データベースを切断
@@ -68,74 +72,14 @@ public class FollowsDao {
 				}
 				catch (SQLException e) {
 					e.printStackTrace();
-					user = null;
+					list = null;
 				}
 			}
 		}
+		return list;
 	}
 	
-	//ユーザーネームから合ってるやつを探す
-	public List<User> select(User search) {
-		Connection conn = null;
-		ArrayList<User> searchList = new ArrayList<User>(); 
 
-		//クロちゃんが会員制の市場へ船で買いに行く指示を受けた
-		try {
-			// JDBCドライバを読み込む（船のドライバー）
-			Class.forName("org.h2.Driver");
-			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4DB", "sa", "");
-
-			// SQL文を準備する（買い物メモ）（この構文を実行しなさい）
-			String sql = "SELECT * FROM Users WHERE userName LIKE ? AND uPrivacyFlg = 1 ORDER BY userId";
-
-			//PreparedStatementはデータベースにアクセスするためのオブジェクト（船）船に地図と買い物メモをのっけた
-			PreparedStatement pStmt = conn.prepareStatement(sql);
-
-			// SQL文を完成させる（買い物メモの？を埋める、数字は左から何番目）
-
-			pStmt.setString(1, "%" + search.getUserName() + "%");
-
-			ResultSet rs = pStmt.executeQuery();
-			
-			// 結果表をコレクションにコピーする
-
-			while (rs.next()) { //next()一行づつ見ていく、次あるかなーあればtrue、なければfalseでループを抜ける
-				User record = new User( //recordという枝豆のさや
-				rs.getInt("userId"),
-				rs.getString("userEmail"),
-				rs.getString("userPassword"),
-				rs.getString("userName"),
-				rs.getString("userImg"),
-				rs.getString("uCreatedAt"),
-				rs.getString("uUpdatedAt")
-				);
-				searchList.add(record);
-			} //アレイリスト名：cardの中に枝豆が入った状態
-		}
-		catch (SQLException e) {
-			e.printStackTrace();
-			searchList = null;
-		}
-		catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			searchList = null;
-		}
-		finally {
-			// データベースを切断
-			if (conn != null) {
-				try {
-					conn.close();
-				}
-				catch (SQLException e) {
-					e.printStackTrace();
-					searchList = null;
-				}
-			}
-		}
-
-		// 結果を返す、中華テーブルに置く
-		return searchList;
-	}
 	//フォローテーブルに追加する
 	public int insert(User in) {
 		Connection conn = null;
@@ -143,21 +87,17 @@ public class FollowsDao {
 
 		try {
 			Class.forName("org.h2.Driver");
-			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/4ADB", "sa", "");
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/4Adb", "sa", "");
 
-			String sql = "INSERT INTO Follows VALUES (NULL, ?, ?, ?, ?)";
+			String sql = "INSERT INTO Follows(user1_id,user2_id) VALUES (?, ?)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
 			pStmt.setInt(1,in.getUser1Id());
 			pStmt.setInt(2,in.getUser2Id());
-			pStmt.setString(3,in.getfCreatedAt());
-			pStmt.setString(4,in.getfUpdatedAt());
 
-			// SQL文を実行する
-			if (pStmt.executeUpdate() == 1) {
-				num = 1;
-			}
+			// 何個インサートできたか数える
+			num = pStmt.executeUpdate();
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
@@ -166,7 +106,6 @@ public class FollowsDao {
 			e.printStackTrace();
 		}
 		finally {
-			// データベースを切断
 			if (conn != null) {
 				try {
 					conn.close();
@@ -176,8 +115,6 @@ public class FollowsDao {
 				}
 			}
 		}
-
-		// 結果を返す
 		return num;
 	}
 	
@@ -188,19 +125,14 @@ public class FollowsDao {
 
 		try {
 			Class.forName("org.h2.Driver");
-			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/4ADB", "sa", "");
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/4Adb", "sa", "");
 
-			// SQL文を準備する
-			String sql = "DELETE FROM Follows WHERE followId=?";
+			String sql = "DELETE FROM Follows WHERE follow_id=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-			// SQL文を完成させる
 			pStmt.setInt(1, number);
 
-			// SQL文を実行する
-			if (pStmt.executeUpdate() == 1) {
-				num = 1;
-			}
+			num = pStmt.executeUpdate();
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
@@ -209,7 +141,6 @@ public class FollowsDao {
 			e.printStackTrace();
 		}
 		finally {
-			// データベースを切断
 			if (conn != null) {
 				try {
 					conn.close();
@@ -219,8 +150,6 @@ public class FollowsDao {
 				}
 			}
 		}
-
-		// 結果を返す
 		return num;
 	}
 

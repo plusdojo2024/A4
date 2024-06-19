@@ -1,5 +1,6 @@
 package model;
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 public class Review implements Serializable {
 
@@ -12,15 +13,15 @@ public class Review implements Serializable {
 	private int userId;	//ユーザーID
 	private int rPrivacyFlg;	//レビュー自体の公開・非公開フラグ
 	private int rDeleteFlg;	//レビュー自体の削除フラグ
-	private String rCreatedAt; //作成日時
-	private String rUpdatedAt;	//更新日時
+	private Timestamp rCreatedAt; //作成日時
+	private Timestamp rUpdatedAt;	//更新日時
 
 	//レビュー画像(reviews_imgs)テーブル
 	private int reviewImgId;	//レビュー画像ID
 	private String reviewImg;	//レビュー画像
 	private int rimDeleteFlg;	//レビュー画像の削除フラグ
-	private String rimCreatedAt;	//作成日時
-	private String rimUpdatedAt;	//更新日時
+	private Timestamp rimCreatedAt;	//作成日時
+	private Timestamp rimUpdatedAt;	//更新日時
 
 	//レビュー項目(reviews_item)テーブル
 	private int reviewItemId;		//レビュー項目ID
@@ -29,8 +30,8 @@ public class Review implements Serializable {
 	private String reviewItem3;	//レビュー項目3
 	private String reviewItem4;	//レビュー項目4
 	private String reviewItem5;	//レビュー項目5
-	private String ritCreatedAt;	//作成日時
-	private String ritUpdatedAt;	//更新日時
+	private Timestamp ritCreatedAt;	//作成日時
+	private Timestamp ritUpdatedAt;	//更新日時
 
 	//スコア(reviews_scores)テーブル
 	private int reviewScoreId;	//レビュースコアID
@@ -40,37 +41,42 @@ public class Review implements Serializable {
 	private int reviewItem4Score;	//レビュー項目4スコア
 	private int reviewItem5Score;	//レビュー項目5スコア
 	private int scoreAvg;	//スコア平均
-	private String rsCreatedAt;	//作成日時
-	private String rsUpdatedAt;	//更新日時
+	private Timestamp rsCreatedAt;	//作成日時
+	private Timestamp rsUpdatedAt;	//更新日時
 
 	//バックナンバー(backnumbers) テーブル
 	private int backnumberId;	//バックナンバーID
 	private String backnumberContent;	//バックナンバーコンテンツ(文章)
 	private int bDeleteFlg;	//バックナンバーの削除フラグ
-	private String bCreatedAt;	//作成日時
-	private String bUpdatedAt;	//更新日時
+	private Timestamp bCreatedAt;	//作成日時
+	private Timestamp bUpdatedAt;	//更新日時
+
+	//リストレビュー(list_reviews)テーブル
+	private int listReviewId;
+	private int lrListId;
+	private Timestamp lrCreatedAt;
+	private Timestamp lrUpdatedAt;
+
+	//ユーザー(user)テーブル
+	private String userEmail;
+	private String userPassword;
+	private String userName;
+	private String userImg;
+	private int uPrivcyFlg;
+	private Timestamp uCreatedAt;
+	private Timestamp uUpdatedAt;
 
 	//コンストラクタ
 	public Review() {
 		this.reviewName = "";
 		this.reviewComment = "";
-		this.rCreatedAt = "";
-		this.rUpdatedAt = "";
 		this.reviewImg = "";
-		this.rimCreatedAt = "";
-		this.rimUpdatedAt = "";
 		this.reviewItem1 = "";
 		this.reviewItem2 = "";
 		this.reviewItem3 = "";
 		this.reviewItem4 = "";
 		this.reviewItem5 = "";
-		this.ritCreatedAt = "";
-		this.ritUpdatedAt = "";
-		this.rsCreatedAt = "";
-		this.rsUpdatedAt = "";
 		this.backnumberContent = "";
-		this.bCreatedAt = "";
-		this.bUpdatedAt = "";
 	}
 
 	public synchronized final int getReviewId() {
@@ -137,19 +143,19 @@ public class Review implements Serializable {
 		this.rDeleteFlg = rDeleteFlg;
 	}
 
-	public synchronized final String getrCreatedAt() {
+	public synchronized final Timestamp getrCreatedAt() {
 		return rCreatedAt;
 	}
 
-	public synchronized final void setrCreatedAt(String rCreatedAt) {
+	public synchronized final void setrCreatedAt(Timestamp rCreatedAt) {
 		this.rCreatedAt = rCreatedAt;
 	}
 
-	public synchronized final String getrUpdatedAt() {
+	public synchronized final Timestamp getrUpdatedAt() {
 		return rUpdatedAt;
 	}
 
-	public synchronized final void setrUpdatedAt(String rUpdatedAt) {
+	public synchronized final void setrUpdatedAt(Timestamp rUpdatedAt) {
 		this.rUpdatedAt = rUpdatedAt;
 	}
 
@@ -177,19 +183,19 @@ public class Review implements Serializable {
 		this.rimDeleteFlg = rimDeleteFlg;
 	}
 
-	public synchronized final String getRimCreatedAt() {
+	public synchronized final Timestamp getRimCreatedAt() {
 		return rimCreatedAt;
 	}
 
-	public synchronized final void setRimCreatedAt(String rimCreatedAt) {
+	public synchronized final void setRimCreatedAt(Timestamp rimCreatedAt) {
 		this.rimCreatedAt = rimCreatedAt;
 	}
 
-	public synchronized final String getRimUpdatedAt() {
+	public synchronized final Timestamp getRimUpdatedAt() {
 		return rimUpdatedAt;
 	}
 
-	public synchronized final void setRimUpdatedAt(String rimUpdatedAt) {
+	public synchronized final void setRimUpdatedAt(Timestamp rimUpdatedAt) {
 		this.rimUpdatedAt = rimUpdatedAt;
 	}
 
@@ -241,19 +247,19 @@ public class Review implements Serializable {
 		this.reviewItem5 = reviewItem5;
 	}
 
-	public synchronized final String getRitCreatedAt() {
+	public synchronized final Timestamp getRitCreatedAt() {
 		return ritCreatedAt;
 	}
 
-	public synchronized final void setRitCreatedAt(String ritCreatedAt) {
+	public synchronized final void setRitCreatedAt(Timestamp ritCreatedAt) {
 		this.ritCreatedAt = ritCreatedAt;
 	}
 
-	public synchronized final String getRitUpdatedAt() {
+	public synchronized final Timestamp getRitUpdatedAt() {
 		return ritUpdatedAt;
 	}
 
-	public synchronized final void setRitUpdatedAt(String ritUpdatedAt) {
+	public synchronized final void setRitUpdatedAt(Timestamp ritUpdatedAt) {
 		this.ritUpdatedAt = ritUpdatedAt;
 	}
 
@@ -313,19 +319,19 @@ public class Review implements Serializable {
 		this.scoreAvg = scoreAvg;
 	}
 
-	public synchronized final String getRsCreatedAt() {
+	public synchronized final Timestamp getRsCreatedAt() {
 		return rsCreatedAt;
 	}
 
-	public synchronized final void setRsCreatedAt(String rsCreatedAt) {
+	public synchronized final void setRsCreatedAt(Timestamp rsCreatedAt) {
 		this.rsCreatedAt = rsCreatedAt;
 	}
 
-	public synchronized final String getRsUpdatedAt() {
+	public synchronized final Timestamp getRsUpdatedAt() {
 		return rsUpdatedAt;
 	}
 
-	public synchronized final void setRsUpdatedAt(String rsUpdatedAt) {
+	public synchronized final void setRsUpdatedAt(Timestamp rsUpdatedAt) {
 		this.rsUpdatedAt = rsUpdatedAt;
 	}
 
@@ -353,20 +359,109 @@ public class Review implements Serializable {
 		this.bDeleteFlg = bDeleteFlg;
 	}
 
-	public synchronized final String getbCreatedAt() {
+	public synchronized final Timestamp getbCreatedAt() {
 		return bCreatedAt;
 	}
 
-	public synchronized final void setbCreatedAt(String bCreatedAt) {
+	public synchronized final void setbCreatedAt(Timestamp bCreatedAt) {
 		this.bCreatedAt = bCreatedAt;
 	}
 
-	public synchronized final String getbUpdatedAt() {
+	public synchronized final Timestamp getbUpdatedAt() {
 		return bUpdatedAt;
 	}
 
-	public synchronized final void setbUpdatedAt(String bUpdatedAt) {
+	public synchronized final void setbUpdatedAt(Timestamp bUpdatedAt) {
 		this.bUpdatedAt = bUpdatedAt;
 	}
 
+	public synchronized final int getListReviewId() {
+		return listReviewId;
+	}
+
+	public synchronized final void setListReviewId(int listReviewId) {
+		this.listReviewId = listReviewId;
+	}
+
+	public synchronized final int getLrListId() {
+		return lrListId;
+	}
+
+	public synchronized final void setLrListId(int lrListId) {
+		this.lrListId = lrListId;
+	}
+
+	public synchronized final Timestamp getLrCreatedAt() {
+		return lrCreatedAt;
+	}
+
+	public synchronized final void setLrCreatedAt(Timestamp lrCreatedAt) {
+		this.lrCreatedAt = lrCreatedAt;
+	}
+
+	public synchronized final Timestamp getLrUpdatedAt() {
+		return lrUpdatedAt;
+	}
+
+	public synchronized final void setLrUpdatedAt(Timestamp lrUpdatedAt) {
+		this.lrUpdatedAt = lrUpdatedAt;
+	}
+
+	public synchronized final String getUserEmail() {
+		return userEmail;
+	}
+
+	public synchronized final void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
+
+	public synchronized final String getUserPassword() {
+		return userPassword;
+	}
+
+	public synchronized final void setUserPassword(String userPassword) {
+		this.userPassword = userPassword;
+	}
+
+	public synchronized final String getUserName() {
+		return userName;
+	}
+
+	public synchronized final void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public synchronized final String getUserImg() {
+		return userImg;
+	}
+
+	public synchronized final void setUserImg(String userImg) {
+		this.userImg = userImg;
+	}
+
+	public synchronized final int getuPrivcyFlg() {
+		return uPrivcyFlg;
+	}
+
+	public synchronized final void setuPrivcyFlg(int uPrivcyFlg) {
+		this.uPrivcyFlg = uPrivcyFlg;
+	}
+
+	public synchronized final Timestamp getuCreatedAt() {
+		return uCreatedAt;
+	}
+
+	public synchronized final void setuCreatedAt(Timestamp uCreatedAt) {
+		this.uCreatedAt = uCreatedAt;
+	}
+
+	public synchronized final Timestamp getuUpdatedAt() {
+		return uUpdatedAt;
+	}
+
+	public synchronized final void setuUpdatedAt(Timestamp uUpdatedAt) {
+		this.uUpdatedAt = uUpdatedAt;
+	}
+
 }
+

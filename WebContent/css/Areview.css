@@ -23,25 +23,84 @@ header .headline{
     margin-left: 100px;
 }
 .tab {
-    line-height: 100px;
-    float: left;
-    margin-left: 450px;
+    text-align: center;
     list-style: none;
+    margin: 10px auto;
+    padding: 0;
+    line-height: 105px;
+    position: relative;
 }
-.tabu-list-item {
-  font-size: 25px;
-  list-style: none;
-  display: inline-block;
-  margin: 0 75px;
-}
-.tabu-list-item {
-  font-size: 25px;
-  list-style: none;
-  display: inline-block;
-  margin: 0 75px;
-}
+.tab li {
+    margin: 0 10px;
+    padding: 0 10px;
+    background: #ffc679;
+    display: inline-block;
+    position: relative;
+    z-index: 0;
 
-
+}
+/* 選択されたタブ */
+.tab li.selected {
+    background: #fff4e0;
+    color: #000;
+    z-index: 2;
+    border-bottom-color: #FFF;
+}
+.tab {
+    position: relative;
+}
+/* タブ選択前に下線 */
+.tab:after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+}
+/* タブ選択後下線なし */
+.tab:before {
+    z-index: 1;
+}
+.tab li {
+    position: relative;
+    z-index: 0;
+}
+.tab li.selected {
+    z-index: 2;
+    border-bottom-color: #FFF;
+}
+.tab li:before,
+.tab li:after {
+    position: absolute;
+    bottom: -1px;
+    width: 6px;
+    height: 6px;
+    content: " ";
+}
+.tab li:before {
+    left: -6px;
+}
+.tab li:after {
+    right: -6px;
+}
+.tab li {
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+.tab li:before {
+    border-bottom-right-radius: 6px;
+}
+.tab li:after {
+    border-bottom-left-radius: 6px;
+    border-width: 0 0 1px 1px;
+}
+.tab li.selected:before {
+    box-shadow: 2px 2px 0 #fff4c0;
+}
+.tab li.selected:after {
+    box-shadow: -2px 2px 0 #fff4c0;
+}
 /* マイアイコン */
 .icon-circle{
   width: 50px;
@@ -51,7 +110,6 @@ header .headline{
   position: relative;
 }
 .icon-circle img{
-  width: 100%;
   height: auto;
   position: absolute;
   top: 0;
@@ -60,104 +118,97 @@ header .headline{
   bottom: 0;
   margin: auto;
 }
+
 .my {
-	text-align: center;/* 中央寄せ */
+	text-align: center; /*中央寄せ */
 }
-/* プルダウンメニュー */
-ul,li{
-	padding:0;
-	margin:0;
+/* ドロップダウンメニュー */
+#drop-down-menu {
+  margin: 0px auto;
+  padding: 0px;
+  list-style-type: none;
+  text-align: center;
+  font-size: 20px;
+  width: 600px;
+  border: 3px solid #ff8410;
 }
-.main-menu li{
-	position: relative;
-	display:inline-block;
-	width:auto;
+#drop-down-menu li {
+	float: left;
+	width: 200px;
 }
-.sub-menu {
-	display:none;
-	position: absolute;
-	top: 100%;
-	left: 0;
-}
-.main-menu li:hover
-
-.sub-menu {
-	display:
-	 block;
-}
-.main-menu li a {
-	border:1px solid #ccc;
-	font-weight: normal;
-	color: #12c;
-	display: block;
-	text-decoration: none;
-	margin: 0;
-	padding:2px 18px;
-}
-.main-menu li a:hover {
-	background-color: #039;
-	color:#fff;
-}
-.main-menu li ul li a {
-	border-width:0 1px 1px 1px;
-}
-/*tabの形状*/
-.tab{
-	display: flex;
-	flex-wrap: wrap;
-}
-.tab li a{
-	display: block;
-	background:#fff4e0;
-	margin:0 2px;
-	padding:10px 20px;
-}
-/*liにactiveクラスがついた時の形状*/
-.tab li.active a{
-	background:#ffc679;
-}
-
-
-/*エリアの表示非表示と形状*/
-.area {
-	display: none;/*はじめは非表示*/
-	opacity: 0;/*透過0*/
-	background: #ffc679;
-	padding:50px 20px;
-}
-
-@keyframes displayAnime{
-	from {
-		opacity: 0;
-	}
-	to {
-		opacity: 1;
-	}
-}
-/*========= レイアウトのためのCSS ===============*/
-
-ul{
-  list-style:none;
-}
-
-a{
-  color:#333;
+#drop-down-menu li a {
   text-decoration: none;
+  color: black;
+  background-color: #ffffff;
+  display: block;
+  padding: 5px;
+}
+#drop-down-menu li:hover a {
+  background-color: #ffffff;
+}
+#drop-down-menu1 li:hover ul {
+  display: block;
+}
+#drop-down-menu li ul {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+  display: none;
+}
+#drop-down-menu li:hover ul {
+	display: block;
+}
+#drop-down-menu li ul a {
+  display: block;
+  text-decoration: none;
+  color: black;
+}
+#drop-down-menu li ul li:hover a {
+  background-color: #ffc679;
+}
+#drop-down-menu:after {
+  content: "";
+  clear: both;
+  display: block;
+}
+/* レビュー２列表示 */
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;/* flexアイテムを折り返す（複数行に配置する） */
 }
 
-.wrapper{
-  width:100%;
-  max-width: 960px;
-  margin:30px auto;
-    background:#fefefe;
-}
-
-.area h2{
-  font-size:1.3rem;
-  margin:0 0 20px 10px;
-}
-
-.area li{
+.flex-item {
+  background-color:#ffffff;
+  text-align: center;
+  width: calc(50% - 20px);
+  box-sizing: border-box;
+  border: 1px solid black;
+  margin: 10px;
   padding: 10px;
-  border-bottom: 1px solid #ddd;
+}
+.container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr;
+}
+.scroll {
+  width: 300px;
+  overflow-y: scroll;
+}
+
+.scroll ::-webkit-scrollbar {
+  width: 16px;
+}
+
+.scroll ::-webkit-scrollbar-track {
+  background-color: #fff;
+}
+
+.scroll ::-webkit-scrollbar-thumb {
+  background-color: #3760d0;
+  border-radius: 8px;
+}
+.side {
+  width: 30%;
 }
