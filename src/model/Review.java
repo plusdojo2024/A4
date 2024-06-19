@@ -12,7 +12,7 @@ public class Review implements Serializable {
 	private int userId;	//ユーザーID
 	private int rPrivacyFlg;	//レビュー自体の公開・非公開フラグ
 	private int rDeleteFlg;	//レビュー自体の削除フラグ
-	private String rCreatedAt; //作成日時
+	private Timestamp rCreatedAt; //作成日時
 	private String rUpdatedAt;	//更新日時
 
 	//レビュー画像(reviews_imgs)テーブル
