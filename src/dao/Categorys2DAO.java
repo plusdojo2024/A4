@@ -39,8 +39,8 @@ public class Categorys2DAO {
 				ca = new Category();
 				ca.setCategory2Id(rs.getInt("category2_id"));	
 				ca.setCategory2Name(rs.getString("category2_name"));
-				ca.setC2CreatedAt(rs.getString("created_at"));
-				ca.setC2UpdatedAt(rs.getString("updated_at"));
+				ca.setC2CreatedAt(rs.getTimestamp("created_at"));
+				ca.setC2UpdatedAt(rs.getTimestamp("updated_at"));
 				list.add(ca);
 			}
 		}
