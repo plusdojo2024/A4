@@ -69,6 +69,7 @@ public class UsersDao {
 		return user;//返ってきた結果をサーブレットに渡す(この後スコープに渡してjspに渡して表示)
 	}
 
+	//ログイン？
 	public boolean isLoginOK(String email, String password) {
 		Connection conn = null;
 		boolean loginResult = false;
@@ -139,6 +140,54 @@ public class UsersDao {
 			// SQL文を完成させる
 			pStmt.setString(1, beams.getUserName());
 			
+			// SQL文を実行する
+			num = pStmt.executeUpdate();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		// 結果を返す
+		return num;
+	}
+	
+	//画像の変更
+	
+	//ユーザーを新規追加
+	public int insert(User newUser) {
+		Connection conn = null;
+		int num = 0;
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4db", "sa", "");
+
+			// SQL文を準備する（AUTO_INCREMENTのNUMBER列にはNULLを指定する）
+			String sql = "INSERT INTO User (USER_EMAIL, USER_PASSWORD, USER_NAME, USER_IMG, PRIVACY_FLG) VALUES (?, ?, ?, \"C:\\pleiades\\workspace\\A4\\WebContent\\img\\defoicon.png\", 1)";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を完成させる
+			pStmt.setString(1, newUser.getUserEmail());
+			pStmt.setString(2, newUser.getUserPassword());
+			pStmt.setString(3, newUser.getUserName());
+
 			// SQL文を実行する
 			num = pStmt.executeUpdate();
 		}
