@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import model.List;
 import model.Review;
 
 public class ReviewsDAO{
@@ -93,8 +92,8 @@ public class ReviewsDAO{
 			String sql = "SELECT reviews.review_id,reviews.category2_id,reviews.review_name,reviews.review_price,reviews.review_comment,"
 					+ "reviews.privacy_flg,reviews.delete_flg,reviews.created_at,reviews.updated_at, "
 					+ "reviews_imgs.review_img_id,reviews_imgs.review_img,reviews_imgs.delete_flg,reviews_imgs.created_at,reviews_imgs.updated_at,"
-					+ "reviews_item.review_item_id,reviews_item.review_item1,reviews_item.review_item2,reviews_item.review_item3,reviews_item.review_item4,reviews_item.review_item5,"
-					+ "reviews_item.created_at,reviews_item.updated_at,"
+					+ "reviews_items.review_item_id,reviews_items.review_item1,reviews_items.review_item2,reviews_items.review_item3,reviews_items.review_item4,reviews_items.review_item5,"
+					+ "reviews_items.created_at,reviews_items.updated_at,"
 					+ "reviews_scores.review_score_id,reviews_scores.review_item_id,"
 					+ "reviews_scores.review_item1_score,reviews_scores.review_item2_score,reviews_scores.review_item3_score,reviews_scores.review_item4_score,reviews_scores.review_item5_score,"
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
@@ -103,7 +102,7 @@ public class ReviewsDAO{
 					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privcy_flg,users.created_at,users.updated_at FROM reviews "
 					+ "JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
 					+ "JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
-					+ "JOIN reviews_items ON categorys2.category2_id = reviews_item.category2_id "
+					+ "JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
 					+ "JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
 					+ "JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
 					+ "JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
@@ -176,15 +175,14 @@ public class ReviewsDAO{
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4DB", "sa", "");
 
 			// SQL文を準備する（AUTO_INCREMENTのNUMBER列にはNULLを指定する） でもJOINしたらどうなるんですか
-			String sql = "INSERT INTO reviews VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";	//追加するときのやつ
+			String sql = "INSERT INTO reviews (review_name,review_price,review_comment,user_id)  VALUES ( ?, ?, ?, ?, ?, ?, ?)";	//追加するときのやつ
 			PreparedStatement pStmt = conn.prepareStatement(sql);	//インジェクション攻撃対策のプリペアードステートメントに対応
 
 			// SQL文を完成させる
-			pStmt.setInt(1,category2Id);
-			pStmt.setString(2,reviewName);
-			pStmt.setInt(3,reviewPrice);
-			pStmt.setString(4,reviewComment);
-			pStmt.setInt(5,userId);
+			pStmt.setString(1,reviewName);
+			pStmt.setInt(2,reviewPrice);
+			pStmt.setString(3,reviewComment);
+			pStmt.setInt(4,userId);
 
 			//空白を未設定にするを全体に設定
 
@@ -322,8 +320,8 @@ public class ReviewsDAO{
 			String sql = "SELECT reviews.review_id,reviews.category2_id,reviews.review_name,reviews.review_price,reviews.review_comment,"
 					+ "reviews.privacy_flg,reviews.delete_flg,reviews.created_at,reviews.updated_at, "
 					+ "reviews_imgs.review_img_id,reviews_imgs.review_img,reviews_imgs.delete_flg,reviews_imgs.created_at,reviews_imgs.updated_at,"
-					+ "reviews_item.review_item_id,reviews_item.review_item1,reviews_item.review_item2,reviews_item.review_item3,reviews_item.review_item4,reviews_item.review_item5,"
-					+ "reviews_item.created_at,reviews_item.updated_at,"
+					+ "reviews_items.review_item_id,reviews_items.review_item1,reviews_items.review_item2,reviews_items.review_item3,reviews_items.review_item4,reviews_items.review_item5,"
+					+ "reviews_items.created_at,reviews_items.updated_at,"
 					+ "reviews_scores.review_score_id,reviews_scores.review_item_id,"
 					+ "reviews_scores.review_item1_score,reviews_scores.review_item2_score,reviews_scores.review_item3_score,reviews_scores.review_item4_score,reviews_scores.review_item5_score,"
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
@@ -332,7 +330,7 @@ public class ReviewsDAO{
 					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privcy_flg,users.created_at,users.updated_at FROM reviews "
 					+ "JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
 					+ "JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
-					+ "JOIN reviews_items ON categorys2.category2_id = reviews_item.category2_id "
+					+ "JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
 					+ "JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
 					+ "JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
 					+ "JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
@@ -354,46 +352,46 @@ public class ReviewsDAO{
 				li.setReviewComment(rs.getString("reviews.review_comment"));
 				li.setrPrivacyFlg(rs.getInt("reviews.privacy_flg"));
 				li.setrDeleteFlg(rs.getInt("reviews.delete_flg"));
-				li.setrCreatedAt(rs.getString("reviews.created_at"));
-				li.setrUpdatedAt(rs.getString("reviews.updated_at"));
+				li.setrCreatedAt(rs.getTimestamp("reviews.created_at"));
+				li.setrUpdatedAt(rs.getTimestamp("reviews.updated_at"));
 				li.setReviewImgId(rs.getInt("reviews_imgs.review_img_id"));
 				li.setReviewImg(rs.getString("reviews_imgs.review_img"));
 				li.setRimDeleteFlg(rs.getInt("reviews_imgs.delete_flg"));
-				li.setRimCreatedAt(rs.getString("reviews_imgs.created_at"));
-				li.setRimUpdatedAt(rs.getString("reviews_imgs.updated_at"));
+				li.setRimCreatedAt(rs.getTimestamp("reviews_imgs.created_at"));
+				li.setRimUpdatedAt(rs.getTimestamp("reviews_imgs.updated_at"));
 				li.setReviewItemId(rs.getInt("reviews_item.review_item_id"));
 				li.setReviewItem1(rs.getString("reviews_item.review_item1"));
 				li.setReviewItem2(rs.getString("reviews_item.review_item2"));
 				li.setReviewItem3(rs.getString("reviews_item.review_item3"));
 				li.setReviewItem4(rs.getString("reviews_item.review_item4"));
 				li.setReviewItem5(rs.getString("reviews_item.review_item5"));
-				li.setRitCreatedAt(rs.getString("reviews_item.created_at"));
-				li.setRitUpdatedAt(rs.getString("reviews_item.updated_at"));
+				li.setRitCreatedAt(rs.getTimestamp("reviews_item.created_at"));
+				li.setRitUpdatedAt(rs.getTimestamp("reviews_item.updated_at"));
 				li.setReviewScoreId(rs.getInt("reviews_scores.review_score_id"));
-				li.set(rs.getInt("reviews_scores.review_item_id"));//★ここーーー
 				li.setReviewItem1Score(rs.getInt("reviews_scores.review_item1_score"));
 				li.setReviewItem2Score(rs.getInt("reviews_scores.review_item2_score"));
 				li.setReviewItem3Score(rs.getInt("reviews_scores.review_item3_score"));
 				li.setReviewItem4Score(rs.getInt("reviews_scores.review_item4_score"));
 				li.setReviewItem5Score(rs.getInt("reviews_scores.review_item5_score"));
 				li.setScoreAvg(rs.getInt("reviews_scores.score_avg"));
-				li.setRsCreatedAt(rs.getString("reviews_scores.created_at"));
-				li.setRsUpdatedAt(rs.getString("reviews_scores.updated_at"));
+				li.setRsCreatedAt(rs.getTimestamp("reviews_scores.created_at"));
+				li.setRsUpdatedAt(rs.getTimestamp("reviews_scores.updated_at"));
 				li.setBacknumberId(rs.getInt("backnumbers.backnumber_id"));
 				li.setBacknumberContent(rs.getString("backnumbers.backnumber_content"));
 				li.setbDeleteFlg(rs.getInt("backnumbers.delete_flg"));
-				li.setbCreatedAt(rs.getString("backnumbers.created_at"));
-				li.setbUpdatedAt(rs.getString("backnumbers.updated_at"));
+				li.setbCreatedAt(rs.getTimestamp("backnumbers.created_at"));
+				li.setbUpdatedAt(rs.getTimestamp("backnumbers.updated_at"));
+				li.setListReviewId(rs.getInt("list_reviews.list_review_id"));
 				li.setLrListId(rs.getInt("list_reviews.list_id"));
-				li.setLrCreatedAt(rs.getString("list_reviews.created_at"));
-				li.setLrUpdatedAt(rs.getString("list_reviews.updated_at"));
+				li.setLrCreatedAt(rs.getTimestamp("list_reviews.created_at"));
+				li.setLrUpdatedAt(rs.getTimestamp("list_reviews.updated_at"));
 				li.setUserEmail(rs.getString("users.user_email"));
-				li.set(rs.getString("users.user_password"));
-				li.set(rs.getString("users.user_name"));
-				li.set(rs.getString("users.user_img"));
-				li.set(rs.getInt("users.privcy_flg"));
-				li.set(rs.getString("users.created_at"));
-				li.set(rs.getString("users.updated_at"));
+				li.setUserPassword(rs.getString("users.user_password"));
+				li.setUserName(rs.getString("users.user_name"));
+				li.setUserImg(rs.getString("users.user_img"));
+				li.setuPrivcyFlg(rs.getInt("users.privcy_flg"));
+				li.setuCreatedAt(rs.getTimestamp("users.created_at"));
+				li.setuUpdatedAt(rs.getTimestamp("users.updated_at"));
 
 				al.add(li);
 			}
@@ -424,4 +422,3 @@ public class ReviewsDAO{
 	}
 }
 
-}
