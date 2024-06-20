@@ -179,8 +179,11 @@ public class ListDAO {
 			while (rs.next()) {
 			//rs.nextで表の次の行にフォーカスが合う　もう行がなければfalseが返ってきて終わり
 				li = new List();
-				li.setListId(rs.getInt("list_id"));
-				li.setListName(rs.getString("list_name"));
+				li.setListId(rs.getInt("list.list_id"));
+				li.setListName(rs.getString("list.list_name"));
+				li.setlDeleteFlg(rs.getInt("list.delete_flg"));
+				li.setlCreatedAt(rs.getTimestamp("list.created_at"));
+				li.setlUpdatedAt(rs.getTimestamp("list.updated_at"));
 				list.add(li);
 			}
 		}
@@ -208,4 +211,5 @@ public class ListDAO {
 		// 結果を返す
 		return list;//返ってきた結果をサーブレットに渡す(この後スコープに渡してjspに渡して表示)
 	}
+
 }
