@@ -5,11 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Insert title</title>
 </head>
 <body>
-<c:forEach var="li" items="${list}" >
-    <h2>${li.listName}</h2>
+<c:forEach var="list" items="${list}">
+<h2>${list.listName}</h2>
 </c:forEach>
 </body>
 </html>
