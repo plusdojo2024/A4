@@ -27,7 +27,7 @@ public class ListDAO {
 			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4DB",id,pw);
 
 			// SELECT文を準備する
-			String sql = "INSERT INTO list VALUES (NULL, ?, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
+			String sql = "INSERT INTO list (list_name, delete_flg) VALUES (?, 1)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, listName);//引数sqlにsetStringしてる
 
@@ -179,6 +179,7 @@ public class ListDAO {
 			while (rs.next()) {
 			//rs.nextで表の次の行にフォーカスが合う　もう行がなければfalseが返ってきて終わり
 				li = new List();
+				li.setListId(rs.getInt("list_id"));
 				li.setListName(rs.getString("list_name"));
 				list.add(li);
 			}

@@ -4,7 +4,10 @@
 body {
 	background-color:#fff4e0;
 }
-
+/* マイレビュー画面 */
+div.logo {
+  text-align: center;
+}
 /* ヘッダー */
 * {
   margin:0; padding:0;
