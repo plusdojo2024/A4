@@ -16,7 +16,7 @@ import model.User;
 
 public class FollowsDao {
 	//フォローしてる人のアイコン、なまえ、IDを持ってくる
-	public ArrayList<User> selectfoll(User foll) { //follにはログインしてるユーザーIDを入れてくる
+	public ArrayList<User> selectfoll(User id) { //follにはログインしてるユーザーIDを入れてくる
 		Connection conn = null;
 		ArrayList<User> list = new ArrayList<User>(); 
 
@@ -34,7 +34,7 @@ public class FollowsDao {
 					+ "ON F.user2_id = US.user_id "						//Followsテーブルのuser2_idとUsersテーブルのuser_idが同じになるように内部結合
 					+ "WHERE F.user1_id = ?";							//Followsのuser1_idが自分のidと一緒という条件
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setInt(1, foll.getUser1Id());							//上の?に取ってきた自分のidを入れる
+			pStmt.setInt(1, id.getUser1Id());							//上の?に取ってきた自分のidを入れる
 
 			ResultSet rs = pStmt.executeQuery();
 

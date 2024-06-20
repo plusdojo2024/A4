@@ -28,6 +28,11 @@ public class User implements Serializable {
 		this.userImg = "";
 	}
 	
+	public User(int userId) {
+		super();
+		this.userId = userId;
+	}
+	
 	public User(int userId, String userName, String userImg) {
 		super();
 		this.userId = userId;
