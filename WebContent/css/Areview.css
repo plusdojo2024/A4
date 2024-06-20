@@ -1,14 +1,14 @@
 @charset "UTF-8";
 
-/* body */
+/* 全画面共通body */
 body {
 	background-color:#fff4e0;
 }
-/* マイレビュー画面 */
+/* ログイン画面 */
 div.logo {
   text-align: center;
 }
-/* ヘッダー */
+/* 全画面共通ヘッダー */
 * {
   margin:0; padding:0;
 }
@@ -25,6 +25,7 @@ header .headline{
     font-size: 30px;
     margin-left: 100px;
 }
+/* タブ */
 .tab {
     text-align: center;
     list-style: none;
