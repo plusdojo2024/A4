@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import model.User;
 
@@ -163,8 +164,52 @@ public class UsersDao {
 		return num;
 	}
 	
+	//ユーザーネームを出す
+	public ArrayList<User> show(int id) {
+		Connection conn = null;
+		ArrayList<User> list = new ArrayList<User>();
+		try {
+			Class.forName("org.h2.Driver");
+			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4db","sa","");
+
+			String sql = "SELECT user_name FROM Users WHERE user_id = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setInt(1, id.getUser1Id());							
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+			while (rs.next()) {
+				//セッターを使った書き方
+				User record = new User();
+				record.setUserName(rs.getString("user_name"));
+				list.add(record);			
+				}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			list = null;
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			list = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					list = null;
+				}
+			}
+		}
+		return list;
+	}
+	
 	//ユーザーネームを変更する
-	public int Nameupdate(User myName) {
+	public int nameUpdate(String myName, int id) {
 		Connection conn = null;
 		int num = 0;
 		
@@ -172,10 +217,11 @@ public class UsersDao {
 			Class.forName("org.h2.Driver");
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4db", "sa", "");
 
-			String sql = "UPDATE Users SET user_name=?";
+			String sql = "UPDATE Users SET user_name=? WHERE user_id = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			pStmt.setString(1, myName.getUserName());
+			pStmt.setInt(2, id.getUserId());
 
 			num = pStmt.executeUpdate();
 		}
@@ -199,7 +245,7 @@ public class UsersDao {
 	}
 	
 	//画像の変更
-	public int iconUpdate(User myicon) {
+	public int iconUpdate(String myicon) {
 		Connection conn = null;
 		int num = 0;
 
@@ -233,8 +279,52 @@ public class UsersDao {
 		return num;
 	}
 	
+	//公開非公開を出す
+	public ArrayList<User> showPri(int id) {
+		Connection conn = null;
+		ArrayList<User> list = new ArrayList<User>();
+		try {
+			Class.forName("org.h2.Driver");
+			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4db","sa","");
+
+			String sql = "SELECT privcy_flg FROM Users WHERE user_id = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setInt(1, id.getUserId());							
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+			while (rs.next()) {
+				//セッターを使った書き方
+				User record = new User();
+				record.setuPrivcyFlg(rs.getString("privcy_flg"));
+				list.add(record);			
+				}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			list = null;
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			list = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					list = null;
+				}
+			}
+		}
+		return list;
+	}
+	
 	//公開非公開の切り替え
-	public int priUpdate(User myPri) {
+	public int priUpdate(int myPri, int id) {
 		Connection conn = null;
 		int num = 0;
 
@@ -242,11 +332,11 @@ public class UsersDao {
 			Class.forName("org.h2.Driver");
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4db", "sa", "");
 
-			String sql = "UPDATE User SET privcy_flg = ?";
+			String sql = "UPDATE User SET privcy_flg = ? WHERE user_id = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			pStmt.setInt(1, myPri.getuPrivcyFlg());//myPriに0か1を入れてくる
-
+			pStmt.setInt(2, id.getUserId());
 			num = pStmt.executeUpdate();
 		}
 		catch (SQLException e) {

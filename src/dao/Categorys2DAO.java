@@ -16,7 +16,7 @@ public class Categorys2DAO {
 	Connection conn = null;
 
 	//selectメソッド（引数はいらない）
-	public List<Category> select() {
+	public List<Category> select(int category1Id) {
 		Category ca = null;//
 		ArrayList<Category> list = new ArrayList<Category>();//Category.javaの内容をArrayListに格納
 			
@@ -28,9 +28,11 @@ public class Categorys2DAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4DB");
 
 			//SELECT文の準備（categorys2テーブルの内容を取得）
-			String sql = "SELECT * FROM categorys2";
+			String sql = "SELECT * FROM categorys2 WHERE category1_id = ?";
 
 			PreparedStatement pStmt = conn.prepareStatement(sql);
+			
+			pStmt.setInt(1, category1Id);
 			
 			ResultSet rs = pStmt.executeQuery();
 			

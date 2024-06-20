@@ -11,13 +11,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 import model.User;
 
 public class FollowsDao {
 	//フォローしてる人のアイコン、なまえ、IDを持ってくる
-	public List<User> selectfoll(User foll) { //follにはログインしてるユーザーIDを入れてくる
+	public ArrayList<User> selectfoll(User foll) { //follにはログインしてるユーザーIDを入れてくる
 		Connection conn = null;
 		ArrayList<User> list = new ArrayList<User>(); 
 
