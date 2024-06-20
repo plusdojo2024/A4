@@ -11,15 +11,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.BacknumbersDAO;
+import dao.BcDAO;
 import dao.Categorys1DAO;
 import dao.Categorys2DAO;
 import dao.FollowsDao;
 import dao.ListDAO;
 import dao.ListReviewsDAO;
 import dao.ReviewsDAO;
-import dao.SubReviewsDao;
+import dao.ReviewsImgsDAO;
+import dao.ReviewsItemsDAO;
+import dao.ReviewsScoresDAO;
 import dao.UsersDao;
-
+import model.Bc;
 import model.Category;
 import model.List;
 import model.Review;
@@ -34,11 +37,11 @@ public class MyReviewServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
-		HttpSession session = request.getSession();
-		if (session.getAttribute("id") == null) {
-			response.sendRedirect("/A4/LoginServlet");
-			return;
-		}
+		//HttpSession session = request.getSession();
+		//if (session.getAttribute("id") == null) {
+		//	response.sendRedirect("/A4/LoginServlet");
+		//	return;
+		//}
 		// メニューページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/my_review.jsp");
 		dispatcher.forward(request, response);
@@ -57,6 +60,35 @@ public class MyReviewServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		
+		
+		
+		//自分のレビューをすべて表示
+		BcDAO bDao = new BcDAO();
+		Bc bc = new Bc(0, "", "", company, "", "", last_name, first_name, "", "", "", "", remarks);
+		List<Bc> cardList = bDao.select(bc);
+
+		// 検索結果をリクエストスコープに格納する
+		request.setAttribute("cardList", cardList);
+
+		// 結果ページにフォワードする
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/search_result.jsp");
+		dispatcher.forward(request, response);
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
 		//値を取得
 
 		//レビュー登録の場合-------------
