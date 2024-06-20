@@ -10,7 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.ReviewsDao;
+import dao.BacknumbersDAO;
+import dao.Categorys1DAO;
+import dao.Categorys2DAO;
+import dao.FollowsDao;
+import dao.ListDAO;
+import dao.ListReviewsDAO;
+import dao.ReviewsDAO;
+import dao.SubReviewsDao;
+import dao.UsersDao;
+
+import model.Category;
+import model.List;
+import model.Review;
+import model.User;
+
 
 @WebServlet("/MyReviewServlet")//ここを変える
 public class MyReviewServlet extends HttpServlet {
