@@ -102,6 +102,7 @@ public class ListReviewsDAO {
 		return num;
 	}
 
+	//リストの数を数える
 	public int countList(int listId) {
 		Connection conn = null;
 		int num = 0;
