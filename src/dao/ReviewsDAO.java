@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
+import model.Idpw;
 import model.Review;
 
 public class ReviewsDAO{
@@ -71,8 +72,130 @@ public class ReviewsDAO{
 		return reviewId;
 	}
 
+	public ArrayList<Review> view1(int userId) {
+		Review review = null;
+		Connection conn = null;
+		ArrayList<Review> list = new ArrayList<>();
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			String id="sa";
+			String pw="";
+
+			// データベースに接続する
+			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4DB",id,pw);
+
+			// SELECT文を準備する
+			String sql = "SELECT reviews.review_id,reviews.category2_id,reviews.review_name,reviews.review_price,reviews.review_comment,"
+					+ "reviews.privacy_flg,reviews.delete_flg,reviews.created_at,reviews.updated_at, "
+					+ "reviews_imgs.review_img_id,reviews_imgs.review_img,reviews_imgs.delete_flg,reviews_imgs.created_at,reviews_imgs.updated_at,"
+					+ "reviews_items.review_item_id,reviews_items.review_item1,reviews_items.review_item2,reviews_items.review_item3,reviews_items.review_item4,reviews_items.review_item5,"
+					+ "reviews_items.created_at,reviews_items.updated_at,"
+					+ "reviews_scores.review_score_id,reviews_scores.review_item_id,"
+					+ "reviews_scores.review_item1_score,reviews_scores.review_item2_score,reviews_scores.review_item3_score,reviews_scores.review_item4_score,reviews_scores.review_item5_score,"
+					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
+					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
+					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privcy_flg,users.created_at,users.updated_at FROM reviews "
+					+ "JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
+					+ "JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
+					+ "JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
+					+ "JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
+					+ "JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
+					+ "JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
+					+ "JOIN users ON users.user_id = reviews.user_id "
+			        + "WHERE reviews.user_id = ? "
+			        + "and reviews.delete_flg = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			pStmt.setInt(1, userId);//引数sqlにsetStringしてる
+			pStmt.setInt(2, 1);
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+			while (rs.next()) {
+			//rs.nextで表の次の行にフォーカスが合う　もう行がなければfalseが返ってきて終わり
+				review = new Review();
+				review.setReviewId(rs.getInt("reviews.review_id"));
+				review.setReviewName(rs.getString("reviews.category2_id"));
+				review.setReviewName(rs.getString("reviews.review_name"));
+				review.setReviewPrice(rs.getInt("reviews.review_price"));
+				review.setReviewComment(rs.getString("reviews.review_comment"));
+				review.setrPrivacyFlg(rs.getInt("reviews.privacy_flg"));
+				review.setrDeleteFlg(rs.getInt("reviews.delete_flg"));
+				review.setrCreatedAt(rs.getTimestamp("reviews.created_at"));
+				review.setrUpdatedAt(rs.getTimestamp("reviews.updated_at"));
+				review.setReviewImgId(rs.getInt("reviews_imgs.review_img_id"));
+				review.setReviewImg(rs.getString("reviews_imgs.review_img"));
+				review.setRimDeleteFlg(rs.getInt("reviews_imgs.delete_flg"));
+				review.setRimCreatedAt(rs.getTimestamp("reviews_imgs.created_at"));
+				review.setRimUpdatedAt(rs.getTimestamp("reviews_imgs.updated_at"));
+				review.setReviewItemId(rs.getInt("reviews_item.review_item_id"));
+				review.setReviewItem1(rs.getString("reviews_item.review_item1"));
+				review.setReviewItem2(rs.getString("reviews_item.review_item2"));
+				review.setReviewItem3(rs.getString("reviews_item.review_item3"));
+				review.setReviewItem4(rs.getString("reviews_item.review_item4"));
+				review.setReviewItem5(rs.getString("reviews_item.review_item5"));
+				review.setRitCreatedAt(rs.getTimestamp("reviews_item.created_at"));
+				review.setRitUpdatedAt(rs.getTimestamp("reviews_item.updated_at"));
+				review.setReviewScoreId(rs.getInt("reviews_scores.review_score_id"));
+				review.setReviewItem1Score(rs.getInt("reviews_scores.review_item1_score"));
+				review.setReviewItem2Score(rs.getInt("reviews_scores.review_item2_score"));
+				review.setReviewItem3Score(rs.getInt("reviews_scores.review_item3_score"));
+				review.setReviewItem4Score(rs.getInt("reviews_scores.review_item4_score"));
+				review.setReviewItem5Score(rs.getInt("reviews_scores.review_item5_score"));
+				review.setScoreAvg(rs.getInt("reviews_scores.score_avg"));
+				review.setRsCreatedAt(rs.getTimestamp("reviews_scores.created_at"));
+				review.setRsUpdatedAt(rs.getTimestamp("reviews_scores.updated_at"));
+				review.setBacknumberId(rs.getInt("backnumbers.backnumber_id"));
+				review.setBacknumberContent(rs.getString("backnumbers.backnumber_content"));
+				review.setbDeleteFlg(rs.getInt("backnumbers.delete_flg"));
+				review.setbCreatedAt(rs.getTimestamp("backnumbers.created_at"));
+				review.setbUpdatedAt(rs.getTimestamp("backnumbers.updated_at"));
+				review.setListReviewId(rs.getInt("list_reviews.list_review_id"));
+				review.setLrListId(rs.getInt("list_reviews.list_id"));
+				review.setLrCreatedAt(rs.getTimestamp("list_reviews.created_at"));
+				review.setLrUpdatedAt(rs.getTimestamp("list_reviews.updated_at"));
+				review.setUserEmail(rs.getString("users.user_email"));
+				review.setUserPassword(rs.getString("users.user_password"));
+				review.setUserName(rs.getString("users.user_name"));
+				review.setUserImg(rs.getString("users.user_img"));
+				review.setuPrivcyFlg(rs.getInt("users.privcy_flg"));
+				review.setuCreatedAt(rs.getTimestamp("users.created_at"));
+				review.setuUpdatedAt(rs.getTimestamp("users.updated_at"));
+				list.add(review);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			list = null;
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			list = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					list = null;
+				}
+			}
+		}
+
+		// 結果を返す
+		return list;//返ってきた結果をサーブレットに渡す(この後スコープに渡してjspに渡して表示)
+	}
+
 	//selectメソッド
-	public ArrayList<Review> select(int userId,int category2Id ) {
+	public ArrayList<Review> view2(int userId, int category2Id) {
+		Review review = null;
 		ArrayList<Review> list = new ArrayList<Review>();
 		//準備①マイバッグ　BCというbeansしか入らないアレイリストを作った
 
@@ -132,11 +255,55 @@ public class ReviewsDAO{
 			//⑨出向して一瞬で戻ってくる船　いってらっしゃい
 			while (rs.next()) {
 			//rs.nextで表の次の行にフォーカスが合う　もう行がなければfalseが返ってきて終わり
-				Review re = new Review();	//beansをrecordに入れる
-				re.setUserId(rs.getInt("reviews.user_id"));
-
-
-				list.add(re);	//検索表に新しい行を作成
+				review = new Review();
+				review.setReviewId(rs.getInt("reviews.review_id"));
+				review.setReviewName(rs.getString("reviews.category2_id"));
+				review.setReviewName(rs.getString("reviews.review_name"));
+				review.setReviewPrice(rs.getInt("reviews.review_price"));
+				review.setReviewComment(rs.getString("reviews.review_comment"));
+				review.setrPrivacyFlg(rs.getInt("reviews.privacy_flg"));
+				review.setrDeleteFlg(rs.getInt("reviews.delete_flg"));
+				review.setrCreatedAt(rs.getTimestamp("reviews.created_at"));
+				review.setrUpdatedAt(rs.getTimestamp("reviews.updated_at"));
+				review.setReviewImgId(rs.getInt("reviews_imgs.review_img_id"));
+				review.setReviewImg(rs.getString("reviews_imgs.review_img"));
+				review.setRimDeleteFlg(rs.getInt("reviews_imgs.delete_flg"));
+				review.setRimCreatedAt(rs.getTimestamp("reviews_imgs.created_at"));
+				review.setRimUpdatedAt(rs.getTimestamp("reviews_imgs.updated_at"));
+				review.setReviewItemId(rs.getInt("reviews_item.review_item_id"));
+				review.setReviewItem1(rs.getString("reviews_item.review_item1"));
+				review.setReviewItem2(rs.getString("reviews_item.review_item2"));
+				review.setReviewItem3(rs.getString("reviews_item.review_item3"));
+				review.setReviewItem4(rs.getString("reviews_item.review_item4"));
+				review.setReviewItem5(rs.getString("reviews_item.review_item5"));
+				review.setRitCreatedAt(rs.getTimestamp("reviews_item.created_at"));
+				review.setRitUpdatedAt(rs.getTimestamp("reviews_item.updated_at"));
+				review.setReviewScoreId(rs.getInt("reviews_scores.review_score_id"));
+				review.setReviewItem1Score(rs.getInt("reviews_scores.review_item1_score"));
+				review.setReviewItem2Score(rs.getInt("reviews_scores.review_item2_score"));
+				review.setReviewItem3Score(rs.getInt("reviews_scores.review_item3_score"));
+				review.setReviewItem4Score(rs.getInt("reviews_scores.review_item4_score"));
+				review.setReviewItem5Score(rs.getInt("reviews_scores.review_item5_score"));
+				review.setScoreAvg(rs.getInt("reviews_scores.score_avg"));
+				review.setRsCreatedAt(rs.getTimestamp("reviews_scores.created_at"));
+				review.setRsUpdatedAt(rs.getTimestamp("reviews_scores.updated_at"));
+				review.setBacknumberId(rs.getInt("backnumbers.backnumber_id"));
+				review.setBacknumberContent(rs.getString("backnumbers.backnumber_content"));
+				review.setbDeleteFlg(rs.getInt("backnumbers.delete_flg"));
+				review.setbCreatedAt(rs.getTimestamp("backnumbers.created_at"));
+				review.setbUpdatedAt(rs.getTimestamp("backnumbers.updated_at"));
+				review.setListReviewId(rs.getInt("list_reviews.list_review_id"));
+				review.setLrListId(rs.getInt("list_reviews.list_id"));
+				review.setLrCreatedAt(rs.getTimestamp("list_reviews.created_at"));
+				review.setLrUpdatedAt(rs.getTimestamp("list_reviews.updated_at"));
+				review.setUserEmail(rs.getString("users.user_email"));
+				review.setUserPassword(rs.getString("users.user_password"));
+				review.setUserName(rs.getString("users.user_name"));
+				review.setUserImg(rs.getString("users.user_img"));
+				review.setuPrivcyFlg(rs.getInt("users.privcy_flg"));
+				review.setuCreatedAt(rs.getTimestamp("users.created_at"));
+				review.setuUpdatedAt(rs.getTimestamp("users.updated_at"));
+				list.add(review);
 			}
 		}
 		catch (SQLException e) {
@@ -162,6 +329,191 @@ public class ReviewsDAO{
 
 		// 結果を返す
 		return list;		//返ってきた結果をサーブレットに渡す(この後スコープに渡してjspに渡して表示)
+	}
+
+	public ArrayList<Review> viewList(int listId) {
+		Review review = null;
+		ArrayList<Review> list = new ArrayList<Review>();
+		//準備①マイバッグ　BCというbeansしか入らないアレイリストを作った
+
+		Connection conn = null;
+		//準備②地図を書き込む白紙のメモを用意する	使い終わったら破棄しないといけないのでtryの外
+		//準備③は省略
+
+		try {
+			Class.forName("org.h2.Driver");
+			//準備④ドライバー(船乗り)を連れてくる　h2のJDBCドライバを読み込む
+
+			String id="sa";
+			String pw="";
+			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4DB",id,pw);
+			//準備⑤地図を完成させ、通行証も同梱する　データベースに接続する
+			//引数にH2に繋ぐためのアドレスを入れている(地図)＝simpleBCの部分が作るときで変わる、そのユーザのid,pw
+
+
+			String sql = "SELECT reviews.review_id,reviews.category2_id,reviews.review_name,reviews.review_price,reviews.review_comment,"
+					+ "reviews.privacy_flg,reviews.delete_flg,reviews.created_at,reviews.updated_at, "
+					+ "reviews_imgs.review_img_id,reviews_imgs.review_img,reviews_imgs.delete_flg,reviews_imgs.created_at,reviews_imgs.updated_at,"
+					+ "reviews_items.review_item_id,reviews_items.review_item1,reviews_items.review_item2,reviews_items.review_item3,reviews_items.review_item4,reviews_items.review_item5,"
+					+ "reviews_items.created_at,reviews_items.updated_at,"
+					+ "reviews_scores.review_score_id,reviews_scores.review_item_id,"
+					+ "reviews_scores.review_item1_score,reviews_scores.review_item2_score,reviews_scores.review_item3_score,reviews_scores.review_item4_score,reviews_scores.review_item5_score,"
+					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
+					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
+					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privcy_flg,users.created_at,users.updated_at FROM reviews "
+					+ "JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
+					+ "JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
+					+ "JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
+					+ "JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
+					+ "JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
+					+ "JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
+					+ "JOIN users ON users.user_id = reviews.user_id "
+					+ " WHERE list_reviews.list_id = ? "
+			        + "and reviews.delete_flg = ?";
+
+			//準備⑥必要なものリストを用意する　ページで検索欄に入れたものが？に入る
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			//準備⑦船を用意し、必要なものを乗っける
+			pStmt.setInt(1, listId);//引数sqlにsetStringしてる
+			pStmt.setInt(2, 1);
+
+			//準備⑧未完成だったSQL文の？のところに値を入れる
+
+
+
+			// SQL文を実行し、結果表を取得する	検索して結果の表をrsに入れる構文
+			ResultSet rs = pStmt.executeQuery();
+			//⑨出向して一瞬で戻ってくる船　いってらっしゃい
+			while (rs.next()) {
+			//rs.nextで表の次の行にフォーカスが合う　もう行がなければfalseが返ってきて終わり
+				review = new Review();
+				review.setReviewId(rs.getInt("reviews.review_id"));
+				review.setReviewName(rs.getString("reviews.category2_id"));
+				review.setReviewName(rs.getString("reviews.review_name"));
+				review.setReviewPrice(rs.getInt("reviews.review_price"));
+				review.setReviewComment(rs.getString("reviews.review_comment"));
+				review.setrPrivacyFlg(rs.getInt("reviews.privacy_flg"));
+				review.setrDeleteFlg(rs.getInt("reviews.delete_flg"));
+				review.setrCreatedAt(rs.getTimestamp("reviews.created_at"));
+				review.setrUpdatedAt(rs.getTimestamp("reviews.updated_at"));
+				review.setReviewImgId(rs.getInt("reviews_imgs.review_img_id"));
+				review.setReviewImg(rs.getString("reviews_imgs.review_img"));
+				review.setRimDeleteFlg(rs.getInt("reviews_imgs.delete_flg"));
+				review.setRimCreatedAt(rs.getTimestamp("reviews_imgs.created_at"));
+				review.setRimUpdatedAt(rs.getTimestamp("reviews_imgs.updated_at"));
+				review.setReviewItemId(rs.getInt("reviews_item.review_item_id"));
+				review.setReviewItem1(rs.getString("reviews_item.review_item1"));
+				review.setReviewItem2(rs.getString("reviews_item.review_item2"));
+				review.setReviewItem3(rs.getString("reviews_item.review_item3"));
+				review.setReviewItem4(rs.getString("reviews_item.review_item4"));
+				review.setReviewItem5(rs.getString("reviews_item.review_item5"));
+				review.setRitCreatedAt(rs.getTimestamp("reviews_item.created_at"));
+				review.setRitUpdatedAt(rs.getTimestamp("reviews_item.updated_at"));
+				review.setReviewScoreId(rs.getInt("reviews_scores.review_score_id"));
+				review.setReviewItem1Score(rs.getInt("reviews_scores.review_item1_score"));
+				review.setReviewItem2Score(rs.getInt("reviews_scores.review_item2_score"));
+				review.setReviewItem3Score(rs.getInt("reviews_scores.review_item3_score"));
+				review.setReviewItem4Score(rs.getInt("reviews_scores.review_item4_score"));
+				review.setReviewItem5Score(rs.getInt("reviews_scores.review_item5_score"));
+				review.setScoreAvg(rs.getInt("reviews_scores.score_avg"));
+				review.setRsCreatedAt(rs.getTimestamp("reviews_scores.created_at"));
+				review.setRsUpdatedAt(rs.getTimestamp("reviews_scores.updated_at"));
+				review.setBacknumberId(rs.getInt("backnumbers.backnumber_id"));
+				review.setBacknumberContent(rs.getString("backnumbers.backnumber_content"));
+				review.setbDeleteFlg(rs.getInt("backnumbers.delete_flg"));
+				review.setbCreatedAt(rs.getTimestamp("backnumbers.created_at"));
+				review.setbUpdatedAt(rs.getTimestamp("backnumbers.updated_at"));
+				review.setListReviewId(rs.getInt("list_reviews.list_review_id"));
+				review.setLrListId(rs.getInt("list_reviews.list_id"));
+				review.setLrCreatedAt(rs.getTimestamp("list_reviews.created_at"));
+				review.setLrUpdatedAt(rs.getTimestamp("list_reviews.updated_at"));
+				review.setUserEmail(rs.getString("users.user_email"));
+				review.setUserPassword(rs.getString("users.user_password"));
+				review.setUserName(rs.getString("users.user_name"));
+				review.setUserImg(rs.getString("users.user_img"));
+				review.setuPrivcyFlg(rs.getInt("users.privcy_flg"));
+				review.setuCreatedAt(rs.getTimestamp("users.created_at"));
+				review.setuUpdatedAt(rs.getTimestamp("users.updated_at"));
+				list.add(review);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			list = null;
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			list = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					list = null;
+				}
+			}
+		}
+
+		// 結果を返す
+		return list;		//返ってきた結果をサーブレットに渡す(この後スコープに渡してjspに渡して表示)
+	}
+
+	public int count(Idpw idpw) {
+		Connection conn = null;
+		boolean loginResult = false;
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/simpleBC", "sa", "");
+
+			// SELECT文を準備する
+			String sql = "SELECT COUNT(*) FROM Idpw WHERE id = ? AND pw = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, idpw.getId());
+			pStmt.setString(2, idpw.getPw());
+
+			// SELECT文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			// ユーザーIDとパスワードが一致するユーザーがいたかどうかをチェックする
+			rs.next();
+			if (rs.getInt("COUNT(*)") >= 1) {
+				loginResult = true;
+			}
+
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			loginResult = false;
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			loginResult = false;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					loginResult = false;
+				}
+			}
+		}
+
+		// 結果を返す
+		return loginResult;
 	}
 
 	//insertメソッド
@@ -213,7 +565,7 @@ public class ReviewsDAO{
 		return num;
 	}
 
-	public int delete() {
+	public int delete(int reviewId) {
 		int num = 0;
 		Connection conn = null;
 
@@ -228,8 +580,10 @@ public class ReviewsDAO{
 			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4DB",id,pw);
 
 			// SELECT文を準備する
-			String sql = "UPDATE list SET delete_flg=1 WHERE review_id=selectId()";
+			String sql = "UPDATE reviews SET delete_flg=0 WHERE review_id=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			pStmt.setInt(1, reviewId);
 
 			// SQL文を実行し、結果表を取得する	検索して結果の表をrsに入れる構文
 			num = pStmt.executeUpdate();
@@ -254,127 +608,6 @@ public class ReviewsDAO{
 
 		// 結果を返す
 		return num;
-	}
-
-
-	public ArrayList<Review> view() {
-		Review li = null;
-		ArrayList<Review> al = new ArrayList<>();
-		Connection conn = null;
-
-		try {
-			// JDBCドライバを読み込む
-			Class.forName("org.h2.Driver");
-
-			String id="sa";
-			String pw="";
-
-			// データベースに接続する
-			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4DB",id,pw);
-
-			// SELECT文を準備する
-			String sql = "SELECT reviews.review_id,reviews.category2_id,reviews.review_name,reviews.review_price,reviews.review_comment,"
-					+ "reviews.privacy_flg,reviews.delete_flg,reviews.created_at,reviews.updated_at, "
-					+ "reviews_imgs.review_img_id,reviews_imgs.review_img,reviews_imgs.delete_flg,reviews_imgs.created_at,reviews_imgs.updated_at,"
-					+ "reviews_items.review_item_id,reviews_items.review_item1,reviews_items.review_item2,reviews_items.review_item3,reviews_items.review_item4,reviews_items.review_item5,"
-					+ "reviews_items.created_at,reviews_items.updated_at,"
-					+ "reviews_scores.review_score_id,reviews_scores.review_item_id,"
-					+ "reviews_scores.review_item1_score,reviews_scores.review_item2_score,reviews_scores.review_item3_score,reviews_scores.review_item4_score,reviews_scores.review_item5_score,"
-					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
-					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
-					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privcy_flg,users.created_at,users.updated_at FROM reviews "
-					+ "JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
-					+ "JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
-					+ "JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
-					+ "JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
-					+ "JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
-					+ "JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
-					+ "JOIN users ON users.user_id = reviews.user_id ";
-
-			PreparedStatement pStmt = conn.prepareStatement(sql);
-
-			pStmt.setInt(1, 1);//引数sqlにsetStringしてる
-			ResultSet rs = pStmt.executeQuery();
-
-			// 結果表をコレクションにコピーする
-			while (rs.next()) {
-			//rs.nextで表の次の行にフォーカスが合う　もう行がなければfalseが返ってきて終わり
-				li = new Review();
-				li.setReviewId(rs.getInt("reviews.review_id"));
-				li.setReviewName(rs.getString("reviews.category2_id"));
-				li.setReviewName(rs.getString("reviews.review_name"));
-				li.setReviewPrice(rs.getInt("reviews.review_price"));
-				li.setReviewComment(rs.getString("reviews.review_comment"));
-				li.setrPrivacyFlg(rs.getInt("reviews.privacy_flg"));
-				li.setrDeleteFlg(rs.getInt("reviews.delete_flg"));
-				li.setrCreatedAt(rs.getTimestamp("reviews.created_at"));
-				li.setrUpdatedAt(rs.getTimestamp("reviews.updated_at"));
-				li.setReviewImgId(rs.getInt("reviews_imgs.review_img_id"));
-				li.setReviewImg(rs.getString("reviews_imgs.review_img"));
-				li.setRimDeleteFlg(rs.getInt("reviews_imgs.delete_flg"));
-				li.setRimCreatedAt(rs.getTimestamp("reviews_imgs.created_at"));
-				li.setRimUpdatedAt(rs.getTimestamp("reviews_imgs.updated_at"));
-				li.setReviewItemId(rs.getInt("reviews_item.review_item_id"));
-				li.setReviewItem1(rs.getString("reviews_item.review_item1"));
-				li.setReviewItem2(rs.getString("reviews_item.review_item2"));
-				li.setReviewItem3(rs.getString("reviews_item.review_item3"));
-				li.setReviewItem4(rs.getString("reviews_item.review_item4"));
-				li.setReviewItem5(rs.getString("reviews_item.review_item5"));
-				li.setRitCreatedAt(rs.getTimestamp("reviews_item.created_at"));
-				li.setRitUpdatedAt(rs.getTimestamp("reviews_item.updated_at"));
-				li.setReviewScoreId(rs.getInt("reviews_scores.review_score_id"));
-				li.setReviewItem1Score(rs.getInt("reviews_scores.review_item1_score"));
-				li.setReviewItem2Score(rs.getInt("reviews_scores.review_item2_score"));
-				li.setReviewItem3Score(rs.getInt("reviews_scores.review_item3_score"));
-				li.setReviewItem4Score(rs.getInt("reviews_scores.review_item4_score"));
-				li.setReviewItem5Score(rs.getInt("reviews_scores.review_item5_score"));
-				li.setScoreAvg(rs.getInt("reviews_scores.score_avg"));
-				li.setRsCreatedAt(rs.getTimestamp("reviews_scores.created_at"));
-				li.setRsUpdatedAt(rs.getTimestamp("reviews_scores.updated_at"));
-				li.setBacknumberId(rs.getInt("backnumbers.backnumber_id"));
-				li.setBacknumberContent(rs.getString("backnumbers.backnumber_content"));
-				li.setbDeleteFlg(rs.getInt("backnumbers.delete_flg"));
-				li.setbCreatedAt(rs.getTimestamp("backnumbers.created_at"));
-				li.setbUpdatedAt(rs.getTimestamp("backnumbers.updated_at"));
-				li.setListReviewId(rs.getInt("list_reviews.list_review_id"));
-				li.setLrListId(rs.getInt("list_reviews.list_id"));
-				li.setLrCreatedAt(rs.getTimestamp("list_reviews.created_at"));
-				li.setLrUpdatedAt(rs.getTimestamp("list_reviews.updated_at"));
-				li.setUserEmail(rs.getString("users.user_email"));
-				li.setUserPassword(rs.getString("users.user_password"));
-				li.setUserName(rs.getString("users.user_name"));
-				li.setUserImg(rs.getString("users.user_img"));
-				li.setuPrivcyFlg(rs.getInt("users.privcy_flg"));
-				li.setuCreatedAt(rs.getTimestamp("users.created_at"));
-				li.setuUpdatedAt(rs.getTimestamp("users.updated_at"));
-
-				al.add(li);
-			}
-		}
-		catch (SQLException e) {
-			e.printStackTrace();
-			al = null;
-		}
-		catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			al = null;
-		}
-		finally {
-			// データベースを切断
-			if (conn != null) {
-				try {
-					conn.close();
-				}
-				catch (SQLException e) {
-					e.printStackTrace();
-					al = null;
-				}
-			}
-		}
-
-		// 結果を返す
-		return al;//返ってきた結果をサーブレットに渡す(この後スコープに渡してjspに渡して表示)
 	}
 
 	public int update(int category2Id,String reviewName,int reviewPrice,String reviewComment,int privacyFlg,Timestamp updatedAt,int reviewId) {
