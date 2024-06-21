@@ -36,15 +36,14 @@ public class MyReviewServlet extends HttpServlet {
 //URLにID,PWに乗っちゃう　
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// もしもログインしていなかったらログインサーブレットにリダイレクトする
-		//HttpSession session = request.getSession();
-		//if (session.getAttribute("id") == null) {
-		//	response.sendRedirect("/A4/LoginServlet");
-		//	return;
-		//}
+		 //もしもログインしていなかったらログインサーブレットにリダイレクトする
+		HttpSession session = request.getSession();
+		if (session.getAttribute("id") == null) {
+			response.sendRedirect("/A4/LoginServlet");
+			return;
+		}
 		
 		//ログイン後の最初のページ,アプリのロゴをクリックしたとき（自分のレビューをすべて表示する）
-		HttpSession session = request.getSession();
 		int id = (int)session.getAttribute("id");
 		
 		//すべてのレビューを持ってくる
@@ -70,11 +69,11 @@ public class MyReviewServlet extends HttpServlet {
 	//URLにID,PWに乗らない　チラ見対策
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
-		//HttpSession session = request.getSession();
-		//if (session.getAttribute("id") == null) {
-		//	response.sendRedirect("/A4/LoginServlet");
-		//	return;
-		//}
+		HttpSession session = request.getSession();
+		if (session.getAttribute("id") == null) {
+			response.sendRedirect("/A4/LoginServlet");
+			return;
+		}
 		
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
