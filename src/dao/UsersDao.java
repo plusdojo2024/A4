@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import model.User;
 
@@ -168,49 +167,49 @@ public class UsersDao {
 	}
 	
 	//ユーザーネームを出す
-	public ArrayList<User> showName(int myId) {
-		Connection conn = null;
-		ArrayList<User> list = new ArrayList<User>();
-		try {
-			Class.forName("org.h2.Driver");
-			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4db","sa","");
-
-			String sql = "SELECT user_name FROM Users WHERE user_id = ?";
-			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setInt(1, myId);							
-			ResultSet rs = pStmt.executeQuery();
-
-			// 結果表をコレクションにコピーする
-			while (rs.next()) {
-				//セッターを使った書き方
-				User record = new User();
-				record.setUserName(rs.getString("user_name"));
-				list.add(record);			
-				}
-		}
-		catch (SQLException e) {
-			e.printStackTrace();
-			list = null;
-		}
-		catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			list = null;
-		}
-		finally {
-			// データベースを切断
-			if (conn != null) {
-				try {
-					conn.close();
-				}
-				catch (SQLException e) {
-					e.printStackTrace();
-					list = null;
-				}
-			}
-		}
-		return list;
-	}
-	
+//	public ArrayList<User> showName(int myId) {
+//		Connection conn = null;
+//		ArrayList<User> list = new ArrayList<User>();
+//		try {
+//			Class.forName("org.h2.Driver");
+//			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4db","sa","");
+//
+//			String sql = "SELECT user_name FROM Users WHERE user_id = ?";
+//			PreparedStatement pStmt = conn.prepareStatement(sql);
+//			pStmt.setInt(1, myId);							
+//			ResultSet rs = pStmt.executeQuery();
+//
+//			// 結果表をコレクションにコピーする
+//			while (rs.next()) {
+//				//セッターを使った書き方
+//				User record = new User();
+//				record.setUserName(rs.getString("user_name"));
+//				list.add(record);			
+//				}
+//		}
+//		catch (SQLException e) {
+//			e.printStackTrace();
+//			list = null;
+//		}
+//		catch (ClassNotFoundException e) {
+//			e.printStackTrace();
+//			list = null;
+//		}
+//		finally {
+//			// データベースを切断
+//			if (conn != null) {
+//				try {
+//					conn.close();
+//				}
+//				catch (SQLException e) {
+//					e.printStackTrace();
+//					list = null;
+//				}
+//			}
+//		}
+//		return list;
+//	}
+//	
 	//ユーザーネームを変更する
 	public int nameUpdate(String myName, int myId) {
 		Connection conn = null;
@@ -248,48 +247,48 @@ public class UsersDao {
 	}
 	
 	//自分のアイコンの画像を出す
-	public ArrayList<User> showIcon(int myId) {
-		Connection conn = null;
-		ArrayList<User> list = new ArrayList<User>();
-		try {
-			Class.forName("org.h2.Driver");
-			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4db","sa","");
-
-			String sql = "SELECT user_img FROM Users WHERE user_id = ?";
-			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setInt(1, myId);							
-			ResultSet rs = pStmt.executeQuery();
-
-			// 結果表をコレクションにコピーする
-			while (rs.next()) {
-				//セッターを使った書き方
-				User record = new User();
-				record.setUserImg(rs.getString("user_img"));
-				list.add(record);			
-				}
-		}
-		catch (SQLException e) {
-			e.printStackTrace();
-			list = null;
-		}
-		catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			list = null;
-		}
-		finally {
-			// データベースを切断
-			if (conn != null) {
-				try {
-					conn.close();
-				}
-				catch (SQLException e) {
-					e.printStackTrace();
-					list = null;
-				}
-			}
-		}
-		return list;
-	}
+//	public ArrayList<User> showIcon(int myId) {
+//		Connection conn = null;
+//		ArrayList<User> list = new ArrayList<User>();
+//		try {
+//			Class.forName("org.h2.Driver");
+//			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4db","sa","");
+//
+//			String sql = "SELECT user_img FROM Users WHERE user_id = ?";
+//			PreparedStatement pStmt = conn.prepareStatement(sql);
+//			pStmt.setInt(1, myId);							
+//			ResultSet rs = pStmt.executeQuery();
+//
+//			// 結果表をコレクションにコピーする
+//			while (rs.next()) {
+//				//セッターを使った書き方
+//				User record = new User();
+//				record.setUserImg(rs.getString("user_img"));
+//				list.add(record);			
+//				}
+//		}
+//		catch (SQLException e) {
+//			e.printStackTrace();
+//			list = null;
+//		}
+//		catch (ClassNotFoundException e) {
+//			e.printStackTrace();
+//			list = null;
+//		}
+//		finally {
+//			// データベースを切断
+//			if (conn != null) {
+//				try {
+//					conn.close();
+//				}
+//				catch (SQLException e) {
+//					e.printStackTrace();
+//					list = null;
+//				}
+//			}
+//		}
+//		return list;
+//	}
 	
 	//アイコンの変更
 	public int iconUpdate(int myId, String newIcon) {
@@ -328,48 +327,48 @@ public class UsersDao {
 	}
 	
 	//公開非公開を出す
-	public ArrayList<User> showPri(int myId) {
-		Connection conn = null;
-		ArrayList<User> list = new ArrayList<User>();
-		try {
-			Class.forName("org.h2.Driver");
-			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4db","sa","");
-
-			String sql = "SELECT privacy_flg FROM Users WHERE user_id = ?";
-			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setInt(1, myId);							
-			ResultSet rs = pStmt.executeQuery();
-
-			// 結果表をコレクションにコピーする
-			while (rs.next()) {
-				//セッターを使った書き方
-				User record = new User();
-				record.setuPrivacyFlg(rs.getInt("privacy_flg"));				
-				list.add(record);			
-				}
-		}
-		catch (SQLException e) {
-			e.printStackTrace();
-			list = null;
-		}
-		catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			list = null;
-		}
-		finally {
-			// データベースを切断
-			if (conn != null) {
-				try {
-					conn.close();
-				}
-				catch (SQLException e) {
-					e.printStackTrace();
-					list = null;
-				}
-			}
-		}
-		return list;
-	}
+//	public ArrayList<User> showPri(int myId) {
+//		Connection conn = null;
+//		ArrayList<User> list = new ArrayList<User>();
+//		try {
+//			Class.forName("org.h2.Driver");
+//			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4db","sa","");
+//
+//			String sql = "SELECT privacy_flg FROM Users WHERE user_id = ?";
+//			PreparedStatement pStmt = conn.prepareStatement(sql);
+//			pStmt.setInt(1, myId);							
+//			ResultSet rs = pStmt.executeQuery();
+//
+//			// 結果表をコレクションにコピーする
+//			while (rs.next()) {
+//				//セッターを使った書き方
+//				User record = new User();
+//				record.setuPrivacyFlg(rs.getInt("privacy_flg"));				
+//				list.add(record);			
+//				}
+//		}
+//		catch (SQLException e) {
+//			e.printStackTrace();
+//			list = null;
+//		}
+//		catch (ClassNotFoundException e) {
+//			e.printStackTrace();
+//			list = null;
+//		}
+//		finally {
+//			// データベースを切断
+//			if (conn != null) {
+//				try {
+//					conn.close();
+//				}
+//				catch (SQLException e) {
+//					e.printStackTrace();
+//					list = null;
+//				}
+//			}
+//		}
+//		return list;
+//	}
 	
 	//公開非公開の切り替え
 	public int priUpdate(int myPri, int myId) {
