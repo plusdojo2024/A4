@@ -98,7 +98,7 @@ public class ReviewsDAO{
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
 					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privcy_flg,users.created_at,users.updated_at FROM reviews "
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at FROM reviews "
 					+ "JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
 					+ "JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
 					+ "JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
@@ -161,7 +161,7 @@ public class ReviewsDAO{
 				review.setUserPassword(rs.getString("users.user_password"));
 				review.setUserName(rs.getString("users.user_name"));
 				review.setUserImg(rs.getString("users.user_img"));
-				review.setuPrivacyFlg(rs.getInt("users.privcy_flg"));
+				review.setuPrivacyFlg(rs.getInt("users.privacy_flg"));
 				review.setuCreatedAt(rs.getTimestamp("users.created_at"));
 				review.setuUpdatedAt(rs.getTimestamp("users.updated_at"));
 				list.add(review);
@@ -223,7 +223,7 @@ public class ReviewsDAO{
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
 					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privcy_flg,users.created_at,users.updated_at FROM reviews "
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at FROM reviews "
 					+ "JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
 					+ "JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
 					+ "JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
@@ -300,7 +300,7 @@ public class ReviewsDAO{
 				review.setUserPassword(rs.getString("users.user_password"));
 				review.setUserName(rs.getString("users.user_name"));
 				review.setUserImg(rs.getString("users.user_img"));
-				review.setuPrivacyFlg(rs.getInt("users.privcy_flg"));
+				review.setuPrivacyFlg(rs.getInt("users.privacy_flg"));
 				review.setuCreatedAt(rs.getTimestamp("users.created_at"));
 				review.setuUpdatedAt(rs.getTimestamp("users.updated_at"));
 				list.add(review);
@@ -362,7 +362,7 @@ public class ReviewsDAO{
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
 					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privcy_flg,users.created_at,users.updated_at FROM reviews "
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at FROM reviews "
 					+ "JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
 					+ "JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
 					+ "JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
@@ -433,7 +433,7 @@ public class ReviewsDAO{
 				review.setUserPassword(rs.getString("users.user_password"));
 				review.setUserName(rs.getString("users.user_name"));
 				review.setUserImg(rs.getString("users.user_img"));
-				review.setuPrivacyFlg(rs.getInt("users.privcy_flg"));
+				review.setuPrivacyFlg(rs.getInt("users.privacy_flg"));
 				review.setuCreatedAt(rs.getTimestamp("users.created_at"));
 				review.setuUpdatedAt(rs.getTimestamp("users.updated_at"));
 				list.add(review);
@@ -637,7 +637,7 @@ public class ReviewsDAO{
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
 					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privcy_flg,users.created_at,users.updated_at FROM reviews "
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at FROM reviews "
 					+ "JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
 					+ "JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
 					+ "JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
@@ -713,7 +713,7 @@ public class ReviewsDAO{
 				review.setUserPassword(rs.getString("users.user_password"));
 				review.setUserName(rs.getString("users.user_name"));
 				review.setUserImg(rs.getString("users.user_img"));
-				review.setuPrivacyFlg(rs.getInt("users.privcy_flg"));
+				review.setuPrivacyFlg(rs.getInt("users.privacy_flg"));
 				review.setuCreatedAt(rs.getTimestamp("users.created_at"));
 				review.setuUpdatedAt(rs.getTimestamp("users.updated_at"));
 				list.add(review);
@@ -771,7 +771,7 @@ public class ReviewsDAO{
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
 					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privcy_flg,users.created_at,users.updated_at FROM reviews "
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at FROM reviews "
 					+ "JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
 					+ "JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
 					+ "JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
@@ -848,7 +848,7 @@ public class ReviewsDAO{
 				review.setUserPassword(rs.getString("users.user_password"));
 				review.setUserName(rs.getString("users.user_name"));
 				review.setUserImg(rs.getString("users.user_img"));
-				review.setuPrivacyFlg(rs.getInt("users.privcy_flg"));
+				review.setuPrivacyFlg(rs.getInt("users.privacy_flg"));
 				review.setuCreatedAt(rs.getTimestamp("users.created_at"));
 				review.setuUpdatedAt(rs.getTimestamp("users.updated_at"));
 				list.add(review);
@@ -906,7 +906,7 @@ public class ReviewsDAO{
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
 					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privcy_flg,users.created_at,users.updated_at FROM reviews "
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at FROM reviews "
 					+ "JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
 					+ "JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
 					+ "JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
@@ -983,7 +983,7 @@ public class ReviewsDAO{
 				review.setUserPassword(rs.getString("users.user_password"));
 				review.setUserName(rs.getString("users.user_name"));
 				review.setUserImg(rs.getString("users.user_img"));
-				review.setuPrivacyFlg(rs.getInt("users.privcy_flg"));
+				review.setuPrivacyFlg(rs.getInt("users.privacy_flg"));
 				review.setuCreatedAt(rs.getTimestamp("users.created_at"));
 				review.setuUpdatedAt(rs.getTimestamp("users.updated_at"));
 				list.add(review);
@@ -1041,7 +1041,7 @@ public class ReviewsDAO{
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
 					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privcy_flg,users.created_at,users.updated_at FROM reviews "
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at FROM reviews "
 					+ "JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
 					+ "JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
 					+ "JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
@@ -1118,7 +1118,7 @@ public class ReviewsDAO{
 				review.setUserPassword(rs.getString("users.user_password"));
 				review.setUserName(rs.getString("users.user_name"));
 				review.setUserImg(rs.getString("users.user_img"));
-				review.setuPrivacyFlg(rs.getInt("users.privcy_flg"));
+				review.setuPrivacyFlg(rs.getInt("users.privacy_flg"));
 				review.setuCreatedAt(rs.getTimestamp("users.created_at"));
 				review.setuUpdatedAt(rs.getTimestamp("users.updated_at"));
 				list.add(review);
@@ -1176,7 +1176,7 @@ public class ReviewsDAO{
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
 					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privcy_flg,users.created_at,users.updated_at FROM reviews "
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at FROM reviews "
 					+ "JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
 					+ "JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
 					+ "JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
@@ -1253,7 +1253,7 @@ public class ReviewsDAO{
 				review.setUserPassword(rs.getString("users.user_password"));
 				review.setUserName(rs.getString("users.user_name"));
 				review.setUserImg(rs.getString("users.user_img"));
-				review.setuPrivacyFlg(rs.getInt("users.privcy_flg"));
+				review.setuPrivacyFlg(rs.getInt("users.privacy_flg"));
 				review.setuCreatedAt(rs.getTimestamp("users.created_at"));
 				review.setuUpdatedAt(rs.getTimestamp("users.updated_at"));
 				list.add(review);
@@ -1311,7 +1311,7 @@ public class ReviewsDAO{
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
 					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privcy_flg,users.created_at,users.updated_at FROM reviews "
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at FROM reviews "
 					+ "JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
 					+ "JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
 					+ "JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
@@ -1388,7 +1388,7 @@ public class ReviewsDAO{
 				review.setUserPassword(rs.getString("users.user_password"));
 				review.setUserName(rs.getString("users.user_name"));
 				review.setUserImg(rs.getString("users.user_img"));
-				review.setuPrivacyFlg(rs.getInt("users.privcy_flg"));
+				review.setuPrivacyFlg(rs.getInt("users.privacy_flg"));
 				review.setuCreatedAt(rs.getTimestamp("users.created_at"));
 				review.setuUpdatedAt(rs.getTimestamp("users.updated_at"));
 				list.add(review);
@@ -1446,7 +1446,7 @@ public class ReviewsDAO{
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
 					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privcy_flg,users.created_at,users.updated_at FROM reviews "
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at FROM reviews "
 					+ "JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
 					+ "JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
 					+ "JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
@@ -1523,7 +1523,7 @@ public class ReviewsDAO{
 				review.setUserPassword(rs.getString("users.user_password"));
 				review.setUserName(rs.getString("users.user_name"));
 				review.setUserImg(rs.getString("users.user_img"));
-				review.setuPrivacyFlg(rs.getInt("users.privcy_flg"));
+				review.setuPrivacyFlg(rs.getInt("users.privacy_flg"));
 				review.setuCreatedAt(rs.getTimestamp("users.created_at"));
 				review.setuUpdatedAt(rs.getTimestamp("users.updated_at"));
 				list.add(review);
@@ -1581,7 +1581,7 @@ public class ReviewsDAO{
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
 					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privcy_flg,users.created_at,users.updated_at FROM reviews "
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at FROM reviews "
 					+ "JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
 					+ "JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
 					+ "JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
@@ -1658,7 +1658,7 @@ public class ReviewsDAO{
 				review.setUserPassword(rs.getString("users.user_password"));
 				review.setUserName(rs.getString("users.user_name"));
 				review.setUserImg(rs.getString("users.user_img"));
-				review.setuPrivacyFlg(rs.getInt("users.privcy_flg"));
+				review.setuPrivacyFlg(rs.getInt("users.privacy_flg"));
 				review.setuCreatedAt(rs.getTimestamp("users.created_at"));
 				review.setuUpdatedAt(rs.getTimestamp("users.updated_at"));
 				list.add(review);
@@ -1716,7 +1716,7 @@ public class ReviewsDAO{
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
 					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privcy_flg,users.created_at,users.updated_at FROM reviews "
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at FROM reviews "
 					+ "JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
 					+ "JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
 					+ "JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
@@ -1793,7 +1793,7 @@ public class ReviewsDAO{
 				review.setUserPassword(rs.getString("users.user_password"));
 				review.setUserName(rs.getString("users.user_name"));
 				review.setUserImg(rs.getString("users.user_img"));
-				review.setuPrivacyFlg(rs.getInt("users.privcy_flg"));
+				review.setuPrivacyFlg(rs.getInt("users.privacy_flg"));
 				review.setuCreatedAt(rs.getTimestamp("users.created_at"));
 				review.setuUpdatedAt(rs.getTimestamp("users.updated_at"));
 				list.add(review);
@@ -1851,7 +1851,7 @@ public class ReviewsDAO{
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
 					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privcy_flg,users.created_at,users.updated_at FROM reviews "
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at FROM reviews "
 					+ "JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
 					+ "JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
 					+ "JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
@@ -1928,7 +1928,7 @@ public class ReviewsDAO{
 				review.setUserPassword(rs.getString("users.user_password"));
 				review.setUserName(rs.getString("users.user_name"));
 				review.setUserImg(rs.getString("users.user_img"));
-				review.setuPrivacyFlg(rs.getInt("users.privcy_flg"));
+				review.setuPrivacyFlg(rs.getInt("users.privacy_flg"));
 				review.setuCreatedAt(rs.getTimestamp("users.created_at"));
 				review.setuUpdatedAt(rs.getTimestamp("users.updated_at"));
 				list.add(review);
