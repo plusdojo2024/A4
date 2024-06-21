@@ -1,139 +1,139 @@
-/* ãƒ¦ãƒ¼ã‚¶ãƒ¼ãƒ†ãƒ¼ãƒ–ãƒ«ã‚’ä½œæˆ */
+/* ƒ†[ƒU[ƒe[ƒuƒ‹‚ðì¬ */
 CREATE TABLE USERS
 (
-    user_id INTEGER AUTO_INCREMENT, /*ãƒ¦ãƒ¼ã‚¶ãƒ¼ID*/
-    user_email VARCHAR, /*ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹*/
-    user_password INTEGER(100) NOT NULL, /*ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰*/
-    user_name VARCHAR(100) NOT NULL, /*ãƒ¦ãƒ¼ã‚¶ãƒ¼ãƒãƒ¼ãƒ */
-    user_img VARCHAR, /*ã‚¢ã‚¤ã‚³ãƒ³ç”»åƒ*/
-    privcy_flg INTEGER DEFAULT 1, /*å…¬é–‹ãƒ»éžå…¬é–‹ãƒ•ãƒ©ã‚°*/
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*ä½œæˆæ—¥æ™‚*/
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*æ›´æ–°æ—¥æ™‚*/
+    user_id INTEGER AUTO_INCREMENT, /*ƒ†[ƒU[ID*/
+    user_email VARCHAR, /*ƒ[ƒ‹ƒAƒhƒŒƒX*/
+    user_password VARCHAR(100) NOT NULL, /*ƒpƒXƒ[ƒh*/
+    user_name VARCHAR(100) NOT NULL, /*ƒ†[ƒU[ƒl[ƒ€*/
+    user_img VARCHAR, /*ƒAƒCƒRƒ“‰æ‘œ*/
+    privacy_flg INTEGER DEFAULT 1, /*ŒöŠJE”ñŒöŠJƒtƒ‰ƒO*/
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*ì¬“úŽž*/
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*XV“úŽž*/
     PRIMARY KEY (user_id) 
 );
 
-/* å¤§ã‚«ãƒ†ã‚´ãƒªãƒ¼ãƒ†ãƒ¼ãƒ–ãƒ«ã‚’ä½œæˆ */
+/* ‘åƒJƒeƒSƒŠ[ƒe[ƒuƒ‹‚ðì¬ */
 CREATE TABLE CATEGORYS1
 (
-    category1_id INTEGER AUTO_INCREMENT, /*å¤§ã‚«ãƒ†ã‚´ãƒªãƒ¼ID*/
-    category1_name VARCHAR(100) NOT NULL, /*å¤§ã‚«ãƒ†ã‚´ãƒªãƒ¼å*/
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*ä½œæˆæ—¥æ™‚*/
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*æ›´æ–°æ—¥æ™‚*/
+    category1_id INTEGER AUTO_INCREMENT, /*‘åƒJƒeƒSƒŠ[ID*/
+    category1_name VARCHAR(100) NOT NULL, /*‘åƒJƒeƒSƒŠ[–¼*/
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*ì¬“úŽž*/
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*XV“úŽž*/
     PRIMARY KEY (category1_id)
 );
 
-/* å°ã‚«ãƒ†ã‚´ãƒªãƒ¼ãƒ†ãƒ¼ãƒ–ãƒ«ã‚’ä½œæˆ */
+/* ¬ƒJƒeƒSƒŠ[ƒe[ƒuƒ‹‚ðì¬ */
 CREATE TABLE CATEGORYS2
 (
-    category2_id INTEGER AUTO_INCREMENT, /*å°ã‚«ãƒ†ã‚´ãƒªãƒ¼ID*/
-    category1_id INTEGER, /*å¤§ã‚«ãƒ†ã‚´ãƒªãƒ¼ID*/
-    category2_name VARCHAR(100) NOT NULL, /*å°ã‚«ãƒ†ã‚´ãƒªãƒ¼å*/
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*ä½œæˆæ—¥æ™‚*/
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*æ›´æ–°æ—¥æ™‚*/
+    category2_id INTEGER AUTO_INCREMENT, /*¬ƒJƒeƒSƒŠ[ID*/
+    category1_id INTEGER, /*‘åƒJƒeƒSƒŠ[ID*/
+    category2_name VARCHAR(100) NOT NULL, /*¬ƒJƒeƒSƒŠ[–¼*/
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*ì¬“úŽž*/
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*XV“úŽž*/
     PRIMARY KEY (category2_id) 
 );
 
-/* ãƒ¬ãƒ“ãƒ¥ãƒ¼ãƒ†ãƒ¼ãƒ–ãƒ«ã‚’ä½œæˆ */
+/* ƒŒƒrƒ…[ƒe[ƒuƒ‹‚ðì¬ */
 CREATE TABLE REVIEWS
 (
-    review_id INTEGER AUTO_INCREMENT, /*ãƒ¦ãƒ¼ã‚¶ãƒ¼ID*/
-    category2_id INTEGER, /*å°ã‚«ãƒ†ã‚´ãƒªãƒ¼ID*/
-    review_name VARCHAR(100) NOT NULL, /*ãƒ¬ãƒ“ãƒ¥ãƒ¼å*/
-    review_price INTEGER, /*ãƒ¬ãƒ“ãƒ¥ãƒ¼ä¾¡æ ¼*/
-    review_comment VARCHAR(100), /*ãƒ¬ãƒ“ãƒ¥ãƒ¼ã‚³ãƒ¡ãƒ³ãƒˆ*/
-    user_id INTEGER, /*ãƒ¦ãƒ¼ã‚¶ãƒ¼ID*/
-    privacy_flg INTEGER DEFAULT 1, /*å…¬é–‹ãƒ»éžå…¬é–‹ãƒ•ãƒ©ã‚°*/
-    delete_flg INTEGER DEFAULT 1, /*å‰Šé™¤ãƒ•ãƒ©ã‚°*/
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*ä½œæˆæ—¥æ™‚*/
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*æ›´æ–°æ—¥æ™‚*/
+    review_id INTEGER AUTO_INCREMENT, /*ƒ†[ƒU[ID*/
+    category2_id INTEGER, /*¬ƒJƒeƒSƒŠ[ID*/
+    review_name VARCHAR(100) NOT NULL, /*ƒŒƒrƒ…[–¼*/
+    review_price INTEGER, /*ƒŒƒrƒ…[‰¿Ši*/
+    review_comment VARCHAR(100), /*ƒŒƒrƒ…[ƒRƒƒ“ƒg*/
+    user_id INTEGER, /*ƒ†[ƒU[ID*/
+    privacy_flg INTEGER DEFAULT 1, /*ŒöŠJE”ñŒöŠJƒtƒ‰ƒO*/
+    delete_flg INTEGER DEFAULT 1, /*íœƒtƒ‰ƒO*/
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*ì¬“úŽž*/
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*XV“úŽž*/
     PRIMARY KEY (review_id) 
 );
 
-/* ãƒ¬ãƒ“ãƒ¥ãƒ¼ç”»åƒãƒ†ãƒ¼ãƒ–ãƒ«ã‚’ä½œæˆ */
+/* ƒŒƒrƒ…[‰æ‘œƒe[ƒuƒ‹‚ðì¬ */
 CREATE TABLE REVIEWS_IMGS
 (
-    review_img_id INTEGER AUTO_INCREMENT, /*ãƒ¬ãƒ“ãƒ¥ãƒ¼ç”»åƒID*/
-    review_id INTEGER, /*ãƒ¬ãƒ“ãƒ¥ãƒ¼ID*/
-    review_img VARCHAR, /*ãƒ¬ãƒ“ãƒ¥ãƒ¼ç”»åƒ*/
-    delete_flg INTEGER DEFAULT 1, /*å‰Šé™¤ãƒ•ãƒ©ã‚°*/
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*ä½œæˆæ—¥æ™‚*/
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*æ›´æ–°æ—¥æ™‚*/
+    review_img_id INTEGER AUTO_INCREMENT, /*ƒŒƒrƒ…[‰æ‘œID*/
+    review_id INTEGER, /*ƒŒƒrƒ…[ID*/
+    review_img VARCHAR, /*ƒŒƒrƒ…[‰æ‘œ*/
+    delete_flg INTEGER DEFAULT 1, /*íœƒtƒ‰ƒO*/
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*ì¬“úŽž*/
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*XV“úŽž*/
     PRIMARY KEY (review_img_id) 
 );
 
-/* ãƒ¬ãƒ“ãƒ¥ãƒ¼é …ç›®ãƒ†ãƒ¼ãƒ–ãƒ«ã‚’ä½œæˆ */
+/* ƒŒƒrƒ…[€–Úƒe[ƒuƒ‹‚ðì¬ */
 CREATE TABLE REVIEWS_ITEMS
 (
-    review_item_id INTEGER AUTO_INCREMENT, /*ãƒ¬ãƒ“ãƒ¥ãƒ¼é …ç›®ID*/
-    category2_id INTEGER, /*å°ã‚«ãƒ†ã‚´ãƒªãƒ¼ID*/
-    review_item1 VARCHAR(100), /*ãƒ¬ãƒ“ãƒ¥ãƒ¼é …ç›®ï¼‘*/
-    review_item2 VARCHAR(100), /*ãƒ¬ãƒ“ãƒ¥ãƒ¼é …ç›®ï¼’*/
-    review_item3 VARCHAR(100), /*ãƒ¬ãƒ“ãƒ¥ãƒ¼é …ç›®ï¼“*/
-    review_item4 VARCHAR(100), /*ãƒ¬ãƒ“ãƒ¥ãƒ¼é …ç›®ï¼”*/
-    review_item5 VARCHAR(100), /*ãƒ¬ãƒ“ãƒ¥ãƒ¼é …ç›®ï¼•*/
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*ä½œæˆæ—¥æ™‚*/
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*æ›´æ–°æ—¥æ™‚*/
+    review_item_id INTEGER AUTO_INCREMENT, /*ƒŒƒrƒ…[€–ÚID*/
+    category2_id INTEGER, /*¬ƒJƒeƒSƒŠ[ID*/
+    review_item1 VARCHAR(100), /*ƒŒƒrƒ…[€–Ú‚P*/
+    review_item2 VARCHAR(100), /*ƒŒƒrƒ…[€–Ú‚Q*/
+    review_item3 VARCHAR(100), /*ƒŒƒrƒ…[€–Ú‚R*/
+    review_item4 VARCHAR(100), /*ƒŒƒrƒ…[€–Ú‚S*/
+    review_item5 VARCHAR(100), /*ƒŒƒrƒ…[€–Ú‚T*/
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*ì¬“úŽž*/
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*XV“úŽž*/
     PRIMARY KEY (review_item_id) 
 );
 
-/* ãƒ¬ãƒ“ãƒ¥ãƒ¼ã‚¹ã‚³ã‚¢ãƒ†ãƒ¼ãƒ–ãƒ«ã‚’ä½œæˆ */
+/* ƒŒƒrƒ…[ƒXƒRƒAƒe[ƒuƒ‹‚ðì¬ */
 CREATE TABLE REVIEWS_SCORES
 (
-    review_score_id INTEGER AUTO_INCREMENT, /*ãƒ¬ãƒ“ãƒ¥ãƒ¼ã‚¹ã‚³ã‚¢ID*/
-    review_id INTEGER, /*ãƒ¬ãƒ“ãƒ¥ãƒ¼ID*/
-    review_item_id INTEGER, /*ãƒ¬ãƒ“ãƒ¥ãƒ¼é …ç›®ID*/
-    review_item1_score INTEGER, /*ãƒ¬ãƒ“ãƒ¥ãƒ¼é …ç›®ï¼‘ã‚¹ã‚³ã‚¢*/
-    review_item2_score INTEGER, /*ãƒ¬ãƒ“ãƒ¥ãƒ¼é …ç›®ï¼’ã‚¹ã‚³ã‚¢*/
-    review_item3_score INTEGER, /*ãƒ¬ãƒ“ãƒ¥ãƒ¼é …ç›®ï¼“ã‚¹ã‚³ã‚¢*/
-    review_item4_score INTEGER, /*ãƒ¬ãƒ“ãƒ¥ãƒ¼é …ç›®ï¼”ã‚¹ã‚³ã‚¢*/
-    review_item5_score INTEGER, /*ãƒ¬ãƒ“ãƒ¥ãƒ¼é …ç›®ï¼•ã‚¹ã‚³ã‚¢*/
-    score_avg INTEGER, /*ã‚¹ã‚³ã‚¢å¹³å‡*/
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*ä½œæˆæ—¥æ™‚*/
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*æ›´æ–°æ—¥æ™‚*/
+    review_score_id INTEGER AUTO_INCREMENT, /*ƒŒƒrƒ…[ƒXƒRƒAID*/
+    review_id INTEGER, /*ƒŒƒrƒ…[ID*/
+    review_item_id INTEGER, /*ƒŒƒrƒ…[€–ÚID*/
+    review_item1_score INTEGER, /*ƒŒƒrƒ…[€–Ú‚PƒXƒRƒA*/
+    review_item2_score INTEGER, /*ƒŒƒrƒ…[€–Ú‚QƒXƒRƒA*/
+    review_item3_score INTEGER, /*ƒŒƒrƒ…[€–Ú‚RƒXƒRƒA*/
+    review_item4_score INTEGER, /*ƒŒƒrƒ…[€–Ú‚SƒXƒRƒA*/
+    review_item5_score INTEGER, /*ƒŒƒrƒ…[€–Ú‚TƒXƒRƒA*/
+    score_avg INTEGER, /*ƒXƒRƒA•½‹Ï*/
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*ì¬“úŽž*/
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*XV“úŽž*/
     PRIMARY KEY (review_score_id) 
 );
 
-/* ãƒãƒƒã‚¯ãƒŠãƒ³ãƒãƒ¼ãƒ†ãƒ¼ãƒ–ãƒ«ã‚’ä½œæˆ */
+/* ƒoƒbƒNƒiƒ“ƒo[ƒe[ƒuƒ‹‚ðì¬ */
 CREATE TABLE BACKNUMBERS
 (
-    backnumber_id INTEGER AUTO_INCREMENT, /*ãƒãƒƒã‚¯ãƒŠãƒ³ãƒãƒ¼ID*/
-    review_id INTEGER, /*ãƒ¬ãƒ“ãƒ¥ãƒ¼ID*/
-    backnumber_content VARCHAR(100) NOT NULL, /*ãƒãƒƒã‚¯ãƒŠãƒ³ãƒãƒ¼ã‚³ãƒ³ãƒ†ãƒ³ãƒ„*/
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*ä½œæˆæ—¥æ™‚*/
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*æ›´æ–°æ—¥æ™‚*/
+    backnumber_id INTEGER AUTO_INCREMENT, /*ƒoƒbƒNƒiƒ“ƒo[ID*/
+    review_id INTEGER, /*ƒŒƒrƒ…[ID*/
+    backnumber_content VARCHAR(100) NOT NULL, /*ƒoƒbƒNƒiƒ“ƒo[ƒRƒ“ƒeƒ“ƒc*/
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*ì¬“úŽž*/
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*XV“úŽž*/
     PRIMARY KEY (backnumber_id) 
 );
 
-/* ãƒ•ã‚©ãƒ­ãƒ¼ãƒ†ãƒ¼ãƒ–ãƒ«ã‚’ä½œæˆ */
+/* ƒtƒHƒ[ƒe[ƒuƒ‹‚ðì¬ */
 CREATE TABLE FOLLOWS
 (
-    follow_id INTEGER AUTO_INCREMENT, /*ãƒ•ã‚©ãƒ­ãƒ¼ID*/
-    user1_id INTEGER, /*ãƒ¦ãƒ¼ã‚¶ãƒ¼ï¼‘ID*/
-    user2_id INTEGER, /*ãƒ¦ãƒ¼ã‚¶ãƒ¼ï¼’ID*/
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*ä½œæˆæ—¥æ™‚*/
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*æ›´æ–°æ—¥æ™‚*/
+    follow_id INTEGER AUTO_INCREMENT, /*ƒtƒHƒ[ID*/
+    user1_id INTEGER, /*ƒ†[ƒU[‚PID*/
+    user2_id INTEGER, /*ƒ†[ƒU[‚QID*/
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*ì¬“úŽž*/
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*XV“úŽž*/
     PRIMARY KEY (follow_id) 
 );
 
-/* ãƒªã‚¹ãƒˆãƒ†ãƒ¼ãƒ–ãƒ«ã‚’ä½œæˆ */
+/* ƒŠƒXƒgƒe[ƒuƒ‹‚ðì¬ */
 CREATE TABLE LIST
 (
-    list_id INTEGER AUTO_INCREMENT, /*ãƒªã‚¹ãƒˆID*/
-    list_name VARCHAR(100) NOT NULL, /*ãƒªã‚¹ãƒˆå*/
-    delete_flg INTEGER DEFAULT 1, /*å‰Šé™¤ãƒ•ãƒ©ã‚°*/
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*ä½œæˆæ—¥æ™‚*/
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*æ›´æ–°æ—¥æ™‚*/
+    list_id INTEGER AUTO_INCREMENT, /*ƒŠƒXƒgID*/
+    list_name VARCHAR(100) NOT NULL, /*ƒŠƒXƒg–¼*/
+    delete_flg INTEGER DEFAULT 1, /*íœƒtƒ‰ƒO*/
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*ì¬“úŽž*/
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*XV“úŽž*/
     PRIMARY KEY (list_id) 
 );
 
-/* ãƒªã‚¹ãƒˆãƒ¬ãƒ“ãƒ¥ãƒ¼ãƒ†ãƒ¼ãƒ–ãƒ«ã‚’ä½œæˆ */
+/* ƒŠƒXƒgƒŒƒrƒ…[ƒe[ƒuƒ‹‚ðì¬ */
 CREATE TABLE LIST_REVIEWS
 (
-    list_review_id INTEGER AUTO_INCREMENT, /*ãƒ¦ãƒ¼ã‚¶ãƒ¼ID*/
-    list_id VARCHAR, /*ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹*/
-    review_id INTEGER(100), /*ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰*/
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*ä½œæˆæ—¥æ™‚*/
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*æ›´æ–°æ—¥æ™‚*/
+    list_review_id INTEGER AUTO_INCREMENT, /*ƒ†[ƒU[ID*/
+    list_id VARCHAR, /*ƒ[ƒ‹ƒAƒhƒŒƒX*/
+    review_id INTEGER(100), /*ƒpƒXƒ[ƒh*/
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*ì¬“úŽž*/
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*XV“úŽž*/
     PRIMARY KEY (list_review_id) 
 );
 
