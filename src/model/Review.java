@@ -78,7 +78,7 @@ public class Review implements Serializable {
 		this.reviewItem5 = "";
 		this.backnumberContent = "";
 	}
-	
+
 	public Review(int userId) {
 		super();
 		this.userId = userId;
