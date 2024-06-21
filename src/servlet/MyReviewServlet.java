@@ -17,6 +17,8 @@ import dao.Categorys1DAO;
 import dao.FollowsDao;
 import dao.ReviewsDAO;
 import dao.ReviewsImgsDAO;
+import dao.ReviewsItemsDAO;
+import dao.ReviewsScoresDAO;
 import dao.UsersDao;
 import model.Category;
 import model.Review;
@@ -85,18 +87,37 @@ public class MyReviewServlet extends HttpServlet {
 			int reviewPrice = Integer.parseInt(request.getParameter("reviewPrice"));
 			String reviewComment = request.getParameter("reviewComment");
 			int privacyFlg = Integer.parseInt(request.getParameter("privacyFlg"));
-			String UpDatedAt = request.getParameter("UpDatedAt");
+			String UpCreatedAt = request.getParameter("UpCreatedAt");
 			//String型からTimestamp型へ変換
 			SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd:HH:mm:ss");
-			java.util.Date parsedDate = f.parse(UpDatedAt);
-			Timestamp upDatedAt = new Timestamp(parsedDate.getTime());	
+			java.util.Date parsedDate = f.parse(UpCreatedAt);
+			Timestamp upCreatedAt = new Timestamp(parsedDate.getTime());	
+			
+			String reviewImg = request.getParameter("reviewImg");
+			
+			String reviewItem1 = request.getParameter("reviewItem1");
+			String reviewItem2 = request.getParameter("reviewItem2");
+			String reviewItem3 = request.getParameter("reviewItem3");
+			String reviewItem4 = request.getParameter("reviewItem4");
+			String reviewItem5 = request.getParameter("reviewItem5");
+			
+			int reviewItemId = Integer.parseInt(request.getParameter("reviewItemId"));
+			int reviewItem1Score = Integer.parseInt(request.getParameter("reviewItem1Score"));
+			int reviewItem2Score = Integer.parseInt(request.getParameter("reviewItem2Score"));
+			int reviewItem3Score = Integer.parseInt(request.getParameter("reviewItem3Score"));
+			int reviewItem4Score = Integer.parseInt(request.getParameter("reviewItem4Score"));
+			int reviewItem5Score = Integer.parseInt(request.getParameter("reviewItem5Score"));
 			
 			ReviewsDAO rDao = new ReviewsDAO();
 			int result1 = rDao.insert(category2Id,reviewName,reviewPrice,reviewComment,id);
-			ReviewsImgsDAO riDAO = new ReviewsImgsDAO();
-			int result2 =riDao.insert(reviewId, reviewImg);
-			
-			if (result == 1) {
+			ReviewsImgsDAO rimgsDao = new ReviewsImgsDAO();
+			int result2 = rimgsDao.insert(reviewId, reviewImg);
+			ReviewsItemsDAO ritemDao = new ReviewsItemsDAO();
+			int result3 = ritemDao.insert(category2Id, reviewItem1, reviewItem2, reviewItem3, reviewItem4, reviewItem5); 
+			ReviewsScoresDAO rSDao = new ReviewsScoresDAO();
+			int result4 = rSDao.insert(reviewId, reviewItemId, reviewItem1Score, reviewItem2Score, reviewItem3Score, reviewItem4Score, reviewItem5Score, null);
+					
+			if (result1 == 1 &&result2 == 1 &&result3 == 1 &&result4 == 1) {
 				request.setAttribute("result", "登録しました。");
 			} else {
 				request.setAttribute("result", "登録できませんでした");
@@ -137,13 +158,34 @@ public class MyReviewServlet extends HttpServlet {
 			//String型からTimestamp型へ変換
 			SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd:HH:mm:ss");
 			java.util.Date parsedDate = f.parse(UpDatedAt);
-			Timestamp upDatedAt = new Timestamp(parsedDate.getTime());			
+			Timestamp upDatedAt = new Timestamp(parsedDate.getTime());
+			
+			String reviewImg = request.getParameter("reviewImg");
+			
+			String reviewItem1 = request.getParameter("reviewItem1");
+			String reviewItem2 = request.getParameter("reviewItem2");
+			String reviewItem3 = request.getParameter("reviewItem3");
+			String reviewItem4 = request.getParameter("reviewItem4");
+			String reviewItem5 = request.getParameter("reviewItem5");
+			
+			int reviewItemId = Integer.parseInt(request.getParameter("reviewItemId"));
+			int reviewItem1Score = Integer.parseInt(request.getParameter("reviewItem1Score"));
+			int reviewItem2Score = Integer.parseInt(request.getParameter("reviewItem2Score"));
+			int reviewItem3Score = Integer.parseInt(request.getParameter("reviewItem3Score"));
+			int reviewItem4Score = Integer.parseInt(request.getParameter("reviewItem4Score"));
+			int reviewItem5Score = Integer.parseInt(request.getParameter("reviewItem5Score"));
 			
 			
 			ReviewsDAO rDao = new ReviewsDAO();
-			int result = rDao.update(category2Id,reviewName, reviewPrice, reviewComment, privacyFlg, upDatedAt, reviewId);
-			
-			if (result == 1) {
+			int result1 = rDao.update(category2Id,reviewName, reviewPrice, reviewComment, privacyFlg, upDatedAt, reviewId);
+			ReviewsImgsDAO rimgsDao = new ReviewsImgsDAO();
+			int result2 = rimgsDao.insert(reviewId, reviewImg);
+			ReviewsItemsDAO ritemDao = new ReviewsItemsDAO();
+			int result3 = ritemDao.insert(category2Id, reviewItem1, reviewItem2, reviewItem3, reviewItem4, reviewItem5); 
+			ReviewsScoresDAO rSDao = new ReviewsScoresDAO();
+			int result4 = rSDao.insert(reviewId, reviewItemId, reviewItem1Score, reviewItem2Score, reviewItem3Score, reviewItem4Score, reviewItem5Score, null);
+
+			if (result1 == 1 &&result2 == 1 &&result3 == 1 &&result4 == 1) {
 				request.setAttribute("result", "更新しました。");
 			} else {
 				request.setAttribute("result", "更新できませんでした");
@@ -190,7 +232,7 @@ public class MyReviewServlet extends HttpServlet {
 			int id = Integer.parseInt(request.getParameter("user_id"));
 			String newIcom = request.getParameter("icon");
 			uDao.iconUpdate(id, newIcom);
-			request.setAttribute("result", "");//スライドするだけどうする
+			request.setAttribute("result", "");//どう変わる
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/my_review.jsp");
 			dispatcher.forward(request, response);
