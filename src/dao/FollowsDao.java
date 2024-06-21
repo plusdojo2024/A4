@@ -1,8 +1,3 @@
-//ユーザーID2に合致するユーザーのID,ネーム、アイコンを取ってくる
-//フォローテーブルに追加
-//フローテーブルから削除
-//ユーザーネームがあってるやつを探す（あいまい検索）
- 
 package dao;
 
 import java.sql.Connection;
@@ -16,9 +11,9 @@ import model.User;
 
 public class FollowsDao {
 	//フォローしてる人のアイコン、なまえ、IDを持ってくる
-	public ArrayList<User> selectfoll(User id) { //follにはログインしてるユーザーIDを入れてくる
+	public ArrayList<User> followSelect(int myId) {			 //myIdにはログインしてるユーザーIDを入れてくる
 		Connection conn = null;
-		ArrayList<User> list = new ArrayList<User>(); 
+		ArrayList<User> list = new ArrayList<>(); 
 
 		try {
 			// JDBCドライバを読み込む
@@ -34,8 +29,7 @@ public class FollowsDao {
 					+ "ON F.user2_id = US.user_id "						//Followsテーブルのuser2_idとUsersテーブルのuser_idが同じになるように内部結合
 					+ "WHERE F.user1_id = ?";							//Followsのuser1_idが自分のidと一緒という条件
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setInt(1, id.getUser1Id());							//上の?に取ってきた自分のidを入れる
-
+			pStmt.setInt(1, myId);							//上の?に取ってきた自分のidを入れる
 			ResultSet rs = pStmt.executeQuery();
 
 			// 結果表をコレクションにコピーする
@@ -48,7 +42,7 @@ public class FollowsDao {
 //				);
 				//セッターを使った書き方
 				User record = new User();
-				record.setUser2Id(rs.getInt("US.user_id"));
+				record.setUserId(rs.getInt("US.user_id"));
 				record.setUserName(rs.getString("US.user_name"));
 				record.setUserImg(rs.getString("US.user_img"));
 				
@@ -80,7 +74,7 @@ public class FollowsDao {
 	
 
 	//フォローテーブルに追加する
-	public int insert(User in) {
+	public int follow(int myId, int yourId) {
 		Connection conn = null;
 		int num = 0;
 
@@ -92,8 +86,8 @@ public class FollowsDao {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
-			pStmt.setInt(1,in.getUser1Id());
-			pStmt.setInt(2,in.getUser2Id());
+			pStmt.setInt(1,myId);
+			pStmt.setInt(2,yourId);
 
 			// 何個インサートできたか数える
 			num = pStmt.executeUpdate();
@@ -118,7 +112,7 @@ public class FollowsDao {
 	}
 	
 	//フォローテーブルから削除する
-	public int delete(int number) {
+	public int delete(int flgNum) {
 		Connection conn = null;
 		int num = 0;
 
@@ -126,10 +120,10 @@ public class FollowsDao {
 			Class.forName("org.h2.Driver");
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/4Adb", "sa", "");
 
-			String sql = "DELETE FROM Follows WHERE follow_id=?";
+			String sql = "DELETE FROM Follows WHERE follow_id = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-			pStmt.setInt(1, number);
+			pStmt.setInt(1, flgNum);
 
 			num = pStmt.executeUpdate();
 		}

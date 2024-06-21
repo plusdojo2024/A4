@@ -10,8 +10,8 @@ public class User implements Serializable {
 	private String userPassword;	//パスワード
 	private String userName;		//ユーザーネーム
 	private String userImg;			//アイコン画像
-	private int uPrivcyFlg;		//ユーザー公開・非公開フラグ
-	private Timestamp uCreatedAt;		//ユーザー作成日時
+	private int uPrivacyFlg;		//ユーザー公開・非公開フラグ
+	private Timestamp uCreatedAt;		//ユーザー作成日時      ここはフィールド
 	private Timestamp uUpdatedAt;		//ユーサー更新日時
 	//followsテーブル
 	private int followId;			//フォローID
@@ -21,24 +21,24 @@ public class User implements Serializable {
 	private Timestamp fUpdatedAt;		//フォロー更新日時
 
 	
-	public User() {
+	public User() {                     //Stringのやつだけ空白にする
 		this.userEmail = "";
 		this.userPassword = "";
 		this.userName = "";
 		this.userImg = "";
 	}
 	
-	public User(int userId) {
-		super();
-		this.userId = userId;
-	}
+	//public User(int userId) {一旦コメントアウトにする
+	//	super();
+	//	this.userId = userId;
+	//}
 	
-	public User(int userId, String userName, String userImg) {
-		super();
-		this.userId = userId;
-		this.userName = userName;
-		this.userImg = userImg;
-	}
+	//public User(int userId, String userName, String userImg) {
+	//	super();
+	//	this.userId = userId;
+	//	this.userName = userName;
+	//	this.userImg = userImg;
+	//}
 
 	public int getUserId() {
 		return userId;
@@ -80,12 +80,12 @@ public class User implements Serializable {
 		this.userImg = userImg;
 	}
 
-	public int getuPrivcyFlg() {
-		return uPrivcyFlg;
+	public int getuPrivacyFlg() {
+		return uPrivacyFlg;
 	}
 
-	public void setuPrivacyFlg(int uPrivcyFlg) {
-		this.uPrivcyFlg = uPrivcyFlg;
+	public void setuPrivacyFlg(int uPrivacyFlg) {
+		this.uPrivacyFlg = uPrivacyFlg;
 	}
 
 	public Timestamp getuCreatedAt() {

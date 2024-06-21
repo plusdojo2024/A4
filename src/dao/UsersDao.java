@@ -80,7 +80,7 @@ public class UsersDao {
 			Class.forName("org.h2.Driver");
 
 			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/simpleBC", "sa", "");
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4db", "sa", "");
 
 			// SELECT文を準備する
 			String sql = "SELECT COUNT(*) FROM user WHERE email = ? AND password = ?";
@@ -122,8 +122,10 @@ public class UsersDao {
 		return loginResult;
 	}
 	
+	
+	
 	//ユーザーを新規追加
-	public int insert(User newUser) {
+	public int insert(String newEmail, String newPassword, String newName,String img) {
 		Connection conn = null;
 		int num = 0;
 
@@ -131,13 +133,14 @@ public class UsersDao {
 			Class.forName("org.h2.Driver");
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4db", "sa", "");
 
-			String sql = "INSERT INTO User (USER_EMAIL, USER_PASSWORD, USER_NAME, USER_IMG, PRIVACY_FLG) VALUES (?, ?, ?, \"C:\\pleiades\\workspace\\A4\\WebContent\\img\\defoicon.png\", 1)";
+			String sql = "INSERT INTO User (USER_EMAIL, USER_PASSWORD, USER_NAME, USER_IMG, PRIVACY_FLG) VALUES (?, ?, ?, ?, 1)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
-			pStmt.setString(1, newUser.getUserEmail());
-			pStmt.setString(2, newUser.getUserPassword());
-			pStmt.setString(3, newUser.getUserName());
+			pStmt.setString(1, newEmail);
+			pStmt.setString(2, newPassword);
+			pStmt.setString(3, newName);
+			pStmt.setString(4, img); //ユーザーの画像名を入れる
 
 			// SQL文を実行する
 			num = pStmt.executeUpdate();
@@ -165,7 +168,7 @@ public class UsersDao {
 	}
 	
 	//ユーザーネームを出す
-	public ArrayList<User> show(int id) {
+	public ArrayList<User> showName(int myId) {
 		Connection conn = null;
 		ArrayList<User> list = new ArrayList<User>();
 		try {
@@ -174,7 +177,7 @@ public class UsersDao {
 
 			String sql = "SELECT user_name FROM Users WHERE user_id = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setInt(1, id.getUser1Id());							
+			pStmt.setInt(1, myId);							
 			ResultSet rs = pStmt.executeQuery();
 
 			// 結果表をコレクションにコピーする
@@ -209,7 +212,7 @@ public class UsersDao {
 	}
 	
 	//ユーザーネームを変更する
-	public int nameUpdate(String myName, int id) {
+	public int nameUpdate(String myName, int myId) {
 		Connection conn = null;
 		int num = 0;
 		
@@ -220,8 +223,8 @@ public class UsersDao {
 			String sql = "UPDATE Users SET user_name=? WHERE user_id = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-			pStmt.setString(1, myName.getUserName());
-			pStmt.setInt(2, id.getUserId());
+			pStmt.setString(1, myName);
+			pStmt.setInt(2, myId);
 
 			num = pStmt.executeUpdate();
 		}
@@ -244,8 +247,52 @@ public class UsersDao {
 		return num;
 	}
 	
-	//画像の変更
-	public int iconUpdate(String myicon) {
+	//自分のアイコンの画像を出す
+	public ArrayList<User> showIcon(int myId) {
+		Connection conn = null;
+		ArrayList<User> list = new ArrayList<User>();
+		try {
+			Class.forName("org.h2.Driver");
+			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4db","sa","");
+
+			String sql = "SELECT user_img FROM Users WHERE user_id = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setInt(1, myId);							
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+			while (rs.next()) {
+				//セッターを使った書き方
+				User record = new User();
+				record.setUserImg(rs.getString("user_img"));
+				list.add(record);			
+				}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			list = null;
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			list = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					list = null;
+				}
+			}
+		}
+		return list;
+	}
+	
+	//アイコンの変更
+	public int iconUpdate(int myId, String newIcon) {
 		Connection conn = null;
 		int num = 0;
 
@@ -253,10 +300,11 @@ public class UsersDao {
 			Class.forName("org.h2.Driver");
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4db", "sa", "");
 
-			String sql = "UPDATE User SET user_img = ?";
+			String sql = "UPDATE User SET user_img = ? WHERE user_id = ?" ;
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-			pStmt.setString(1, myicon.getUserImg());//myiconに画像の絶対パスを入れる
+			pStmt.setString(1, newIcon);//newIconに画像の絶対パスを入れる
+			pStmt.setInt(2, myId);
 
 			num = pStmt.executeUpdate();
 		}
@@ -280,23 +328,23 @@ public class UsersDao {
 	}
 	
 	//公開非公開を出す
-	public ArrayList<User> showPri(int id) {
+	public ArrayList<User> showPri(int myId) {
 		Connection conn = null;
 		ArrayList<User> list = new ArrayList<User>();
 		try {
 			Class.forName("org.h2.Driver");
 			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4db","sa","");
 
-			String sql = "SELECT privcy_flg FROM Users WHERE user_id = ?";
+			String sql = "SELECT privacy_flg FROM Users WHERE user_id = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setInt(1, id.getUserId());							
+			pStmt.setInt(1, myId);							
 			ResultSet rs = pStmt.executeQuery();
 
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
 				//セッターを使った書き方
 				User record = new User();
-				record.setuPrivcyFlg(rs.getString("privcy_flg"));
+				record.setuPrivacyFlg(rs.getInt("privacy_flg"));				
 				list.add(record);			
 				}
 		}
@@ -324,7 +372,7 @@ public class UsersDao {
 	}
 	
 	//公開非公開の切り替え
-	public int priUpdate(int myPri, int id) {
+	public int priUpdate(int myPri, int myId) {
 		Connection conn = null;
 		int num = 0;
 
@@ -332,11 +380,11 @@ public class UsersDao {
 			Class.forName("org.h2.Driver");
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4db", "sa", "");
 
-			String sql = "UPDATE User SET privcy_flg = ? WHERE user_id = ?";
+			String sql = "UPDATE User SET privacy_flg = ? WHERE user_id = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-			pStmt.setInt(1, myPri.getuPrivcyFlg());//myPriに0か1を入れてくる
-			pStmt.setInt(2, id.getUserId());
+			pStmt.setInt(1, myPri);//myPriに0か1を入れてくる
+			pStmt.setInt(2, myId);
 			num = pStmt.executeUpdate();
 		}
 		catch (SQLException e) {

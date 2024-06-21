@@ -161,7 +161,7 @@ public class ReviewsDAO{
 				review.setUserPassword(rs.getString("users.user_password"));
 				review.setUserName(rs.getString("users.user_name"));
 				review.setUserImg(rs.getString("users.user_img"));
-				review.setuPrivcyFlg(rs.getInt("users.privcy_flg"));
+				review.setuPrivacyFlg(rs.getInt("users.privcy_flg"));
 				review.setuCreatedAt(rs.getTimestamp("users.created_at"));
 				review.setuUpdatedAt(rs.getTimestamp("users.updated_at"));
 				list.add(review);
@@ -300,7 +300,7 @@ public class ReviewsDAO{
 				review.setUserPassword(rs.getString("users.user_password"));
 				review.setUserName(rs.getString("users.user_name"));
 				review.setUserImg(rs.getString("users.user_img"));
-				review.setuPrivcyFlg(rs.getInt("users.privcy_flg"));
+				review.setuPrivacyFlg(rs.getInt("users.privcy_flg"));
 				review.setuCreatedAt(rs.getTimestamp("users.created_at"));
 				review.setuUpdatedAt(rs.getTimestamp("users.updated_at"));
 				list.add(review);
@@ -433,7 +433,7 @@ public class ReviewsDAO{
 				review.setUserPassword(rs.getString("users.user_password"));
 				review.setUserName(rs.getString("users.user_name"));
 				review.setUserImg(rs.getString("users.user_img"));
-				review.setuPrivcyFlg(rs.getInt("users.privcy_flg"));
+				review.setuPrivacyFlg(rs.getInt("users.privcy_flg"));
 				review.setuCreatedAt(rs.getTimestamp("users.created_at"));
 				review.setuUpdatedAt(rs.getTimestamp("users.updated_at"));
 				list.add(review);
@@ -713,7 +713,7 @@ public class ReviewsDAO{
 				review.setUserPassword(rs.getString("users.user_password"));
 				review.setUserName(rs.getString("users.user_name"));
 				review.setUserImg(rs.getString("users.user_img"));
-				review.setuPrivcyFlg(rs.getInt("users.privcy_flg"));
+				review.setuPrivacyFlg(rs.getInt("users.privcy_flg"));
 				review.setuCreatedAt(rs.getTimestamp("users.created_at"));
 				review.setuUpdatedAt(rs.getTimestamp("users.updated_at"));
 				list.add(review);
@@ -848,7 +848,7 @@ public class ReviewsDAO{
 				review.setUserPassword(rs.getString("users.user_password"));
 				review.setUserName(rs.getString("users.user_name"));
 				review.setUserImg(rs.getString("users.user_img"));
-				review.setuPrivcyFlg(rs.getInt("users.privcy_flg"));
+				review.setuPrivacyFlg(rs.getInt("users.privcy_flg"));
 				review.setuCreatedAt(rs.getTimestamp("users.created_at"));
 				review.setuUpdatedAt(rs.getTimestamp("users.updated_at"));
 				list.add(review);
@@ -983,7 +983,7 @@ public class ReviewsDAO{
 				review.setUserPassword(rs.getString("users.user_password"));
 				review.setUserName(rs.getString("users.user_name"));
 				review.setUserImg(rs.getString("users.user_img"));
-				review.setuPrivcyFlg(rs.getInt("users.privcy_flg"));
+				review.setuPrivacyFlg(rs.getInt("users.privcy_flg"));
 				review.setuCreatedAt(rs.getTimestamp("users.created_at"));
 				review.setuUpdatedAt(rs.getTimestamp("users.updated_at"));
 				list.add(review);
@@ -1118,7 +1118,7 @@ public class ReviewsDAO{
 				review.setUserPassword(rs.getString("users.user_password"));
 				review.setUserName(rs.getString("users.user_name"));
 				review.setUserImg(rs.getString("users.user_img"));
-				review.setuPrivcyFlg(rs.getInt("users.privcy_flg"));
+				review.setuPrivacyFlg(rs.getInt("users.privcy_flg"));
 				review.setuCreatedAt(rs.getTimestamp("users.created_at"));
 				review.setuUpdatedAt(rs.getTimestamp("users.updated_at"));
 				list.add(review);
@@ -1253,7 +1253,7 @@ public class ReviewsDAO{
 				review.setUserPassword(rs.getString("users.user_password"));
 				review.setUserName(rs.getString("users.user_name"));
 				review.setUserImg(rs.getString("users.user_img"));
-				review.setuPrivcyFlg(rs.getInt("users.privcy_flg"));
+				review.setuPrivacyFlg(rs.getInt("users.privcy_flg"));
 				review.setuCreatedAt(rs.getTimestamp("users.created_at"));
 				review.setuUpdatedAt(rs.getTimestamp("users.updated_at"));
 				list.add(review);
@@ -1388,7 +1388,7 @@ public class ReviewsDAO{
 				review.setUserPassword(rs.getString("users.user_password"));
 				review.setUserName(rs.getString("users.user_name"));
 				review.setUserImg(rs.getString("users.user_img"));
-				review.setuPrivcyFlg(rs.getInt("users.privcy_flg"));
+				review.setuPrivacyFlg(rs.getInt("users.privcy_flg"));
 				review.setuCreatedAt(rs.getTimestamp("users.created_at"));
 				review.setuUpdatedAt(rs.getTimestamp("users.updated_at"));
 				list.add(review);
@@ -1523,7 +1523,7 @@ public class ReviewsDAO{
 				review.setUserPassword(rs.getString("users.user_password"));
 				review.setUserName(rs.getString("users.user_name"));
 				review.setUserImg(rs.getString("users.user_img"));
-				review.setuPrivcyFlg(rs.getInt("users.privcy_flg"));
+				review.setuPrivacyFlg(rs.getInt("users.privcy_flg"));
 				review.setuCreatedAt(rs.getTimestamp("users.created_at"));
 				review.setuUpdatedAt(rs.getTimestamp("users.updated_at"));
 				list.add(review);
@@ -1658,7 +1658,7 @@ public class ReviewsDAO{
 				review.setUserPassword(rs.getString("users.user_password"));
 				review.setUserName(rs.getString("users.user_name"));
 				review.setUserImg(rs.getString("users.user_img"));
-				review.setuPrivcyFlg(rs.getInt("users.privcy_flg"));
+				review.setuPrivacyFlg(rs.getInt("users.privcy_flg"));
 				review.setuCreatedAt(rs.getTimestamp("users.created_at"));
 				review.setuUpdatedAt(rs.getTimestamp("users.updated_at"));
 				list.add(review);
@@ -1793,7 +1793,7 @@ public class ReviewsDAO{
 				review.setUserPassword(rs.getString("users.user_password"));
 				review.setUserName(rs.getString("users.user_name"));
 				review.setUserImg(rs.getString("users.user_img"));
-				review.setuPrivcyFlg(rs.getInt("users.privcy_flg"));
+				review.setuPrivacyFlg(rs.getInt("users.privcy_flg"));
 				review.setuCreatedAt(rs.getTimestamp("users.created_at"));
 				review.setuUpdatedAt(rs.getTimestamp("users.updated_at"));
 				list.add(review);
@@ -1928,7 +1928,7 @@ public class ReviewsDAO{
 				review.setUserPassword(rs.getString("users.user_password"));
 				review.setUserName(rs.getString("users.user_name"));
 				review.setUserImg(rs.getString("users.user_img"));
-				review.setuPrivcyFlg(rs.getInt("users.privcy_flg"));
+				review.setuPrivacyFlg(rs.getInt("users.privcy_flg"));
 				review.setuCreatedAt(rs.getTimestamp("users.created_at"));
 				review.setuUpdatedAt(rs.getTimestamp("users.updated_at"));
 				list.add(review);

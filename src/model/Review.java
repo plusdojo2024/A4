@@ -62,7 +62,7 @@ public class Review implements Serializable {
 	private String userPassword;
 	private String userName;
 	private String userImg;
-	private int uPrivcyFlg;
+	private int uPrivacyFlg;
 	private Timestamp uCreatedAt;
 	private Timestamp uUpdatedAt;
 
@@ -444,13 +444,6 @@ public class Review implements Serializable {
 		this.userImg = userImg;
 	}
 
-	public synchronized final int getuPrivcyFlg() {
-		return uPrivcyFlg;
-	}
-
-	public synchronized final void setuPrivcyFlg(int uPrivcyFlg) {
-		this.uPrivcyFlg = uPrivcyFlg;
-	}
 
 	public synchronized final Timestamp getuCreatedAt() {
 		return uCreatedAt;
@@ -466,6 +459,14 @@ public class Review implements Serializable {
 
 	public synchronized final void setuUpdatedAt(Timestamp uUpdatedAt) {
 		this.uUpdatedAt = uUpdatedAt;
+	}
+
+	public int getuPrivacyFlg() {
+		return uPrivacyFlg;
+	}
+
+	public void setuPrivacyFlg(int uPrivacyFlg) {
+		this.uPrivacyFlg = uPrivacyFlg;
 	}
 
 }
