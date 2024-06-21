@@ -465,7 +465,7 @@ public class ReviewsDAO{
 	}
 
 	//insertメソッド
-	public int insert(int category2Id,String reviewName,int reviewPrice,String reviewComment,int userId) {
+	public int insert(int category2Id,String reviewName,int reviewPrice,String reviewComment,int userId, int privacyFlg) {
 		Connection conn = null;
 		int num=0;
 
@@ -477,7 +477,7 @@ public class ReviewsDAO{
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4DB", "sa", "");
 
 			// SQL文を準備する（AUTO_INCREMENTのNUMBER列にはNULLを指定する） でもJOINしたらどうなるんですか
-			String sql = "INSERT INTO reviews (review_name,review_price,review_comment,user_id)  VALUES ( ?, ?, ?, ?, ?, ?, ?)";	//追加するときのやつ
+			String sql = "INSERT INTO reviews (review_name,review_price,review_comment,user_id, privacy_flg)  VALUES ( ?, ?, ?, ?, ?)";	//追加するときのやつ
 			PreparedStatement pStmt = conn.prepareStatement(sql);	//インジェクション攻撃対策のプリペアードステートメントに対応
 
 			// SQL文を完成させる
@@ -485,6 +485,7 @@ public class ReviewsDAO{
 			pStmt.setInt(2,reviewPrice);
 			pStmt.setString(3,reviewComment);
 			pStmt.setInt(4,userId);
+			pStmt.setInt(5,privacyFlg);
 
 			//空白を未設定にするを全体に設定
 
