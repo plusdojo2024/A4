@@ -11,7 +11,7 @@ import model.Review;
 
 public class ReviewsScoresDAO {
 
-	public int insert(int reviewId, int reviewItemId, int reviewItem1Score, int reviewItem2Score, int reviewItem3Score, int reviewItem4Score, int reviewItem5Score, int scoreAvg) {
+	public int insert(int reviewId, int reviewItemId, int reviewItem1Score, int reviewItem2Score, int reviewItem3Score, int reviewItem4Score, int reviewItem5Score) {
 		int num = 0;
 		Connection conn = null;
 
@@ -24,18 +24,39 @@ public class ReviewsScoresDAO {
 
 			// データベースに接続する
 			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4DB",id,pw);
-
+			//スコアの平均値を取得する
+			int count = 0;
+			if(reviewItem1Score!=0) {
+				count++;
+			}
+			if(reviewItem2Score!=0) {
+				count++;
+			}
+			if(reviewItem3Score!=0) {
+				count++;
+			}
+			if(reviewItem4Score!=0) {
+				count++;
+			}
+			if(reviewItem5Score!=0) {
+				count++;
+			}
+			int sum = reviewItem1Score+reviewItem2Score+reviewItem3Score+reviewItem4Score+reviewItem5Score;
+			//平均値
+			double scoreAvg = (double)sum / count;
+			
 			// SELECT文を準備する
-			String sql = "INSERT INTO reviews_scores (review_id, review_item_id, review_item1_score, review_item2_score, review_item3_score, review_item4, review_item5, score=avg) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO reviews_scores (review_id, review_item_id, review_item1_score, review_item2_score, review_item3_score, review_item4, review_item5, double avg) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
+			
 			pStmt.setInt(1, reviewId);//
 			pStmt.setInt(2, reviewItemId);
 			pStmt.setInt(3, reviewItem1Score);
 			pStmt.setInt(4, reviewItem2Score);
 			pStmt.setInt(5, reviewItem3Score);
 			pStmt.setInt(6, reviewItem4Score);
-			pStmt.setInt(6, reviewItem5Score);
-			pStmt.setInt(6, scoreAvg);
+			pStmt.setInt(7, reviewItem5Score);
+			pStmt.setDouble(8, scoreAvg);
 
 
 			// SQL文を実行し、結果表を取得する	検索して結果の表をrsに入れる構文

@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -90,7 +91,13 @@ public class MyReviewServlet extends HttpServlet {
 			String UpCreatedAt = request.getParameter("UpCreatedAt");
 			//String型からTimestamp型へ変換
 			SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd:HH:mm:ss");
-			java.util.Date parsedDate = f.parse(UpCreatedAt);
+			java.util.Date parsedDate = null;
+			try {
+				parsedDate = f.parse(UpCreatedAt);
+			} catch (ParseException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
 			Timestamp upCreatedAt = new Timestamp(parsedDate.getTime());	
 			
 			String reviewImg = request.getParameter("reviewImg");
@@ -115,7 +122,7 @@ public class MyReviewServlet extends HttpServlet {
 			ReviewsItemsDAO ritemDao = new ReviewsItemsDAO();
 			int result3 = ritemDao.insert(category2Id, reviewItem1, reviewItem2, reviewItem3, reviewItem4, reviewItem5); 
 			ReviewsScoresDAO rSDao = new ReviewsScoresDAO();
-			int result4 = rSDao.insert(reviewId, reviewItemId, reviewItem1Score, reviewItem2Score, reviewItem3Score, reviewItem4Score, reviewItem5Score, null);
+			int result4 = rSDao.insert(reviewId, reviewItemId, reviewItem1Score, reviewItem2Score, reviewItem3Score, reviewItem4Score, reviewItem5Score);
 					
 			if (result1 == 1 &&result2 == 1 &&result3 == 1 &&result4 == 1) {
 				request.setAttribute("result", "登録しました。");
@@ -157,7 +164,13 @@ public class MyReviewServlet extends HttpServlet {
 			String UpDatedAt = request.getParameter("UpDatedAt");
 			//String型からTimestamp型へ変換
 			SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd:HH:mm:ss");
-			java.util.Date parsedDate = f.parse(UpDatedAt);
+			java.util.Date parsedDate=null;
+			try {
+				parsedDate = f.parse(UpDatedAt);
+			} catch (ParseException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
 			Timestamp upDatedAt = new Timestamp(parsedDate.getTime());
 			
 			String reviewImg = request.getParameter("reviewImg");
@@ -183,7 +196,7 @@ public class MyReviewServlet extends HttpServlet {
 			ReviewsItemsDAO ritemDao = new ReviewsItemsDAO();
 			int result3 = ritemDao.insert(category2Id, reviewItem1, reviewItem2, reviewItem3, reviewItem4, reviewItem5); 
 			ReviewsScoresDAO rSDao = new ReviewsScoresDAO();
-			int result4 = rSDao.insert(reviewId, reviewItemId, reviewItem1Score, reviewItem2Score, reviewItem3Score, reviewItem4Score, reviewItem5Score, null);
+			int result4 = rSDao.insert(reviewId, reviewItemId, reviewItem1Score, reviewItem2Score, reviewItem3Score, reviewItem4Score, reviewItem5Score);
 
 			if (result1 == 1 &&result2 == 1 &&result3 == 1 &&result4 == 1) {
 				request.setAttribute("result", "更新しました。");
@@ -194,66 +207,38 @@ public class MyReviewServlet extends HttpServlet {
 			dispatcher.forward(request, response);
 		}
 
-		//自分の公開非公開を変更
-		else if(request.getParameter("submit").equals("")) {
+		//自分の公開非公開を変更(※Ajaxで値を送る仕掛けが必要)
+		else if(request.getParameter("hen")!=null) {
+			request.setCharacterEncoding("UTF-8");
 			UsersDao uDao = new UsersDao();
 			int id = Integer.parseInt(request.getParameter("user_id"));
 			int privacyFlg = Integer.parseInt(request.getParameter("privacyFlg"));
+			//公開非公開の変更--------------------
+			int num1 =uDao.priUpdate(privacyFlg,id);
+			//今回はいらない　request.setAttribute("result", "");//スライドするだけどうする
 			
-			uDao.priUpdate(privacyFlg,id);
-			request.setAttribute("result", "");//スライドするだけどうする
-
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/my_review.jsp");
-			dispatcher.forward(request, response);
-		}
-		
-		//自分の名前を変更
-		else if(request.getParameter("submit").equals("名前を更新")) {
-			UsersDao uDao = new UsersDao();//入力したら更新されるシステム
+			//名前の変更--------------------
 			
-			request.setCharacterEncoding("UTF-8");
-			int id = Integer.parseInt(request.getParameter("user_id"));
 			String userName = request.getParameter("userName");
 			
-			int num = uDao.nameUpdate(userName, id);
+			int num2 = uDao.nameUpdate(userName, id);		
 			
-			if (num == 1) {
+			
+			//画像の変更--------------------
+			String newIcom = request.getParameter("icon");
+			int num3 =uDao.iconUpdate(id, newIcom);
+			
+			//最後は消す
+			if (num1+num2+num3 == 3) {
 				request.setAttribute("result", "登録しました。");
 			} else {
 				request.setAttribute("result", "登録できませんでした");
 			}
+			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/my_review.jsp");
 			dispatcher.forward(request, response);
 		}
 		
-		//自分の画像を変更
-		else if(request.getParameter("submit").equals("")) {
-			UsersDao uDao = new UsersDao();
-			int id = Integer.parseInt(request.getParameter("user_id"));
-			String newIcom = request.getParameter("icon");
-			uDao.iconUpdate(id, newIcom);
-			request.setAttribute("result", "");//どう変わる
-
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/my_review.jsp");
-			dispatcher.forward(request, response);
-		}
-		
-
-		//レビュー登録の場合-------------
-//		ReviewsDao d1 = new ReviewsDao();4
-//		d1.insert(引数たくさん);
-//		int reviewsId = d1.selectId();
-//
-//		ReviewsImgDao d2 = new ReviewsImgDao();3
-//		for(String gazo : gazoList) {
-//			d2.insert(reviewsId,gazo);
-//		}
-//		ReviewsItemDao d3 = new ReviewsItemDao();3
-//		d3.insert(reviewsId,xxxx);
-//
-//		ReviewsScoresDao d4 = new ReviewsScoresDao();3
-//		d4.insert(reviewsId,引数);
-		//-------------
 
 		//JSPに処理を委譲
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/my_review.jsp");
