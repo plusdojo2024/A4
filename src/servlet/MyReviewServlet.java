@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.BacknumbersDAO;
 import dao.Categorys1DAO;
 import dao.FollowsDao;
 import dao.ReviewsDAO;
@@ -187,7 +188,9 @@ public class MyReviewServlet extends HttpServlet {
 			int reviewItem3Score = Integer.parseInt(request.getParameter("reviewItem3Score"));
 			int reviewItem4Score = Integer.parseInt(request.getParameter("reviewItem4Score"));
 			int reviewItem5Score = Integer.parseInt(request.getParameter("reviewItem5Score"));
-			
+
+			String backnumberContent = request.getParameter("backnumberContent");
+			int backnumberId = Integer.parseInt(request.getParameter("backnumberId"));
 			
 			ReviewsDAO rDao = new ReviewsDAO();
 			int result1 = rDao.update(category2Id,reviewName, reviewPrice, reviewComment, privacyFlg, upDatedAt, reviewId);
@@ -197,8 +200,13 @@ public class MyReviewServlet extends HttpServlet {
 			int result3 = ritemDao.insert(category2Id, reviewItem1, reviewItem2, reviewItem3, reviewItem4, reviewItem5); 
 			ReviewsScoresDAO rSDao = new ReviewsScoresDAO();
 			int result4 = rSDao.insert(reviewId, reviewItemId, reviewItem1Score, reviewItem2Score, reviewItem3Score, reviewItem4Score, reviewItem5Score);
-
-			if (result1 == 1 &&result2 == 1 &&result3 == 1 &&result4 == 1) {
+			BacknumbersDAO bDao = new BacknumbersDAO();
+			int result5 = bDao.insert(backnumberContent);
+			int result6 = bDao.delete(backnumberId);
+			int result7 = bDao.update(backnumberId, backnumberContent);
+			
+			
+			if (result1 == 1 &&result2 == 1 &&result3 == 1 &&result4 == 1 &&result5 == 1 &&result6 == 1 &&result7 == 1) {
 				request.setAttribute("result", "更新しました。");
 			} else {
 				request.setAttribute("result", "更新できませんでした");
