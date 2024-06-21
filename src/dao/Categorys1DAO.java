@@ -19,8 +19,6 @@ public class Categorys1DAO {
 	//selectメソッド（引数はいらない）
 	public List<Category> select() {
 		
-		Category ca = null;
-		
 		ArrayList<Category> list = new ArrayList<Category>();
 
 		try {
@@ -38,7 +36,7 @@ public class Categorys1DAO {
 			
 			//categorys1テーブル
 			while (rs.next()) {
-				ca = new Category();
+				Category ca = new Category();
 				ca.setCategory1Id(rs.getInt("category1_id"));	
 				ca.setCategory1Name(rs.getString("category1_name"));
 				ca.setC1CreatedAt(rs.getTimestamp("created_at"));

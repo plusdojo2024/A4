@@ -17,7 +17,7 @@ public class Categorys2DAO {
 
 	//selectメソッド（引数はいらない）
 	public List<Category> select(int category1Id) {
-		Category ca = null;//
+
 		ArrayList<Category> list = new ArrayList<Category>();//Category.javaの内容をArrayListに格納
 			
 		
@@ -38,7 +38,7 @@ public class Categorys2DAO {
 			
 			//categorys2テーブル
 			while (rs.next()) {
-				ca = new Category();
+				Category ca = new Category();
 				ca.setCategory2Id(rs.getInt("category2_id"));	
 				ca.setCategory2Name(rs.getString("category2_name"));
 				ca.setC2CreatedAt(rs.getTimestamp("created_at"));
