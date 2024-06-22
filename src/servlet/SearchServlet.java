@@ -5,7 +5,6 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.Categorys1DAO;
-import dao.Categorys2DAO;
 import dao.ReviewsDAO;
 import dao.UsersDAO;
 import model.Category;
@@ -335,5 +333,5 @@ public class SearchServlet extends HttpServlet {
 	    dispatcher.forward(request, response);
 
 	}
-
+	}
 }

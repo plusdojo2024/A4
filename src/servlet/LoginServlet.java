@@ -42,9 +42,8 @@ public class LoginServlet extends HttpServlet {
 			User u = uDao.UserLogin(userEmail , userPassword);
 
 			request.setAttribute("user", u);
-
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/tabSample.jsp");
-			dispatcher.forward(request, response);
+			// メニューサーブレットにリダイレクトする
+			response.sendRedirect("/A4/MyReviewServlet");
 
 		} else {
             String message = "ログイン失敗";

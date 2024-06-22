@@ -27,7 +27,7 @@ public class UsersDAO {
 			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4DB",id,pw);
 
 			// SELECT文を準備する
-			String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
+			String sql = "SELECT * FROM users WHERE user_email = ? AND user_password = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, email);//引数sqlにsetStringしてる
 			pStmt.setString(2, password);
