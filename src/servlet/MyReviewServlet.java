@@ -58,7 +58,6 @@ public class MyReviewServlet extends HttpServlet {
 		ArrayList<User> fUserList = fDao.followSelect(id);
 
 		request.setAttribute("fUserList", fUserList);
-		System.out.println(view1.get(0).getUserId()+"aaaaaaaaaaaaa");
 
 		request.setAttribute("list", view1);
 		request.setAttribute("categoryList", categoryList);

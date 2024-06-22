@@ -23,8 +23,7 @@
 .tab_item {
 	width: calc(100%/ 3);
 	height: 50px;
-	border-bottom: 3px solid #5ab4bd;
-	background-color: #d9d9d9;
+	background-color: #ffc679;
 	line-height: 50px;
 	font-size: 16px;
 	text-align: center;
@@ -61,8 +60,8 @@ input[name="tab_item"] {
 
 /*選択されているタブのスタイルを変える*/
 .tabs input:checked+.tab_item {
-	background-color: #5ab4bd;
-	color: #fff;
+	background-color: #fff4e0;
+	color: black;
 }
 </style>
 </head>
@@ -81,7 +80,8 @@ input[name="tab_item"] {
 			<input id="bbb" type="radio" name="tab_item">
 		<label class="tab_item" for="bbb">リスト</label>
 
-		<!-- ここから内容 -->
+<!-- -----------------------------マイレビュー---------------------------------------------------------- -->
+
 		<div class="tab_content" id="all_content"><!-- -------- -->
 			<h2 class="my">
 				<a>マイレビュー</a>
@@ -224,9 +224,125 @@ input[name="tab_item"] {
 		</div>
 		<!-- -------- -->
 
+<!-- ----------------------------------全体検索------------------------------------------- -->
 		<div class="tab_content" id="aaa_content">BBBの内容がここに入ります</div>
+<div id="drop-down-menu">
+		<div class="dropdown">
+      		<input type="checkbox" id="submenu-toggle-2">
+      		<label for="submenu-toggle-2">ドロップダウンメニュー</label>
+      		<ul class="submenu">
+        		<li><a href="#">Submenu 2-1</a></li>
+        		<li><a href="#">Submenu 2-2</a></li>
+        		<li><a href="#">Submenu 2-3</a></li>
+      		</ul>
+		</div>
+		<div class="dropdown">
+      		<input type="checkbox" id="submenu-toggle-2">
+      		<label for="submenu-toggle-2">ドロップダウンメニュー</label>
+      		<ul class="submenu">
+        		<li><a href="#">Submenu 2-1</a></li>
+        		<li><a href="#">Submenu 2-2</a></li>
+        		<li><a href="#">Submenu 2-3</a></li>
+      		</ul>
+		</div>
+		<div class="dropdown">
+      		<input type="checkbox" id="submenu-toggle-2">
+      		<label for="submenu-toggle-2">ドロップダウンメニュー</label>
+      		<ul class="submenu">
+        		<li><a href="#">Submenu 2-1</a></li>
+        		<li><a href="#">Submenu 2-2</a></li>
+        		<li><a href="#">Submenu 2-3</a></li>
+      		</ul>
+		</div>
+	</div>
+  <div class="container">
+  	<div class="scroll">
+  	<div class="flex-container">
 
+    	<div class="flex-item">
+    		<div class= "item_img"><img src="/A4/img/myicon.jpg" width="100" height="100" alt="マイアイコン"></div>
+    		<div class="grid_item2">
+    			<h1>子要素1</h1>
+    			<p class= "item_text">テキスト</p>
+    			<p class= "item_text">テキスト</p>
+    		</div>
+    		<!-- モーダルウインドウのエリア -->
+			<div id="modalArea" class="modalNoDisp">
+				<div class="modalWindow">
+					<!-- ここがウインドウとなります -->
+					<p>モーダルウインドウ</p>
+					<p>xxx入力<br><input type="text" value="" style="width: 200px">
+					</p>
+					<p><input type="button" value="閉じる" onclick="modalClose()"></p>
+				</div>
+			</div>
+		</div>
+    	<div class="flex-item">
+    		<div class= "item_img"><img src="/A4/img/myicon.jpg" width="100" height="100" alt="マイアイコン"></div>
+    		<div class="grid_item2">
+    			<h1>子要素2</h1>
+    			<p class= "item_text">テキスト</p>
+    			<p class= "item_text">テキスト</p>
+    		</div>
+    	</div>
+    	<div class="flex-item">
+    		<div class= "item_img"><img src="/A4/img/myicon.jpg" width="100" height="100" alt="マイアイコン"></div>
+    		<div class="grid_item2">
+    			<h1>子要素3</h1>
+    			<p class= "item_text">テキスト</p>
+    			<p class= "item_text">テキスト</p>
+    		</div>
+    	</div>
+    	<div class="flex-item">
+    		<div class= "item_img"><img src="/A4/img/myicon.jpg" width="100" height="100" alt="マイアイコン"></div>
+    		<div class="grid_item2">
+    			<h1>子要素4</h1>
+    			<p class= "item_text">テキスト</p>
+    			<p class= "item_text">テキスト</p>
+    		</div>
+    	</div>
+    	<div class="flex-item">
+    		<div class= "item_img"><img src="/A4/img/myicon.jpg" width="100" height="100" alt="マイアイコン"></div>
+    		<div class="grid_item2">
+    			<h1>子要素5</h1>
+    			<p class= "item_text">テキスト</p>
+    			<p class= "item_text">テキスト</p>
+    		</div>
+    	</div>
+    	<div class="flex-item">
+    		<div class= "item_img"><img src="/A4/img/myicon.jpg" width="100" height="100" alt="マイアイコン"></div>
+    		<div class="grid_item2">
+    			<h1>子要素6</h1>
+    			<p class= "item_text">テキスト</p>
+    			<p class= "item_text">テキスト</p>
+    		</div>
+    	</div>
+  	</div>
+	</div>
+
+
+<!-- ----------------------------------リスト--------------------------------------------------- -->
 		<div class="tab_content" id="bbb_content">CCCの内容がここに入ります</div>
+		<div class="container">
+		<div class="scroll">
+			<div class="flex-container">
+				<br> <br> <br>
+				<div class="flex-item">子要素1</div>
+				<div class="flex-item">子要素2</div>
+				<div class="flex-item">子要素3</div>
+				<div class="flex-item">子要素4</div>
+				<div class="flex-item">子要素5</div>
+				<div class="flex-item">子要素6</div>
+			</div>
+		</div>
+	<div class="bo">
+		<div class="post-btn">
+			<a href="/"> <img src="/A4/img/sinkilist.png">
+			</a>
+		</div>
+	</div>
+	</div>
+
 	</div>
 </body>
 </html>
