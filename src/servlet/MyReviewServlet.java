@@ -38,13 +38,14 @@ public class MyReviewServlet extends HttpServlet {
 
 		 //もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
-		if (session.getAttribute("id") == null) {
+		if (session.getAttribute("user") == null) {
 			response.sendRedirect("/A4/LoginServlet");
 			return;
 		}
 		System.out.println("uhelelele");
 		//ログイン後の最初のページ,アプリのロゴをクリックしたとき（自分のレビューをすべて表示する）
-		int id = (int)session.getAttribute("id");
+		User user = (User)session.getAttribute("user");
+		int id = user.getUserId();
 
 		//すべてのレビューを持ってくる
 		ReviewsDAO rDao = new ReviewsDAO();
@@ -57,7 +58,7 @@ public class MyReviewServlet extends HttpServlet {
 		ArrayList<User> fUserList = fDao.followSelect(id);
 
 		request.setAttribute("fUserList", fUserList);
-
+		System.out.println(view1.get(0).getUserId()+"aaaaaaaaaaaaa");
 
 		request.setAttribute("list", view1);
 		request.setAttribute("categoryList", categoryList);
@@ -169,7 +170,6 @@ public class MyReviewServlet extends HttpServlet {
 			try {
 				parsedDate = f.parse(UpDatedAt);
 			} catch (ParseException e) {
-				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
 			}
 			Timestamp upDatedAt = new Timestamp(parsedDate.getTime());

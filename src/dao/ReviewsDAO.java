@@ -34,21 +34,21 @@ public class ReviewsDAO{
 					+ "reviews_imgs.review_img_id,reviews_imgs.review_img,reviews_imgs.delete_flg,reviews_imgs.created_at,reviews_imgs.updated_at,"
 					+ "reviews_items.review_item_id,reviews_items.review_item1,reviews_items.review_item2,reviews_items.review_item3,reviews_items.review_item4,reviews_items.review_item5,"
 					+ "reviews_items.created_at,reviews_items.updated_at,"
-					+ "reviews_scores.review_score_id,reviews_scores.review_item_id,"
+					+ "reviews_scores.review_score_id,"
 					+ "reviews_scores.review_item1_score,reviews_scores.review_item2_score,reviews_scores.review_item3_score,reviews_scores.review_item4_score,reviews_scores.review_item5_score,"
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
-					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
+					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at"
+					+ "users.user_email,users.user_password,users.user_id,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at,"
 					+ "list.list_name FROM reviews "
-					+ "OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
-					+ "OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
-					+ "OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
-					+ "OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
-					+ "OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
-					+ "OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
-					+ "OUTER JOIN users ON users.user_id = reviews.user_id "
-					+ "OUTER JOIN list ON list.list_id = list_reviews.list_id "
+					+ "LEFT OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
+					+ "LEFT OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
+					+ "LEFT OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
+					+ "LEFT OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN users ON users.user_id = reviews.user_id "
+					+ "LEFT OUTER JOIN list ON list.list_id = list_reviews.list_id "
 					+ "WHERE users.privacy_flg = 1 and reviews.privacy_flg =1 and reviews.delete_flg";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
@@ -118,21 +118,21 @@ public class ReviewsDAO{
 					+ "reviews_imgs.review_img_id,reviews_imgs.review_img,reviews_imgs.delete_flg,reviews_imgs.created_at,reviews_imgs.updated_at,"
 					+ "reviews_items.review_item_id,reviews_items.review_item1,reviews_items.review_item2,reviews_items.review_item3,reviews_items.review_item4,reviews_items.review_item5,"
 					+ "reviews_items.created_at,reviews_items.updated_at,"
-					+ "reviews_scores.review_score_id,reviews_scores.review_item_id,"
+					+ "reviews_scores.review_score_id,"
 					+ "reviews_scores.review_item1_score,reviews_scores.review_item2_score,reviews_scores.review_item3_score,reviews_scores.review_item4_score,reviews_scores.review_item5_score,"
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
-					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
+					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at"
+					+ "users.user_email,users.user_password,users.user_id,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at,"
 					+ "list.list_name FROM reviews "
-					+ "OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
-					+ "OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
-					+ "OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
-					+ "OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
-					+ "OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
-					+ "OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
-					+ "OUTER JOIN users ON users.user_id = reviews.user_id "
-					+ "OUTER JOIN list ON list.list_id = list_reviews.list_id "
+					+ "LEFT OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
+					+ "LEFT OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
+					+ "LEFT OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
+					+ "LEFT OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN users ON users.user_id = reviews.user_id "
+					+ "LEFT OUTER JOIN list ON list.list_id = list_reviews.list_id "
 					+ "WHERE users.privacy_flg = 1 and reviews.privacy_flg =1 and reviews.delete_flg and categorys2.category2_id = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
@@ -263,21 +263,21 @@ public class ReviewsDAO{
 					+ "reviews_imgs.review_img_id,reviews_imgs.review_img,reviews_imgs.delete_flg,reviews_imgs.created_at,reviews_imgs.updated_at,"
 					+ "reviews_items.review_item_id,reviews_items.review_item1,reviews_items.review_item2,reviews_items.review_item3,reviews_items.review_item4,reviews_items.review_item5,"
 					+ "reviews_items.created_at,reviews_items.updated_at,"
-					+ "reviews_scores.review_score_id,reviews_scores.review_item_id,"
+					+ "reviews_scores.review_score_id,"
 					+ "reviews_scores.review_item1_score,reviews_scores.review_item2_score,reviews_scores.review_item3_score,reviews_scores.review_item4_score,reviews_scores.review_item5_score,"
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
-					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
+					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at"
+					+ "users.user_email,users.user_password,users.user_id,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at,"
 					+ "list.list_name FROM reviews "
-					+ "OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
-					+ "OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
-					+ "OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
-					+ "OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
-					+ "OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
-					+ "OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
-					+ "OUTER JOIN users ON users.user_id = reviews.user_id "
-					+ "OUTER JOIN list ON list.list_id = list_reviews.list_id "
+					+ "LEFT OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
+					+ "LEFT OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
+					+ "LEFT OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
+					+ "LEFT OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN users ON users.user_id = reviews.user_id "
+					+ "LEFT OUTER JOIN list ON list.list_id = list_reviews.list_id "
 			        + "WHERE reviews.user_id = ? "
 			        + "and reviews.delete_flg = 1";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -289,7 +289,52 @@ public class ReviewsDAO{
 			while (rs.next()) {
 			//rs.nextで表の次の行にフォーカスが合う　もう行がなければfalseが返ってきて終わり
 				Review review = new Review();
-				review.setReviewId(rs.getInt(" review_id"));
+				review.setReviewId(rs.getInt("reviews.review_id"));
+				review.setReviewName(rs.getString("reviews.category2_id"));
+				review.setReviewName(rs.getString("reviews.review_name"));
+				review.setReviewPrice(rs.getInt("reviews.review_price"));
+				review.setReviewComment(rs.getString("reviews.review_comment"));
+				review.setrPrivacyFlg(rs.getInt("reviews.privacy_flg"));
+				review.setrDeleteFlg(rs.getInt("reviews.delete_flg"));
+				review.setrCreatedAt(rs.getTimestamp("reviews.created_at"));
+				review.setrUpdatedAt(rs.getTimestamp("reviews.updated_at"));
+				review.setReviewImgId(rs.getInt("reviews_imgs.review_img_id"));
+				review.setReviewImg(rs.getString("reviews_imgs.review_img"));
+				review.setRimDeleteFlg(rs.getInt("reviews_imgs.delete_flg"));
+				review.setRimCreatedAt(rs.getTimestamp("reviews_imgs.created_at"));
+				review.setRimUpdatedAt(rs.getTimestamp("reviews_imgs.updated_at"));
+				review.setReviewItemId(rs.getInt("reviews_items.review_item_id"));
+				review.setReviewItem1(rs.getString("reviews_items.review_item1"));
+				review.setReviewItem2(rs.getString("reviews_items.review_item2"));
+				review.setReviewItem3(rs.getString("reviews_items.review_item3"));
+				review.setReviewItem4(rs.getString("reviews_items.review_item4"));
+				review.setReviewItem5(rs.getString("reviews_items.review_item5"));
+				review.setRitCreatedAt(rs.getTimestamp("reviews_items.created_at"));
+				review.setRitUpdatedAt(rs.getTimestamp("reviews_items.updated_at"));
+				review.setReviewScoreId(rs.getInt("reviews_scores.review_score_id"));
+				review.setReviewItem1Score(rs.getInt("reviews_scores.review_item1_score"));
+				review.setReviewItem2Score(rs.getInt("reviews_scores.review_item2_score"));
+				review.setReviewItem3Score(rs.getInt("reviews_scores.review_item3_score"));
+				review.setReviewItem4Score(rs.getInt("reviews_scores.review_item4_score"));
+				review.setReviewItem5Score(rs.getInt("reviews_scores.review_item5_score"));
+				review.setScoreAvg(rs.getInt("reviews_scores.score_avg"));
+				review.setRsCreatedAt(rs.getTimestamp("reviews_scores.created_at"));
+				review.setRsUpdatedAt(rs.getTimestamp("reviews_scores.updated_at"));
+				review.setBacknumberId(rs.getInt("backnumbers.backnumber_id"));
+				review.setBacknumberContent(rs.getString("backnumbers.backnumber_content"));
+				review.setbCreatedAt(rs.getTimestamp("backnumbers.created_at"));
+				review.setbUpdatedAt(rs.getTimestamp("backnumbers.updated_at"));
+				review.setLrListId(rs.getInt("list_reviews.list_id"));
+				review.setLrCreatedAt(rs.getTimestamp("list_reviews.created_at"));
+				review.setLrUpdatedAt(rs.getTimestamp("list_reviews.updated_at"));
+				review.setUserEmail(rs.getString("users.user_email"));
+				review.setUserPassword(rs.getString("users.user_password"));
+				review.setUserName(rs.getString("users.user_id"));
+				review.setUserName(rs.getString("users.user_name"));
+				review.setUserImg(rs.getString("users.user_img"));
+				review.setuPrivacyFlg(rs.getInt("users.privacy_flg"));
+				review.setuCreatedAt(rs.getTimestamp("users.created_at"));
+				review.setuUpdatedAt(rs.getTimestamp("users.updated_at"));
 				list.add(review);
 			}
 		}
@@ -320,23 +365,17 @@ public class ReviewsDAO{
 
 	//マイページレビュー一覧（小カテゴリー別）
 	public ArrayList<Review> view2(int userId, int category2Id) {
-		Review review = null;
+
 		ArrayList<Review> list = new ArrayList<Review>();
-		//準備①マイバッグ　BCというbeansしか入らないアレイリストを作った
 
 		Connection conn = null;
-		//準備②地図を書き込む白紙のメモを用意する	使い終わったら破棄しないといけないのでtryの外
-		//準備③は省略
 
 		try {
 			Class.forName("org.h2.Driver");
-			//準備④ドライバー(船乗り)を連れてくる　h2のJDBCドライバを読み込む
 
 			String id="sa";
 			String pw="";
 			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4DB",id,pw);
-			//準備⑤地図を完成させ、通行証も同梱する　データベースに接続する
-			//引数にH2に繋ぐためのアドレスを入れている(地図)＝simpleBCの部分が作るときで変わる、そのユーザのid,pw
 
 
 			String sql = "SELECT reviews.review_id,reviews.category2_id,reviews.review_name,reviews.review_price,reviews.review_comment,"
@@ -344,46 +383,39 @@ public class ReviewsDAO{
 					+ "reviews_imgs.review_img_id,reviews_imgs.review_img,reviews_imgs.delete_flg,reviews_imgs.created_at,reviews_imgs.updated_at,"
 					+ "reviews_items.review_item_id,reviews_items.review_item1,reviews_items.review_item2,reviews_items.review_item3,reviews_items.review_item4,reviews_items.review_item5,"
 					+ "reviews_items.created_at,reviews_items.updated_at,"
-					+ "reviews_scores.review_score_id,reviews_scores.review_item_id,"
+					+ "reviews_scores.review_score_id,"
 					+ "reviews_scores.review_item1_score,reviews_scores.review_item2_score,reviews_scores.review_item3_score,reviews_scores.review_item4_score,reviews_scores.review_item5_score,"
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
-					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
+					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at"
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at,"
 					+ "list.list_name FROM reviews "
-					+ "OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
-					+ "OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
-					+ "OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
-					+ "OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
-					+ "OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
-					+ "OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
-					+ "OUTER JOIN users ON users.user_id = reviews.user_id "
-					+ "OUTER JOIN list ON list.list_id = list_reviews.list_id "
+					+ "LEFT OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
+					+ "LEFT OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
+					+ "LEFT OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
+					+ "LEFT OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN users ON users.user_id = reviews.user_id "
+					+ "LEFT OUTER JOIN list ON list.list_id = list_reviews.list_id "
 					+ " WHERE reviews.user_id = ? "
 			        + "and reviews.delete_flg = 1";
 					if(category2Id != 0) {
 						sql += " and categorys2.category2_id = ? ";
 					}
 
-			//準備⑥必要なものリストを用意する　ページで検索欄に入れたものが？に入る
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-			//準備⑦船を用意し、必要なものを乗っける
-			pStmt.setInt(1,userId );//引数sqlにsetStringしてる
+			pStmt.setInt(1,userId );
 
-			//準備⑧未完成だったSQL文の？のところに値を入れる
 			if(category2Id != 0) {
 				pStmt.setInt(2, category2Id);
 			}
 
-
-
-			// SQL文を実行し、結果表を取得する	検索して結果の表をrsに入れる構文
 			ResultSet rs = pStmt.executeQuery();
-			//⑨出向して一瞬で戻ってくる船　いってらっしゃい
+
 			while (rs.next()) {
-			//rs.nextで表の次の行にフォーカスが合う　もう行がなければfalseが返ってきて終わり
-				review = new Review();
+				Review review = new Review();
 				review.setReviewId(rs.getInt("reviews.review_id"));
 				review.setReviewName(rs.getString("reviews.category2_id"));
 				review.setReviewName(rs.getString("reviews.review_name"));
@@ -398,14 +430,14 @@ public class ReviewsDAO{
 				review.setRimDeleteFlg(rs.getInt("reviews_imgs.delete_flg"));
 				review.setRimCreatedAt(rs.getTimestamp("reviews_imgs.created_at"));
 				review.setRimUpdatedAt(rs.getTimestamp("reviews_imgs.updated_at"));
-				review.setReviewItemId(rs.getInt("reviews_item.review_item_id"));
-				review.setReviewItem1(rs.getString("reviews_item.review_item1"));
-				review.setReviewItem2(rs.getString("reviews_item.review_item2"));
-				review.setReviewItem3(rs.getString("reviews_item.review_item3"));
-				review.setReviewItem4(rs.getString("reviews_item.review_item4"));
-				review.setReviewItem5(rs.getString("reviews_item.review_item5"));
-				review.setRitCreatedAt(rs.getTimestamp("reviews_item.created_at"));
-				review.setRitUpdatedAt(rs.getTimestamp("reviews_item.updated_at"));
+				review.setReviewItemId(rs.getInt("reviews_items.review_item_id"));
+				review.setReviewItem1(rs.getString("reviews_items.review_item1"));
+				review.setReviewItem2(rs.getString("reviews_items.review_item2"));
+				review.setReviewItem3(rs.getString("reviews_items.review_item3"));
+				review.setReviewItem4(rs.getString("reviews_items.review_item4"));
+				review.setReviewItem5(rs.getString("reviews_items.review_item5"));
+				review.setRitCreatedAt(rs.getTimestamp("reviews_items.created_at"));
+				review.setRitUpdatedAt(rs.getTimestamp("reviews_items.updated_at"));
 				review.setReviewScoreId(rs.getInt("reviews_scores.review_score_id"));
 				review.setReviewItem1Score(rs.getInt("reviews_scores.review_item1_score"));
 				review.setReviewItem2Score(rs.getInt("reviews_scores.review_item2_score"));
@@ -417,15 +449,14 @@ public class ReviewsDAO{
 				review.setRsUpdatedAt(rs.getTimestamp("reviews_scores.updated_at"));
 				review.setBacknumberId(rs.getInt("backnumbers.backnumber_id"));
 				review.setBacknumberContent(rs.getString("backnumbers.backnumber_content"));
-				review.setbDeleteFlg(rs.getInt("backnumbers.delete_flg"));
 				review.setbCreatedAt(rs.getTimestamp("backnumbers.created_at"));
 				review.setbUpdatedAt(rs.getTimestamp("backnumbers.updated_at"));
-				review.setListReviewId(rs.getInt("list_reviews.list_review_id"));
 				review.setLrListId(rs.getInt("list_reviews.list_id"));
 				review.setLrCreatedAt(rs.getTimestamp("list_reviews.created_at"));
 				review.setLrUpdatedAt(rs.getTimestamp("list_reviews.updated_at"));
 				review.setUserEmail(rs.getString("users.user_email"));
 				review.setUserPassword(rs.getString("users.user_password"));
+				review.setUserName(rs.getString("users.user_id"));
 				review.setUserName(rs.getString("users.user_name"));
 				review.setUserImg(rs.getString("users.user_img"));
 				review.setuPrivacyFlg(rs.getInt("users.privacy_flg"));
@@ -461,23 +492,18 @@ public class ReviewsDAO{
 
 	//リスト追加のレビュー一覧
 	public ArrayList<Review> viewList(int listId) {
-		Review review = null;
+
 		ArrayList<Review> list = new ArrayList<Review>();
 		//準備①マイバッグ　BCというbeansしか入らないアレイリストを作った
 
 		Connection conn = null;
-		//準備②地図を書き込む白紙のメモを用意する	使い終わったら破棄しないといけないのでtryの外
-		//準備③は省略
 
 		try {
 			Class.forName("org.h2.Driver");
-			//準備④ドライバー(船乗り)を連れてくる　h2のJDBCドライバを読み込む
 
 			String id="sa";
 			String pw="";
 			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4DB",id,pw);
-			//準備⑤地図を完成させ、通行証も同梱する　データベースに接続する
-			//引数にH2に繋ぐためのアドレスを入れている(地図)＝simpleBCの部分が作るときで変わる、そのユーザのid,pw
 
 
 			String sql = "SELECT reviews.review_id,reviews.category2_id,reviews.review_name,reviews.review_price,reviews.review_comment,"
@@ -485,21 +511,21 @@ public class ReviewsDAO{
 					+ "reviews_imgs.review_img_id,reviews_imgs.review_img,reviews_imgs.delete_flg,reviews_imgs.created_at,reviews_imgs.updated_at,"
 					+ "reviews_items.review_item_id,reviews_items.review_item1,reviews_items.review_item2,reviews_items.review_item3,reviews_items.review_item4,reviews_items.review_item5,"
 					+ "reviews_items.created_at,reviews_items.updated_at,"
-					+ "reviews_scores.review_score_id,reviews_scores.review_item_id,"
+					+ "reviews_scores.review_score_id,"
 					+ "reviews_scores.review_item1_score,reviews_scores.review_item2_score,reviews_scores.review_item3_score,reviews_scores.review_item4_score,reviews_scores.review_item5_score,"
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
-					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
+					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at"
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at,"
 					+ "list.list_name FROM reviews "
-					+ "OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
-					+ "OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
-					+ "OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
-					+ "OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
-					+ "OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
-					+ "OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
-					+ "OUTER JOIN users ON users.user_id = reviews.user_id "
-					+ "OUTER JOIN list ON list.list_id = list_reviews.list_id "
+					+ "LEFT OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
+					+ "LEFT OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
+					+ "LEFT OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
+					+ "LEFT OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN users ON users.user_id = reviews.user_id "
+					+ "LEFT OUTER JOIN list ON list.list_id = list_reviews.list_id "
 					+ " WHERE list_reviews.list_id = ? "
 			        + "and reviews.delete_flg = 1";
 
@@ -518,7 +544,7 @@ public class ReviewsDAO{
 			//⑨出向して一瞬で戻ってくる船　いってらっしゃい
 			while (rs.next()) {
 			//rs.nextで表の次の行にフォーカスが合う　もう行がなければfalseが返ってきて終わり
-				review = new Review();
+				Review review = new Review();;
 				review.setReviewId(rs.getInt("reviews.review_id"));
 				review.setReviewName(rs.getString("reviews.category2_id"));
 				review.setReviewName(rs.getString("reviews.review_name"));
@@ -533,14 +559,14 @@ public class ReviewsDAO{
 				review.setRimDeleteFlg(rs.getInt("reviews_imgs.delete_flg"));
 				review.setRimCreatedAt(rs.getTimestamp("reviews_imgs.created_at"));
 				review.setRimUpdatedAt(rs.getTimestamp("reviews_imgs.updated_at"));
-				review.setReviewItemId(rs.getInt("reviews_item.review_item_id"));
-				review.setReviewItem1(rs.getString("reviews_item.review_item1"));
-				review.setReviewItem2(rs.getString("reviews_item.review_item2"));
-				review.setReviewItem3(rs.getString("reviews_item.review_item3"));
-				review.setReviewItem4(rs.getString("reviews_item.review_item4"));
-				review.setReviewItem5(rs.getString("reviews_item.review_item5"));
-				review.setRitCreatedAt(rs.getTimestamp("reviews_item.created_at"));
-				review.setRitUpdatedAt(rs.getTimestamp("reviews_item.updated_at"));
+				review.setReviewItemId(rs.getInt("reviews_items.review_item_id"));
+				review.setReviewItem1(rs.getString("reviews_items.review_item1"));
+				review.setReviewItem2(rs.getString("reviews_items.review_item2"));
+				review.setReviewItem3(rs.getString("reviews_items.review_item3"));
+				review.setReviewItem4(rs.getString("reviews_items.review_item4"));
+				review.setReviewItem5(rs.getString("reviews_items.review_item5"));
+				review.setRitCreatedAt(rs.getTimestamp("reviews_items.created_at"));
+				review.setRitUpdatedAt(rs.getTimestamp("reviews_items.updated_at"));
 				review.setReviewScoreId(rs.getInt("reviews_scores.review_score_id"));
 				review.setReviewItem1Score(rs.getInt("reviews_scores.review_item1_score"));
 				review.setReviewItem2Score(rs.getInt("reviews_scores.review_item2_score"));
@@ -552,15 +578,14 @@ public class ReviewsDAO{
 				review.setRsUpdatedAt(rs.getTimestamp("reviews_scores.updated_at"));
 				review.setBacknumberId(rs.getInt("backnumbers.backnumber_id"));
 				review.setBacknumberContent(rs.getString("backnumbers.backnumber_content"));
-				review.setbDeleteFlg(rs.getInt("backnumbers.delete_flg"));
 				review.setbCreatedAt(rs.getTimestamp("backnumbers.created_at"));
 				review.setbUpdatedAt(rs.getTimestamp("backnumbers.updated_at"));
-				review.setListReviewId(rs.getInt("list_reviews.list_review_id"));
 				review.setLrListId(rs.getInt("list_reviews.list_id"));
 				review.setLrCreatedAt(rs.getTimestamp("list_reviews.created_at"));
 				review.setLrUpdatedAt(rs.getTimestamp("list_reviews.updated_at"));
 				review.setUserEmail(rs.getString("users.user_email"));
 				review.setUserPassword(rs.getString("users.user_password"));
+				review.setUserName(rs.getString("users.user_id"));
 				review.setUserName(rs.getString("users.user_name"));
 				review.setUserImg(rs.getString("users.user_img"));
 				review.setuPrivacyFlg(rs.getInt("users.privacy_flg"));
@@ -744,7 +769,7 @@ public class ReviewsDAO{
 
 	//全体検索（すべて）
 	public ArrayList<Review> wholeSearch1(String freeWord, int priceA, int priceB, int evaA, int evaB, Timestamp createdA, Timestamp createdB) {
-		Review review = null;
+
 		ArrayList<Review> list = new ArrayList<>();
 		Connection conn = null;
 
@@ -764,21 +789,21 @@ public class ReviewsDAO{
 					+ "reviews_imgs.review_img_id,reviews_imgs.review_img,reviews_imgs.delete_flg,reviews_imgs.created_at,reviews_imgs.updated_at,"
 					+ "reviews_items.review_item_id,reviews_items.review_item1,reviews_items.review_item2,reviews_items.review_item3,reviews_items.review_item4,reviews_items.review_item5,"
 					+ "reviews_items.created_at,reviews_items.updated_at,"
-					+ "reviews_scores.review_score_id,reviews_scores.review_item_id,"
+					+ "reviews_scores.review_score_id,"
 					+ "reviews_scores.review_item1_score,reviews_scores.review_item2_score,reviews_scores.review_item3_score,reviews_scores.review_item4_score,reviews_scores.review_item5_score,"
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
-					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
+					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at"
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at,"
 					+ "list.list_name FROM reviews "
-					+ "OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
-					+ "OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
-					+ "OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
-					+ "OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
-					+ "OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
-					+ "OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
-					+ "OUTER JOIN users ON users.user_id = reviews.user_id "
-					+ "OUTER JOIN list ON list.list_id = list_reviews.list_id "
+					+ "LEFT OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
+					+ "LEFT OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
+					+ "LEFT OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
+					+ "LEFT OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN users ON users.user_id = reviews.user_id "
+					+ "LEFT OUTER JOIN list ON list.list_id = list_reviews.list_id "
 					+ " WHERE reviews.review_price between ? AND ? AND reviews_scores.score_avg between ? AND ? AND reviews.created_at between ? AND ?;"
 					+ "AND"
 					+ "reviews.review_name = ? AND reviews.review_comment = ?"
@@ -802,7 +827,7 @@ public class ReviewsDAO{
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
 			//rs.nextで表の次の行にフォーカスが合う　もう行がなければfalseが返ってきて終わり
-				review = new Review();
+				Review review = new Review();
 				review.setReviewId(rs.getInt("reviews.review_id"));
 				review.setReviewName(rs.getString("reviews.category2_id"));
 				review.setReviewName(rs.getString("reviews.review_name"));
@@ -817,14 +842,14 @@ public class ReviewsDAO{
 				review.setRimDeleteFlg(rs.getInt("reviews_imgs.delete_flg"));
 				review.setRimCreatedAt(rs.getTimestamp("reviews_imgs.created_at"));
 				review.setRimUpdatedAt(rs.getTimestamp("reviews_imgs.updated_at"));
-				review.setReviewItemId(rs.getInt("reviews_item.review_item_id"));
-				review.setReviewItem1(rs.getString("reviews_item.review_item1"));
-				review.setReviewItem2(rs.getString("reviews_item.review_item2"));
-				review.setReviewItem3(rs.getString("reviews_item.review_item3"));
-				review.setReviewItem4(rs.getString("reviews_item.review_item4"));
-				review.setReviewItem5(rs.getString("reviews_item.review_item5"));
-				review.setRitCreatedAt(rs.getTimestamp("reviews_item.created_at"));
-				review.setRitUpdatedAt(rs.getTimestamp("reviews_item.updated_at"));
+				review.setReviewItemId(rs.getInt("reviews_items.review_item_id"));
+				review.setReviewItem1(rs.getString("reviews_items.review_item1"));
+				review.setReviewItem2(rs.getString("reviews_items.review_item2"));
+				review.setReviewItem3(rs.getString("reviews_items.review_item3"));
+				review.setReviewItem4(rs.getString("reviews_items.review_item4"));
+				review.setReviewItem5(rs.getString("reviews_items.review_item5"));
+				review.setRitCreatedAt(rs.getTimestamp("reviews_items.created_at"));
+				review.setRitUpdatedAt(rs.getTimestamp("reviews_items.updated_at"));
 				review.setReviewScoreId(rs.getInt("reviews_scores.review_score_id"));
 				review.setReviewItem1Score(rs.getInt("reviews_scores.review_item1_score"));
 				review.setReviewItem2Score(rs.getInt("reviews_scores.review_item2_score"));
@@ -836,15 +861,14 @@ public class ReviewsDAO{
 				review.setRsUpdatedAt(rs.getTimestamp("reviews_scores.updated_at"));
 				review.setBacknumberId(rs.getInt("backnumbers.backnumber_id"));
 				review.setBacknumberContent(rs.getString("backnumbers.backnumber_content"));
-				review.setbDeleteFlg(rs.getInt("backnumbers.delete_flg"));
 				review.setbCreatedAt(rs.getTimestamp("backnumbers.created_at"));
 				review.setbUpdatedAt(rs.getTimestamp("backnumbers.updated_at"));
-				review.setListReviewId(rs.getInt("list_reviews.list_review_id"));
 				review.setLrListId(rs.getInt("list_reviews.list_id"));
 				review.setLrCreatedAt(rs.getTimestamp("list_reviews.created_at"));
 				review.setLrUpdatedAt(rs.getTimestamp("list_reviews.updated_at"));
 				review.setUserEmail(rs.getString("users.user_email"));
 				review.setUserPassword(rs.getString("users.user_password"));
+				review.setUserName(rs.getString("users.user_id"));
 				review.setUserName(rs.getString("users.user_name"));
 				review.setUserImg(rs.getString("users.user_img"));
 				review.setuPrivacyFlg(rs.getInt("users.privacy_flg"));
@@ -880,7 +904,7 @@ public class ReviewsDAO{
 
 	//全体検索（カテゴリー別）
 	public ArrayList<Review> wholeSearch2(int category2Id, String freeWord, int priceA, int priceB, int evaA, int evaB, Timestamp createdA, Timestamp createdB) {
-		Review review = null;
+
 		ArrayList<Review> list = new ArrayList<>();
 		Connection conn = null;
 
@@ -900,21 +924,21 @@ public class ReviewsDAO{
 					+ "reviews_imgs.review_img_id,reviews_imgs.review_img,reviews_imgs.delete_flg,reviews_imgs.created_at,reviews_imgs.updated_at,"
 					+ "reviews_items.review_item_id,reviews_items.review_item1,reviews_items.review_item2,reviews_items.review_item3,reviews_items.review_item4,reviews_items.review_item5,"
 					+ "reviews_items.created_at,reviews_items.updated_at,"
-					+ "reviews_scores.review_score_id,reviews_scores.review_item_id,"
+					+ "reviews_scores.review_score_id,"
 					+ "reviews_scores.review_item1_score,reviews_scores.review_item2_score,reviews_scores.review_item3_score,reviews_scores.review_item4_score,reviews_scores.review_item5_score,"
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
-					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
+					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at"
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at,"
 					+ "list.list_name FROM reviews "
-					+ "OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
-					+ "OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
-					+ "OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
-					+ "OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
-					+ "OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
-					+ "OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
-					+ "OUTER JOIN users ON users.user_id = reviews.user_id "
-					+ "OUTER JOIN list ON list.list_id = list_reviews.list_id "
+					+ "LEFT OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
+					+ "LEFT OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
+					+ "LEFT OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
+					+ "LEFT OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN users ON users.user_id = reviews.user_id "
+					+ "LEFT OUTER JOIN list ON list.list_id = list_reviews.list_id "
 					+ " WHERE reviews.review_price between ? AND ?, AND reviews_scores.score_avg between ? AND ?, AND reviews.created_at between ? AND ?;"
 					+ "AND"
 					+ "reviews.category2_id = ? AND reviews.review_name = ? AND reviews.review_comment = ?"
@@ -939,7 +963,7 @@ public class ReviewsDAO{
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
 			//rs.nextで表の次の行にフォーカスが合う　もう行がなければfalseが返ってきて終わり
-				review = new Review();
+				Review review = new Review();
 				review.setReviewId(rs.getInt("reviews.review_id"));
 				review.setReviewName(rs.getString("reviews.category2_id"));
 				review.setReviewName(rs.getString("reviews.review_name"));
@@ -954,14 +978,14 @@ public class ReviewsDAO{
 				review.setRimDeleteFlg(rs.getInt("reviews_imgs.delete_flg"));
 				review.setRimCreatedAt(rs.getTimestamp("reviews_imgs.created_at"));
 				review.setRimUpdatedAt(rs.getTimestamp("reviews_imgs.updated_at"));
-				review.setReviewItemId(rs.getInt("reviews_item.review_item_id"));
-				review.setReviewItem1(rs.getString("reviews_item.review_item1"));
-				review.setReviewItem2(rs.getString("reviews_item.review_item2"));
-				review.setReviewItem3(rs.getString("reviews_item.review_item3"));
-				review.setReviewItem4(rs.getString("reviews_item.review_item4"));
-				review.setReviewItem5(rs.getString("reviews_item.review_item5"));
-				review.setRitCreatedAt(rs.getTimestamp("reviews_item.created_at"));
-				review.setRitUpdatedAt(rs.getTimestamp("reviews_item.updated_at"));
+				review.setReviewItemId(rs.getInt("reviews_items.review_item_id"));
+				review.setReviewItem1(rs.getString("reviews_items.review_item1"));
+				review.setReviewItem2(rs.getString("reviews_items.review_item2"));
+				review.setReviewItem3(rs.getString("reviews_items.review_item3"));
+				review.setReviewItem4(rs.getString("reviews_items.review_item4"));
+				review.setReviewItem5(rs.getString("reviews_items.review_item5"));
+				review.setRitCreatedAt(rs.getTimestamp("reviews_items.created_at"));
+				review.setRitUpdatedAt(rs.getTimestamp("reviews_items.updated_at"));
 				review.setReviewScoreId(rs.getInt("reviews_scores.review_score_id"));
 				review.setReviewItem1Score(rs.getInt("reviews_scores.review_item1_score"));
 				review.setReviewItem2Score(rs.getInt("reviews_scores.review_item2_score"));
@@ -973,15 +997,14 @@ public class ReviewsDAO{
 				review.setRsUpdatedAt(rs.getTimestamp("reviews_scores.updated_at"));
 				review.setBacknumberId(rs.getInt("backnumbers.backnumber_id"));
 				review.setBacknumberContent(rs.getString("backnumbers.backnumber_content"));
-				review.setbDeleteFlg(rs.getInt("backnumbers.delete_flg"));
 				review.setbCreatedAt(rs.getTimestamp("backnumbers.created_at"));
 				review.setbUpdatedAt(rs.getTimestamp("backnumbers.updated_at"));
-				review.setListReviewId(rs.getInt("list_reviews.list_review_id"));
 				review.setLrListId(rs.getInt("list_reviews.list_id"));
 				review.setLrCreatedAt(rs.getTimestamp("list_reviews.created_at"));
 				review.setLrUpdatedAt(rs.getTimestamp("list_reviews.updated_at"));
 				review.setUserEmail(rs.getString("users.user_email"));
 				review.setUserPassword(rs.getString("users.user_password"));
+				review.setUserName(rs.getString("users.user_id"));
 				review.setUserName(rs.getString("users.user_name"));
 				review.setUserImg(rs.getString("users.user_img"));
 				review.setuPrivacyFlg(rs.getInt("users.privacy_flg"));
@@ -1017,7 +1040,7 @@ public class ReviewsDAO{
 
 	//更新日昇順検索
 	public ArrayList<Review> ascDateSearch(int userId, String freeWord, int priceA, int priceB, int evaA, int evaB, Timestamp createdA, Timestamp createdB) {
-		Review review = null;
+
 		ArrayList<Review> list = new ArrayList<>();
 		Connection conn = null;
 
@@ -1037,21 +1060,21 @@ public class ReviewsDAO{
 					+ "reviews_imgs.review_img_id,reviews_imgs.review_img,reviews_imgs.delete_flg,reviews_imgs.created_at,reviews_imgs.updated_at,"
 					+ "reviews_items.review_item_id,reviews_items.review_item1,reviews_items.review_item2,reviews_items.review_item3,reviews_items.review_item4,reviews_items.review_item5,"
 					+ "reviews_items.created_at,reviews_items.updated_at,"
-					+ "reviews_scores.review_score_id,reviews_scores.review_item_id,"
+					+ "reviews_scores.review_score_id,"
 					+ "reviews_scores.review_item1_score,reviews_scores.review_item2_score,reviews_scores.review_item3_score,reviews_scores.review_item4_score,reviews_scores.review_item5_score,"
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
-					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
+					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at"
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at,"
 					+ "list.list_name FROM reviews "
-					+ "OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
-					+ "OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
-					+ "OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
-					+ "OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
-					+ "OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
-					+ "OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
-					+ "OUTER JOIN users ON users.user_id = reviews.user_id "
-					+ "OUTER JOIN list ON list.list_id = list_reviews.list_id "
+					+ "LEFT OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
+					+ "LEFT OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
+					+ "LEFT OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
+					+ "LEFT OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN users ON users.user_id = reviews.user_id "
+					+ "LEFT OUTER JOIN list ON list.list_id = list_reviews.list_id "
 					+ " WHERE reviews.user_id = ? AND reviews.review_price between ? AND ? AND reviews_scores.score_avg between ? AND ? AND reviews.created_at between ? AND ?;"
 					+ "AND"
 					+ "reviews.review_name = ? AND reviews.review_comment = ?"
@@ -1076,7 +1099,7 @@ public class ReviewsDAO{
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
 			//rs.nextで表の次の行にフォーカスが合う　もう行がなければfalseが返ってきて終わり
-				review = new Review();
+				Review review = new Review();
 				review.setReviewId(rs.getInt("reviews.review_id"));
 				review.setReviewName(rs.getString("reviews.category2_id"));
 				review.setReviewName(rs.getString("reviews.review_name"));
@@ -1091,14 +1114,14 @@ public class ReviewsDAO{
 				review.setRimDeleteFlg(rs.getInt("reviews_imgs.delete_flg"));
 				review.setRimCreatedAt(rs.getTimestamp("reviews_imgs.created_at"));
 				review.setRimUpdatedAt(rs.getTimestamp("reviews_imgs.updated_at"));
-				review.setReviewItemId(rs.getInt("reviews_item.review_item_id"));
-				review.setReviewItem1(rs.getString("reviews_item.review_item1"));
-				review.setReviewItem2(rs.getString("reviews_item.review_item2"));
-				review.setReviewItem3(rs.getString("reviews_item.review_item3"));
-				review.setReviewItem4(rs.getString("reviews_item.review_item4"));
-				review.setReviewItem5(rs.getString("reviews_item.review_item5"));
-				review.setRitCreatedAt(rs.getTimestamp("reviews_item.created_at"));
-				review.setRitUpdatedAt(rs.getTimestamp("reviews_item.updated_at"));
+				review.setReviewItemId(rs.getInt("reviews_items.review_item_id"));
+				review.setReviewItem1(rs.getString("reviews_items.review_item1"));
+				review.setReviewItem2(rs.getString("reviews_items.review_item2"));
+				review.setReviewItem3(rs.getString("reviews_items.review_item3"));
+				review.setReviewItem4(rs.getString("reviews_items.review_item4"));
+				review.setReviewItem5(rs.getString("reviews_items.review_item5"));
+				review.setRitCreatedAt(rs.getTimestamp("reviews_items.created_at"));
+				review.setRitUpdatedAt(rs.getTimestamp("reviews_items.updated_at"));
 				review.setReviewScoreId(rs.getInt("reviews_scores.review_score_id"));
 				review.setReviewItem1Score(rs.getInt("reviews_scores.review_item1_score"));
 				review.setReviewItem2Score(rs.getInt("reviews_scores.review_item2_score"));
@@ -1110,15 +1133,14 @@ public class ReviewsDAO{
 				review.setRsUpdatedAt(rs.getTimestamp("reviews_scores.updated_at"));
 				review.setBacknumberId(rs.getInt("backnumbers.backnumber_id"));
 				review.setBacknumberContent(rs.getString("backnumbers.backnumber_content"));
-				review.setbDeleteFlg(rs.getInt("backnumbers.delete_flg"));
 				review.setbCreatedAt(rs.getTimestamp("backnumbers.created_at"));
 				review.setbUpdatedAt(rs.getTimestamp("backnumbers.updated_at"));
-				review.setListReviewId(rs.getInt("list_reviews.list_review_id"));
 				review.setLrListId(rs.getInt("list_reviews.list_id"));
 				review.setLrCreatedAt(rs.getTimestamp("list_reviews.created_at"));
 				review.setLrUpdatedAt(rs.getTimestamp("list_reviews.updated_at"));
 				review.setUserEmail(rs.getString("users.user_email"));
 				review.setUserPassword(rs.getString("users.user_password"));
+				review.setUserName(rs.getString("users.user_id"));
 				review.setUserName(rs.getString("users.user_name"));
 				review.setUserImg(rs.getString("users.user_img"));
 				review.setuPrivacyFlg(rs.getInt("users.privacy_flg"));
@@ -1154,7 +1176,7 @@ public class ReviewsDAO{
 
 	//更新日降順検索
 	public ArrayList<Review> descDateSearch(int userId, String freeWord, int priceA, int priceB, int evaA, int evaB, Timestamp createdA, Timestamp createdB) {
-		Review review = null;
+
 		ArrayList<Review> list = new ArrayList<>();
 		Connection conn = null;
 
@@ -1174,21 +1196,21 @@ public class ReviewsDAO{
 					+ "reviews_imgs.review_img_id,reviews_imgs.review_img,reviews_imgs.delete_flg,reviews_imgs.created_at,reviews_imgs.updated_at,"
 					+ "reviews_items.review_item_id,reviews_items.review_item1,reviews_items.review_item2,reviews_items.review_item3,reviews_items.review_item4,reviews_items.review_item5,"
 					+ "reviews_items.created_at,reviews_items.updated_at,"
-					+ "reviews_scores.review_score_id,reviews_scores.review_item_id,"
+					+ "reviews_scores.review_score_id,"
 					+ "reviews_scores.review_item1_score,reviews_scores.review_item2_score,reviews_scores.review_item3_score,reviews_scores.review_item4_score,reviews_scores.review_item5_score,"
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
-					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
+					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at"
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at,"
 					+ "list.list_name FROM reviews "
-					+ "OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
-					+ "OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
-					+ "OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
-					+ "OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
-					+ "OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
-					+ "OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
-					+ "OUTER JOIN users ON users.user_id = reviews.user_id "
-					+ "OUTER JOIN list ON list.list_id = list_reviews.list_id "
+					+ "LEFT OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
+					+ "LEFT OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
+					+ "LEFT OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
+					+ "LEFT OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN users ON users.user_id = reviews.user_id "
+					+ "LEFT OUTER JOIN list ON list.list_id = list_reviews.list_id "
 					+ " WHERE reviews.user_id = ? AND reviews.review_price between ? AND ?, AND reviews_scores.score_avg between ? AND ?, AND reviews.created_at between ? AND ?;"
 					+ "AND"
 					+ "reviews.review_name = ? AND reviews.review_comment = ?"
@@ -1213,7 +1235,7 @@ public class ReviewsDAO{
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
 			//rs.nextで表の次の行にフォーカスが合う　もう行がなければfalseが返ってきて終わり
-				review = new Review();
+				Review review = new Review();
 				review.setReviewId(rs.getInt("reviews.review_id"));
 				review.setReviewName(rs.getString("reviews.category2_id"));
 				review.setReviewName(rs.getString("reviews.review_name"));
@@ -1228,14 +1250,14 @@ public class ReviewsDAO{
 				review.setRimDeleteFlg(rs.getInt("reviews_imgs.delete_flg"));
 				review.setRimCreatedAt(rs.getTimestamp("reviews_imgs.created_at"));
 				review.setRimUpdatedAt(rs.getTimestamp("reviews_imgs.updated_at"));
-				review.setReviewItemId(rs.getInt("reviews_item.review_item_id"));
-				review.setReviewItem1(rs.getString("reviews_item.review_item1"));
-				review.setReviewItem2(rs.getString("reviews_item.review_item2"));
-				review.setReviewItem3(rs.getString("reviews_item.review_item3"));
-				review.setReviewItem4(rs.getString("reviews_item.review_item4"));
-				review.setReviewItem5(rs.getString("reviews_item.review_item5"));
-				review.setRitCreatedAt(rs.getTimestamp("reviews_item.created_at"));
-				review.setRitUpdatedAt(rs.getTimestamp("reviews_item.updated_at"));
+				review.setReviewItemId(rs.getInt("reviews_items.review_item_id"));
+				review.setReviewItem1(rs.getString("reviews_items.review_item1"));
+				review.setReviewItem2(rs.getString("reviews_items.review_item2"));
+				review.setReviewItem3(rs.getString("reviews_items.review_item3"));
+				review.setReviewItem4(rs.getString("reviews_items.review_item4"));
+				review.setReviewItem5(rs.getString("reviews_items.review_item5"));
+				review.setRitCreatedAt(rs.getTimestamp("reviews_items.created_at"));
+				review.setRitUpdatedAt(rs.getTimestamp("reviews_items.updated_at"));
 				review.setReviewScoreId(rs.getInt("reviews_scores.review_score_id"));
 				review.setReviewItem1Score(rs.getInt("reviews_scores.review_item1_score"));
 				review.setReviewItem2Score(rs.getInt("reviews_scores.review_item2_score"));
@@ -1247,15 +1269,14 @@ public class ReviewsDAO{
 				review.setRsUpdatedAt(rs.getTimestamp("reviews_scores.updated_at"));
 				review.setBacknumberId(rs.getInt("backnumbers.backnumber_id"));
 				review.setBacknumberContent(rs.getString("backnumbers.backnumber_content"));
-				review.setbDeleteFlg(rs.getInt("backnumbers.delete_flg"));
 				review.setbCreatedAt(rs.getTimestamp("backnumbers.created_at"));
 				review.setbUpdatedAt(rs.getTimestamp("backnumbers.updated_at"));
-				review.setListReviewId(rs.getInt("list_reviews.list_review_id"));
 				review.setLrListId(rs.getInt("list_reviews.list_id"));
 				review.setLrCreatedAt(rs.getTimestamp("list_reviews.created_at"));
 				review.setLrUpdatedAt(rs.getTimestamp("list_reviews.updated_at"));
 				review.setUserEmail(rs.getString("users.user_email"));
 				review.setUserPassword(rs.getString("users.user_password"));
+				review.setUserName(rs.getString("users.user_id"));
 				review.setUserName(rs.getString("users.user_name"));
 				review.setUserImg(rs.getString("users.user_img"));
 				review.setuPrivacyFlg(rs.getInt("users.privacy_flg"));
@@ -1291,7 +1312,7 @@ public class ReviewsDAO{
 
 	//価格昇順検索
 	public ArrayList<Review> ascPriceSearch(int userId, String freeWord, int priceA, int priceB, int evaA, int evaB, Timestamp createdA, Timestamp createdB) {
-		Review review = null;
+
 		ArrayList<Review> list = new ArrayList<>();
 		Connection conn = null;
 
@@ -1311,21 +1332,21 @@ public class ReviewsDAO{
 					+ "reviews_imgs.review_img_id,reviews_imgs.review_img,reviews_imgs.delete_flg,reviews_imgs.created_at,reviews_imgs.updated_at,"
 					+ "reviews_items.review_item_id,reviews_items.review_item1,reviews_items.review_item2,reviews_items.review_item3,reviews_items.review_item4,reviews_items.review_item5,"
 					+ "reviews_items.created_at,reviews_items.updated_at,"
-					+ "reviews_scores.review_score_id,reviews_scores.review_item_id,"
+					+ "reviews_scores.review_score_id,"
 					+ "reviews_scores.review_item1_score,reviews_scores.review_item2_score,reviews_scores.review_item3_score,reviews_scores.review_item4_score,reviews_scores.review_item5_score,"
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
-					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
+					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at"
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at,"
 					+ "list.list_name FROM reviews "
-					+ "OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
-					+ "OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
-					+ "OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
-					+ "OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
-					+ "OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
-					+ "OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
-					+ "OUTER JOIN users ON users.user_id = reviews.user_id "
-					+ "OUTER JOIN list ON list.list_id = list_reviews.list_id "
+					+ "LEFT OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
+					+ "LEFT OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
+					+ "LEFT OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
+					+ "LEFT OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN users ON users.user_id = reviews.user_id "
+					+ "LEFT OUTER JOIN list ON list.list_id = list_reviews.list_id "
 					+ " WHERE reviews.user_id = ? AND reviews.review_price between ? AND ?, AND reviews_scores.score_avg between ? AND ?, AND reviews.created_at between ? AND ?;"
 					+ "AND"
 					+ "reviews.review_name = ? AND reviews.review_comment = ?"
@@ -1350,7 +1371,7 @@ public class ReviewsDAO{
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
 			//rs.nextで表の次の行にフォーカスが合う　もう行がなければfalseが返ってきて終わり
-				review = new Review();
+				Review review = new Review();
 				review.setReviewId(rs.getInt("reviews.review_id"));
 				review.setReviewName(rs.getString("reviews.category2_id"));
 				review.setReviewName(rs.getString("reviews.review_name"));
@@ -1365,14 +1386,14 @@ public class ReviewsDAO{
 				review.setRimDeleteFlg(rs.getInt("reviews_imgs.delete_flg"));
 				review.setRimCreatedAt(rs.getTimestamp("reviews_imgs.created_at"));
 				review.setRimUpdatedAt(rs.getTimestamp("reviews_imgs.updated_at"));
-				review.setReviewItemId(rs.getInt("reviews_item.review_item_id"));
-				review.setReviewItem1(rs.getString("reviews_item.review_item1"));
-				review.setReviewItem2(rs.getString("reviews_item.review_item2"));
-				review.setReviewItem3(rs.getString("reviews_item.review_item3"));
-				review.setReviewItem4(rs.getString("reviews_item.review_item4"));
-				review.setReviewItem5(rs.getString("reviews_item.review_item5"));
-				review.setRitCreatedAt(rs.getTimestamp("reviews_item.created_at"));
-				review.setRitUpdatedAt(rs.getTimestamp("reviews_item.updated_at"));
+				review.setReviewItemId(rs.getInt("reviews_items.review_item_id"));
+				review.setReviewItem1(rs.getString("reviews_items.review_item1"));
+				review.setReviewItem2(rs.getString("reviews_items.review_item2"));
+				review.setReviewItem3(rs.getString("reviews_items.review_item3"));
+				review.setReviewItem4(rs.getString("reviews_items.review_item4"));
+				review.setReviewItem5(rs.getString("reviews_items.review_item5"));
+				review.setRitCreatedAt(rs.getTimestamp("reviews_items.created_at"));
+				review.setRitUpdatedAt(rs.getTimestamp("reviews_items.updated_at"));
 				review.setReviewScoreId(rs.getInt("reviews_scores.review_score_id"));
 				review.setReviewItem1Score(rs.getInt("reviews_scores.review_item1_score"));
 				review.setReviewItem2Score(rs.getInt("reviews_scores.review_item2_score"));
@@ -1384,15 +1405,14 @@ public class ReviewsDAO{
 				review.setRsUpdatedAt(rs.getTimestamp("reviews_scores.updated_at"));
 				review.setBacknumberId(rs.getInt("backnumbers.backnumber_id"));
 				review.setBacknumberContent(rs.getString("backnumbers.backnumber_content"));
-				review.setbDeleteFlg(rs.getInt("backnumbers.delete_flg"));
 				review.setbCreatedAt(rs.getTimestamp("backnumbers.created_at"));
 				review.setbUpdatedAt(rs.getTimestamp("backnumbers.updated_at"));
-				review.setListReviewId(rs.getInt("list_reviews.list_review_id"));
 				review.setLrListId(rs.getInt("list_reviews.list_id"));
 				review.setLrCreatedAt(rs.getTimestamp("list_reviews.created_at"));
 				review.setLrUpdatedAt(rs.getTimestamp("list_reviews.updated_at"));
 				review.setUserEmail(rs.getString("users.user_email"));
 				review.setUserPassword(rs.getString("users.user_password"));
+				review.setUserName(rs.getString("users.user_id"));
 				review.setUserName(rs.getString("users.user_name"));
 				review.setUserImg(rs.getString("users.user_img"));
 				review.setuPrivacyFlg(rs.getInt("users.privacy_flg"));
@@ -1428,7 +1448,7 @@ public class ReviewsDAO{
 
 	//価格降順検索
 	public ArrayList<Review> descPriceSearch(int userId, String freeWord, int priceA, int priceB, int evaA, int evaB, Timestamp createdA, Timestamp createdB) {
-		Review review = null;
+
 		ArrayList<Review> list = new ArrayList<>();
 		Connection conn = null;
 
@@ -1448,21 +1468,21 @@ public class ReviewsDAO{
 					+ "reviews_imgs.review_img_id,reviews_imgs.review_img,reviews_imgs.delete_flg,reviews_imgs.created_at,reviews_imgs.updated_at,"
 					+ "reviews_items.review_item_id,reviews_items.review_item1,reviews_items.review_item2,reviews_items.review_item3,reviews_items.review_item4,reviews_items.review_item5,"
 					+ "reviews_items.created_at,reviews_items.updated_at,"
-					+ "reviews_scores.review_score_id,reviews_scores.review_item_id,"
+					+ "reviews_scores.review_score_id,"
 					+ "reviews_scores.review_item1_score,reviews_scores.review_item2_score,reviews_scores.review_item3_score,reviews_scores.review_item4_score,reviews_scores.review_item5_score,"
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
-					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
+					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at"
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at,"
 					+ "list.list_name FROM reviews "
-					+ "OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
-					+ "OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
-					+ "OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
-					+ "OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
-					+ "OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
-					+ "OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
-					+ "OUTER JOIN users ON users.user_id = reviews.user_id "
-					+ "OUTER JOIN list ON list.list_id = list_reviews.list_id "
+					+ "LEFT OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
+					+ "LEFT OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
+					+ "LEFT OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
+					+ "LEFT OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN users ON users.user_id = reviews.user_id "
+					+ "LEFT OUTER JOIN list ON list.list_id = list_reviews.list_id "
 					+ " WHERE reviews.user_id = ? AND reviews.review_price between ? AND ?, AND reviews_scores.score_avg between ? AND ?, AND reviews.created_at between ? AND ?;"
 					+ "AND"
 					+ "reviews.review_name = ?, reviews.review_comment = ?"
@@ -1487,7 +1507,7 @@ public class ReviewsDAO{
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
 			//rs.nextで表の次の行にフォーカスが合う　もう行がなければfalseが返ってきて終わり
-				review = new Review();
+				Review review = new Review();
 				review.setReviewId(rs.getInt("reviews.review_id"));
 				review.setReviewName(rs.getString("reviews.category2_id"));
 				review.setReviewName(rs.getString("reviews.review_name"));
@@ -1502,14 +1522,14 @@ public class ReviewsDAO{
 				review.setRimDeleteFlg(rs.getInt("reviews_imgs.delete_flg"));
 				review.setRimCreatedAt(rs.getTimestamp("reviews_imgs.created_at"));
 				review.setRimUpdatedAt(rs.getTimestamp("reviews_imgs.updated_at"));
-				review.setReviewItemId(rs.getInt("reviews_item.review_item_id"));
-				review.setReviewItem1(rs.getString("reviews_item.review_item1"));
-				review.setReviewItem2(rs.getString("reviews_item.review_item2"));
-				review.setReviewItem3(rs.getString("reviews_item.review_item3"));
-				review.setReviewItem4(rs.getString("reviews_item.review_item4"));
-				review.setReviewItem5(rs.getString("reviews_item.review_item5"));
-				review.setRitCreatedAt(rs.getTimestamp("reviews_item.created_at"));
-				review.setRitUpdatedAt(rs.getTimestamp("reviews_item.updated_at"));
+				review.setReviewItemId(rs.getInt("reviews_items.review_item_id"));
+				review.setReviewItem1(rs.getString("reviews_items.review_item1"));
+				review.setReviewItem2(rs.getString("reviews_items.review_item2"));
+				review.setReviewItem3(rs.getString("reviews_items.review_item3"));
+				review.setReviewItem4(rs.getString("reviews_items.review_item4"));
+				review.setReviewItem5(rs.getString("reviews_items.review_item5"));
+				review.setRitCreatedAt(rs.getTimestamp("reviews_items.created_at"));
+				review.setRitUpdatedAt(rs.getTimestamp("reviews_items.updated_at"));
 				review.setReviewScoreId(rs.getInt("reviews_scores.review_score_id"));
 				review.setReviewItem1Score(rs.getInt("reviews_scores.review_item1_score"));
 				review.setReviewItem2Score(rs.getInt("reviews_scores.review_item2_score"));
@@ -1521,15 +1541,14 @@ public class ReviewsDAO{
 				review.setRsUpdatedAt(rs.getTimestamp("reviews_scores.updated_at"));
 				review.setBacknumberId(rs.getInt("backnumbers.backnumber_id"));
 				review.setBacknumberContent(rs.getString("backnumbers.backnumber_content"));
-				review.setbDeleteFlg(rs.getInt("backnumbers.delete_flg"));
 				review.setbCreatedAt(rs.getTimestamp("backnumbers.created_at"));
 				review.setbUpdatedAt(rs.getTimestamp("backnumbers.updated_at"));
-				review.setListReviewId(rs.getInt("list_reviews.list_review_id"));
 				review.setLrListId(rs.getInt("list_reviews.list_id"));
 				review.setLrCreatedAt(rs.getTimestamp("list_reviews.created_at"));
 				review.setLrUpdatedAt(rs.getTimestamp("list_reviews.updated_at"));
 				review.setUserEmail(rs.getString("users.user_email"));
 				review.setUserPassword(rs.getString("users.user_password"));
+				review.setUserName(rs.getString("users.user_id"));
 				review.setUserName(rs.getString("users.user_name"));
 				review.setUserImg(rs.getString("users.user_img"));
 				review.setuPrivacyFlg(rs.getInt("users.privacy_flg"));
@@ -1565,7 +1584,7 @@ public class ReviewsDAO{
 
 	//評価昇順検索
 	public ArrayList<Review> ascEvaSearch(int userId, String freeWord, int priceA, int priceB, int evaA, int evaB, Timestamp createdA, Timestamp createdB) {
-		Review review = null;
+
 		ArrayList<Review> list = new ArrayList<>();
 		Connection conn = null;
 
@@ -1585,21 +1604,21 @@ public class ReviewsDAO{
 					+ "reviews_imgs.review_img_id,reviews_imgs.review_img,reviews_imgs.delete_flg,reviews_imgs.created_at,reviews_imgs.updated_at,"
 					+ "reviews_items.review_item_id,reviews_items.review_item1,reviews_items.review_item2,reviews_items.review_item3,reviews_items.review_item4,reviews_items.review_item5,"
 					+ "reviews_items.created_at,reviews_items.updated_at,"
-					+ "reviews_scores.review_score_id,reviews_scores.review_item_id,"
+					+ "reviews_scores.review_score_id,"
 					+ "reviews_scores.review_item1_score,reviews_scores.review_item2_score,reviews_scores.review_item3_score,reviews_scores.review_item4_score,reviews_scores.review_item5_score,"
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
-					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
+					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at"
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at,"
 					+ "list.list_name FROM reviews "
-					+ "OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
-					+ "OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
-					+ "OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
-					+ "OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
-					+ "OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
-					+ "OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
-					+ "OUTER JOIN users ON users.user_id = reviews.user_id "
-					+ "OUTER JOIN list ON list.list_id = list_reviews.list_id "
+					+ "LEFT OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
+					+ "LEFT OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
+					+ "LEFT OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
+					+ "LEFT OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN users ON users.user_id = reviews.user_id "
+					+ "LEFT OUTER JOIN list ON list.list_id = list_reviews.list_id "
 					+ " WHERE reviews.user_id = ? AND reviews.review_price between ? AND ?, AND reviews_scores.score_avg between ? AND ?, AND reviews.created_at between ? AND ?;"
 					+ "AND"
 					+ "reviews.review_name = ?, reviews.review_comment = ?"
@@ -1624,7 +1643,7 @@ public class ReviewsDAO{
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
 			//rs.nextで表の次の行にフォーカスが合う　もう行がなければfalseが返ってきて終わり
-				review = new Review();
+				Review review = new Review();
 				review.setReviewId(rs.getInt("reviews.review_id"));
 				review.setReviewName(rs.getString("reviews.category2_id"));
 				review.setReviewName(rs.getString("reviews.review_name"));
@@ -1639,14 +1658,14 @@ public class ReviewsDAO{
 				review.setRimDeleteFlg(rs.getInt("reviews_imgs.delete_flg"));
 				review.setRimCreatedAt(rs.getTimestamp("reviews_imgs.created_at"));
 				review.setRimUpdatedAt(rs.getTimestamp("reviews_imgs.updated_at"));
-				review.setReviewItemId(rs.getInt("reviews_item.review_item_id"));
-				review.setReviewItem1(rs.getString("reviews_item.review_item1"));
-				review.setReviewItem2(rs.getString("reviews_item.review_item2"));
-				review.setReviewItem3(rs.getString("reviews_item.review_item3"));
-				review.setReviewItem4(rs.getString("reviews_item.review_item4"));
-				review.setReviewItem5(rs.getString("reviews_item.review_item5"));
-				review.setRitCreatedAt(rs.getTimestamp("reviews_item.created_at"));
-				review.setRitUpdatedAt(rs.getTimestamp("reviews_item.updated_at"));
+				review.setReviewItemId(rs.getInt("reviews_items.review_item_id"));
+				review.setReviewItem1(rs.getString("reviews_items.review_item1"));
+				review.setReviewItem2(rs.getString("reviews_items.review_item2"));
+				review.setReviewItem3(rs.getString("reviews_items.review_item3"));
+				review.setReviewItem4(rs.getString("reviews_items.review_item4"));
+				review.setReviewItem5(rs.getString("reviews_items.review_item5"));
+				review.setRitCreatedAt(rs.getTimestamp("reviews_items.created_at"));
+				review.setRitUpdatedAt(rs.getTimestamp("reviews_items.updated_at"));
 				review.setReviewScoreId(rs.getInt("reviews_scores.review_score_id"));
 				review.setReviewItem1Score(rs.getInt("reviews_scores.review_item1_score"));
 				review.setReviewItem2Score(rs.getInt("reviews_scores.review_item2_score"));
@@ -1658,15 +1677,14 @@ public class ReviewsDAO{
 				review.setRsUpdatedAt(rs.getTimestamp("reviews_scores.updated_at"));
 				review.setBacknumberId(rs.getInt("backnumbers.backnumber_id"));
 				review.setBacknumberContent(rs.getString("backnumbers.backnumber_content"));
-				review.setbDeleteFlg(rs.getInt("backnumbers.delete_flg"));
 				review.setbCreatedAt(rs.getTimestamp("backnumbers.created_at"));
 				review.setbUpdatedAt(rs.getTimestamp("backnumbers.updated_at"));
-				review.setListReviewId(rs.getInt("list_reviews.list_review_id"));
 				review.setLrListId(rs.getInt("list_reviews.list_id"));
 				review.setLrCreatedAt(rs.getTimestamp("list_reviews.created_at"));
 				review.setLrUpdatedAt(rs.getTimestamp("list_reviews.updated_at"));
 				review.setUserEmail(rs.getString("users.user_email"));
 				review.setUserPassword(rs.getString("users.user_password"));
+				review.setUserName(rs.getString("users.user_id"));
 				review.setUserName(rs.getString("users.user_name"));
 				review.setUserImg(rs.getString("users.user_img"));
 				review.setuPrivacyFlg(rs.getInt("users.privacy_flg"));
@@ -1702,7 +1720,7 @@ public class ReviewsDAO{
 
 	//評価降順検索
 	public ArrayList<Review> descEvaSearch(int userId, String freeWord, int priceA, int priceB, int evaA, int evaB, Timestamp createdA, Timestamp createdB) {
-		Review review = null;
+
 		ArrayList<Review> list = new ArrayList<>();
 		Connection conn = null;
 
@@ -1722,21 +1740,21 @@ public class ReviewsDAO{
 					+ "reviews_imgs.review_img_id,reviews_imgs.review_img,reviews_imgs.delete_flg,reviews_imgs.created_at,reviews_imgs.updated_at,"
 					+ "reviews_items.review_item_id,reviews_items.review_item1,reviews_items.review_item2,reviews_items.review_item3,reviews_items.review_item4,reviews_items.review_item5,"
 					+ "reviews_items.created_at,reviews_items.updated_at,"
-					+ "reviews_scores.review_score_id,reviews_scores.review_item_id,"
+					+ "reviews_scores.review_score_id,"
 					+ "reviews_scores.review_item1_score,reviews_scores.review_item2_score,reviews_scores.review_item3_score,reviews_scores.review_item4_score,reviews_scores.review_item5_score,"
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
-					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
+					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at"
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at,"
 					+ "list.list_name FROM reviews "
-					+ "OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
-					+ "OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
-					+ "OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
-					+ "OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
-					+ "OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
-					+ "OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
-					+ "OUTER JOIN users ON users.user_id = reviews.user_id "
-					+ "OUTER JOIN list ON list.list_id = list_reviews.list_id "
+					+ "LEFT OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
+					+ "LEFT OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
+					+ "LEFT OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
+					+ "LEFT OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN users ON users.user_id = reviews.user_id "
+					+ "LEFT OUTER JOIN list ON list.list_id = list_reviews.list_id "
 					+ " WHERE reviews.user_id = ? AND reviews.review_price between ? AND ?, AND reviews_scores.score_avg between ? AND ?, AND reviews.created_at between ? AND ?;"
 					+ "AND"
 					+ "reviews.review_name = ?, reviews.review_comment = ?"
@@ -1761,7 +1779,7 @@ public class ReviewsDAO{
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
 			//rs.nextで表の次の行にフォーカスが合う　もう行がなければfalseが返ってきて終わり
-				review = new Review();
+				Review review = new Review();
 				review.setReviewId(rs.getInt("reviews.review_id"));
 				review.setReviewName(rs.getString("reviews.category2_id"));
 				review.setReviewName(rs.getString("reviews.review_name"));
@@ -1776,14 +1794,14 @@ public class ReviewsDAO{
 				review.setRimDeleteFlg(rs.getInt("reviews_imgs.delete_flg"));
 				review.setRimCreatedAt(rs.getTimestamp("reviews_imgs.created_at"));
 				review.setRimUpdatedAt(rs.getTimestamp("reviews_imgs.updated_at"));
-				review.setReviewItemId(rs.getInt("reviews_item.review_item_id"));
-				review.setReviewItem1(rs.getString("reviews_item.review_item1"));
-				review.setReviewItem2(rs.getString("reviews_item.review_item2"));
-				review.setReviewItem3(rs.getString("reviews_item.review_item3"));
-				review.setReviewItem4(rs.getString("reviews_item.review_item4"));
-				review.setReviewItem5(rs.getString("reviews_item.review_item5"));
-				review.setRitCreatedAt(rs.getTimestamp("reviews_item.created_at"));
-				review.setRitUpdatedAt(rs.getTimestamp("reviews_item.updated_at"));
+				review.setReviewItemId(rs.getInt("reviews_items.review_item_id"));
+				review.setReviewItem1(rs.getString("reviews_items.review_item1"));
+				review.setReviewItem2(rs.getString("reviews_items.review_item2"));
+				review.setReviewItem3(rs.getString("reviews_items.review_item3"));
+				review.setReviewItem4(rs.getString("reviews_items.review_item4"));
+				review.setReviewItem5(rs.getString("reviews_items.review_item5"));
+				review.setRitCreatedAt(rs.getTimestamp("reviews_items.created_at"));
+				review.setRitUpdatedAt(rs.getTimestamp("reviews_items.updated_at"));
 				review.setReviewScoreId(rs.getInt("reviews_scores.review_score_id"));
 				review.setReviewItem1Score(rs.getInt("reviews_scores.review_item1_score"));
 				review.setReviewItem2Score(rs.getInt("reviews_scores.review_item2_score"));
@@ -1795,15 +1813,14 @@ public class ReviewsDAO{
 				review.setRsUpdatedAt(rs.getTimestamp("reviews_scores.updated_at"));
 				review.setBacknumberId(rs.getInt("backnumbers.backnumber_id"));
 				review.setBacknumberContent(rs.getString("backnumbers.backnumber_content"));
-				review.setbDeleteFlg(rs.getInt("backnumbers.delete_flg"));
 				review.setbCreatedAt(rs.getTimestamp("backnumbers.created_at"));
 				review.setbUpdatedAt(rs.getTimestamp("backnumbers.updated_at"));
-				review.setListReviewId(rs.getInt("list_reviews.list_review_id"));
 				review.setLrListId(rs.getInt("list_reviews.list_id"));
 				review.setLrCreatedAt(rs.getTimestamp("list_reviews.created_at"));
 				review.setLrUpdatedAt(rs.getTimestamp("list_reviews.updated_at"));
 				review.setUserEmail(rs.getString("users.user_email"));
 				review.setUserPassword(rs.getString("users.user_password"));
+				review.setUserName(rs.getString("users.user_id"));
 				review.setUserName(rs.getString("users.user_name"));
 				review.setUserImg(rs.getString("users.user_img"));
 				review.setuPrivacyFlg(rs.getInt("users.privacy_flg"));
@@ -1839,7 +1856,7 @@ public class ReviewsDAO{
 
 	//五十音昇順検索
 	public ArrayList<Review> ascWordSearch(int userId, String freeWord, int priceA, int priceB, int evaA, int evaB, Timestamp createdA, Timestamp createdB) {
-		Review review = null;
+
 		ArrayList<Review> list = new ArrayList<>();
 		Connection conn = null;
 
@@ -1859,21 +1876,21 @@ public class ReviewsDAO{
 					+ "reviews_imgs.review_img_id,reviews_imgs.review_img,reviews_imgs.delete_flg,reviews_imgs.created_at,reviews_imgs.updated_at,"
 					+ "reviews_items.review_item_id,reviews_items.review_item1,reviews_items.review_item2,reviews_items.review_item3,reviews_items.review_item4,reviews_items.review_item5,"
 					+ "reviews_items.created_at,reviews_items.updated_at,"
-					+ "reviews_scores.review_score_id,reviews_scores.review_item_id,"
+					+ "reviews_scores.review_score_id,"
 					+ "reviews_scores.review_item1_score,reviews_scores.review_item2_score,reviews_scores.review_item3_score,reviews_scores.review_item4_score,reviews_scores.review_item5_score,"
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
-					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
+					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at"
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at,"
 					+ "list.list_name FROM reviews "
-					+ "OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
-					+ "OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
-					+ "OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
-					+ "OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
-					+ "OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
-					+ "OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
-					+ "OUTER JOIN users ON users.user_id = reviews.user_id "
-					+ "OUTER JOIN list ON list.list_id = list_reviews.list_id "
+					+ "LEFT OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
+					+ "LEFT OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
+					+ "LEFT OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
+					+ "LEFT OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN users ON users.user_id = reviews.user_id "
+					+ "LEFT OUTER JOIN list ON list.list_id = list_reviews.list_id "
 					+ " WHERE reviews.user_id = ? AND reviews.review_price between ? AND ?, AND reviews_scores.score_avg between ? AND ?, AND reviews.created_at between ? AND ?;"
 					+ "AND"
 					+ "reviews.review_name = ?, reviews.review_comment = ?"
@@ -1898,7 +1915,7 @@ public class ReviewsDAO{
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
 			//rs.nextで表の次の行にフォーカスが合う　もう行がなければfalseが返ってきて終わり
-				review = new Review();
+				Review review = new Review();
 				review.setReviewId(rs.getInt("reviews.review_id"));
 				review.setReviewName(rs.getString("reviews.category2_id"));
 				review.setReviewName(rs.getString("reviews.review_name"));
@@ -1913,14 +1930,14 @@ public class ReviewsDAO{
 				review.setRimDeleteFlg(rs.getInt("reviews_imgs.delete_flg"));
 				review.setRimCreatedAt(rs.getTimestamp("reviews_imgs.created_at"));
 				review.setRimUpdatedAt(rs.getTimestamp("reviews_imgs.updated_at"));
-				review.setReviewItemId(rs.getInt("reviews_item.review_item_id"));
-				review.setReviewItem1(rs.getString("reviews_item.review_item1"));
-				review.setReviewItem2(rs.getString("reviews_item.review_item2"));
-				review.setReviewItem3(rs.getString("reviews_item.review_item3"));
-				review.setReviewItem4(rs.getString("reviews_item.review_item4"));
-				review.setReviewItem5(rs.getString("reviews_item.review_item5"));
-				review.setRitCreatedAt(rs.getTimestamp("reviews_item.created_at"));
-				review.setRitUpdatedAt(rs.getTimestamp("reviews_item.updated_at"));
+				review.setReviewItemId(rs.getInt("reviews_items.review_item_id"));
+				review.setReviewItem1(rs.getString("reviews_items.review_item1"));
+				review.setReviewItem2(rs.getString("reviews_items.review_item2"));
+				review.setReviewItem3(rs.getString("reviews_items.review_item3"));
+				review.setReviewItem4(rs.getString("reviews_items.review_item4"));
+				review.setReviewItem5(rs.getString("reviews_items.review_item5"));
+				review.setRitCreatedAt(rs.getTimestamp("reviews_items.created_at"));
+				review.setRitUpdatedAt(rs.getTimestamp("reviews_items.updated_at"));
 				review.setReviewScoreId(rs.getInt("reviews_scores.review_score_id"));
 				review.setReviewItem1Score(rs.getInt("reviews_scores.review_item1_score"));
 				review.setReviewItem2Score(rs.getInt("reviews_scores.review_item2_score"));
@@ -1932,15 +1949,14 @@ public class ReviewsDAO{
 				review.setRsUpdatedAt(rs.getTimestamp("reviews_scores.updated_at"));
 				review.setBacknumberId(rs.getInt("backnumbers.backnumber_id"));
 				review.setBacknumberContent(rs.getString("backnumbers.backnumber_content"));
-				review.setbDeleteFlg(rs.getInt("backnumbers.delete_flg"));
 				review.setbCreatedAt(rs.getTimestamp("backnumbers.created_at"));
 				review.setbUpdatedAt(rs.getTimestamp("backnumbers.updated_at"));
-				review.setListReviewId(rs.getInt("list_reviews.list_review_id"));
 				review.setLrListId(rs.getInt("list_reviews.list_id"));
 				review.setLrCreatedAt(rs.getTimestamp("list_reviews.created_at"));
 				review.setLrUpdatedAt(rs.getTimestamp("list_reviews.updated_at"));
 				review.setUserEmail(rs.getString("users.user_email"));
 				review.setUserPassword(rs.getString("users.user_password"));
+				review.setUserName(rs.getString("users.user_id"));
 				review.setUserName(rs.getString("users.user_name"));
 				review.setUserImg(rs.getString("users.user_img"));
 				review.setuPrivacyFlg(rs.getInt("users.privacy_flg"));
@@ -1976,7 +1992,7 @@ public class ReviewsDAO{
 
 	//五十音降順検索
 	public ArrayList<Review> descWordSearch(int userId, String freeWord, int priceA, int priceB, int evaA, int evaB, Timestamp createdA, Timestamp createdB) {
-		Review review = null;
+
 		ArrayList<Review> list = new ArrayList<>();
 		Connection conn = null;
 
@@ -1996,21 +2012,21 @@ public class ReviewsDAO{
 					+ "reviews_imgs.review_img_id,reviews_imgs.review_img,reviews_imgs.delete_flg,reviews_imgs.created_at,reviews_imgs.updated_at,"
 					+ "reviews_items.review_item_id,reviews_items.review_item1,reviews_items.review_item2,reviews_items.review_item3,reviews_items.review_item4,reviews_items.review_item5,"
 					+ "reviews_items.created_at,reviews_items.updated_at,"
-					+ "reviews_scores.review_score_id,reviews_scores.review_item_id,"
+					+ "reviews_scores.review_score_id,"
 					+ "reviews_scores.review_item1_score,reviews_scores.review_item2_score,reviews_scores.review_item3_score,reviews_scores.review_item4_score,reviews_scores.review_item5_score,"
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
-					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
+					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at"
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at,"
 					+ "list.list_name FROM reviews "
-					+ "OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
-					+ "OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
-					+ "OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
-					+ "OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
-					+ "OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
-					+ "OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
-					+ "OUTER JOIN users ON users.user_id = reviews.user_id "
-					+ "OUTER JOIN list ON list.list_id = list_reviews.list_id "
+					+ "LEFT OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
+					+ "LEFT OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
+					+ "LEFT OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
+					+ "LEFT OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
+					+ "LEFT OUTER JOIN users ON users.user_id = reviews.user_id "
+					+ "LEFT OUTER JOIN list ON list.list_id = list_reviews.list_id "
 					+ " WHERE reviews.user_id = ? AND reviews.review_price between ? AND ?, AND reviews_scores.score_avg between ? AND ?, AND reviews.created_at between ? AND ?;"
 					+ "AND"
 					+ "reviews.review_name = ?, reviews.review_comment = ?"
@@ -2035,7 +2051,7 @@ public class ReviewsDAO{
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
 			//rs.nextで表の次の行にフォーカスが合う　もう行がなければfalseが返ってきて終わり
-				review = new Review();
+				Review review = new Review();
 				review.setReviewId(rs.getInt("reviews.review_id"));
 				review.setReviewName(rs.getString("reviews.category2_id"));
 				review.setReviewName(rs.getString("reviews.review_name"));
@@ -2050,14 +2066,14 @@ public class ReviewsDAO{
 				review.setRimDeleteFlg(rs.getInt("reviews_imgs.delete_flg"));
 				review.setRimCreatedAt(rs.getTimestamp("reviews_imgs.created_at"));
 				review.setRimUpdatedAt(rs.getTimestamp("reviews_imgs.updated_at"));
-				review.setReviewItemId(rs.getInt("reviews_item.review_item_id"));
-				review.setReviewItem1(rs.getString("reviews_item.review_item1"));
-				review.setReviewItem2(rs.getString("reviews_item.review_item2"));
-				review.setReviewItem3(rs.getString("reviews_item.review_item3"));
-				review.setReviewItem4(rs.getString("reviews_item.review_item4"));
-				review.setReviewItem5(rs.getString("reviews_item.review_item5"));
-				review.setRitCreatedAt(rs.getTimestamp("reviews_item.created_at"));
-				review.setRitUpdatedAt(rs.getTimestamp("reviews_item.updated_at"));
+				review.setReviewItemId(rs.getInt("reviews_items.review_item_id"));
+				review.setReviewItem1(rs.getString("reviews_items.review_item1"));
+				review.setReviewItem2(rs.getString("reviews_items.review_item2"));
+				review.setReviewItem3(rs.getString("reviews_items.review_item3"));
+				review.setReviewItem4(rs.getString("reviews_items.review_item4"));
+				review.setReviewItem5(rs.getString("reviews_items.review_item5"));
+				review.setRitCreatedAt(rs.getTimestamp("reviews_items.created_at"));
+				review.setRitUpdatedAt(rs.getTimestamp("reviews_items.updated_at"));
 				review.setReviewScoreId(rs.getInt("reviews_scores.review_score_id"));
 				review.setReviewItem1Score(rs.getInt("reviews_scores.review_item1_score"));
 				review.setReviewItem2Score(rs.getInt("reviews_scores.review_item2_score"));
@@ -2069,15 +2085,14 @@ public class ReviewsDAO{
 				review.setRsUpdatedAt(rs.getTimestamp("reviews_scores.updated_at"));
 				review.setBacknumberId(rs.getInt("backnumbers.backnumber_id"));
 				review.setBacknumberContent(rs.getString("backnumbers.backnumber_content"));
-				review.setbDeleteFlg(rs.getInt("backnumbers.delete_flg"));
 				review.setbCreatedAt(rs.getTimestamp("backnumbers.created_at"));
 				review.setbUpdatedAt(rs.getTimestamp("backnumbers.updated_at"));
-				review.setListReviewId(rs.getInt("list_reviews.list_review_id"));
 				review.setLrListId(rs.getInt("list_reviews.list_id"));
 				review.setLrCreatedAt(rs.getTimestamp("list_reviews.created_at"));
 				review.setLrUpdatedAt(rs.getTimestamp("list_reviews.updated_at"));
 				review.setUserEmail(rs.getString("users.user_email"));
 				review.setUserPassword(rs.getString("users.user_password"));
+				review.setUserName(rs.getString("users.user_id"));
 				review.setUserName(rs.getString("users.user_name"));
 				review.setUserImg(rs.getString("users.user_img"));
 				review.setuPrivacyFlg(rs.getInt("users.privacy_flg"));

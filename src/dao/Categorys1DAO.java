@@ -76,10 +76,10 @@ public ArrayList<Category> AllSelectCategory() {
 			Class.forName("org.h2.Driver");
 
 			//DB接続に接続
-			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4DB");
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4db","sa","");
 
 			//SELECT文の準備
-			String sql = "SELECT categorys1.category1_id,categorys1.category1_name"
+			String sql = "SELECT categorys1.category1_id,categorys1.category1_name,"
 					+ "categorys2.category2_id,categorys2.category2_name FROM categorys1 "
 					+ "JOIN categorys2 ON categorys1.category1_id = categorys2.category1_id";
 

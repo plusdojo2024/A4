@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -118,14 +119,14 @@ input[name="tab_item"] {
 			<div class="container">
 				<div class="scroll">
 					<div class="flex-container">
-
+						<c:forEach var="e" items="${list}" >
 						<div class="flex-item">
 							<div class="item_img">
 								<img src="/A4/img/myicon.jpg" width="100" height="100"
 									alt="マイアイコン">
 							</div>
 							<div class="grid_item2">
-								<h1>子要素1</h1>
+								<h1>${e.reviewName}</h1>
 								<p class="item_text">テキスト</p>
 								<p class="item_text">テキスト</p>
 							</div>
@@ -144,6 +145,8 @@ input[name="tab_item"] {
 								</div>
 							</div>
 						</div>
+						</c:forEach>
+
 						<div class="flex-item">
 							<div class="item_img">
 								<img src="/A4/img/myicon.jpg" width="100" height="100"
