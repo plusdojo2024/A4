@@ -5,11 +5,12 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import model.User;
 
 //userテーブルとやり取りをするクラス
-public class UsersDao {
+public class UsersDAO {
 
 	public User UserLogin(String email , String password) {
 		User user = null;
@@ -82,7 +83,7 @@ public class UsersDao {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4db", "sa", "");
 
 			// SELECT文を準備する
-			String sql = "SELECT COUNT(*) FROM user WHERE email = ? AND password = ?";
+			String sql = "SELECT COUNT(*) FROM users WHERE user_email = ? AND user_password = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, email);
 			pStmt.setString(2,password);
@@ -120,9 +121,9 @@ public class UsersDao {
 		// 結果を返す
 		return loginResult;
 	}
-	
-	
-	
+
+
+
 	//ユーザーを新規追加
 	public int insert(String newEmail, String newPassword, String newName,String img) {
 		Connection conn = null;
@@ -132,7 +133,7 @@ public class UsersDao {
 			Class.forName("org.h2.Driver");
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4db", "sa", "");
 
-			String sql = "INSERT INTO User (USER_EMAIL, USER_PASSWORD, USER_NAME, USER_IMG, PRIVACY_FLG) VALUES (?, ?, ?, ?, 1)";
+			String sql = "INSERT INTO users (USER_EMAIL, USER_PASSWORD, USER_NAME, USER_IMG, PRIVACY_FLG) VALUES (?, ?, ?, ?, 1)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
@@ -165,7 +166,7 @@ public class UsersDao {
 		// 結果を返す
 		return num;
 	}
-	
+
 	//ユーザーネームを出す
 //	public ArrayList<User> showName(int myId) {
 //		Connection conn = null;
@@ -176,7 +177,7 @@ public class UsersDao {
 //
 //			String sql = "SELECT user_name FROM Users WHERE user_id = ?";
 //			PreparedStatement pStmt = conn.prepareStatement(sql);
-//			pStmt.setInt(1, myId);							
+//			pStmt.setInt(1, myId);
 //			ResultSet rs = pStmt.executeQuery();
 //
 //			// 結果表をコレクションにコピーする
@@ -184,7 +185,7 @@ public class UsersDao {
 //				//セッターを使った書き方
 //				User record = new User();
 //				record.setUserName(rs.getString("user_name"));
-//				list.add(record);			
+//				list.add(record);
 //				}
 //		}
 //		catch (SQLException e) {
@@ -209,17 +210,17 @@ public class UsersDao {
 //		}
 //		return list;
 //	}
-//	
+//
 	//ユーザーネームを変更する
 	public int nameUpdate(String myName, int myId) {
 		Connection conn = null;
 		int num = 0;
-		
+
 		try {
 			Class.forName("org.h2.Driver");
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4db", "sa", "");
 
-			String sql = "UPDATE Users SET user_name=? WHERE user_id = ?";
+			String sql = "UPDATE users SET user_name=? WHERE user_id = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			pStmt.setString(1, myName);
@@ -245,7 +246,7 @@ public class UsersDao {
 		}
 		return num;
 	}
-	
+
 	//自分のアイコンの画像を出す
 //	public ArrayList<User> showIcon(int myId) {
 //		Connection conn = null;
@@ -256,7 +257,7 @@ public class UsersDao {
 //
 //			String sql = "SELECT user_img FROM Users WHERE user_id = ?";
 //			PreparedStatement pStmt = conn.prepareStatement(sql);
-//			pStmt.setInt(1, myId);							
+//			pStmt.setInt(1, myId);
 //			ResultSet rs = pStmt.executeQuery();
 //
 //			// 結果表をコレクションにコピーする
@@ -264,7 +265,7 @@ public class UsersDao {
 //				//セッターを使った書き方
 //				User record = new User();
 //				record.setUserImg(rs.getString("user_img"));
-//				list.add(record);			
+//				list.add(record);
 //				}
 //		}
 //		catch (SQLException e) {
@@ -289,7 +290,7 @@ public class UsersDao {
 //		}
 //		return list;
 //	}
-	
+
 	//アイコンの変更
 	public int iconUpdate(int myId, String newIcon) {
 		Connection conn = null;
@@ -299,7 +300,7 @@ public class UsersDao {
 			Class.forName("org.h2.Driver");
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4db", "sa", "");
 
-			String sql = "UPDATE User SET user_img = ? WHERE user_id = ?" ;
+			String sql = "UPDATE users SET user_img = ? WHERE user_id = ?" ;
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			pStmt.setString(1, newIcon);//newIconに画像の絶対パスを入れる
@@ -325,7 +326,7 @@ public class UsersDao {
 		}
 		return num;
 	}
-	
+
 	//公開非公開を出す
 //	public ArrayList<User> showPri(int myId) {
 //		Connection conn = null;
@@ -336,15 +337,15 @@ public class UsersDao {
 //
 //			String sql = "SELECT privacy_flg FROM Users WHERE user_id = ?";
 //			PreparedStatement pStmt = conn.prepareStatement(sql);
-//			pStmt.setInt(1, myId);							
+//			pStmt.setInt(1, myId);
 //			ResultSet rs = pStmt.executeQuery();
 //
 //			// 結果表をコレクションにコピーする
 //			while (rs.next()) {
 //				//セッターを使った書き方
 //				User record = new User();
-//				record.setuPrivacyFlg(rs.getInt("privacy_flg"));				
-//				list.add(record);			
+//				record.setuPrivacyFlg(rs.getInt("privacy_flg"));
+//				list.add(record);
 //				}
 //		}
 //		catch (SQLException e) {
@@ -369,7 +370,7 @@ public class UsersDao {
 //		}
 //		return list;
 //	}
-	
+
 	//公開非公開の切り替え
 	public int priUpdate(int myPri, int myId) {
 		Connection conn = null;
@@ -379,7 +380,7 @@ public class UsersDao {
 			Class.forName("org.h2.Driver");
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4db", "sa", "");
 
-			String sql = "UPDATE User SET privacy_flg = ? WHERE user_id = ?";
+			String sql = "UPDATE users SET privacy_flg = ? WHERE user_id = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			pStmt.setInt(1, myPri);//myPriに0か1を入れてくる
@@ -405,4 +406,94 @@ public class UsersDao {
 		return num;
 	}
 
+	//すべてのユーザーのユーザーID、ユーザーネーム、アイコン画像を格納
+	public ArrayList<User> view() {
+		Connection conn = null;
+		ArrayList<User> list = new ArrayList<User>();
+		try {
+			Class.forName("org.h2.Driver");
+			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4db","sa","");
+
+			String sql = "SELECT user_id, user_name, user_img FROM users WHERE privacy_flg = 1";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+			while (rs.next()) {
+				//セッターを使った書き方
+				User user = new User();
+				user.setUserId(rs.getInt("user_id"));
+				user.setUserName(rs.getString("user_name"));
+				user.setUserImg(rs.getString("user_img"));
+				list.add(user);
+				}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			list = null;
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			list = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					list = null;
+				}
+			}
+		}
+		return list;
+	}
+
+	//フリーワード検索をしたときのユーザーID、ユーザーネーム、ユーザー画像を格納する
+	public ArrayList<User> search(String freeWord) {
+		Connection conn = null;
+		ArrayList<User> list = new ArrayList<User>();
+		try {
+			Class.forName("org.h2.Driver");
+			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4db","sa","");
+
+			String sql = "SELECT user_id, user_name, user_img FROM users WHERE user_name = ? AND privacy_flg = 1";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, "%"+freeWord+"%");
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+			while (rs.next()) {
+				//セッターを使った書き方
+				User user = new User();
+				user.setUserId(rs.getInt("user_id"));
+				user.setUserName(rs.getString("user_name"));
+				user.setUserImg(rs.getString("user_img"));
+				list.add(user);
+				}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			list = null;
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			list = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					list = null;
+				}
+			}
+		}
+		return list;
+	}
 }

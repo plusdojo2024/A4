@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.UsersDao;
+import dao.UsersDAO;
+import model.User;
 
 @WebServlet("/LoginServlet")//ここを変える
 public class LoginServlet extends HttpServlet {
@@ -33,10 +34,14 @@ public class LoginServlet extends HttpServlet {
 		String userPassword = request.getParameter("password");
 
 		// UsersDao をインスタンス化
-		UsersDao usersDao = new UsersDao();
-		boolean boo = usersDao.isLoginOK(userEmail, userPassword);
+		UsersDAO uDao = new UsersDAO();
+		boolean boo = uDao.isLoginOK(userEmail, userPassword);
 		if (boo) {
-			usersDao.UserLogin(userEmail , userPassword);
+
+			//ログインした時の情報をもとに、ユーザーのメールアドレス、ユーザーネーム、ユーザーIDを取得
+			User u = uDao.UserLogin(userEmail , userPassword);
+
+			request.setAttribute("user", u);
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/my_review.jsp");
 			dispatcher.forward(request, response);
@@ -44,7 +49,7 @@ public class LoginServlet extends HttpServlet {
 		} else {
             String message = "ログイン失敗";
             request.setAttribute("message", message);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/new_login.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
 			dispatcher.forward(request, response);
 		}
 	}

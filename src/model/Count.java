@@ -4,14 +4,23 @@ import java.io.Serializable;
 public class Count implements Serializable {
 
 	//Usersテーブル
-	private int wholeCount;				//全体検索数（すべて）「
+	private int reviewSearchCount;				//レビューの全体検索数
+	private int userSearchCount;
 
-	public int getWholeCount() {
-		return wholeCount;
+	public int getReviewSearchCount() {
+		return reviewSearchCount;
 	}
 
-	public void setWholeCount(int wholeCount) {
-		this.wholeCount = wholeCount;
+	public void setReviewSearchCount(int sum) {
+		this.reviewSearchCount = sum;
+	}
+
+	public int getUserSearchCount() {
+		return userSearchCount;
+	}
+
+	public void setUserSearchCount(int sum) {
+		this.userSearchCount = sum;
 	}
 }
 

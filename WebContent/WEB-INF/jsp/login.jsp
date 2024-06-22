@@ -15,7 +15,7 @@
 		</div>
 		<div class="login">
 			<div class="input-group">
-			<form method="post" action="/A4/MyReviewServlet">
+			<form method="post" action="/A4/LoginServlet">
 				<input type="email" id="email" name="email" placeholder="メールアドレス">
 				<div class="input-group">
 					<input type="password" id="password" name="password" placeholder="パスワード">
