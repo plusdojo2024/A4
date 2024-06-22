@@ -66,7 +66,10 @@ input[name="tab_item"] {
 </style>
 </head>
 <body>
-
+<header>
+	<h1 class ="headline">
+    <a href="MyReviewServlet"><img src="/A4/img/logo.png" width="100" height="100" alt="A review"></a>
+	</h1>
 	<div class="tabs">
 		<input id="all" type="radio" name="tab_item" checked>
 		<!-- ここからタブ -->
