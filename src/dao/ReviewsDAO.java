@@ -12,7 +12,177 @@ import model.Review;
 
 public class ReviewsDAO{
 
+	//検索のときに使う全部ランダム検索
+	public ArrayList<Review> view() {
 
+		Connection conn = null;
+		ArrayList<Review> list = new ArrayList<>();
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			String id="sa";
+			String pw="";
+
+			// データベースに接続する
+			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4DB",id,pw);
+
+			// SELECT文を準備する
+			String sql = "SELECT reviews.review_id,reviews.category2_id,reviews.review_name,reviews.review_price,reviews.review_comment,"
+					+ "reviews.privacy_flg,reviews.delete_flg,reviews.created_at,reviews.updated_at, "
+					+ "reviews_imgs.review_img_id,reviews_imgs.review_img,reviews_imgs.delete_flg,reviews_imgs.created_at,reviews_imgs.updated_at,"
+					+ "reviews_items.review_item_id,reviews_items.review_item1,reviews_items.review_item2,reviews_items.review_item3,reviews_items.review_item4,reviews_items.review_item5,"
+					+ "reviews_items.created_at,reviews_items.updated_at,"
+					+ "reviews_scores.review_score_id,reviews_scores.review_item_id,"
+					+ "reviews_scores.review_item1_score,reviews_scores.review_item2_score,reviews_scores.review_item3_score,reviews_scores.review_item4_score,reviews_scores.review_item5_score,"
+					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
+					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
+					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at"
+					+ "list.list_name FROM reviews "
+					+ "OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
+					+ "OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
+					+ "OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
+					+ "OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
+					+ "OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
+					+ "OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
+					+ "OUTER JOIN users ON users.user_id = reviews.user_id "
+					+ "OUTER JOIN list ON list.list_id = list_reviews.list_id "
+					+ "WHERE users.privacy_flg = 1 and reviews.privacy_flg =1 and reviews.delete_flg";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+			while (rs.next()) {
+			//rs.nextで表の次の行にフォーカスが合う　もう行がなければfalseが返ってきて終わり
+				Review review = new Review();
+				review.setReviewId(rs.getInt(" review_id"));
+				review.setReviewName(rs.getString(" category2_id"));
+				review.setReviewName(rs.getString(" review_name"));
+				review.setReviewPrice(rs.getInt(" review_price"));
+				review.setReviewComment(rs.getString(" review_comment"));
+				review.setrPrivacyFlg(rs.getInt(" privacy_flg"));
+				review.setrDeleteFlg(rs.getInt(" delete_flg"));
+				review.setrCreatedAt(rs.getTimestamp(" created_at"));
+				review.setrUpdatedAt(rs.getTimestamp(" updated_at"));
+
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			list = null;
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			list = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					list = null;
+				}
+			}
+		}
+
+		// 結果を返す
+		return list;
+	}
+
+	//検索ページカテゴリーごとすべて
+	public ArrayList<Review> view3(int category2Id) {
+
+		Connection conn = null;
+		ArrayList<Review> list = new ArrayList<>();
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			String id="sa";
+			String pw="";
+
+			// データベースに接続する
+			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4DB",id,pw);
+
+			// SELECT文を準備する
+			String sql = "SELECT reviews.review_id,reviews.category2_id,reviews.review_name,reviews.review_price,reviews.review_comment,"
+					+ "reviews.privacy_flg,reviews.delete_flg,reviews.created_at,reviews.updated_at, "
+					+ "reviews_imgs.review_img_id,reviews_imgs.review_img,reviews_imgs.delete_flg,reviews_imgs.created_at,reviews_imgs.updated_at,"
+					+ "reviews_items.review_item_id,reviews_items.review_item1,reviews_items.review_item2,reviews_items.review_item3,reviews_items.review_item4,reviews_items.review_item5,"
+					+ "reviews_items.created_at,reviews_items.updated_at,"
+					+ "reviews_scores.review_score_id,reviews_scores.review_item_id,"
+					+ "reviews_scores.review_item1_score,reviews_scores.review_item2_score,reviews_scores.review_item3_score,reviews_scores.review_item4_score,reviews_scores.review_item5_score,"
+					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
+					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
+					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at"
+					+ "list.list_name FROM reviews "
+					+ "OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
+					+ "OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
+					+ "OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
+					+ "OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
+					+ "OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
+					+ "OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
+					+ "OUTER JOIN users ON users.user_id = reviews.user_id "
+					+ "OUTER JOIN list ON list.list_id = list_reviews.list_id "
+					+ "WHERE users.privacy_flg = 1 and reviews.privacy_flg =1 and reviews.delete_flg and categorys2.category2_id = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			pStmt.setInt(1, category2Id);
+
+			ResultSet rs = pStmt.executeQuery();
+
+
+			// 結果表をコレクションにコピーする
+			while (rs.next()) {
+			//rs.nextで表の次の行にフォーカスが合う　もう行がなければfalseが返ってきて終わり
+				Review review = new Review();
+				review.setReviewId(rs.getInt(" review_id"));
+				review.setReviewName(rs.getString(" category2_id"));
+				review.setReviewName(rs.getString(" review_name"));
+				review.setReviewPrice(rs.getInt(" review_price"));
+				review.setReviewComment(rs.getString(" review_comment"));
+				review.setrPrivacyFlg(rs.getInt(" privacy_flg"));
+				review.setrDeleteFlg(rs.getInt(" delete_flg"));
+				review.setrCreatedAt(rs.getTimestamp(" created_at"));
+				review.setrUpdatedAt(rs.getTimestamp(" updated_at"));
+
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			list = null;
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			list = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					list = null;
+				}
+			}
+		}
+
+		// 結果を返す
+		return list;
+	}
+
+	//
 	public int selectId() {
 		int reviewId= 0;
 
@@ -73,7 +243,6 @@ public class ReviewsDAO{
 
 	//マイページレビュー一覧（すべて）
 	public ArrayList<Review> view1(int userId) {
-		Review review = null;
 		Connection conn = null;
 		ArrayList<Review> list = new ArrayList<>();
 
@@ -87,6 +256,7 @@ public class ReviewsDAO{
 			// データベースに接続する
 			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4DB",id,pw);
 
+
 			// SELECT文を準備する
 			String sql = "SELECT reviews.review_id,reviews.category2_id,reviews.review_name,reviews.review_price,reviews.review_comment,"
 					+ "reviews.privacy_flg,reviews.delete_flg,reviews.created_at,reviews.updated_at, "
@@ -98,14 +268,16 @@ public class ReviewsDAO{
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
 					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at FROM reviews "
-					+ "JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
-					+ "JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
-					+ "JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
-					+ "JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
-					+ "JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
-					+ "JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
-					+ "JOIN users ON users.user_id = reviews.user_id "
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at"
+					+ "list.list_name FROM reviews "
+					+ "OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
+					+ "OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
+					+ "OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
+					+ "OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
+					+ "OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
+					+ "OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
+					+ "OUTER JOIN users ON users.user_id = reviews.user_id "
+					+ "OUTER JOIN list ON list.list_id = list_reviews.list_id "
 			        + "WHERE reviews.user_id = ? "
 			        + "and reviews.delete_flg = 1";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -116,54 +288,8 @@ public class ReviewsDAO{
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
 			//rs.nextで表の次の行にフォーカスが合う　もう行がなければfalseが返ってきて終わり
-				review = new Review();
-				review.setReviewId(rs.getInt("reviews.review_id"));
-				review.setReviewName(rs.getString("reviews.category2_id"));
-				review.setReviewName(rs.getString("reviews.review_name"));
-				review.setReviewPrice(rs.getInt("reviews.review_price"));
-				review.setReviewComment(rs.getString("reviews.review_comment"));
-				review.setrPrivacyFlg(rs.getInt("reviews.privacy_flg"));
-				review.setrDeleteFlg(rs.getInt("reviews.delete_flg"));
-				review.setrCreatedAt(rs.getTimestamp("reviews.created_at"));
-				review.setrUpdatedAt(rs.getTimestamp("reviews.updated_at"));
-				review.setReviewImgId(rs.getInt("reviews_imgs.review_img_id"));
-				review.setReviewImg(rs.getString("reviews_imgs.review_img"));
-				review.setRimDeleteFlg(rs.getInt("reviews_imgs.delete_flg"));
-				review.setRimCreatedAt(rs.getTimestamp("reviews_imgs.created_at"));
-				review.setRimUpdatedAt(rs.getTimestamp("reviews_imgs.updated_at"));
-				review.setReviewItemId(rs.getInt("reviews_item.review_item_id"));
-				review.setReviewItem1(rs.getString("reviews_item.review_item1"));
-				review.setReviewItem2(rs.getString("reviews_item.review_item2"));
-				review.setReviewItem3(rs.getString("reviews_item.review_item3"));
-				review.setReviewItem4(rs.getString("reviews_item.review_item4"));
-				review.setReviewItem5(rs.getString("reviews_item.review_item5"));
-				review.setRitCreatedAt(rs.getTimestamp("reviews_item.created_at"));
-				review.setRitUpdatedAt(rs.getTimestamp("reviews_item.updated_at"));
-				review.setReviewScoreId(rs.getInt("reviews_scores.review_score_id"));
-				review.setReviewItem1Score(rs.getInt("reviews_scores.review_item1_score"));
-				review.setReviewItem2Score(rs.getInt("reviews_scores.review_item2_score"));
-				review.setReviewItem3Score(rs.getInt("reviews_scores.review_item3_score"));
-				review.setReviewItem4Score(rs.getInt("reviews_scores.review_item4_score"));
-				review.setReviewItem5Score(rs.getInt("reviews_scores.review_item5_score"));
-				review.setScoreAvg(rs.getInt("reviews_scores.score_avg"));
-				review.setRsCreatedAt(rs.getTimestamp("reviews_scores.created_at"));
-				review.setRsUpdatedAt(rs.getTimestamp("reviews_scores.updated_at"));
-				review.setBacknumberId(rs.getInt("backnumbers.backnumber_id"));
-				review.setBacknumberContent(rs.getString("backnumbers.backnumber_content"));
-				review.setbDeleteFlg(rs.getInt("backnumbers.delete_flg"));
-				review.setbCreatedAt(rs.getTimestamp("backnumbers.created_at"));
-				review.setbUpdatedAt(rs.getTimestamp("backnumbers.updated_at"));
-				review.setListReviewId(rs.getInt("list_reviews.list_review_id"));
-				review.setLrListId(rs.getInt("list_reviews.list_id"));
-				review.setLrCreatedAt(rs.getTimestamp("list_reviews.created_at"));
-				review.setLrUpdatedAt(rs.getTimestamp("list_reviews.updated_at"));
-				review.setUserEmail(rs.getString("users.user_email"));
-				review.setUserPassword(rs.getString("users.user_password"));
-				review.setUserName(rs.getString("users.user_name"));
-				review.setUserImg(rs.getString("users.user_img"));
-				review.setuPrivacyFlg(rs.getInt("users.privacy_flg"));
-				review.setuCreatedAt(rs.getTimestamp("users.created_at"));
-				review.setuUpdatedAt(rs.getTimestamp("users.updated_at"));
+				Review review = new Review();
+				review.setReviewId(rs.getInt(" review_id"));
 				list.add(review);
 			}
 		}
@@ -223,14 +349,16 @@ public class ReviewsDAO{
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
 					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at FROM reviews "
-					+ "JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
-					+ "JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
-					+ "JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
-					+ "JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
-					+ "JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
-					+ "JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
-					+ "JOIN users ON users.user_id = reviews.user_id "
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at"
+					+ "list.list_name FROM reviews "
+					+ "OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
+					+ "OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
+					+ "OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
+					+ "OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
+					+ "OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
+					+ "OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
+					+ "OUTER JOIN users ON users.user_id = reviews.user_id "
+					+ "OUTER JOIN list ON list.list_id = list_reviews.list_id "
 					+ " WHERE reviews.user_id = ? "
 			        + "and reviews.delete_flg = 1";
 					if(category2Id != 0) {
@@ -362,14 +490,16 @@ public class ReviewsDAO{
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
 					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at FROM reviews "
-					+ "JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
-					+ "JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
-					+ "JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
-					+ "JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
-					+ "JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
-					+ "JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
-					+ "JOIN users ON users.user_id = reviews.user_id "
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at"
+					+ "list.list_name FROM reviews "
+					+ "OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
+					+ "OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
+					+ "OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
+					+ "OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
+					+ "OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
+					+ "OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
+					+ "OUTER JOIN users ON users.user_id = reviews.user_id "
+					+ "OUTER JOIN list ON list.list_id = list_reviews.list_id "
 					+ " WHERE list_reviews.list_id = ? "
 			        + "and reviews.delete_flg = 1";
 
@@ -464,7 +594,7 @@ public class ReviewsDAO{
 		return list;		//返ってきた結果をサーブレットに渡す(この後スコープに渡してjspに渡して表示)
 	}
 
-	//insertメソッド
+	//レビュー新規登録メソッド
 	public int insert(int category2Id,String reviewName,int reviewPrice,String reviewComment,int userId, int privacyFlg) {
 		Connection conn = null;
 		int num=0;
@@ -513,7 +643,7 @@ public class ReviewsDAO{
 		// 結果を返す
 		return num;
 	}
-
+	//レビュー削除メソッド
 	public int delete(int reviewId) {
 		int num = 0;
 		Connection conn = null;
@@ -559,6 +689,7 @@ public class ReviewsDAO{
 		return num;
 	}
 
+	//レビュー編集メソッド
 	public int update(int category2Id,String reviewName,int reviewPrice,String reviewComment,int privacyFlg,Timestamp updatedAt,int reviewId) {
 		int num = 0;
 		Connection conn = null;
@@ -638,14 +769,16 @@ public class ReviewsDAO{
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
 					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at FROM reviews "
-					+ "JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
-					+ "JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
-					+ "JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
-					+ "JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
-					+ "JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
-					+ "JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
-					+ "JOIN users ON users.user_id = reviews.user_id "
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at"
+					+ "list.list_name FROM reviews "
+					+ "OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
+					+ "OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
+					+ "OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
+					+ "OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
+					+ "OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
+					+ "OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
+					+ "OUTER JOIN users ON users.user_id = reviews.user_id "
+					+ "OUTER JOIN list ON list.list_id = list_reviews.list_id "
 					+ " WHERE reviews.review_price between ? AND ? AND reviews_scores.score_avg between ? AND ? AND reviews.created_at between ? AND ?;"
 					+ "AND"
 					+ "reviews.review_name = ? AND reviews.review_comment = ?"
@@ -772,14 +905,16 @@ public class ReviewsDAO{
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
 					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at FROM reviews "
-					+ "JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
-					+ "JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
-					+ "JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
-					+ "JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
-					+ "JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
-					+ "JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
-					+ "JOIN users ON users.user_id = reviews.user_id "
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at"
+					+ "list.list_name FROM reviews "
+					+ "OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
+					+ "OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
+					+ "OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
+					+ "OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
+					+ "OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
+					+ "OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
+					+ "OUTER JOIN users ON users.user_id = reviews.user_id "
+					+ "OUTER JOIN list ON list.list_id = list_reviews.list_id "
 					+ " WHERE reviews.review_price between ? AND ?, AND reviews_scores.score_avg between ? AND ?, AND reviews.created_at between ? AND ?;"
 					+ "AND"
 					+ "reviews.category2_id = ? AND reviews.review_name = ? AND reviews.review_comment = ?"
@@ -907,14 +1042,16 @@ public class ReviewsDAO{
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
 					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at FROM reviews "
-					+ "JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
-					+ "JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
-					+ "JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
-					+ "JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
-					+ "JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
-					+ "JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
-					+ "JOIN users ON users.user_id = reviews.user_id "
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at"
+					+ "list.list_name FROM reviews "
+					+ "OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
+					+ "OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
+					+ "OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
+					+ "OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
+					+ "OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
+					+ "OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
+					+ "OUTER JOIN users ON users.user_id = reviews.user_id "
+					+ "OUTER JOIN list ON list.list_id = list_reviews.list_id "
 					+ " WHERE reviews.user_id = ? AND reviews.review_price between ? AND ? AND reviews_scores.score_avg between ? AND ? AND reviews.created_at between ? AND ?;"
 					+ "AND"
 					+ "reviews.review_name = ? AND reviews.review_comment = ?"
@@ -1042,14 +1179,16 @@ public class ReviewsDAO{
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
 					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at FROM reviews "
-					+ "JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
-					+ "JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
-					+ "JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
-					+ "JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
-					+ "JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
-					+ "JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
-					+ "JOIN users ON users.user_id = reviews.user_id "
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at"
+					+ "list.list_name FROM reviews "
+					+ "OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
+					+ "OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
+					+ "OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
+					+ "OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
+					+ "OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
+					+ "OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
+					+ "OUTER JOIN users ON users.user_id = reviews.user_id "
+					+ "OUTER JOIN list ON list.list_id = list_reviews.list_id "
 					+ " WHERE reviews.user_id = ? AND reviews.review_price between ? AND ?, AND reviews_scores.score_avg between ? AND ?, AND reviews.created_at between ? AND ?;"
 					+ "AND"
 					+ "reviews.review_name = ? AND reviews.review_comment = ?"
@@ -1177,14 +1316,16 @@ public class ReviewsDAO{
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
 					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at FROM reviews "
-					+ "JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
-					+ "JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
-					+ "JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
-					+ "JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
-					+ "JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
-					+ "JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
-					+ "JOIN users ON users.user_id = reviews.user_id "
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at"
+					+ "list.list_name FROM reviews "
+					+ "OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
+					+ "OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
+					+ "OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
+					+ "OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
+					+ "OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
+					+ "OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
+					+ "OUTER JOIN users ON users.user_id = reviews.user_id "
+					+ "OUTER JOIN list ON list.list_id = list_reviews.list_id "
 					+ " WHERE reviews.user_id = ? AND reviews.review_price between ? AND ?, AND reviews_scores.score_avg between ? AND ?, AND reviews.created_at between ? AND ?;"
 					+ "AND"
 					+ "reviews.review_name = ? AND reviews.review_comment = ?"
@@ -1312,14 +1453,16 @@ public class ReviewsDAO{
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
 					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at FROM reviews "
-					+ "JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
-					+ "JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
-					+ "JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
-					+ "JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
-					+ "JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
-					+ "JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
-					+ "JOIN users ON users.user_id = reviews.user_id "
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at"
+					+ "list.list_name FROM reviews "
+					+ "OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
+					+ "OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
+					+ "OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
+					+ "OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
+					+ "OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
+					+ "OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
+					+ "OUTER JOIN users ON users.user_id = reviews.user_id "
+					+ "OUTER JOIN list ON list.list_id = list_reviews.list_id "
 					+ " WHERE reviews.user_id = ? AND reviews.review_price between ? AND ?, AND reviews_scores.score_avg between ? AND ?, AND reviews.created_at between ? AND ?;"
 					+ "AND"
 					+ "reviews.review_name = ?, reviews.review_comment = ?"
@@ -1447,14 +1590,16 @@ public class ReviewsDAO{
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
 					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at FROM reviews "
-					+ "JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
-					+ "JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
-					+ "JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
-					+ "JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
-					+ "JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
-					+ "JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
-					+ "JOIN users ON users.user_id = reviews.user_id "
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at"
+					+ "list.list_name FROM reviews "
+					+ "OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
+					+ "OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
+					+ "OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
+					+ "OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
+					+ "OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
+					+ "OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
+					+ "OUTER JOIN users ON users.user_id = reviews.user_id "
+					+ "OUTER JOIN list ON list.list_id = list_reviews.list_id "
 					+ " WHERE reviews.user_id = ? AND reviews.review_price between ? AND ?, AND reviews_scores.score_avg between ? AND ?, AND reviews.created_at between ? AND ?;"
 					+ "AND"
 					+ "reviews.review_name = ?, reviews.review_comment = ?"
@@ -1582,14 +1727,16 @@ public class ReviewsDAO{
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
 					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at FROM reviews "
-					+ "JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
-					+ "JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
-					+ "JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
-					+ "JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
-					+ "JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
-					+ "JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
-					+ "JOIN users ON users.user_id = reviews.user_id "
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at"
+					+ "list.list_name FROM reviews "
+					+ "OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
+					+ "OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
+					+ "OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
+					+ "OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
+					+ "OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
+					+ "OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
+					+ "OUTER JOIN users ON users.user_id = reviews.user_id "
+					+ "OUTER JOIN list ON list.list_id = list_reviews.list_id "
 					+ " WHERE reviews.user_id = ? AND reviews.review_price between ? AND ?, AND reviews_scores.score_avg between ? AND ?, AND reviews.created_at between ? AND ?;"
 					+ "AND"
 					+ "reviews.review_name = ?, reviews.review_comment = ?"
@@ -1717,14 +1864,16 @@ public class ReviewsDAO{
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
 					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at FROM reviews "
-					+ "JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
-					+ "JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
-					+ "JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
-					+ "JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
-					+ "JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
-					+ "JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
-					+ "JOIN users ON users.user_id = reviews.user_id "
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at"
+					+ "list.list_name FROM reviews "
+					+ "OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
+					+ "OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
+					+ "OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
+					+ "OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
+					+ "OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
+					+ "OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
+					+ "OUTER JOIN users ON users.user_id = reviews.user_id "
+					+ "OUTER JOIN list ON list.list_id = list_reviews.list_id "
 					+ " WHERE reviews.user_id = ? AND reviews.review_price between ? AND ?, AND reviews_scores.score_avg between ? AND ?, AND reviews.created_at between ? AND ?;"
 					+ "AND"
 					+ "reviews.review_name = ?, reviews.review_comment = ?"
@@ -1852,14 +2001,16 @@ public class ReviewsDAO{
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
 					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.delete_flg,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
-					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at FROM reviews "
-					+ "JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
-					+ "JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
-					+ "JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
-					+ "JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
-					+ "JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
-					+ "JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
-					+ "JOIN users ON users.user_id = reviews.user_id "
+					+ "users.user_email,users.user_password,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at"
+					+ "list.list_name FROM reviews "
+					+ "OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
+					+ "OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
+					+ "OUTER JOIN reviews_items ON categorys2.category2_id = reviews_items.category2_id "
+					+ "OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
+					+ "OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
+					+ "OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
+					+ "OUTER JOIN users ON users.user_id = reviews.user_id "
+					+ "OUTER JOIN list ON list.list_id = list_reviews.list_id "
 					+ " WHERE reviews.user_id = ? AND reviews.review_price between ? AND ?, AND reviews_scores.score_avg between ? AND ?, AND reviews.created_at between ? AND ?;"
 					+ "AND"
 					+ "reviews.review_name = ?, reviews.review_comment = ?"
