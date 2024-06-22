@@ -14,7 +14,7 @@
 	padding-bottom: 40px;
 	background-color: #fff;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-	width: 700px;
+	/* width: 700px; */
 	margin: 0 auto;
 }
 
@@ -68,8 +68,9 @@ input[name="tab_item"] {
 <body>
 <header>
 	<h1 class ="headline">
-    <a href="MyReviewServlet"><img src="/A4/img/logo.png" width="100" height="100" alt="A review"></a>
+   	 <a href="MyReviewServlet"><img src="/A4/img/logo.png" width="100" height="100" alt="A review"></a>
 	</h1>
+</header>
 	<div class="tabs">
 		<input id="all" type="radio" name="tab_item" checked>
 		<!-- ここからタブ -->

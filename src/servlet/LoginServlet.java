@@ -43,7 +43,7 @@ public class LoginServlet extends HttpServlet {
 
 			request.setAttribute("user", u);
 
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/my_review.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/tabSample.jsp");
 			dispatcher.forward(request, response);
 
 		} else {

@@ -67,7 +67,7 @@
   <div class="container">
   	<div class="scroll">
   	<div class="flex-container">
-  		
+
     	<div class="flex-item">
     		<div class= "item_img"><img src="/A4/img/myicon.jpg" width="100" height="100" alt="マイアイコン"></div>
     		<div class="grid_item2">
@@ -142,7 +142,7 @@
   			<a href="/">
     			<img src="/A4/img/removebg-preview.png">
     		</a>
-  		</div>		
+  		</div>
 	</div>
   </div>
 </body>
