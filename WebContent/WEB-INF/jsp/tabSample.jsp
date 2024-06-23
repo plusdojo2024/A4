@@ -6,22 +6,25 @@
 <head>
 <meta charset="UTF-8">
 <title>マイレビューぺージ</title>
+<link rel="stylesheet" href="/A4/css/list.css">
+<link rel="stylesheet" href="/A4/css/search.css">
 <link rel="stylesheet" href="/A4/css/Areview.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
 /*タブ切り替え全体のスタイル*/
 .tabs {
+
 	margin-top: 50px;
 	padding-bottom: 40px;
 	background-color: #fff;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 	/* width: 700px; */
 	margin: 0 auto;
 }
 
 /*タブのスタイル*/
 .tab_item {
-	width: calc(100%/ 3);
+	margin-top:-3.25%;
+	width: calc(70%/3);
 	height: 50px;
 	background-color: #ffc679;
 	line-height: 50px;
@@ -33,6 +36,9 @@
 	text-align: center;
 	font-weight: bold;
 	transition: all 0.2s ease;
+	position: flex;
+
+
 }
 
 .tab_item:hover {
@@ -72,13 +78,14 @@ input[name="tab_item"] {
 	</h1>
 </header>
 	<div class="tabs">
-		<input id="all" type="radio" name="tab_item" checked>
+		<input id="all" type="radio" name="tab_item" checked >
 		<!-- ここからタブ -->
-		<label class="tab_item" for="all">マイレビュー</label>
+		<label class="tab_item" for="all" style="margin-left:15%">マイレビュー</label>
 			<input id="aaa"	type="radio" name="tab_item">
 		<label class="tab_item"	for="aaa">全体検索</label>
 			<input id="bbb" type="radio" name="tab_item">
 		<label class="tab_item" for="bbb">リスト</label>
+
 
 <!-- -----------------------------マイレビュー---------------------------------------------------------- -->
 
@@ -89,8 +96,8 @@ input[name="tab_item"] {
 
 			<div id="drop-down-menu">
 				<div class="dropdown">
-					<input type="checkbox" id="submenu-toggle-2"> <label
-						for="submenu-toggle-2">ドロップダウンメニュー</label>
+					<input type="checkbox" id="submenu-toggle-2">
+					<label	for="submenu-toggle-2">ドロップダウンメニュー</label>
 					<ul class="submenu">
 						<li><a href="#">Submenu 2-1</a></li>
 						<li><a href="#">Submenu 2-2</a></li>
@@ -147,61 +154,7 @@ input[name="tab_item"] {
 						</div>
 						</c:forEach>
 
-						<div class="flex-item">
-							<div class="item_img">
-								<img src="/A4/img/myicon.jpg" width="100" height="100"
-									alt="マイアイコン">
-							</div>
-							<div class="grid_item2">
-								<h1>子要素2</h1>
-								<p class="item_text">テキスト</p>
-								<p class="item_text">テキスト</p>
-							</div>
-						</div>
-						<div class="flex-item">
-							<div class="item_img">
-								<img src="/A4/img/myicon.jpg" width="100" height="100"
-									alt="マイアイコン">
-							</div>
-							<div class="grid_item2">
-								<h1>子要素3</h1>
-								<p class="item_text">テキスト</p>
-								<p class="item_text">テキスト</p>
-							</div>
-						</div>
-						<div class="flex-item">
-							<div class="item_img">
-								<img src="/A4/img/myicon.jpg" width="100" height="100"
-									alt="マイアイコン">
-							</div>
-							<div class="grid_item2">
-								<h1>子要素4</h1>
-								<p class="item_text">テキスト</p>
-								<p class="item_text">テキスト</p>
-							</div>
-						</div>
-						<div class="flex-item">
-							<div class="item_img">
-								<img src="/A4/img/myicon.jpg" width="100" height="100"
-									alt="マイアイコン">
-							</div>
-							<div class="grid_item2">
-								<h1>子要素5</h1>
-								<p class="item_text">テキスト</p>
-								<p class="item_text">テキスト</p>
-							</div>
-						</div>
-						<div class="flex-item">
-							<div class="item_img">
-								<img src="/A4/img/myicon.jpg" width="100" height="100"
-									alt="マイアイコン">
-							</div>
-							<div class="grid_item2">
-								<h1>子要素6</h1>
-								<p class="item_text">テキスト</p>
-								<p class="item_text">テキスト</p>
-							</div>
-						</div>
+
 					</div>
 				</div>
 				<div class="side">
@@ -225,36 +178,8 @@ input[name="tab_item"] {
 		<!-- -------- -->
 
 <!-- ----------------------------------全体検索------------------------------------------- -->
-		<div class="tab_content" id="aaa_content">BBBの内容がここに入ります</div>
-<div id="drop-down-menu">
-		<div class="dropdown">
-      		<input type="checkbox" id="submenu-toggle-2">
-      		<label for="submenu-toggle-2">ドロップダウンメニュー</label>
-      		<ul class="submenu">
-        		<li><a href="#">Submenu 2-1</a></li>
-        		<li><a href="#">Submenu 2-2</a></li>
-        		<li><a href="#">Submenu 2-3</a></li>
-      		</ul>
-		</div>
-		<div class="dropdown">
-      		<input type="checkbox" id="submenu-toggle-2">
-      		<label for="submenu-toggle-2">ドロップダウンメニュー</label>
-      		<ul class="submenu">
-        		<li><a href="#">Submenu 2-1</a></li>
-        		<li><a href="#">Submenu 2-2</a></li>
-        		<li><a href="#">Submenu 2-3</a></li>
-      		</ul>
-		</div>
-		<div class="dropdown">
-      		<input type="checkbox" id="submenu-toggle-2">
-      		<label for="submenu-toggle-2">ドロップダウンメニュー</label>
-      		<ul class="submenu">
-        		<li><a href="#">Submenu 2-1</a></li>
-        		<li><a href="#">Submenu 2-2</a></li>
-        		<li><a href="#">Submenu 2-3</a></li>
-      		</ul>
-		</div>
-	</div>
+		<div class="tab_content" id="aaa_content">BBBの内容がここに入ります
+
   <div class="container">
   	<div class="scroll">
   	<div class="flex-container">
@@ -319,30 +244,33 @@ input[name="tab_item"] {
     	</div>
   	</div>
 	</div>
+	</div>
+	</div>
 
 
 <!-- ----------------------------------リスト--------------------------------------------------- -->
-		<div class="tab_content" id="bbb_content">CCCの内容がここに入ります</div>
-		<div class="container">
-		<div class="scroll">
-			<div class="flex-container">
-				<br> <br> <br>
-				<div class="flex-item">子要素1</div>
-				<div class="flex-item">子要素2</div>
-				<div class="flex-item">子要素3</div>
-				<div class="flex-item">子要素4</div>
-				<div class="flex-item">子要素5</div>
-				<div class="flex-item">子要素6</div>
+		<div class="tab_content" id="bbb_content">CCCの内容がここに入ります
+			<div class="container">
+				<div class="scroll">
+					<div class="flex-container">
+						<br> <br> <br>
+						<div class="flex-item">子要素1</div>
+						<div class="flex-item">子要素2</div>
+						<div class="flex-item">子要素3</div>
+						<div class="flex-item">子要素4</div>
+						<div class="flex-item">子要素5</div>
+						<div class="flex-item">子要素6</div>
+					</div>
+				</div>
+				<div class="bo">
+					<div class="post-btn">
+						<a href="/"> <img src="/A4/img/sinkilist.png">
+						</a>
+					</div>
+				</div>
 			</div>
 		</div>
-	<div class="bo">
-		<div class="post-btn">
-			<a href="/"> <img src="/A4/img/sinkilist.png">
-			</a>
 		</div>
-	</div>
-	</div>
 
-	</div>
 </body>
 </html>

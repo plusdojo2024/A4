@@ -18,7 +18,7 @@ div.logo {
 header {
 	display : grid;
 	grid-template-columns: 1fr 3fr 1fr;
-  	height: auto;
+  	height: 5%;
   	width: 100%;
   	padding-top: 2vh;
   	margin-bottom: 2vh;
@@ -27,6 +27,8 @@ header {
 	margin: 0 auto;
 	justify-items: center;
   	align-items: center;
+  	position: flex;
+  	z-index:1000;
 }
 
 /* ロゴの編集 */
@@ -210,12 +212,12 @@ header .headline{
   position:relative;
   display:inline-block;
   padding: 5px;
-  text-align: center;
-  &:hover{
+  text-align: center;}
+ .dropdown label:hover{
     color:#333;
     background-color:#fff;
   }
-    &::after{
+ .dropdown label:after{
     font-family: FontAwesome;
     display: inline-block;
     margin-right:5px;
@@ -225,7 +227,7 @@ header .headline{
     transform: translateY(-50%);
     font-size:11px;
   }
-}
+
 .submenu{
   margin:8px;
   padding:10px;
