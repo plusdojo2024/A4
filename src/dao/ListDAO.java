@@ -12,7 +12,7 @@ import model.List;
 //userテーブルとやり取りをするクラス
 public class ListDAO {
 
-	public int insert(String listName) {
+	public int insert(String listName, int userId) {
 		int num = 0;
 		Connection conn = null;
 
@@ -27,9 +27,10 @@ public class ListDAO {
 			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4DB",id,pw);
 
 			// SELECT文を準備する
-			String sql = "INSERT INTO list (list_name, delete_flg) VALUES (?, 1)";
+			String sql = "INSERT INTO list (list_name, user_id, delete_flg) VALUES (?, ?, 1)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, listName);//引数sqlにsetStringしてる
+			pStmt.setInt(2, userId);
 
 			// SQL文を実行し、結果表を取得する	検索して結果の表をrsに入れる構文
 			num = pStmt.executeUpdate();
@@ -71,12 +72,11 @@ public class ListDAO {
 			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4DB",id,pw);
 
 			// SELECT文を準備する
-			String sql = "UPDATE list SET delete_flg=? WHERE list_id=?";
+			String sql = "UPDATE list SET delete_flg=0 WHERE list_id=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
-			pStmt.setInt(1, 0);
-			pStmt.setInt(2, listId);//引数sqlにsetStringしてる
+			pStmt.setInt(1, listId);//引数sqlにsetStringしてる
 
 			// SQL文を実行し、結果表を取得する	検索して結果の表をrsに入れる構文
 			num = pStmt.executeUpdate();
@@ -150,8 +150,9 @@ public class ListDAO {
 		return num;
 	}
 
-	
-	public ArrayList<List> view() {
+
+	//リスト選択画面のリスト表示用のデータを格納
+	public ArrayList<List> view(int userId) {
 		List li = null;
 		ArrayList<List> list = new ArrayList<>();
 		Connection conn = null;
@@ -167,10 +168,9 @@ public class ListDAO {
 			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4DB",id,pw);
 
 			// SELECT文を準備する
-			String sql = "SELECT list.list_id,list.list_name,list.delete_flg,list.created_at,list.updated_at"
-		    + "JOIN list_reviews ON list.list_id=list_reviews.list_id";
+			String sql = "SELECT * FROM list WHERE user_id = ? AND delete_flg = 1";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setInt(1, 1);//引数sqlにsetStringしてる
+			pStmt.setInt(1, userId);//引数sqlにsetStringしてる
 
 			// SQL文を実行し、結果表を取得する	検索して結果の表をrsに入れる構文
 			ResultSet rs = pStmt.executeQuery();
@@ -180,8 +180,9 @@ public class ListDAO {
 			while (rs.next()) {
 			//rs.nextで表の次の行にフォーカスが合う　もう行がなければfalseが返ってきて終わり
 				li = new List();
-				li.setListId(rs.getInt("list.list_id"));
-				li.setListName(rs.getString("list.list_name"));
+				li.setListId(rs.getInt("list_id"));
+				li.setListName(rs.getString("list_name"));
+				li.setUserId(rs.getInt("user_id"));
 				li.setlDeleteFlg(rs.getInt("list.delete_flg"));
 				li.setlCreatedAt(rs.getTimestamp("list.created_at"));
 				li.setlUpdatedAt(rs.getTimestamp("list.updated_at"));
@@ -212,5 +213,6 @@ public class ListDAO {
 		// 結果を返す
 		return list;//返ってきた結果をサーブレットに渡す(この後スコープに渡してjspに渡して表示)
 	}
+
 
 }
