@@ -191,51 +191,10 @@ input[name="tab_item"] {
         		</div>
     		</div>
 		</div>
+		</c:forEach>
 		<!-- ↑ここまでモーダルウインドウのエリア↑ -->
-		
-    	<div class="flex-item">
-    		<div class= "item_img"><img src="/A4/img/myicon.jpg" width="100" height="100" alt="マイアイコン"></div>
-    		<div class="grid_item2">
-    			<h1>子要素2</h1>
-    			<p class= "item_text">テキスト</p>
-    			<p class= "item_text">テキスト</p>
-    		</div>
-    	</div>
-    	<div class="flex-item">
-    		<div class= "item_img"><img src="/A4/img/myicon.jpg" width="100" height="100" alt="マイアイコン"></div>
-    		<div class="grid_item2">
-    			<h1>子要素3</h1>
-    			<p class= "item_text">テキスト</p>
-    			<p class= "item_text">テキスト</p>
-    		</div>
-    	</div>
-    	<div class="flex-item">
-    		<div class= "item_img"><img src="/A4/img/myicon.jpg" width="100" height="100" alt="マイアイコン"></div>
-    		<div class="grid_item2">
-    			<h1>子要素4</h1>
-    			<p class= "item_text">テキスト</p>
-    			<p class= "item_text">テキスト</p>
-    		</div>
-    	</div>
-    	<div class="flex-item">
-    		<div class= "item_img"><img src="/A4/img/myicon.jpg" width="100" height="100" alt="マイアイコン"></div>
-    		<div class="grid_item2">
-    			<h1>子要素5</h1>
-    			<p class= "item_text">テキスト</p>
-    			<p class= "item_text">テキスト</p>
-    		</div>
-    	</div>
-    	<div class="flex-item">
-    		<div class= "item_img"><img src="/A4/img/myicon.jpg" width="100" height="100" alt="マイアイコン"></div>
-    		<div class="grid_item2">
-    			<h1>子要素6</h1>
-    			<p class= "item_text">テキスト</p>
-    			<p class= "item_text">テキスト</p>
-    		</div>
-    	</div>
   	</div>
 	</div>
-	</c:forEach>
 	<div class= "side">
   		<div class="sort">
   			<img src="/A4/img/myicon.jpg" width="100" height="100" alt="マイアイコン">
