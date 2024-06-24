@@ -109,40 +109,47 @@ input[name="tab_item"] {
 		<!-- ↑ここまでアイコンモーダルのエリア↑ -->
 
 </header>
+<!-- タブヘッダー（ここまで） -->
 
 	<h2 class="my">
 	<a>マイレビュー</a>
 	</h2>
-
+	<!-- ↓ドロップのエリア↓ -->
 	<div id="drop-down-menu">
-		<div class="dropdown">
+		<div class="dropdown all" >
+      		<input type="checkbox" id="submenu-toggle-1">
+      		<label for="submenu-toggle-1">すべて▽</label>
+      		<ul class="submenu all_submenu">
+        		<li><input type="submit" class="category" id="adult_category_1" name="search" value="すべて"></li>
+        		<li>
+        			<input type="checkbox" id="adult_category_1" name="search" value="ファッション()">
+        			<ul>
+        				<li><input type="submit" id="child_category_1" name="search" value=""></li>
+        			</ul>
+        		</li>
+        		<li><a href="#">Submenu 2-3</a></li>
+      		</ul>
+		</div>
+		<div class="dropdown follow">
       		<input type="checkbox" id="submenu-toggle-2">
-      		<label for="submenu-toggle-2">ドロップダウンメニュー</label>
-      		<ul class="submenu">
-        		<li><a href="#">Submenu 2-1</a></li>
+      		<label for="submenu-toggle-2">フォロー▽</label>
+      		<ul class="submenu follow_submenu">
+        		<li><input type="submit" name="search" value="すべて"></li>
         		<li><a href="#">Submenu 2-2</a></li>
         		<li><a href="#">Submenu 2-3</a></li>
       		</ul>
 		</div>
-		<div class="dropdown">
-      		<input type="checkbox" id="submenu-toggle-2">
-      		<label for="submenu-toggle-2">ドロップダウンメニュー</label>
-      		<ul class="submenu">
-        		<li><a href="#">Submenu 2-1</a></li>
-        		<li><a href="#">Submenu 2-2</a></li>
-        		<li><a href="#">Submenu 2-3</a></li>
-      		</ul>
-		</div>
-		<div class="dropdown">
-      		<input type="checkbox" id="submenu-toggle-2">
-      		<label for="submenu-toggle-2">ドロップダウンメニュー</label>
-      		<ul class="submenu">
+		<div class="dropdown in_review">
+      		<input type="checkbox" id="submenu-toggle-3">
+      		<label for="submenu-toggle-3">レビュー内検索▽</label>
+      		<ul class="submenu in_review_submenu">
         		<li><a href="#">Submenu 2-1</a></li>
         		<li><a href="#">Submenu 2-2</a></li>
         		<li><a href="#">Submenu 2-3</a></li>
       		</ul>
 		</div>
 	</div>
+	<!-- ↑ここまでドロップダウンのエリア↑ -->
   <div class="container">
   	<div class="scroll">
   	<div class="flex-container">
