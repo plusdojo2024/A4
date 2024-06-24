@@ -128,30 +128,6 @@ input[name="tab_item"] {
 					<div class="flex-container">
 						<c:forEach var="e" items="${list}" >
 						<div class="flex-item">
-								<button id="openiconModal">
-									<figure class="icon-circle">
-										<img src="/A4/img/myicon.jpg" width="100" height="100"
-											alt="マイアイコン">
-									</figure>
-								</button>
-								<!-- ↓アイコンモーダルのエリア↓ -->
-								<div id="myiconModal" class="icon_modal">
-									<div class="icon_modal_content">
-										<span id="closeModal">&times;</span>
-										<div class="icon_modal_box">
-											<img class="modal_myicon" src="/A4/img/myicon.jpg">
-											<div class="name_box">名前</div>
-											<div class="re_btn">ボタン</div>
-											<div class="icon_flex">
-												<div class="change">変更</div>
-												<div class="logout">
-													<a href="/A4/LoginServlet">ログアウト</a>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<!-- ↑ここまでアイコンモーダルのエリア↑ -->
 								<div class="grid_item2">
 								<h1>${e.reviewName}</h1>
 								<p class="item_text">テキスト</p>

@@ -42,7 +42,6 @@ public class MyReviewServlet extends HttpServlet {
 			response.sendRedirect("/A4/LoginServlet");
 			return;
 		}
-		System.out.println("uhelelele");
 		//ログイン後の最初のページ,アプリのロゴをクリックしたとき（自分のレビューをすべて表示する）
 		User user = (User)session.getAttribute("user");
 		int id = user.getUserId();
@@ -62,7 +61,7 @@ public class MyReviewServlet extends HttpServlet {
 		request.setAttribute("list", view1);
 		request.setAttribute("categoryList", categoryList);
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/tabSample.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/my_review.jsp");
 		dispatcher.forward(request, response);
 
 	}

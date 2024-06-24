@@ -345,7 +345,7 @@ header .headline{
 .flex-item {
   background-color:#ffffff;
   text-align: center;
-  width: 50%;
+  width: 100%;
   box-sizing: border-box;
   border: 1px solid black;
   margin: 10px;
