@@ -290,7 +290,7 @@ public class ReviewsDAO{
 			//rs.nextで表の次の行にフォーカスが合う　もう行がなければfalseが返ってきて終わり
 				Review review = new Review();
 				review.setReviewId(rs.getInt("reviews.review_id"));
-				review.setReviewName(rs.getString("reviews.category2_id"));
+				review.setCategory2Id(rs.getInt("categorys2.category2_id"));
 				review.setReviewName(rs.getString("reviews.review_name"));
 				review.setReviewPrice(rs.getInt("reviews.review_price"));
 				review.setReviewComment(rs.getString("reviews.review_comment"));
@@ -768,7 +768,7 @@ public class ReviewsDAO{
 	}
 
 	//全体検索（すべて）
-	public ArrayList<Review> wholeSearch1(String freeWord, int priceA, int priceB, int evaA, int evaB, Timestamp createdA, Timestamp createdB) {
+	public ArrayList<Review> wholeSearch1(int userId, String freeWord, int priceA, int priceB, int evaA, int evaB, Timestamp createdA, Timestamp createdB) {
 
 		ArrayList<Review> list = new ArrayList<>();
 		Connection conn = null;
@@ -903,7 +903,7 @@ public class ReviewsDAO{
 	}
 
 	//全体検索（カテゴリー別）
-	public ArrayList<Review> wholeSearch2(int category2Id, String freeWord, int priceA, int priceB, int evaA, int evaB, Timestamp createdA, Timestamp createdB) {
+	public ArrayList<Review> wholeSearch2(int userId, int category2Id, String freeWord, int priceA, int priceB, int evaA, int evaB, Timestamp createdA, Timestamp createdB) {
 
 		ArrayList<Review> list = new ArrayList<>();
 		Connection conn = null;

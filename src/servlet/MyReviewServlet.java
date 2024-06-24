@@ -258,6 +258,122 @@ public class MyReviewServlet extends HttpServlet {
 //		d4.insert(reviewsId,引数);
 		//-------------
 
+		//↓レビュー表示用
+
+
+		//J//レビュー項目表示
+		int category2Id = Integer.parseInt(request.getParameter("category2Id"));
+		int reviewId = Integer.parseInt(request.getParameter("reviewId"));
+
+		//Userビーンズをインスタンス化
+		UsersDAO uDao = new UsersDAO();
+
+		//ReviewsDAOをインスタンス化
+		ReviewsDAO rDao = new ReviewsDAO();
+
+		//ReviewItemsDAOをインスタンス化
+		ReviewsItemsDAO ritemDao = new ReviewsItemsDAO();
+
+		//ReviewScoresDAOをインスタンス化
+		ReviewsScoresDAO rscoreDao  = new ReviewsScoresDAO();
+
+		//Reviewビーンズを５個作成
+		Review review1 = new Review();
+		Review review2 = new Review();
+		Review review3 = new Review();
+		Review review4 = new Review();
+		Review review5 = new Review();
+
+		//レビュー項目１のデータを格納
+		review1 = ritemDao.viewItem1(category2Id);
+
+		//レビュー項目１スコアのデータを格納
+		rscoreDao.viewScore1(reviewId, review1);
+
+
+		//レビュー項目２のデータを格納
+		review2 = ritemDao.viewItem2(category2Id);
+
+		//レビュー項目２スコアのデータを格納
+		rscoreDao.viewScore2(reviewId, review2);
+
+		//レビュー項目３のデータを格納
+		review3 = ritemDao.viewItem3(category2Id);
+
+		//レビュー項目３スコアのデータを格納
+		rscoreDao.viewScore3(reviewId, review3);
+
+		//レビュー項目４のデータを格納
+		review1 = ritemDao.viewItem4(category2Id);
+
+		//レビュー項目４スコアのデータを格納
+		rscoreDao.viewScore4(reviewId, review4);
+
+		//レビュー項目５のデータを格納
+		review1 = ritemDao.viewItem5(category2Id);
+
+		//レビュー項目１スコアのデータを格納
+		rscoreDao.viewScore5(reviewId, review5);
+
+		//レビュー項目１、レビュー項目１スコアのデータをスコープに格納
+		request.setAttribute("review1", review1);
+		//レビュー項目２、レビュー項目２スコアのデータをスコープに格納
+	    request.setAttribute("review2", review2);
+	    //レビュー項目３、レビュー項目３スコアのデータをスコープに格納
+	    request.setAttribute("reveiw3", review3);
+	    //レビュー項目４、レビュー項目４スコアのデータをスコープに格納
+	    request.setAttribute("review4", review4);
+	    //レビュー項目５、レビュー項目５スコアのデータをスコープに格納
+	    request.setAttribute("review5", review5);
+
+	    //価格検索のテキストの内容を取得する文
+		String freeWord = request.getParameter("freeWord");
+		String stpriceA = request.getParameter("price_a");
+		int priceA = Integer.parseInt(stpriceA);
+		String stpriceB = request.getParameter("price_b");
+		int priceB = Integer.parseInt(stpriceB);
+
+		//評価検索のテキストの内容を取得する文
+		String stevaA = request.getParameter("eva_a");
+		int evaA = Integer.parseInt(stevaA);
+		String stevaB = request.getParameter("eva_b");
+		int evaB = Integer.parseInt(stevaB);
+
+		//日付検索のテキストの内容を取得する文
+		String stcreatedA = request.getParameter("created_a");
+		SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd:HH:mm:ss");
+		java.util.Date parsedDate = null;
+		try {
+		 	parsedDate = f.parse(stcreatedA);
+		} catch (ParseException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+		Timestamp createdA = new Timestamp(parsedDate.getTime());
+
+		String stcreatedB = request.getParameter("created_b");
+		try {
+		 	parsedDate = f.parse(stcreatedB);
+		} catch (ParseException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+		Timestamp createdB = new Timestamp(parsedDate.getTime());
+
+
+		//並び替え表示
+	    if (request.getParameter("asc")!=null) {
+
+	    	//昇順ボタンを押したとき
+	    	if (request.getParameter("sort1").equals("昇順")) {
+	    		if (request.getParameter("sort2").equals("五十音")) {
+	    			rDao.ascWordSearch(userId, freeWord, priceA, priceB, evaA, evaB, createdA, createdB);
+	    		}
+	    	} else {
+
+	    	}
+	    }
+
 		//JSPに処理を委譲
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/my_review.jsp");
 		dispatcher.forward(request, response);

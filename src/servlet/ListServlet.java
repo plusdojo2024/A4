@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,11 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.ListDAO;
 import dao.ListReviewsDAO;
-import dao.ReviewsDAO;
-import dao.ReviewsImgsDAO;
-import dao.ReviewsItemsDAO;
-import dao.ReviewsScoresDAO;
-import model.List;
 import model.Count;
 
 @WebServlet("/ListServlet")//ここを変える
@@ -44,15 +38,15 @@ public class ListServlet extends HttpServlet {
 
 		//リスト項目の表示
 		//セッションスコープのユーザーIDを引数として取得（方法は後で考える）
-		ArrayList<List> list = ldao.view(int userId);
+		//ArrayList<List> list = ldao.view(int userId);
 
 	    //このリストIDはどのようにして受け取ればいい？
-	    int sum = lrdao.countList(int listId);
+	    //int sum = lrdao.countList(int listId);
 
 	    //リストの数をCount.javaに格納
-	    co.setListCount(sum);
+	    //co.setListCount(sum);
 
-	    request.setAttribute("list", list);
+	    //request.setAttribute("list", list);
 	    request.setAttribute("count", co);
 
 		//JSPに処理を委譲

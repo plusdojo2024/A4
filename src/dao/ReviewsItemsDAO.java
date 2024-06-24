@@ -126,7 +126,7 @@ public class ReviewsItemsDAO {
 			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4DB",id,pw);
 
 			// SELECT文を準備する
-			String sql = "SELECT review_item1 FROM reviews_items "
+			String sql = "SELECT review_item_id, review_item1 FROM reviews_items "
 					+ "WHERE category2_id=? "
 					+ "and "
 					+ "reviews_items_id =(select  max(reviews_items_id) from reviews_items)";
@@ -141,6 +141,7 @@ public class ReviewsItemsDAO {
 			while (rs.next()) {
 			//rs.nextで表の次の行にフォーカスが合う　もう行がなければfalseが返ってきて終わり
 				review = new Review();
+				review.setReviewItemId(rs.getInt("review_item_id"));
 				review.setReviewItem1(rs.getString("review_item1"));
 			}
 		}
@@ -184,7 +185,7 @@ public class ReviewsItemsDAO {
 			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4DB",id,pw);
 
 			// SELECT文を準備する
-			String sql = "SELECT review_item2 FROM reviews_items "
+			String sql = "SELECT review_item_id, review_item2 FROM reviews_items "
 					+ "WHERE category2_id=? "
 					+ "and "
 					+ "reviews_items_id =(select  max(reviews_items_id) from reviews_items)";
@@ -199,6 +200,7 @@ public class ReviewsItemsDAO {
 			while (rs.next()) {
 			//rs.nextで表の次の行にフォーカスが合う　もう行がなければfalseが返ってきて終わり
 				review = new Review();
+				review.setReviewItemId(rs.getInt("review_item_id"));
 				review.setReviewItem2(rs.getString("review_item2"));
 			}
 		}
@@ -242,7 +244,7 @@ public class ReviewsItemsDAO {
 			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4DB",id,pw);
 
 			// SELECT文を準備する
-			String sql = "SELECT review_item3 FROM reviews_items "
+			String sql = "SELECT review_item_id, review_item3 FROM reviews_items "
 					+ "WHERE category2_id=? "
 					+ "and "
 					+ "reviews_items_id =(select  max(reviews_items_id) from reviews_items)";
@@ -257,6 +259,7 @@ public class ReviewsItemsDAO {
 			while (rs.next()) {
 			//rs.nextで表の次の行にフォーカスが合う　もう行がなければfalseが返ってきて終わり
 				review = new Review();
+				review.setReviewItemId(rs.getInt("review_item_id"));
 				review.setReviewItem3(rs.getString("review_item3"));
 			}
 		}
@@ -300,7 +303,7 @@ public class ReviewsItemsDAO {
 			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4DB",id,pw);
 
 			// SELECT文を準備する
-			String sql = "SELECT review_item4 FROM reviews_items "
+			String sql = "SELECT review_item_id, review_item4 FROM reviews_items "
 					+ "WHERE category2_id=? "
 					+ "and "
 					+ "reviews_items_id =(select  max(reviews_items_id) from reviews_items)";
@@ -315,6 +318,7 @@ public class ReviewsItemsDAO {
 			while (rs.next()) {
 			//rs.nextで表の次の行にフォーカスが合う　もう行がなければfalseが返ってきて終わり
 				review = new Review();
+				review.setReviewItemId(rs.getInt("review_item_id"));
 				review.setReviewItem4(rs.getString("review_item4"));
 			}
 		}
@@ -358,7 +362,7 @@ public class ReviewsItemsDAO {
 			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4DB",id,pw);
 
 			// SELECT文を準備する
-			String sql = "SELECT review_item5 FROM reviews_items "
+			String sql = "SELECT review_item_id, review_item5 FROM reviews_items "
 					+ "WHERE category2_id=? "
 					+ "and "
 					+ "reviews_items_id =(select  max(reviews_items_id) from reviews_items)";
@@ -373,6 +377,7 @@ public class ReviewsItemsDAO {
 			while (rs.next()) {
 			//rs.nextで表の次の行にフォーカスが合う　もう行がなければfalseが返ってきて終わり
 				review = new Review();
+				review.setReviewItemId(rs.getInt("review_item_id"));
 				review.setReviewItem5(rs.getString("review_item5"));
 			}
 		}
