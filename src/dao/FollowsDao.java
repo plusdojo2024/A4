@@ -13,7 +13,7 @@ public class FollowsDao {
 	//フォローしてる人のアイコン、なまえ、IDを持ってくる
 	public ArrayList<User> followSelect(int myId) {			 //myIdにはログインしてるユーザーIDを入れてくる
 		Connection conn = null;
-		ArrayList<User> list = new ArrayList<>(); 
+		ArrayList<User> list = new ArrayList<>();
 
 		try {
 			// JDBCドライバを読み込む
@@ -27,7 +27,8 @@ public class FollowsDao {
 			String sql = "SELECT US.user_id, US.user_name, US.user_img "//Usersテーブルのuser_id、user_name、user_imgを持ってくる
 					+ "FROM Users AS US INNER JOIN Follows AS F "		//UsersをUSに、FollowsをFに改名して内部結合
 					+ "ON F.user2_id = US.user_id "						//Followsテーブルのuser2_idとUsersテーブルのuser_idが同じになるように内部結合
-					+ "WHERE F.user1_id = ?";							//Followsのuser1_idが自分のidと一緒という条件
+					+ "WHERE F.user1_id = US.user_id and F.user1_id=?";							//Followsのuser1_idが自分のidと一緒という条件
+			System.out.println(sql);
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setInt(1, myId);							//上の?に取ってきた自分のidを入れる
 			ResultSet rs = pStmt.executeQuery();
@@ -42,11 +43,11 @@ public class FollowsDao {
 //				);
 				//セッターを使った書き方
 				User record = new User();
-				record.setUserId(rs.getInt("US.user_id"));
-				record.setUserName(rs.getString("US.user_name"));
-				record.setUserImg(rs.getString("US.user_img"));
-				
-				list.add(record);			
+				record.setUserId(rs.getInt("user_id"));
+				record.setUserName(rs.getString("user_name"));
+				record.setUserImg(rs.getString("user_img"));
+
+				list.add(record);
 				}
 		}
 		catch (SQLException e) {
@@ -71,7 +72,7 @@ public class FollowsDao {
 		}
 		return list;
 	}
-	
+
 
 	//フォローテーブルに追加する
 	public int follow(int myId, int yourId) {
@@ -110,7 +111,7 @@ public class FollowsDao {
 		}
 		return num;
 	}
-	
+
 	//フォローテーブルから削除する
 	public int delete(int flgNum) {
 		Connection conn = null;
