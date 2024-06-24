@@ -128,30 +128,71 @@ input[name="tab_item"] {
 					<div class="flex-container">
 						<c:forEach var="e" items="${list}" >
 						<div class="flex-item">
-							<div class="item_img">
-								<img src="/A4/img/myicon.jpg" width="100" height="100"
-									alt="マイアイコン">
-							</div>
-							<div class="grid_item2">
+								<button id="openiconModal">
+									<figure class="icon-circle">
+										<img src="/A4/img/myicon.jpg" width="100" height="100"
+											alt="マイアイコン">
+									</figure>
+								</button>
+								<!-- ↓アイコンモーダルのエリア↓ -->
+								<div id="myiconModal" class="icon_modal">
+									<div class="icon_modal_content">
+										<span id="closeModal">&times;</span>
+										<div class="icon_modal_box">
+											<img class="modal_myicon" src="/A4/img/myicon.jpg">
+											<div class="name_box">名前</div>
+											<div class="re_btn">ボタン</div>
+											<div class="icon_flex">
+												<div class="change">変更</div>
+												<div class="logout">
+													<a href="/A4/LoginServlet">ログアウト</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- ↑ここまでアイコンモーダルのエリア↑ -->
+								<div class="grid_item2">
 								<h1>${e.reviewName}</h1>
 								<p class="item_text">テキスト</p>
 								<p class="item_text">テキスト</p>
 							</div>
-							<!-- モーダルウインドウのエリア -->
-							<div id="modalArea" class="modalNoDisp">
-								<div class="modalWindow">
-									<!-- ここがウインドウとなります -->
-									<p>モーダルウインドウ</p>
-									<p>
-										xxx入力<br>
-										<input type="text" value="" style="width: 200px">
-									</p>
-									<p>
-										<input type="button" value="閉じる" onclick="modalClose()">
-									</p>
+							<!-- ↓モーダルウインドウのエリア↓ -->
+								<div id="myModal" class="modal">
+									<div class="modal-content">
+										<span id="closeModal">&times;</span>
+										<div class="modal_box">
+											<img class="modal_img" src="/A4/img/myicon.jpg">
+											<div class="modal_text">
+												<div class="title_box">
+													<p class="create_at">2024/06/10</p>
+													<h1 class="modal_title">青いラーメン</h1>
+												</div>
+												<div class="modal_grid">
+													<div class="modal_grid_left">
+														<table class="eva">
+															<tr>
+																<td>おいしさ</td>
+																<td>4/5</td>
+															</tr>
+														</table>
+													</div>
+													<div class="modal_grid_right">
+														<div class="up_box">
+															<div class="open_close">公開・非公開</div>
+															<div class="list">リスト追加</div>
+														</div>
+														<h1 class="avg">総合評価</h1>
+													</div>
+												</div>
+											</div>
+											<div class="remarks">備考</div>
+											<div class="back_number">バックナンバー</div>
+										</div>
+									</div>
 								</div>
+								<!-- ↑ここまでモーダルウインドウのエリア↑ -->
 							</div>
-						</div>
 						</c:forEach>
 
 
@@ -271,6 +312,45 @@ input[name="tab_item"] {
 			</div>
 		</div>
 		</div>
+		
+	<script>
+ // モーダルウィンドウとボタン、クローズアイコンの要素を取得
+    var modal = document.getElementById("myModal");
+    var btn = document.getElementById("openModal");
+    var span = document.getElementById("closeModal");
+    // ボタンがクリックされた時にモーダルを表示
+    btn.onclick = function() {
+    modal.style.display = "block";
+    }
+    // ×（クローズアイコン）がクリックされた時にモーダルを非表示
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+    // モーダルの外側をクリックした時にモーダルを非表示
+    window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+    }
+    //ここからアイコンのモーダル
+    var icon_modal = document.getElementById("myiconModal");
+    var icon_btn = document.getElementById("openiconModal");
+    var icon_span = document.getElementById("closeiconModal");
+    // ボタンがクリックされた時にモーダルを表示
+    icon_btn.onclick = function() {
+    modal.style.display = "block";
+    }
+    // ×（クローズアイコン）がクリックされた時にモーダルを非表示
+    icon_span.onclick = function() {
+        modal.style.display = "none";
+    }
+    // モーダルの外側をクリックした時にモーダルを非表示
+    window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+    }
+    </script>
 
 </body>
 </html>
