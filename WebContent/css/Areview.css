@@ -268,7 +268,8 @@ header .headline{
   font-size: 20px;
   width: 800px;
   background-color:#ffc679;
-  border-radius: 10px;;
+  border-radius: 10px;
+  position:relative;
 }
 
 /* 検索表題 */
@@ -285,11 +286,20 @@ header .headline{
   cursor: pointer;
 }
 
-.dropdown .submenu {
-  display: none;
+/* すべてを押したときの動作 */
+.all input[type="checkbox"]:checked + label[for="submenu-toggle-1"] + .all_submenu {
+  display: block;
+  width: auto;
 }
 
-.dropdown input[type="checkbox"]:checked + label + .submenu {
+/* フォローを押したときの動作 */
+.follow input[type="checkbox"]:checked + label[for="submenu-toggle-2"] + .follow_submenu {
+  display: block;
+  width: auto;
+}
+
+/* レビュー内を押したときの動作 */
+.in_review input[type="checkbox"]:checked + label[for="submenu-toggle-3"] + .in_review_submenu {
   display: block;
   width: auto;
 }
@@ -298,37 +308,66 @@ header .headline{
   color:#333;
   text-decoration:none;
 }
+
+.category{
+	display: block;
+    padding: 7px;
+    text-decoration: none;
+    color: #545454;
+}
+
 .dropdown a:hover{
   color:#333;
   text-decoration:none;
 }
-.dropdown label{
-  position:relative;
-  display:inline-block;
-  padding: 5px;
-  text-align: center;}
- .dropdown label:hover{
-    color:#333;
-    background-color:#fff;
-  }
- .dropdown label:after{
-    font-family: FontAwesome;
-    display: inline-block;
-    margin-right:5px;
-    position: absolute;
-    right:10px;
-    top:50%;
-    transform: translateY(-50%);
-    font-size:11px;
-  }
 
-.submenu{
-  margin:8px;
-  padding:10px;
-  border:1px solid #333;
-  list-style:none;
+/* すべて用サブメニュー */
+.all_submenu{
+  display: none;
+    position: absolute;
+    background-color: #FFF;
+    width: 170px;
+    font-size: 1em;
+    text-align: left;
+    box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.2);
+    padding: 0px  10px 0px  10px;
+    z-index: 1;
+    top: 30px;
+    margin-left: 40px;
+    list-style: none;
 }
 
+/* follow用サブメニュー */
+.follow_submenu{
+  display: none;
+    position: absolute;
+    background-color: #FFF;
+    width: 170px;
+    font-size: 1em;
+    text-align: left;
+    box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.2);
+    padding: 0px  10px 0px  10px;
+    z-index: 1;
+    top: 30px;
+    margin-left: 40px;
+    list-style: none;
+}
+
+/* レビュー用サブメニュー */
+.in_review_submenu {
+  display: none;
+    position: absolute;
+    background-color: #FFF;
+    width: 170px;
+    font-size: 1em;
+    text-align: left;
+    box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.2);
+    padding: 0px  10px 0px  10px;
+    z-index: 1;
+    top: 30px;
+    margin-left: 50px;
+    list-style: none;
+}
 
 
 /*===
@@ -358,6 +397,20 @@ header .headline{
   grid-template-columns: 1fr 2fr;
   grid-template-rows: 1fr;
   gap : 3vw;
+}
+.submenu li {
+	border-bottom: 1px solid #545454;
+}
+
+.submenu li:last-child {
+	border-bottom: none;
+}
+
+.submenu li a {
+	display: block;
+    padding: 7px;
+    text-decoration: none;
+    color: #545454;
 }
 
 /* レビューのテキスト */
