@@ -258,12 +258,44 @@ public class MyReviewServlet extends HttpServlet {
 //		d4.insert(reviewsId,引数);
 		//-------------
 
+		//価格検索のテキストの内容を取得する文
+		int category2Id = Integer.parseInt(request.getParameter("category"));
+		String freeWord = request.getParameter("freeWord");
+		String stpriceA = request.getParameter("price_a");
+		int priceA = Integer.parseInt(stpriceA);
+		String stpriceB = request.getParameter("price_b");
+		int priceB = Integer.parseInt(stpriceB);
+
+		//評価検索のテキストの内容を取得する文
+		String stevaA = request.getParameter("eva_a");
+		int evaA = Integer.parseInt(stevaA);
+		String stevaB = request.getParameter("eva_b");
+		int evaB = Integer.parseInt(stevaB);
+
+		//日付検索のテキストの内容を取得する文
+		String stcreatedA = request.getParameter("created_a");
+		SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd:HH:mm:ss");
+		java.util.Date parsedDate = null;
+		try {
+		 	parsedDate = f.parse(stcreatedA);
+		} catch (ParseException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+		Timestamp createdA = new Timestamp(parsedDate.getTime());
+
+		String stcreatedB = request.getParameter("created_b");
+		try {
+		 	parsedDate = f.parse(stcreatedB);
+		} catch (ParseException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+		Timestamp createdB = new Timestamp(parsedDate.getTime());
+
+
 		//↓レビュー表示用
 
-
-		//J//レビュー項目表示
-		int category2Id = Integer.parseInt(request.getParameter("category2Id"));
-		int reviewId = Integer.parseInt(request.getParameter("reviewId"));
 
 		//Userビーンズをインスタンス化
 		UsersDAO uDao = new UsersDAO();
@@ -326,53 +358,343 @@ public class MyReviewServlet extends HttpServlet {
 	    //レビュー項目５、レビュー項目５スコアのデータをスコープに格納
 	    request.setAttribute("review5", review5);
 
-	    //価格検索のテキストの内容を取得する文
-		String freeWord = request.getParameter("freeWord");
-		String stpriceA = request.getParameter("price_a");
-		int priceA = Integer.parseInt(stpriceA);
-		String stpriceB = request.getParameter("price_b");
-		int priceB = Integer.parseInt(stpriceB);
+	    //ログイン時に受け取ったユーザー情報を取得する
+	    User user = (User)session.getAttribute("user");
 
-		//評価検索のテキストの内容を取得する文
-		String stevaA = request.getParameter("eva_a");
-		int evaA = Integer.parseInt(stevaA);
-		String stevaB = request.getParameter("eva_b");
-		int evaB = Integer.parseInt(stevaB);
+		//↓全体検索画面のレビュー表示について
 
-		//日付検索のテキストの内容を取得する文
-		String stcreatedA = request.getParameter("created_a");
-		SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd:HH:mm:ss");
-		java.util.Date parsedDate = null;
-		try {
-		 	parsedDate = f.parse(stcreatedA);
-		} catch (ParseException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
-		Timestamp createdA = new Timestamp(parsedDate.getTime());
+	    if (request.getParameter("categoryId") != null) {
 
-		String stcreatedB = request.getParameter("created_b");
-		try {
-		 	parsedDate = f.parse(stcreatedB);
-		} catch (ParseException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
-		Timestamp createdB = new Timestamp(parsedDate.getTime());
+	    }
 
 
-		//並び替え表示
-	    if (request.getParameter("asc")!=null) {
 
-	    	//昇順ボタンを押したとき
+	    //「すべて」を選択した場合
+		if (request.getParameter("categoryId").equals("すべて")) {
+
+			//昇順ボタンを押したとき
 	    	if (request.getParameter("sort1").equals("昇順")) {
+
+	    		//五十音を押したとき
 	    		if (request.getParameter("sort2").equals("五十音")) {
-	    			rDao.ascWordSearch(userId, freeWord, priceA, priceB, evaA, evaB, createdA, createdB);
+
+	    			//検索ボタンを押したとき
+	    			if (request.getParameter("search") != null) {
+	    				ArrayList<Review> rlist = rDao.ascWordSearch(user.getUserId(), freeWord, priceA, priceB, evaA, evaB, createdA, createdB);
+
+	    				//スコープに格納
+	    				request.setAttribute("rlist", rlist);
+
+	    			//「すべて」「昇順」「五十音」にならべる
+	    			} else {
+	    				ArrayList<Review> rlist = rDao.ascWordView(user.getUserId());
+
+	    				//スコープに格納
+	    				request.setAttribute("rlist", rlist);
+	    			}
 	    		}
+
+	    		//価格を押したとき
+	    		if (request.getParameter("sort2").equals("価格")) {
+
+	    			//検索ボタンを押したとき
+	    			if (request.getParameter("search") != null) {
+	    				ArrayList<Review> rlist = rDao.ascPriceSearch(user.getUserId(), freeWord, priceA, priceB, evaA, evaB, createdA, createdB);
+
+	    				//スコープに格納
+	    				request.setAttribute("rlist", rlist);
+
+	    			//「すべて」「昇順」「価格」にならべる
+	    			} else {
+	    				ArrayList<Review> rlist = rDao.ascPriceView(user.getUserId());
+
+	    				//スコープに格納
+	    				request.setAttribute("rlist", rlist);
+	    			}
+ 	    		}
+
+	    		//更新日を押したとき
+	    		if (request.getParameter("sort2").equals("更新日")) {
+
+	    			//検索ボタンを押したとき
+	    			if (request.getParameter("search") != null) {
+	    				ArrayList<Review> rlist = rDao.ascDateSearch(user.getUserId(), freeWord, priceA, priceB, evaA, evaB, createdA, createdB);
+
+	    				//スコープに格納
+	    				request.setAttribute("rlist", rlist);
+
+	    			//「すべて」「昇順」「更新日」にならべる
+	    			} else {
+	    				ArrayList<Review> rlist = rDao.ascDateView(user.getUserId());
+
+	    				//スコープに格納
+	    				request.setAttribute("rlist", rlist);
+	    			}
+ 	    		}
+
+	    		//評価を押したとき
+	    		if (request.getParameter("sort2").equals("評価")) {
+
+	    			//検索ボタンを押したとき
+	    			if (request.getParameter("search") != null) {
+	    				ArrayList<Review> rlist = rDao.ascEvaSearch(user.getUserId(), freeWord, priceA, priceB, evaA, evaB, createdA, createdB);
+
+	    				//スコープに格納
+	    				request.setAttribute("rlist", rlist);
+
+	    			//「すべて」「昇順」「評価」にならべる
+	    			} else {
+	    				ArrayList<Review> rlist = rDao.ascEvaView(user.getUserId());
+
+	    				//スコープに格納
+	    				request.setAttribute("rlist", rlist);
+	    			}
+ 	    		}
+
+	    	//降順ボタンを押したとき
 	    	} else {
 
+	    		//五十音を押したとき
+	    		if (request.getParameter("sort2").equals("五十音")) {
+
+	    			//検索ボタンを押したとき
+	    			if (request.getParameter("search") != null) {
+	    				ArrayList<Review> rlist = rDao.descWordSearch(user.getUserId(), freeWord, priceA, priceB, evaA, evaB, createdA, createdB);
+
+	    				//スコープに格納
+	    				request.setAttribute("rlist", rlist);
+
+	    			//「すべて」「降順」「五十音」にならべる
+	    			} else {
+	    				ArrayList<Review> rlist = rDao.descWordView(user.getUserId());
+
+	    				//スコープに格納
+	    				request.setAttribute("rlist", rlist);
+	    			}
+	    		}
+
+	    		//価格を押したとき
+	    		if (request.getParameter("sort2").equals("価格")) {
+
+	    			//検索ボタンを押したとき
+	    			if (request.getParameter("search") != null) {
+	    				ArrayList<Review> rlist = rDao.descPriceSearch(user.getUserId(), freeWord, priceA, priceB, evaA, evaB, createdA, createdB);
+
+	    				//スコープに格納
+	    				request.setAttribute("rlist", rlist);
+
+	    			//「すべて」「降順」「価格」にならべる
+	    			} else {
+	    				ArrayList<Review> rlist = rDao.descPriceView(user.getUserId());
+
+	    				//スコープに格納
+	    				request.setAttribute("rlist", rlist);
+	    			}
+	    		}
+
+	    		//更新日を押したとき
+	    		if (request.getParameter("sort2").equals("更新日")) {
+
+	    			//検索ボタンを押したとき
+	    			if (request.getParameter("search") != null) {
+	    				ArrayList<Review> rlist = rDao.descDateSearch(user.getUserId(), freeWord, priceA, priceB, evaA, evaB, createdA, createdB);
+
+	    				//スコープに格納
+	    				request.setAttribute("rlist", rlist);
+
+	    			//「すべて」「降順」「更新日」にならべる
+	    			} else {
+	    				ArrayList<Review> rlist = rDao.descDateView(user.getUserId());
+
+	    				//スコープに格納
+	    				request.setAttribute("rlist", rlist);
+	    			}
+	    		}
+
+	    		//評価を押したとき
+	    		if (request.getParameter("sort2").equals("評価")) {
+
+	    			//検索ボタンを押したとき
+	    			if (request.getParameter("search") != null) {
+	    				ArrayList<Review> rlist = rDao.descEvaSearch(user.getUserId(), freeWord, priceA, priceB, evaA, evaB, createdA, createdB);
+
+	    				//スコープに格納
+	    				request.setAttribute("rlist", rlist);
+
+	    			//「すべて」「降順」「評価」にならべる
+	    			} else {
+	    				ArrayList<Review> rlist = rDao.descEvaView(user.getUserId());
+
+	    				//スコープに格納
+	    				request.setAttribute("rlist", rlist);
+	    			}
+	    		}
+
 	    	}
-	    }
+
+	    //小カテゴリーを選択した場合
+		} else {
+
+
+			//昇順ボタンを押したとき
+	    	if (request.getParameter("sort1").equals("昇順")) {
+
+	    		//五十音を押したとき
+	    		if (request.getParameter("sort2").equals("五十音")) {
+
+	    			//検索ボタンを押したとき
+	    			if (request.getParameter("search") != null) {
+	    				ArrayList<Review> rlist = rDao.ascWordSearch2(user.getUserId(), category2Id, freeWord, priceA, priceB, evaA, evaB, createdA, createdB);
+
+	    				//スコープに格納
+	    				request.setAttribute("rlist", rlist);
+
+	    			//「小カテゴリー」「昇順」「五十音」にならべる
+	    			} else {
+	    				ArrayList<Review> rlist = rDao.ascWordView2(user.getUserId(), category2Id);
+
+	    				//スコープに格納
+	    				request.setAttribute("rlist", rlist);
+	    			}
+	    		}
+
+	    		//価格を押したとき
+	    		if (request.getParameter("sort2").equals("価格")) {
+
+	    			//検索ボタンを押したとき
+	    			if (request.getParameter("search") != null) {
+	    				ArrayList<Review> rlist = rDao.ascPriceSearch2(user.getUserId(), category2Id, freeWord, priceA, priceB, evaA, evaB, createdA, createdB);
+
+	    				//スコープに格納
+	    				request.setAttribute("rlist", rlist);
+
+	    			//「すべて」「昇順」「価格」にならべる
+	    			} else {
+	    				ArrayList<Review> rlist = rDao.ascPriceView2(user.getUserId(), category2Id);
+
+	    				//スコープに格納
+	    				request.setAttribute("rlist", rlist);
+	    			}
+ 	    		}
+
+	    		//更新日を押したとき
+	    		if (request.getParameter("sort2").equals("更新日")) {
+
+	    			//検索ボタンを押したとき
+	    			if (request.getParameter("search") != null) {
+	    				ArrayList<Review> rlist = rDao.ascDateSearch2(user.getUserId(), category2Id, freeWord, priceA, priceB, evaA, evaB, createdA, createdB);
+
+	    				//スコープに格納
+	    				request.setAttribute("rlist", rlist);
+
+	    			//「小カテゴリー」「昇順」「更新日」にならべる
+	    			} else {
+	    				ArrayList<Review> rlist = rDao.ascDateView2(user.getUserId(), category2Id);
+
+	    				//スコープに格納
+	    				request.setAttribute("rlist", rlist);
+	    			}
+ 	    		}
+
+	    		//評価を押したとき
+	    		if (request.getParameter("sort2").equals("評価")) {
+
+	    			//検索ボタンを押したとき
+	    			if (request.getParameter("search") != null) {
+	    				ArrayList<Review> rlist = rDao.ascEvaSearch2(user.getUserId(), category2Id, freeWord, priceA, priceB, evaA, evaB, createdA, createdB);
+
+	    				//スコープに格納
+	    				request.setAttribute("rlist", rlist);
+
+	    			//「小カテゴリー」「昇順」「評価」にならべる
+	    			} else {
+	    				ArrayList<Review> rlist = rDao.ascEvaView2(user.getUserId(), category2Id);
+	    			}
+ 	    		}
+
+	    	//降順ボタンを押したとき
+	    	} else {
+
+	    		//五十音を押したとき
+	    		if (request.getParameter("sort2").equals("五十音")) {
+
+	    			//検索ボタンを押したとき
+	    			if (request.getParameter("search") != null) {
+	    				ArrayList<Review> rlist = rDao.descWordSearch2(user.getUserId(), category2Id, freeWord, priceA, priceB, evaA, evaB, createdA, createdB);
+
+	    				//スコープに格納
+	    				request.setAttribute("rlist", rlist);
+
+	    			//「小カテゴリー」「降順」「五十音」にならべる
+	    			} else {
+	    				ArrayList<Review> rlist = rDao.descWordView2(user.getUserId(), category2Id);
+
+	    				//スコープに格納
+	    				request.setAttribute("rlist", rlist);
+	    			}
+	    		}
+
+	    		//価格を押したとき
+	    		if (request.getParameter("sort2").equals("価格")) {
+
+	    			//検索ボタンを押したとき
+	    			if (request.getParameter("search") != null) {
+	    				ArrayList<Review> rlist = rDao.descPriceSearch2(user.getUserId(), category2Id, freeWord, priceA, priceB, evaA, evaB, createdA, createdB);
+
+	    				//スコープに格納
+	    				request.setAttribute("rlist", rlist);
+
+	    			//「小カテゴリー」「降順」「価格」にならべる
+	    			} else {
+	    				ArrayList<Review> rlist = rDao.descPriceView2(user.getUserId(), category2Id);
+
+	    				//スコープに格納
+	    				request.setAttribute("rlist", rlist);
+	    			}
+	    		}
+
+	    		//更新日を押したとき
+	    		if (request.getParameter("sort2").equals("更新日")) {
+
+	    			//検索ボタンを押したとき
+	    			if (request.getParameter("search") != null) {
+	    				ArrayList<Review> rlist = rDao.descDateSearch2(user.getUserId(), category2Id, freeWord, priceA, priceB, evaA, evaB, createdA, createdB);
+
+	    				//スコープに格納
+	    				request.setAttribute("rlist", rlist);
+
+	    			//「小カテゴリー」「降順」「更新日」にならべる
+	    			} else {
+	    				ArrayList<Review> rlist = rDao.descDateView2(user.getUserId(), category2Id);
+
+	    				//スコープに格納
+	    				request.setAttribute("rlist", rlist);
+	    			}
+	    		}
+
+	    		//評価を押したとき
+	    		if (request.getParameter("sort2").equals("評価")) {
+
+	    			//検索ボタンを押したとき
+	    			if (request.getParameter("search") != null) {
+	    				ArrayList<Review> rlist = rDao.descEvaSearch2(user.getUserId(), category2Id, freeWord, priceA, priceB, evaA, evaB, createdA, createdB);
+
+	    				//スコープに格納
+	    				request.setAttribute("rlist", rlist);
+
+	    			//「小カテゴリー」「降順」「評価」にならべる
+	    			} else {
+	    				ArrayList<Review> rlist = rDao.descEvaView2(user.getUserId(), category2Id);
+
+	    				//スコープに格納
+	    				request.setAttribute("rlist", rlist);
+	    			}
+	    		}
+
+	    	}
+
+
+		}
 
 		//JSPに処理を委譲
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/my_review.jsp");
