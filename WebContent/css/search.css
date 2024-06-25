@@ -13,6 +13,21 @@ div.logo {
   margin:0; padding:0;
 }
 
+/* リストのクロテンを消す */
+ul {
+	list-style: none;
+}
+
+/* チェックボックスを消す */
+input[type="checkbox"] {
+  display: none;
+}
+
+/* labelのとき手を表示する */
+label {
+  cursor: pointer;
+}
+
 
 header {
 	display : grid;
@@ -361,34 +376,51 @@ section:nth-child(2n){
   background:#f3f3f3;
 }
 
-/*===
-	ここからレビューアイテム編集用CSS
- ===*/
 
+/*==============================
+ここから検索とすべてを二つに分けるCSS
+==============================*/
 
-/* レビュー２列表示 */
+.search_grid{
+	display:grid;
+	grid-template-columns: 1fr 3fr;
+}
 
+/*=== 全体検索左側のgrid ===*/
+.search_grid_left {
+	background: #fff;
+}
+
+/*=== 左側のレビューアイテム編集用 ===*/
 .flex-container {
   display: grid;
-  grid-te
-  flex-wrap: wrap;/* flexアイテムを折り返す（複数行に配置する） */
+  grid-template-columns: 1fr 1fr;
 }
+
 
 /* レビューアイテム編集用 */
 
 .flex-item {
   background-color:#ffffff;
   text-align: center;
-  width: 50%;
+  width: 90%;
   box-sizing: border-box;
   border: 1px solid black;
-  margin: 10px;
+  margin: 10px auto;
   padding: 10px;
   display: grid;
   grid-template-columns: 1fr 2fr;
   grid-template-rows: 1fr;
   gap : 3vw;
 }
+
+
+
+/*==============================
+ここからレビューアイテム編集用CSS
+==============================*/
+
+
 
 /* レビューのテキスト */
 
@@ -398,10 +430,7 @@ section:nth-child(2n){
 
 /* ↓マイレビューのボディと並び替えの編集用CSS↓ */
 
-.container {
-  display: grid;
-  grid-template-columns: 5fr 1fr;
-  grid-template-rows: 1fr;
+.container {	
   margin: 0 3vw;
 }
 .scroll {
@@ -422,6 +451,8 @@ section:nth-child(2n){
   border-radius: 8px;
 }
 
+
+
 /* マイレビュー右側の要素編集用 */
 
 .side {
@@ -438,7 +469,7 @@ section:nth-child(2n){
     padding: 1vh 2vh 1vh 2vh;
     margin: 2vw auto;
     border-radius: 10%;
-    background: #fff;
+    background-color: #fff;
 }
 
 .sort_item li {
@@ -447,10 +478,70 @@ section:nth-child(2n){
 	border-bottom: 1px solid #000;
 }
 
-/* 投稿ボタン */
- .post-btn {
-  margin: 0 auto;
+/*==============================
+検索ボックス編集用CSS
+==============================*/
+
+.search_drop {
+	text-align: center;
+	margin: 10px auto;
+	position: relative;
 }
+
+/*===  ===*/
+.search_text{
+	width:50%;
+	background-color: #fff;
+	margin: 0 auto;
+	border: 1px solid #333;
+}
+
+/* すべてを押したときの動作 */
+.search_drop input[type="checkbox"]:checked + label[for="search_drop"] + .search_drop_menu {
+  display: block;
+  width: auto;
+}
+
+/*=== レビューアイテム編集用 ===*/
+.search_drop_menu {
+	display:none;
+	position: absolute;
+	background-color: #fff;
+	border: 1px solid #333;
+	right: 0;
+  left: 0;
+  margin: 50px auto;
+  width: 50%;
+}
+/*=== レビューアコーディオ内検索ボックス ===*/
+.search_search{
+	grid-column-end: 3;
+}
+
+/*=== レビューアコーディオ編集用 ===*/
+.search_drop_menu li {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	margin: 10px auto;
+	align-items: center;
+	gap : 10px;
+}
+
+/*=== アコーディオ入力編集用 ===*/
+.search_input{
+	height: 12px;
+	padding: 10px;
+	width: 50%;
+	margin: 0 auto;
+	background-color: #fff4e0;
+}
+
+/*=== アコーディオ/レビュー投稿ボタン ===*/
+.search_btn {
+	grid-column-end: 3;
+}
+
+
 
 
 /* === モーダル非表示（初期） ============================== */
