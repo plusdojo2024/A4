@@ -537,7 +537,7 @@ header .headline{
 ==============================*/
 
 /* モーダルを開くための要素の設定 */
-#openModal{
+button{
 	background-color: transparent;
 	appearance: auto;
     text-rendering: auto;
