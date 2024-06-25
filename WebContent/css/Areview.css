@@ -580,7 +580,10 @@ header .headline{
 }
 
 
-#closeModal {
+/*==============================
+モーダルcloseボタンのCSS
+==============================*/
+.closeModal {
   float: right;
   font-size: 28px;
   font-weight: bold;

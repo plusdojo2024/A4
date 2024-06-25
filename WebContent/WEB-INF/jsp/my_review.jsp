@@ -154,12 +154,14 @@ input[name="tab_item"] {
       		</ul>
 		</div>
 	</div>
-	<!-- ↑ここまでドロップダウンのエリア↑ -->
+	<!-- ロ↑ここまでドロップダウンのエリア↑ -->
+	
+<!-- ↓ここからレビューアイテムのエリア↓ -->
   <div class="container">
   	<div class="scroll">
   	<div class="flex-container">
-  	<c:forEach var="e" items="${list}" >
-  		<button id="openModal">
+  	<c:forEach var="e" items="${list}" varStatus="status">
+  		<button id="openModal${status.index}" onclick="openM(${status.index})">
     		<div class="flex-item">
     			<div class= "item_img"><img src="/A4/img/myicon.jpg" width="100" height="100" alt="マイアイコン"></div>
     			<div class="grid_item2">
@@ -169,10 +171,12 @@ input[name="tab_item"] {
     			</div>
 			</div>
 		</button>
-		<!-- ↓モーダルウインドウのエリア↓ -->
-		<div id="myModal" class="modal">
+		<!-- ↑ここまでレビューアイテムのエリア↑ -->
+		
+		<!-- ↓レビューアイテムのモーダルのエリア↓ -->
+		<div id="myModal${status.index}" class="modal">
     		<div class="modal-content">
-        		<span id="closeModal">&times;</span>
+        		<span id="closeModal${status.index}" class="closeModal" onclick="closeM(${status.index})">&times;</span>
         		<div class="modal_box">
         			<img class="modal_img" src="/A4/img/myicon.jpg">
         			<div class="modal_text">
@@ -193,7 +197,7 @@ input[name="tab_item"] {
         						<div class="up_box">
         							<div class="open_close">
         								<label class="switch">
-    <input checked="" type="checkbox">
+    <input checked="true" type="checkbox" name="ch" value="checked">
     <div class="slider">
         <div class="circle">
             <svg class="cross" xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 365.696 365.696" y="0" x="0" height="6" width="6" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -212,7 +216,7 @@ input[name="tab_item"] {
         							</div>
         							<div class="list">リスト追加</div>
         						</div>
-        						<h1 class="avg">${e.scoreAvg}</h1>
+        						<h1 class="avg">総合評価${e.scoreAvg}</h1>
         					</div>
         				</div>
         			</div>
@@ -246,29 +250,65 @@ input[name="tab_item"] {
   
  	<script>
  	
+ 	/*==============================
+ 	レビューアイテムのjs
+ 	==============================*/
+ 	
  // モーダルウィンドウとボタン、クローズアイコンの要素を取得
- 	var modal = document.getElementById("myModal");
- 	var btn = document.getElementById("openModal");
- 	var span = document.getElementById("closeModal");
+ 	let modal = document.getElementById("myModal");
 
  	// ボタンがクリックされた時にモーダルを表示
- 	btn.onclick = function() {
- 	modal.style.display = "block";
+ 	function openM(num){
+ 		let modal =document.getElementById("myModal" + num);
+ 		modal.style.display = "block";
  	}
 
  	// ×（クローズアイコン）がクリックされた時にモーダルを非表示
- 	span.onclick = function() {
- 	modal.style.display = "none";
+ 	function closeM(num){
+ 		let modal =document.getElementById("myModal" + num);
+ 		let span =document.getElementById("closeModal" + num);
+ 		modal.style.display = "none";
  	}
 
  	// モーダルの外側をクリックした時にモーダルを非表示
+ 	/*
  	window.onclick = function(event) {
+ 		let modal =document.getElementById("myModal" + num);
  	    if (event.target == modal) {
  	      modal.style.display = "none";
  	    }
  	}
+ 	*/
+ 	
+ // クリックイベントリスナーを関数にする
+    function handleClick(event) {
+        // クリックされた要素を取得
+        var clickedElement = event.target;
+        var elementId = clickedElement.id;
+
+        // クリックされた要素のIDが "myModal" で始まる場合に処理を実行
+        if (elementId.startsWith("openModal")) {
+            // IDの数字部分を取得
+            var num = elementId.replace("openModal", "");
+            closeModal(num, event);
+        }
+    }
+
+    // モーダルを閉じる処理を行う関数
+    function closeModal(num, event) {
+        var modal = document.getElementById("myModal" + num);
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    // window にクリックイベントリスナーを追加
+    window.onclick = handleClick;
  	
  	
+    /*==============================
+ 	ここからアイコンのモーダルのjs
+ 	==============================*/
  	
  	//ここからアイコンのモーダル
  	var icon_modal = document.getElementById("myiconModal");
