@@ -193,10 +193,10 @@ public class ReviewsItemsDAO {
 			//rs.nextで表の次の行にフォーカスが合う　もう行がなければfalseが返ってきて終わり
 				review.setReviewItemId(rs.getInt("review_item_id"));
 				review.setReviewItem1(rs.getString("review_item1"));
-				review.setReviewItem1(rs.getString("review_item2"));
-				review.setReviewItem1(rs.getString("review_item3"));
-				review.setReviewItem1(rs.getString("review_item4"));
-				review.setReviewItem1(rs.getString("review_item5"));
+				review.setReviewItem2(rs.getString("review_item2"));
+				review.setReviewItem3(rs.getString("review_item3"));
+				review.setReviewItem4(rs.getString("review_item4"));
+				review.setReviewItem5(rs.getString("review_item5"));
 
 			}
 		}

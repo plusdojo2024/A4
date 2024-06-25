@@ -214,8 +214,13 @@ input[name="tab_item"] {
     </div>
 </label>
         							</div>
-        							<div class="list">リスト追加</div>
+        						<%--  <div class="list">リスト追加${e.scoreAvg}</div> --%>
         						</div>
+        						<div class = categorys>${e.reviewItem1}</div>
+        						<div class = categorys>${e.reviewItem2}</div>
+        						<div class = categorys>${e.reviewItem3}</div>
+        						<div class = categorys>${e.reviewItem4}</div>
+        						<div class = categorys>${e.reviewItem5}</div>
         						<h1 class="avg">総合評価${e.scoreAvg}</h1>
         					</div>
         				</div>
