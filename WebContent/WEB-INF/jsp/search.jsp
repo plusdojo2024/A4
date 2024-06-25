@@ -35,21 +35,41 @@
       		
 				<!-- ↓レビューアイテムのモーダルのエリア↓ -->
 				<ul id="search_drop_menu" class="search_drop_menu">
-					<li><h1 class="search_search">検索</h1></li>
 					<li>
-						<input class="search_input" type="text" name="" value="">
+						<input type="checkbox" id="search_drop" class="search_drop">
+      					<label class="grid-label" for="search_drop">✖</label>
+      				</li>
+					<li>
+						<input type="text" name="freeWord" class="search_text" placeholder="フリー検索">
+      				</li>
+					<li>
+						<input class="search_input" type="text" name="price_a">
 						<h1>～</h1>
-						<input class="search_input" type="text" name="" value="">
+						<input class="search_input" type="text" name="price_b">
 					</li>
 					<li>
-						<input class="search_input" type="text" name="" value="">
+						<input list="eva_list_a" id="eva_list_a" class="search_input" name="eva_a">
+						<datalist id="eva_list_a">
+							<option value="1"></option>
+							<option value="2"></option>
+							<option value="3"></option>
+							<option value="4"></option>
+							<option value="5"></option>
+						</datalist>
 						<h1>～</h1>
-						<input class="search_input" type="text" name="" value="">
+						<input list="eva_list_b" id="eva_list_b" class="search_input" name="eva_b">
+						<datalist id="eva_list_b">
+							<option value="1"></option>
+							<option value="2"></option>
+							<option value="3"></option>
+							<option value="4"></option>
+							<option value="5"></option>
+						</datalist>
 					</li>
 					<li>
-						<input class="search_input" type="text" name="" value="">
+						<input class="search_input" type="date" name="created_a">
 						<h1>～</h1>
-						<input class="search_input" type="text" name="" value="">
+						<input class="search_input" type="date" name="created_b">
 					</li>
 					<li><input class="search_btn" type="submit" name="search" value="検索"></li>
 				</ul>

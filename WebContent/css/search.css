@@ -486,20 +486,31 @@ section:nth-child(2n){
 	text-align: center;
 	margin: 10px auto;
 	position: relative;
+	width: 30%;
+	background-color: #fff;
+	border: 1px solid #333;
+	border-radius: 30px;
+}
+
+.search_drop label {
+	width:100%;
 }
 
 /*===  ===*/
 .search_text{
-	width:50%;
+	width:100%;
 	background-color: #fff;
 	margin: 0 auto;
 	border: 1px solid #333;
+	grid-column-start: 2;
+	grid-column-end: 3;
+	padding: 5px;
 }
 
 /* すべてを押したときの動作 */
 .search_drop input[type="checkbox"]:checked + label[for="search_drop"] + .search_drop_menu {
   display: block;
-  width: auto;
+  width: 150%;
 }
 
 /*=== レビューアイテム編集用 ===*/
@@ -508,10 +519,7 @@ section:nth-child(2n){
 	position: absolute;
 	background-color: #fff;
 	border: 1px solid #333;
-	right: 0;
-  left: 0;
-  margin: 50px auto;
-  width: 50%;
+  margin: -30px -60px;
 }
 /*=== レビューアコーディオ内検索ボックス ===*/
 .search_search{
@@ -527,6 +535,11 @@ section:nth-child(2n){
 	gap : 10px;
 }
 
+.grid-label{
+	grid-column-start: 3;
+	grid-column-end: 4;
+}
+
 /*=== アコーディオ入力編集用 ===*/
 .search_input{
 	height: 12px;
@@ -538,6 +551,7 @@ section:nth-child(2n){
 
 /*=== アコーディオ/レビュー投稿ボタン ===*/
 .search_btn {
+	grid-column-start: 2;
 	grid-column-end: 3;
 }
 
