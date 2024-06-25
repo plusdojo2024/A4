@@ -122,7 +122,7 @@ public class MyReviewServlet extends HttpServlet {
 			ReviewsItemsDAO ritemDao = new ReviewsItemsDAO();
 			int result3 = ritemDao.insert(category2Id, reviewItem1, reviewItem2, reviewItem3, reviewItem4, reviewItem5);
 			ReviewsScoresDAO rSDao = new ReviewsScoresDAO();
-			int result4 = rSDao.insert(reviewId, reviewItemId, reviewItem1Score, reviewItem2Score, reviewItem3Score, reviewItem4Score, reviewItem5Score);
+			int result4 = rSDao.insert(reviewId,reviewItem1Score, reviewItem2Score, reviewItem3Score, reviewItem4Score, reviewItem5Score);
 
 			if (result1 == 1 &&result2 == 1 &&result3 == 1 &&result4 == 1) {
 				request.setAttribute("result", "登録しました。");
@@ -197,7 +197,7 @@ public class MyReviewServlet extends HttpServlet {
 			ReviewsItemsDAO ritemDao = new ReviewsItemsDAO();
 			int result3 = ritemDao.insert(category2Id, reviewItem1, reviewItem2, reviewItem3, reviewItem4, reviewItem5);
 			ReviewsScoresDAO rSDao = new ReviewsScoresDAO();
-			int result4 = rSDao.insert(reviewId, reviewItemId, reviewItem1Score, reviewItem2Score, reviewItem3Score, reviewItem4Score, reviewItem5Score);
+			int result4 = rSDao.insert(reviewId,reviewItem1Score, reviewItem2Score, reviewItem3Score, reviewItem4Score, reviewItem5Score);
 			BacknumbersDAO bDao = new BacknumbersDAO();
 			int result5 = bDao.insert(backnumberContent);
 			int result6 = bDao.delete(backnumberId);
