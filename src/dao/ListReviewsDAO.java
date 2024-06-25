@@ -153,7 +153,7 @@ public class ListReviewsDAO {
 	}
 
 	//リスト内でのレビュー表示
-	public ArrayList<Review> view(int listId) {
+	public void view(int listId) {
 
 		Connection conn = null;
 		ArrayList<Review> list = new ArrayList<>();
