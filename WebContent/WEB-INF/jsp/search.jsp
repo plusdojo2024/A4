@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ page import="java.util.*,model.Bean" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +26,57 @@
 
 </header>
 	<div class="search_grid">
-		<div class="search_grid_left"></div>
+		<!-- ↓全体検索左側のエリア（ここから）↓ -->
+		<div class="search_grid_left">
+			<%
+		ArrayList<Bean> list = new ArrayList<Bean>();
+		for(int i = 0;i<5;i++){
+			Bean b = new Bean();
+			b.setBig("1大");
+			b.setSmall("　1小");
+
+			list.add(b);
+		}
+		for(int i = 0;i<5;i++){
+			Bean b = new Bean();
+			b.setBig("2大");
+			b.setSmall("　2小");
+
+			list.add(b);
+		}
+		for(int i = 0;i<5;i++){
+			Bean b = new Bean();
+			b.setBig("3大");
+			b.setSmall("　3小");
+
+			list.add(b);
+		}
+
+		request.setAttribute("list",list);
+	%>
+		そのまま表示<br>
+		<c:forEach var="e" items="${list}" >
+			${e.big }<br>
+			${e.small }<br>
+		</c:forEach>
+
+		//大項目と小項目を考えて表示<br>
+		<c:forEach var="e" items="${list}" >
+			<%-- ${e.big}==${taihi}と同じ --%>
+			<c:if test="${e.big ==taihi}">
+				${e.small }<br>
+			</c:if>
+			<%-- ${e.big}!=${taihi}と同じ --%>
+			<c:if test="${e.big !=taihi}">
+				${e.big }<br>
+				${e.small }<br>
+			</c:if>
+
+			<%-- request.setAttribute("taihi",${e.big});と同じ処理 --%>
+			<c:set var="taihi" value="${e.big}" />
+		</c:forEach>
+		<!-- ↑全体検索左側のエリア（ここまで）↑ -->
+		</div>
 		<div class="search_grid_right">
 			<h2 class="my">
 				<a>すべて</a>
