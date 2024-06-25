@@ -4,19 +4,19 @@ import java.sql.Timestamp;
 
 
 public class Category implements Serializable {
-	
+
 	//category1テーブル
 	private int category1Id; 				//大カテゴリーID
 	private String category1Name;			//大カテゴリー名
 	private Timestamp c1CreatedAt;			//大カテゴリー作成日時
 	private Timestamp c1UpdatedAt;				//大カテゴリー更新日時
-	
+
 	//category2テーブル
 	private int category2Id;			//小カテゴリーID
 	private String category2Name;		//小カテゴリー名
 	private Timestamp c2CreatedAt;		//小カテゴリー作成日時
 	private Timestamp c2UpdatedAt;		//小カテゴリー更新日時
-	
+
 	//reviewsテーブル
 	private int reviewId;				//レビューID
 	private String reviewName;			//レビュー名
@@ -27,7 +27,7 @@ public class Category implements Serializable {
 	private int rDeleteFlg;				//レビュー削除フラグ
 	private Timestamp rCreatedAt;		//レビュー作成日時
 	private Timestamp rUpdatedAt;		//レビュー更新日時
-	
+
 	//コンストラクタ
 	public Category() {
 		this.category1Name = "";

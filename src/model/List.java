@@ -27,6 +27,10 @@ public class List implements Serializable {
 	private Timestamp lrCreatedAt;     //リストレビュー作成日時
 	private Timestamp lrUpdatedAt;     //リストレビュー更新日時
 
+	//リスト数
+	private int listCount;
+
+
 	public List() {
 		this.reviewName = "";
 		this.reviewComment = "";
@@ -140,6 +144,12 @@ public class List implements Serializable {
 	}
 	public void setLrUpdatedAt(Timestamp lrUpdatedAt) {
 		this.lrUpdatedAt = lrUpdatedAt;
+	}
+	public int getListCount() {
+		return listCount;
+	}
+	public void setListCount(int sum) {
+		this.listCount = sum;
 	}
 
 }
