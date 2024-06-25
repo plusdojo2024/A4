@@ -239,11 +239,31 @@ input[name="tab_item"] {
 			<li>更新日</li>
 			<li>評価</li>
 		</ul>
-  		<div class="post-btn">
-  			<a href="/">
-    			<img src="/A4/img/removebg-preview.png">
-    		</a>
-  		</div>		
+		<!-- ↓投稿用ボタンのエリア↓ -->
+		<button id="open_post_Modal">
+	  		<div class="post-btn">
+	  			<img src="/A4/img/removebg-preview.png">
+	  		</div>
+		</button>
+		<!-- ↑ここまで投稿用モーダルのエリア↑ -->
+		
+	  	<!-- ↓投稿用モーダルのエリア↓ -->
+		<div id="my_post_Modal" class="icon_modal">
+    		<div class="icon_modal_content">
+        		<span id="close_post_Modal">&times;</span>
+        		<div class ="icon_modal_box">
+        			<img class="modal_myicon" src="/A4/img/myicon.jpg">
+        			<div class="name_box">名前</div>
+        			<div class="re_btn">ボタン</div>
+        			<div class="icon_flex">
+        				<div class="change">変更</div>
+        				<div class="logout"><a href="/A4/LoginServlet">ログアウト</a></div>
+        			</div>
+        		</div>
+    		</div>
+		</div>
+		<!-- ↑ここまで投稿用モーダルのエリア↑ -->
+		
 	</div>
   </div>
   
@@ -347,6 +367,42 @@ input[name="tab_item"] {
  	    });
  	    */
  	});
+ 	
+ 	
+ 	/*==============================
+ 	ここから投稿用モーダルjs
+ 	==============================*/
+ 	
+ 	var post_modal = document.getElementById("my_post_Modal");
+ 	var post_btn = document.getElementById("open_post_Modal");
+ 	var post_span = document.getElementById("close_post_Modal");
+
+ 	// ボタンがクリックされた時にモーダルを表示
+ 	post_btn.onclick = function() {
+ 	post_modal.style.display = "block";
+ 	}
+
+ 	// ×（クローズアイコン）がクリックされた時にモーダルを非表示
+ 	post_span.onclick = function() {
+ 	post_modal.style.display = "none";
+ 	}
+
+ 	// モーダルの外側をクリックした時にモーダルを非表示
+ 	window.onclick = function(event) {
+ 	    if (event.target == post_modal) {
+ 	      post_modal.style.display = "none";
+ 	    }
+ 	}
+ 	
+ 	// モーダルの外側をクリックした時にモーダルを非表示
+ 	$(function(){
+ 	    // クリックで動く
+ 	    $('.navi-open').click(function(){
+ 	        $(this).toggleClass('active');
+ 	        $(this).next('navi').slideToggle();
+ 	    });
+ 	    
+ 	
  	
 	</script>
 </body>
