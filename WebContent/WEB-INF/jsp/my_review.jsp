@@ -155,7 +155,7 @@ input[name="tab_item"] {
 		</div>
 	</div>
 	<!-- ロ↑ここまでドロップダウンのエリア↑ -->
-	
+
 <!-- ↓ここからレビューアイテムのエリア↓ -->
   <div class="container">
   	<div class="scroll">
@@ -165,14 +165,14 @@ input[name="tab_item"] {
     		<div class="flex-item">
     			<div class= "item_img"><img src="/A4/img/myicon.jpg" width="100" height="100" alt="マイアイコン"></div>
     			<div class="grid_item2">
-    				<h1>${e.reviewName}</h1>	
+    				<h1>${e.reviewName}</h1>
     				<p class= "item_text">テキスト</p>
     				<p class= "item_text">テキスト</p>
     			</div>
 			</div>
 		</button>
 		<!-- ↑ここまでレビューアイテムのエリア↑ -->
-		
+
 		<!-- ↓レビューアイテムのモーダルのエリア↓ -->
 		<div id="myModal${status.index}" class="modal">
     		<div class="modal-content">
@@ -246,7 +246,7 @@ input[name="tab_item"] {
 	  		</div>
 		</button>
 		<!-- ↑ここまで投稿用モーダルのエリア↑ -->
-		
+
 	  	<!-- ↓投稿用モーダルのエリア↓ -->
 		<div id="my_post_Modal" class="icon_modal">
     		<div class="icon_modal_content">
@@ -263,17 +263,17 @@ input[name="tab_item"] {
     		</div>
 		</div>
 		<!-- ↑ここまで投稿用モーダルのエリア↑ -->
-		
+
 	</div>
   </div>
-  
-  
+
+
  	<script>
- 	
+
  	/*==============================
  	レビューアイテムのjs
  	==============================*/
- 	
+
  // モーダルウィンドウとボタン、クローズアイコンの要素を取得
  	let modal = document.getElementById("myModal");
 
@@ -299,7 +299,7 @@ input[name="tab_item"] {
  	    }
  	}
  	*/
- 	
+
  // クリックイベントリスナーを関数にする
     function handleClick(event) {
         // クリックされた要素を取得
@@ -324,12 +324,12 @@ input[name="tab_item"] {
 
     // window にクリックイベントリスナーを追加
     window.onclick = handleClick;
- 	
- 	
+
+
     /*==============================
  	ここからアイコンのモーダルのjs
  	==============================*/
- 	
+
  	//ここからアイコンのモーダル
  	var icon_modal = document.getElementById("myiconModal");
  	var icon_btn = document.getElementById("openiconModal");
@@ -351,7 +351,7 @@ input[name="tab_item"] {
  	      icon_modal.style.display = "none";
  	    }
  	}
- 	
+
  	// モーダルの外側をクリックした時にモーダルを非表示
  	$(function(){
  	    // クリックで動く
@@ -367,24 +367,24 @@ input[name="tab_item"] {
  	    });
  	    */
  	});
- 	
- 	
+
+
  	/*==============================
  	ここから投稿用モーダルjs
  	==============================*/
- 	
- 	var post_modal = document.getElementById("my_post_Modal");
- 	var post_btn = document.getElementById("open_post_Modal");
- 	var post_span = document.getElementById("close_post_Modal");
+
+ 	let post_modal = document.getElementById("my_post_Modal");
+ 	let post_btn = document.getElementById("open_post_Modal");
+ 	let post_span = document.getElementById("close_post_Modal");
 
  	// ボタンがクリックされた時にモーダルを表示
  	post_btn.onclick = function() {
- 	post_modal.style.display = "block";
+ 		post_modal.style.display = "block"
  	}
 
  	// ×（クローズアイコン）がクリックされた時にモーダルを非表示
  	post_span.onclick = function() {
- 	post_modal.style.display = "none";
+ 		post_modal.style.display = "none";
  	}
 
  	// モーダルの外側をクリックした時にモーダルを非表示
@@ -393,7 +393,7 @@ input[name="tab_item"] {
  	      post_modal.style.display = "none";
  	    }
  	}
- 	
+
  	// モーダルの外側をクリックした時にモーダルを非表示
  	$(function(){
  	    // クリックで動く
@@ -401,9 +401,9 @@ input[name="tab_item"] {
  	        $(this).toggleClass('active');
  	        $(this).next('navi').slideToggle();
  	    });
- 	    
- 	
- 	
+
+ 	});
+
 	</script>
 </body>
 </html>
