@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import dao.ListDAO;
 import dao.ListReviewsDAO;
 import model.List;
+import model.Review;
 import model.User;
 
 @WebServlet("/ListServlet")//ここを変える
@@ -68,6 +69,9 @@ public class ListServlet extends HttpServlet {
 		//リストDAOをインスタンス化
 		ListDAO ldao = new ListDAO();
 
+		//リストレビューズDAOをインスタンス化
+	    ListReviewsDAO lrdao = new ListReviewsDAO();
+
 		//ログイン時に受け取ったユーザー情報を取得する
 		User user = (User)session.getAttribute("user");
 
@@ -79,7 +83,10 @@ public class ListServlet extends HttpServlet {
 
 		//個々のリストを押したとき
 		if (request.getParameter("list_id") != null) {
+
+			//Ajaxをもちいてlist_idを取得する
 			int listId = Integer.parseInt(request.getParameter("list_id"));
+			ArrayList<Review> rlist = lrdao.view(listId);
 		}
 
 

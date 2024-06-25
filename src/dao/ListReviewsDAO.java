@@ -179,7 +179,7 @@ public class ListReviewsDAO {
 					+ "reviews_scores.review_item1_score,reviews_scores.review_item2_score,reviews_scores.review_item3_score,reviews_scores.review_item4_score,reviews_scores.review_item5_score,"
 					+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
 					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.created_at,backnumbers.updated_at,"
-					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
+					+ "list_reviews.list_review_id,list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
 					+ "users.user_email,users.user_password,users.user_id,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at,"
 					+ "list.list_name FROM reviews "
 					+ "LEFT OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
@@ -192,7 +192,7 @@ public class ListReviewsDAO {
 					+ "LEFT OUTER JOIN list ON list.list_id = list_reviews.list_id "
 					+ "WHERE reviews.delete_flg = 1"
 			        + "AND list.list_id = ?"
-			        + "ORDER BY list_name ASC";
+			        + "ORDER BY list_reviews.list ASC";
 
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
