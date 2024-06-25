@@ -271,9 +271,10 @@ input[name="tab_item"] {
         				</div>
         			</div>
         			<input class="remarks" type="text" name="reviewComment" value="${e.reviewComment}">
-
+	<c:forEach var="e" items="${bkList}" varStatus="backnumber">
         			<input class="back_number" type="hidden" name="backnumberId" value="${e.backnumberId}">
         			<input class="back_number" type="text" name="backnumberContent" value="${e.backnumberContent}">
+    </c:forEach>
         			<!-- ↓編集用ボタン（ここから）↓ -->
         			<input type="submit" name="submit" value="更新">
         			<!-- ↑編集用ボタン（ここから）↑ -->
