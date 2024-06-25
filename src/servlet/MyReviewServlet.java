@@ -42,13 +42,13 @@ public class MyReviewServlet extends HttpServlet {
 			response.sendRedirect("/A4/LoginServlet");
 			return;
 		}
-		//ログイン後の最初のページ,アプリのロゴをクリックしたとき（自分のレビューをすべて表示する）
+
 		User user = (User)session.getAttribute("user");
 		int id = user.getUserId();
 
 		//すべてのレビューを持ってくる
 		ReviewsDAO rDao = new ReviewsDAO();
-		ArrayList<Review> view1 = rDao.view1(id);
+		ArrayList<Review> myAllReview = rDao.descDateView(id);
 		//大カテゴリー、小カテゴリーも一緒に持ってくる
 		Categorys1DAO dao = new Categorys1DAO();
 		ArrayList<Category> categoryList = (ArrayList<Category>)dao.AllSelectCategory();
@@ -56,10 +56,9 @@ public class MyReviewServlet extends HttpServlet {
 		FollowsDao fDao = new FollowsDao();
 		ArrayList<User> fUserList = fDao.followSelect(id);
 
-		request.setAttribute("fUserList", fUserList);
-
-		request.setAttribute("list", view1);
+		request.setAttribute("list", myAllReview);
 		request.setAttribute("categoryList", categoryList);
+		request.setAttribute("fUserList", fUserList);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/my_review.jsp");
 		dispatcher.forward(request, response);
@@ -69,11 +68,13 @@ public class MyReviewServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
-		if (session.getAttribute("id") == null) {
+		if (session.getAttribute("user") == null) {
 			response.sendRedirect("/A4/LoginServlet");
 			return;
 		}
-		System.out.println("aaaa");
+
+		User user = (User)session.getAttribute("user");
+		int id = user.getUserId();
 
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
@@ -81,7 +82,6 @@ public class MyReviewServlet extends HttpServlet {
 
 		//レビュー新規登録
 		if (request.getParameter("submit").equals("新規登録")) {
-			int id = Integer.parseInt(request.getParameter("user_id"));
 			int reviewId = Integer.parseInt(request.getParameter("reviewId"));
 			int category2Id = Integer.parseInt(request.getParameter("category2Id"));
 			String reviewName = request.getParameter("reviewName");
@@ -108,7 +108,6 @@ public class MyReviewServlet extends HttpServlet {
 			String reviewItem4 = request.getParameter("reviewItem4");
 			String reviewItem5 = request.getParameter("reviewItem5");
 
-			int reviewItemId = Integer.parseInt(request.getParameter("reviewItemId"));
 			int reviewItem1Score = Integer.parseInt(request.getParameter("reviewItem1Score"));
 			int reviewItem2Score = Integer.parseInt(request.getParameter("reviewItem2Score"));
 			int reviewItem3Score = Integer.parseInt(request.getParameter("reviewItem3Score"));
@@ -180,7 +179,6 @@ public class MyReviewServlet extends HttpServlet {
 			String reviewItem4 = request.getParameter("reviewItem4");
 			String reviewItem5 = request.getParameter("reviewItem5");
 
-			int reviewItemId = Integer.parseInt(request.getParameter("reviewItemId"));
 			int reviewItem1Score = Integer.parseInt(request.getParameter("reviewItem1Score"));
 			int reviewItem2Score = Integer.parseInt(request.getParameter("reviewItem2Score"));
 			int reviewItem3Score = Integer.parseInt(request.getParameter("reviewItem3Score"));
@@ -218,7 +216,6 @@ public class MyReviewServlet extends HttpServlet {
 			request.setCharacterEncoding("UTF-8");
 			UsersDAO uDao = new UsersDAO();
 			//公開非公開の変更--------------------
-			int id = Integer.parseInt(request.getParameter("user_id"));
 			int privacyFlg = Integer.parseInt(request.getParameter("privacyFlg"));
 			int num1 =uDao.priUpdate(privacyFlg,id);
 
@@ -320,9 +317,6 @@ public class MyReviewServlet extends HttpServlet {
 
 
 
-		//Review.javaをインスタンス化
-		Review review = new Review();
-
 		//ReviewsDAOをインスタンス化
 		ReviewsDAO rDao = new ReviewsDAO();
 
@@ -331,9 +325,6 @@ public class MyReviewServlet extends HttpServlet {
 
 		//ReviewScoresDAOをインスタンス化
 		ReviewsScoresDAO rscoreDao  = new ReviewsScoresDAO();
-
-		//ログイン時に受け取ったユーザー情報を取得する
-	    User user = (User)session.getAttribute("user");
 
 		//↓全体検索画面のレビュー表示について
 
