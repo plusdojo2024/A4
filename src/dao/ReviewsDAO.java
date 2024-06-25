@@ -366,7 +366,7 @@ public class ReviewsDAO{
 			//rs.nextで表の次の行にフォーカスが合う　もう行がなければfalseが返ってきて終わり
 				Review review = new Review();
 				review.setReviewId(rs.getInt("reviews.review_id"));
-				review.setCategory2Id(rs.getInt("categorys2.category2_id"));
+				review.setCategory2Id(rs.getInt("reviews.category2_id"));
 				review.setReviewName(rs.getString("reviews.review_name"));
 				review.setReviewPrice(rs.getInt("reviews.review_price"));
 				review.setReviewComment(rs.getString("reviews.review_comment"));
