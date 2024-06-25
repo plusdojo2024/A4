@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.Categorys1DAO;
 import dao.ReviewsDAO;
@@ -26,12 +27,12 @@ public class SearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		// もしもログインしていなかったらログインサーブレットにリダイレクトする
-//		HttpSession session = request.getSession();
-//		if (session.getAttribute("id") == null) {
-//			response.sendRedirect("/A4/LoginServlet");
-//			return;
-//		}
+		// もしもログインしていなかったらログインサーブレットにリダイレクトする
+		HttpSession session = request.getSession();
+		if (session.getAttribute("id") == null) {
+			response.sendRedirect("/A4/LoginServlet");
+			return;
+		}
 
 		//ReviewsDAOをインスタンス化
 		ReviewsDAO rdao = new ReviewsDAO();
@@ -82,12 +83,15 @@ public class SearchServlet extends HttpServlet {
 
 	//ここからdoPost。ここに追加していく。
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// もしもログインしていなかったらログインサーブレットにリダイレクトする
-//		HttpSession session = request.getSession();
-//			if (session.getAttribute("id") == null) {
-//			response.sendRedirect("/A4/LoginServlet");
-//			return;
-//		}
+		//もしもログインしていなかったらログインサーブレットにリダイレクトする
+		HttpSession session = request.getSession();
+			if (session.getAttribute("id") == null) {
+			response.sendRedirect("/A4/LoginServlet");
+			return;
+		}
+
+		//ログイン時に受け取ったユーザー情報を取得する
+	    User user = (User)session.getAttribute("user");
 
 		//ReviewsDAOをインスタンス化
 		ReviewsDAO rdao = new ReviewsDAO();
@@ -145,7 +149,7 @@ public class SearchServlet extends HttpServlet {
 				Timestamp createdB = new Timestamp(parsedDate.getTime());
 
 				//小カテゴリー選択時の検索結果のレビューデータをrlistに格納
-				ArrayList<Review> rlist = rdao.wholeSearch2(category2Id, freeWord, priceA, priceB, evaA, evaB, createdA, createdB);
+				ArrayList<Review> rlist = rdao.wholeSearch2(user.getUserId(), category2Id, freeWord, priceA, priceB, evaA, evaB, createdA, createdB);
 
 				//検索結果のユーザーデータをulistに格納
 				ArrayList<User> ulist = udao.search(freeWord);
@@ -254,7 +258,7 @@ public class SearchServlet extends HttpServlet {
 				Timestamp createdB = new Timestamp(parsedDate.getTime());
 
 				//「すべて」選択時の検索結果のレビューデータをrlistに格納
-				ArrayList<Review> rlist = rdao.wholeSearch1(freeWord, priceA, priceB, evaA, evaB, createdA, createdB);
+				ArrayList<Review> rlist = rdao.wholeSearch1(user.getUserId(), freeWord, priceA, priceB, evaA, evaB, createdA, createdB);
 
 				//「すべて」選択時の検索結果のユーザーデータをulistに格納
 				ArrayList<User> ulist = udao.search(freeWord);

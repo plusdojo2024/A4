@@ -317,35 +317,35 @@ public class MyReviewServlet extends HttpServlet {
 		Review review5 = new Review();
 
 		//レビュー項目１のデータを格納
-		review1 = ritemDao.viewItem1(category2Id);
+		review1 = ritemDao.viewItem1(reviewId);
 
 		//レビュー項目１スコアのデータを格納
-		rscoreDao.viewScore1(reviewId, review1);
+		rscoreDao.viewScore1(review1);
 
 
 		//レビュー項目２のデータを格納
-		review2 = ritemDao.viewItem2(category2Id);
+		review2 = ritemDao.viewItem2(reviewId);
 
 		//レビュー項目２スコアのデータを格納
-		rscoreDao.viewScore2(reviewId, review2);
+		rscoreDao.viewScore2(review2);
 
 		//レビュー項目３のデータを格納
-		review3 = ritemDao.viewItem3(category2Id);
+		review3 = ritemDao.viewItem3(reviewId);
 
 		//レビュー項目３スコアのデータを格納
-		rscoreDao.viewScore3(reviewId, review3);
+		rscoreDao.viewScore3(review3);
 
 		//レビュー項目４のデータを格納
-		review1 = ritemDao.viewItem4(category2Id);
+		review4 = ritemDao.viewItem4(reviewId);
 
 		//レビュー項目４スコアのデータを格納
-		rscoreDao.viewScore4(reviewId, review4);
+		rscoreDao.viewScore4(review4);
 
 		//レビュー項目５のデータを格納
-		review1 = ritemDao.viewItem5(category2Id);
+		review5 = ritemDao.viewItem5(reviewId);
 
 		//レビュー項目１スコアのデータを格納
-		rscoreDao.viewScore5(reviewId, review5);
+		rscoreDao.viewScore5(review5);
 
 		//レビュー項目１、レビュー項目１スコアのデータをスコープに格納
 		request.setAttribute("review1", review1);
