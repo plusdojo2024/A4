@@ -25,7 +25,7 @@ public class ListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
-			if (session.getAttribute("id") == null) {
+		if (session.getAttribute("user") == null) {
 			response.sendRedirect("/A4/LoginServlet");
 			return;
 		}
@@ -45,7 +45,7 @@ public class ListServlet extends HttpServlet {
 
 	    //リスト数を数えてlistに格納
 		for (List li : list) {
-			lrdao.countList(li.getListId());
+			lrdao.countList(li);
 		}
 
 	    request.setAttribute("list", list);
@@ -59,16 +59,29 @@ public class ListServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
-//		HttpSession session = request.getSession();
-//			if (session.getAttribute("id") == null) {
-//			response.sendRedirect("/A4/LoginServlet");
-//			return;
-//		}
+		HttpSession session = request.getSession();
+			if (session.getAttribute("user") == null) {
+			response.sendRedirect("/A4/LoginServlet");
+			return;
+		}
+
+		//リストDAOをインスタンス化
+		ListDAO ldao = new ListDAO();
+
+		//ログイン時に受け取ったユーザー情報を取得する
+		User user = (User)session.getAttribute("user");
 
 		//リスト新規登録
 		if (request.getParameter("submit").equals("新規リスト登録")) {
-
+			String listName = request.getParameter("list_name");
+			ldao.insert(listName, user.getUserId());
 		}
+
+		//個々のリストを押したとき
+		if (request.getParameter("list_id") != null) {
+			int listId = Integer.parseInt(request.getParameter("list_id"));
+		}
+
 
 		//↓マイレビューサーブレットと同じ
 

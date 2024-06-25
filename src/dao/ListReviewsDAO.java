@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import model.List;
 import model.Review;
 
 //userテーブルとやり取りをするクラス
@@ -106,9 +107,8 @@ public class ListReviewsDAO {
 	}
 
 	//リストの数を数える（リスト項目表示画面のリスト数を表示するために使用する）
-	public int countList(int listId) {
+	public void countList(List list) {
 		Connection conn = null;
-		int num = 0;
 
 		try {
 			// JDBCドライバを読み込む
@@ -120,21 +120,23 @@ public class ListReviewsDAO {
 			// SELECT文を準備する
 			String sql = "SELECT COUNT(*) list_review_id FROM list_reviews WHERE list_id = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setInt(1, listId);
+			pStmt.setInt(1, list.getListId());
 
-			// SELECT文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
 
-			// ユーザーIDとパスワードが一致するユーザーがいたかどうかをチェックする
-			rs.next();
-			num = rs.getInt("COUNT(*)");
+			// 結果表をコレクションにコピーする
+			while (rs.next()) {
+				list.setListCount(rs.getInt("COUNT(*)"));
+			}
 
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
+			list = null;
 		}
 		catch (ClassNotFoundException e) {
 			e.printStackTrace();
+			list = null;
 		}
 		finally {
 			// データベースを切断
@@ -144,16 +146,15 @@ public class ListReviewsDAO {
 				}
 				catch (SQLException e) {
 					e.printStackTrace();
+					list = null;
 				}
 			}
 		}
 
-		// 結果を返す
-		return num;
 	}
 
 	//リスト内でのレビュー表示
-	public void view(int listId) {
+	public ArrayList<Review> view(int listId) {
 
 		Connection conn = null;
 		ArrayList<Review> list = new ArrayList<>();
@@ -190,7 +191,9 @@ public class ListReviewsDAO {
 					+ "LEFT OUTER JOIN users ON users.user_id = reviews.user_id "
 					+ "LEFT OUTER JOIN list ON list.list_id = list_reviews.list_id "
 					+ "WHERE reviews.delete_flg = 1"
-			        + "AND list.list_id = ?";
+			        + "AND list.list_id = ?"
+			        + "ORDER BY list_name ASC";
+
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			pStmt.setInt(1, listId);

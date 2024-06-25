@@ -168,7 +168,7 @@ public class ListDAO {
 			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4DB",id,pw);
 
 			// SELECT文を準備する
-			String sql = "SELECT * FROM list WHERE user_id = ? AND delete_flg = 1";
+			String sql = "SELECT * FROM list WHERE user_id = ? AND delete_flg = 1 ORDER BY list_name ASC";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setInt(1, userId);//引数sqlにsetStringしてる
 
