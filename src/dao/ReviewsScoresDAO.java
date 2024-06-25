@@ -242,7 +242,7 @@ public class ReviewsScoresDAO {
 
 			// SELECT文を準備する
 			String sql = "SELECT review_score_id, review_item1_score, review_item2_score, review_item3_score, reveiw_item4_score, review_item5_score, score_avg FROM reviews_scores "
-					+ "WHERE review_score_id = (select max(review_id = ?) from reviews_items)";
+					+ "WHERE review_score_id = (select max(review_id = ?) from reviews_scores)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setInt(1, reviewId);
 

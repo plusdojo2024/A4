@@ -16,6 +16,8 @@ import javax.servlet.http.HttpSession;
 
 import dao.Categorys1DAO;
 import dao.ReviewsDAO;
+import dao.ReviewsItemsDAO;
+import dao.ReviewsScoresDAO;
 import dao.UsersDAO;
 import model.Category;
 import model.Count;
@@ -37,6 +39,12 @@ public class SearchServlet extends HttpServlet {
 		//ReviewsDAOをインスタンス化
 		ReviewsDAO rdao = new ReviewsDAO();
 
+		//ReviewsItemsDAOをインスタンス化
+		ReviewsItemsDAO ridao = new ReviewsItemsDAO();
+
+		//ReviewsScoresDAOをインスタンス化
+		ReviewsScoresDAO rsdao = new ReviewsScoresDAO();
+
 		//UsersDAOをインスタンス化
 		UsersDAO udao = new UsersDAO();
 
@@ -46,23 +54,27 @@ public class SearchServlet extends HttpServlet {
 		//「すべて」選択時かつ「検索ボタン」が押されていない時の表示用レビューデータをrlistに格納
 		ArrayList<Review> rlist = rdao.view();
 
+		//レビュー項目をrlistに追加
+		for (Review r : rlist) {
+			ridao.view(r.getReviewId(), r);
+		}
+
+		//レビュースコアをrlistに追加
+		for (Review r: rlist) {
+			rsdao.view(r.getReviewId(), r);
+		}
+
 		//「すべて」選択時かつ「検索ボタン」が押されていない時の表示用ユーザーデータをulistに格納
 		ArrayList<User> ulist = udao.view();
 
 		//「すべて」選択時のレビューの検索結果の数を数える
-		int sum1 = 0;
-		for(Review r : rlist) {
-			sum1+=1;
-		}
+		int sum1 = rlist.size();
 
 		//Count.javaのreviewSearchCountに数えた数を格納
 		co.setReviewSearchCount(sum1);
 
 		//「すべて」選択時のユーザーの検索結果の数を数える
-		int sum2 = 0;
-		for(User u : ulist) {
-			sum2+=1;
-		}
+		int sum2 = ulist.size();
 
 		//Count.javaのuserSearchCountに数えた数を格納
 		co.setUserSearchCount(sum2);
@@ -95,6 +107,12 @@ public class SearchServlet extends HttpServlet {
 
 		//ReviewsDAOをインスタンス化
 		ReviewsDAO rdao = new ReviewsDAO();
+
+		//ReviewsItemsDAOをインスタンス化
+		ReviewsItemsDAO ridao = new ReviewsItemsDAO();
+
+		//ReviewsScoresDAOをインスタンス化
+		ReviewsScoresDAO rsdao = new ReviewsScoresDAO();
 
 		//UsersDAOをインスタンス化
 		UsersDAO udao = new UsersDAO();
@@ -151,23 +169,27 @@ public class SearchServlet extends HttpServlet {
 				//小カテゴリー選択時の検索結果のレビューデータをrlistに格納
 				ArrayList<Review> rlist = rdao.wholeSearch2(user.getUserId(), category2Id, freeWord, priceA, priceB, evaA, evaB, createdA, createdB);
 
+				//レビュー項目をrlistに追加
+				for (Review r : rlist) {
+					ridao.view(r.getReviewId(), r);
+				}
+
+				//レビュースコアをrlistに追加
+				for (Review r: rlist) {
+					rsdao.view(r.getReviewId(), r);
+				}
+
 				//検索結果のユーザーデータをulistに格納
 				ArrayList<User> ulist = udao.search(freeWord);
 
 				//レビューの検索結果の数を調べる
-				int sum1 = 0;
-				for(Review r : rlist) {
-					sum1+=1;
-				}
+				int sum1 = rlist.size();
 
 				//Count.javaのreviewSearchCountに数えたレビュー数を格納
 				co.setReviewSearchCount(sum1);
 
 				//ユーザーの検索結果の数を数える
-				int sum2 = 0;
-				for(User u : ulist) {
-					sum2+=2;
-				}
+				int sum2 = ulist.size();
 
 				//Count.javaのuserSearchCountに数えたユーザー数を格納
 				co.setUserSearchCount(sum2);
@@ -186,23 +208,27 @@ public class SearchServlet extends HttpServlet {
 			    //カテゴリー選択時かつ「検索ボタン」が押されていない時の表示用データをlistに格納
 				ArrayList<Review> rlist = rdao.view3(category2Id);
 
+				//レビュー項目をrlistに追加
+				for (Review r : rlist) {
+					ridao.view(r.getReviewId(), r);
+				}
+
+				//レビュースコアをrlistに追加
+				for (Review r: rlist) {
+					rsdao.view(r.getReviewId(), r);
+				}
+
 				//すべてのユーザー情報をlistに格納
 				ArrayList<User> ulist = udao.view();
 
 				//選択したカテゴリーの検索結果のレビュー数を調べる
-				int sum1 = 0;
-				for(Review r : rlist) {
-					sum1+=1;
-				}
+				int sum1 = rlist.size();
 
 				//Count.javaのreviewSearchCountに数えたレビュー数を格納
 				co.setReviewSearchCount(sum1);
 
 				//すべてのユーザーの検索結果の数を数える
-				int sum2 = 0;
-				for(User u : ulist) {
-					sum2+=2;
-				}
+				int sum2 = ulist.size();
 
 				//Count.javaのuserSearchCountにすべてのユーザー数を格納
 				co.setUserSearchCount(sum2);
@@ -260,23 +286,27 @@ public class SearchServlet extends HttpServlet {
 				//「すべて」選択時の検索結果のレビューデータをrlistに格納
 				ArrayList<Review> rlist = rdao.wholeSearch1(user.getUserId(), freeWord, priceA, priceB, evaA, evaB, createdA, createdB);
 
+				//レビュー項目をrlistに追加
+				for (Review r : rlist) {
+					ridao.view(r.getReviewId(), r);
+				}
+
+				//レビュースコアをrlistに追加
+				for (Review r: rlist) {
+					rsdao.view(r.getReviewId(), r);
+				}
+
 				//「すべて」選択時の検索結果のユーザーデータをulistに格納
 				ArrayList<User> ulist = udao.search(freeWord);
 
 				//「すべて」選択時のレビューの検索結果の数を数える
-				int sum1 = 0;
-				for(Review r : rlist) {
-					sum1+=1;
-				}
+				int sum1 = rlist.size();
 
 				//Count.javaのreviewSearchCountに数えた数を格納
 				co.setReviewSearchCount(sum1);
 
 				//「すべて」選択時のユーザーの検索結果の数を数える
-				int sum2 = 0;
-				for(User u : ulist) {
-					sum2+=1;
-				}
+				int sum2 = ulist.size();
 
 				//Count.javaのuserSearchCountに数えた数を格納
 				co.setUserSearchCount(sum2);
@@ -294,23 +324,27 @@ public class SearchServlet extends HttpServlet {
 				//「すべて」選択時かつ「検索ボタン」が押されていない時の表示用レビューデータをrlistに格納
 				ArrayList<Review> rlist = rdao.view();
 
+				//レビュー項目をrlistに追加
+				for (Review r : rlist) {
+					ridao.view(r.getReviewId(), r);
+				}
+
+				//レビュースコアをrlistに追加
+				for (Review r: rlist) {
+					rsdao.view(r.getReviewId(), r);
+				}
+
 				//「すべて」選択時かつ「検索ボタン」が押されていない時の表示用ユーザーデータをulistに格納
 				ArrayList<User> ulist = udao.view();
 
 				//「すべて」選択時のレビューの検索結果の数を数える
-				int sum1 = 0;
-				for(Review r : rlist) {
-					sum1+=1;
-				}
+				int sum1 = rlist.size();
 
 				//Count.javaのreviewSearchCountに数えた数を格納
 				co.setReviewSearchCount(sum1);
 
 				//「すべて」選択時のユーザーの検索結果の数を数える
-				int sum2 = 0;
-				for(User u : ulist) {
-					sum2+=1;
-				}
+				int sum2 = ulist.size();
 
 				//Count.javaのuserSearchCountに数えた数を格納
 				co.setUserSearchCount(sum2);
