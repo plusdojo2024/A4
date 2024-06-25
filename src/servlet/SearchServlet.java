@@ -101,7 +101,7 @@ public class SearchServlet extends HttpServlet {
 			response.sendRedirect("/A4/LoginServlet");
 			return;
 		}
-
+		request.setCharacterEncoding("UTF-8");
 		//ログイン時に受け取ったユーザー情報を取得する
 	    User user = (User)session.getAttribute("user");
 
@@ -251,19 +251,37 @@ public class SearchServlet extends HttpServlet {
 				request.setCharacterEncoding("UTF-8");
 				//価格検索のテキストの内容を取得する文
 				String freeWord = request.getParameter("freeWord");
+
 				String stpriceA = request.getParameter("price_a");
-				int priceA = Integer.parseInt(stpriceA);
+				int priceA =0;
+				int priceB = 9999999;
+				if(!stpriceA.equals("")) {
+					priceA = Integer.parseInt(stpriceA);
+				}
 				String stpriceB = request.getParameter("price_b");
-				int priceB = Integer.parseInt(stpriceB);
+				if(!stpriceB.equals("")) {
+					priceB = Integer.parseInt(stpriceB);
+				}
 
 				//評価検索のテキストの内容を取得する文
+				int evaA =0;
+				int evaB =5;
 				String stevaA = request.getParameter("eva_a");
-				int evaA = Integer.parseInt(stevaA);
+				if(!stevaA.equals("")) {
+					evaA = Integer.parseInt(stevaA);
+				}
 				String stevaB = request.getParameter("eva_b");
-				int evaB = Integer.parseInt(stevaB);
+				if(!stevaB.equals("")) {
+					evaB = Integer.parseInt(stevaB);
+				}
+
 
 				//日付検索のテキストの内容を取得する文
-				String stcreatedA = request.getParameter("created_a");
+				String stcreatedA ="0001-01-01:00:00:00";
+				if(!request.getParameter("created_a").equals("")) {
+					stcreatedA = request.getParameter("created_a");
+				}
+
 				SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd:HH:mm:ss");
 				java.util.Date parsedDate = null;
 				try {
@@ -273,8 +291,10 @@ public class SearchServlet extends HttpServlet {
 					e.printStackTrace();
 				}
 				Timestamp createdA = new Timestamp(parsedDate.getTime());
-
-				String stcreatedB = request.getParameter("created_b");
+				String stcreatedB ="9999-12-12:00:00:00";
+				if(!request.getParameter("created_b").equals("")) {
+					stcreatedB = request.getParameter("created_b");
+				}
 				try {
 				 	parsedDate = f.parse(stcreatedB);
 				} catch (ParseException e) {

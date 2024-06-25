@@ -33,9 +33,9 @@
 				<form method="post" action="/A4/SearchServlet">
 				<input type="checkbox" id="search_drop" class="search_drop">
       			<label for="search_drop">検索</label>
-      		
+
 				<!-- ↓レビューアイテムのモーダルのエリア↓ -->
-				
+
 				<ul id="search_drop_menu" class="search_drop_menu">
 					<li>
 						<input type="checkbox" id="search_drop" class="search_drop">
