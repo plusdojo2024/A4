@@ -48,14 +48,22 @@ public class MyReviewServlet extends HttpServlet {
 
 		//すべてのレビューを持ってくる
 		ReviewsDAO rDao = new ReviewsDAO();
-		ArrayList<Review> myAllReview = rDao.descDateView(id);
+		ArrayList<Review> myAllReview0 = rDao.descDateView(id);
+		int tai=0;
+		ArrayList<Review> myAllReview = new ArrayList<>();
+		//重複するものを排除
+		for(Review r : myAllReview0) {
+			if(r.getReviewId()!=tai) {
+				tai = r.getReviewId();
+				myAllReview.add(r);
+			}
+		}
 		//大カテゴリー、小カテゴリーも一緒に持ってくる
 		Categorys1DAO dao = new Categorys1DAO();
 		ArrayList<Category> categoryList = (ArrayList<Category>)dao.AllSelectCategory();
 		//フォローしてる人を取ってくる
 		FollowsDao fDao = new FollowsDao();
 		ArrayList<User> fUserList = fDao.followSelect(id);
-
 		request.setAttribute("list", myAllReview);
 		request.setAttribute("categoryList", categoryList);
 		request.setAttribute("fUserList", fUserList);
@@ -81,7 +89,7 @@ public class MyReviewServlet extends HttpServlet {
 
 
 		//レビュー新規登録
-		if (request.getParameter("submit").equals("新規登録")) {
+		if (request.getParameter("submit")!=null && request.getParameter("submit").equals("新規登録")) {
 			int reviewId = Integer.parseInt(request.getParameter("reviewId"));
 			int category2Id = Integer.parseInt(request.getParameter("category2Id"));
 			String reviewName = request.getParameter("reviewName");
@@ -135,7 +143,7 @@ public class MyReviewServlet extends HttpServlet {
 
 
 		//レビュー削除
-		else if(request.getParameter("submit").equals("削除")) {
+		else if(request.getParameter("submit")!=null && request.getParameter("submit").equals("削除")) {
 
 			int reviewId = Integer.parseInt(request.getParameter("reviewId"));
 
@@ -159,10 +167,13 @@ public class MyReviewServlet extends HttpServlet {
 			String reviewName = request.getParameter("reviewName");
 			int reviewPrice = Integer.parseInt(request.getParameter("reviewPrice"));
 			String reviewComment = request.getParameter("reviewComment");
-			int privacyFlg = Integer.parseInt(request.getParameter("privacyFlg"));
+			int privacyFlg = Integer.parseInt(request.getParameter("rPrivacyFlg"));
 			String UpDatedAt = request.getParameter("UpDatedAt");
+			UpDatedAt =UpDatedAt.replace("00:00:00.0","");
+			System.out.println(UpDatedAt+"あぷあぷ");
 			//String型からTimestamp型へ変換
-			SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd:HH:mm:ss");
+			SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+			System.out.println(f+"えふぅ");
 			java.util.Date parsedDate=null;
 			try {
 				parsedDate = f.parse(UpDatedAt);
@@ -188,25 +199,67 @@ public class MyReviewServlet extends HttpServlet {
 			String backnumberContent = request.getParameter("backnumberContent");
 			int backnumberId = Integer.parseInt(request.getParameter("backnumberId"));
 
+			ReviewsDAO dao1 = new ReviewsDAO();
+			//とりあえず、全てのレビューの情報を取得してくる
+			ArrayList<Review> re = dao1.view4();
+		    Review review = new Review();
+		    //選んだreviewIdのコンテンツの情報を取得
+			for(Review r : re) {
+				if(r.getReviewId()==reviewId) {
+					review = r;
+					break;
+				}
+			}
+
+
+
 			ReviewsDAO rDao = new ReviewsDAO();
 			int result1 = rDao.update(category2Id,reviewName, reviewPrice, reviewComment, privacyFlg, upDatedAt, reviewId);
 			ReviewsImgsDAO rimgsDao = new ReviewsImgsDAO();
-			int result2 = rimgsDao.insert(reviewId, reviewImg);
+			int result2 = rimgsDao.update(reviewId, reviewImg);
 			ReviewsItemsDAO ritemDao = new ReviewsItemsDAO();
-			int result3 = ritemDao.insert(category2Id, reviewItem1, reviewItem2, reviewItem3, reviewItem4, reviewItem5);
+			int result3 = ritemDao.update(review.getReviewItemId(),review.getReviewId(), reviewItem1, reviewItem2, reviewItem3, reviewItem4, reviewItem5);
 			ReviewsScoresDAO rSDao = new ReviewsScoresDAO();
-			int result4 = rSDao.insert(reviewId,reviewItem1Score, reviewItem2Score, reviewItem3Score, reviewItem4Score, reviewItem5Score);
+			int result4 = rSDao.update(review.getReviewScoreId(),review.getReviewId(),reviewItem1Score, reviewItem2Score, reviewItem3Score, reviewItem4Score, reviewItem5Score);
 			BacknumbersDAO bDao = new BacknumbersDAO();
-			int result5 = bDao.insert(backnumberContent);
-			int result6 = bDao.delete(backnumberId);
-			int result7 = bDao.update(backnumberId, backnumberContent);
+			int result5 = bDao.insert(reviewId,backnumberContent);
+			/*int result6 = bDao.delete(backnumberId);*/
+			/*int result7 = bDao.update(backnumberId, backnumberContent);
+			*/
 
-
-			if (result1 == 1 &&result2 == 1 &&result3 == 1 &&result4 == 1 &&result5 == 1 &&result6 == 1 &&result7 == 1) {
+			if (result1 == 1 &&result2 == 1 &&result3 == 1 &&result4 == 1 &&result5 == 1) {
 				request.setAttribute("result", "更新しました。");
 			} else {
 				request.setAttribute("result", "更新できませんでした");
 			}
+			User user1 = (User)session.getAttribute("user");
+			int id1 = user1.getUserId();
+
+			//すべてのレビューを持ってくる
+			ReviewsDAO rDao1 = new ReviewsDAO();
+			ArrayList<Review> myAllReview0 = rDao1.descDateView(id1);
+			ArrayList<Review> myAllReview = new ArrayList<Review>();
+			int tai = 0;
+			//重複するものを排除
+			for(Review r : myAllReview0) {
+				if(r.getReviewId()!=tai) {
+					tai = r.getReviewId();
+					myAllReview.add(r);
+				}
+			}
+
+			BacknumbersDAO backDao = new BacknumbersDAO();
+			ArrayList<Review> bkList = backDao.getBackNumbers(reviewId);
+
+			//大カテゴリー、小カテゴリーも一緒に持ってくる
+			Categorys1DAO dao = new Categorys1DAO();
+			ArrayList<Category> categoryList = (ArrayList<Category>)dao.AllSelectCategory();
+			//フォローしてる人を取ってくる
+			FollowsDao fDao = new FollowsDao();
+			ArrayList<User> fUserList = fDao.followSelect(id1);
+			request.setAttribute("list", myAllReview);
+			request.setAttribute("categoryList", categoryList);
+			request.setAttribute("fUserList", fUserList);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/my_review.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -279,52 +332,52 @@ public class MyReviewServlet extends HttpServlet {
 		//↓レビュー表示用
 
 
+		 if(request.getParameter("submit")!=null && request.getParameter("submit").equals("検索")) {
+			//価格検索のテキストの内容を取得する文
+			int category2Id = Integer.parseInt(request.getParameter("category2Id"));
+			String freeWord = request.getParameter("freeWord");
+			String stpriceA = request.getParameter("price_a");
+			int priceA = Integer.parseInt(stpriceA);
+			String stpriceB = request.getParameter("price_b");
+			int priceB = Integer.parseInt(stpriceB);
 
-		//価格検索のテキストの内容を取得する文
-		int category2Id = Integer.parseInt(request.getParameter("category"));
-		String freeWord = request.getParameter("freeWord");
-		String stpriceA = request.getParameter("price_a");
-		int priceA = Integer.parseInt(stpriceA);
-		String stpriceB = request.getParameter("price_b");
-		int priceB = Integer.parseInt(stpriceB);
+			//評価検索のテキストの内容を取得する文
+			String stevaA = request.getParameter("eva_a");
+			int evaA = Integer.parseInt(stevaA);
+			String stevaB = request.getParameter("eva_b");
+			int evaB = Integer.parseInt(stevaB);
 
-		//評価検索のテキストの内容を取得する文
-		String stevaA = request.getParameter("eva_a");
-		int evaA = Integer.parseInt(stevaA);
-		String stevaB = request.getParameter("eva_b");
-		int evaB = Integer.parseInt(stevaB);
+			//日付検索のテキストの内容を取得する文
+			String stcreatedA = request.getParameter("created_a");
+			SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd:HH:mm:ss");
+			java.util.Date parsedDate = null;
+			try {
+			 	parsedDate = f.parse(stcreatedA);
+			} catch (ParseException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
+			Timestamp createdA = new Timestamp(parsedDate.getTime());
 
-		//日付検索のテキストの内容を取得する文
-		String stcreatedA = request.getParameter("created_a");
-		SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd:HH:mm:ss");
-		java.util.Date parsedDate = null;
-		try {
-		 	parsedDate = f.parse(stcreatedA);
-		} catch (ParseException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
-		Timestamp createdA = new Timestamp(parsedDate.getTime());
-
-		String stcreatedB = request.getParameter("created_b");
-		try {
-		 	parsedDate = f.parse(stcreatedB);
-		} catch (ParseException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
-		Timestamp createdB = new Timestamp(parsedDate.getTime());
+			String stcreatedB = request.getParameter("created_b");
+			try {
+			 	parsedDate = f.parse(stcreatedB);
+			} catch (ParseException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
+			Timestamp createdB = new Timestamp(parsedDate.getTime());
 
 
 
-		//ReviewsDAOをインスタンス化
-		ReviewsDAO rDao = new ReviewsDAO();
+			//ReviewsDAOをインスタンス化
+			ReviewsDAO rDao = new ReviewsDAO();
 
-		//ReviewItemsDAOをインスタンス化
-		ReviewsItemsDAO ritemDao = new ReviewsItemsDAO();
+			//ReviewItemsDAOをインスタンス化
+			ReviewsItemsDAO ritemDao = new ReviewsItemsDAO();
 
-		//ReviewScoresDAOをインスタンス化
-		ReviewsScoresDAO rscoreDao  = new ReviewsScoresDAO();
+			//ReviewScoresDAOをインスタンス化
+			ReviewsScoresDAO rscoreDao  = new ReviewsScoresDAO();
 
 		//↓全体検索画面のレビュー表示について
 
@@ -985,7 +1038,7 @@ public class MyReviewServlet extends HttpServlet {
 		//JSPに処理を委譲
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/my_review.jsp");
 		dispatcher.forward(request, response);
-
+		 }
 	}
 
 }

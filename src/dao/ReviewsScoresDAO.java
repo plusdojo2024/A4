@@ -46,7 +46,7 @@ public class ReviewsScoresDAO {
 			double scoreAvg = (double)sum / count;
 
 			// SELECT文を準備する
-			String sql = "INSERT INTO reviews_scores (review_id, review_item1_score, review_item2_score, review_item3_score, review_item4, review_item5, score_avg) VALUES (?, ?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO reviews_scores (review_id, review_item1_score, review_item2_score, review_item3_score, review_item4_score, review_item5_score, score_avg) VALUES (?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			pStmt.setInt(1, reviewId);//

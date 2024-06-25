@@ -118,6 +118,7 @@ input[name="tab_item"] {
 	<h2 class="my">
 	<a>マイレビュー</a>
 	</h2>
+	<span style="color:red">${result}</span>
 	<!-- ↓ドロップのエリア↓ -->
 	<div id="drop-down-menu">
 		<div class="dropdown all" >
@@ -166,6 +167,7 @@ input[name="tab_item"] {
     			<div class= "item_img"><img src="/A4/img/myicon.jpg" width="100" height="100" alt="マイアイコン"></div>
     			<div class="grid_item2">
     				<h1>${e.reviewName}</h1>
+
     				<p class= "item_text">テキスト</p>
     				<p class= "item_text">テキスト</p>
     			</div>
@@ -181,12 +183,28 @@ input[name="tab_item"] {
         			<img class="modal_img" src="/A4/img/myicon.jpg">
         			<div class="modal_text">
         				<div class="title_box">
+
         					<!-- ↓これが俺たちのIDだーーーー！！！↓ -->
-        					<input type="hidden" name="reviewId" value="${e.reviewId}">
-        					<input type="text" name="number" value="${e.number}" readonly="readonly">
+        					<input type="text" name="reviewId" value="${e.reviewId}">
+        					<input type="text" name="category2Id" value="${e.category2Id}">
+        					<input type="text" name="reviewName" value="${e.reviewName}">
+        					<input type="text" name="reviewPrice" value="${e.reviewPrice}">
+        					<input type="text" name="reviewComment" value="${e.reviewComment}">
+        					<input type="text" name="rPrivacyFlg" value="${e.rPrivacyFlg}">
+        					<input type="text" name="UpDatedAt" value="${e.rUpdatedAt}">
+        					<input type="text" name="reviewItem1Score" value="${e.reviewItem1Score}">
+        					<input type="text" name="reviewItem2Score" value="${e.reviewItem2Score}">
+        					<input type="text" name="reviewItem3Score" value="${e.reviewItem3Score}">
+        					<input type="text" name="reviewItem4Score" value="${e.reviewItem4Score}">
+        					<input type="text" name="reviewItem5Score" value="${e.reviewItem5Score}">
+        					<input type="text" name="backnumberContent" value="${e.backnumberContent}">
+        					<input type="text" name="backnumberId" value="${e.backnumberId}">
+
         					<!-- ↑これが俺たちのIDだーーーー！！！↑ -->
+
         					<p class="create_at">${e.rCreatedAt}</p>
         					<h1 class="modal_title">${e.reviewName}</h1>
+        					<input type="text" name="reviewName" value="${e.reviewName}">
         				</div>
         				<div class="modal_grid">
         					<div class="modal_grid_left">
@@ -253,6 +271,8 @@ input[name="tab_item"] {
         				</div>
         			</div>
         			<input class="remarks" type="text" name="reviewComment" value="${e.reviewComment}">
+
+        			<input class="back_number" type="hidden" name="backnumberId" value="${e.backnumberId}">
         			<input class="back_number" type="text" name="backnumberContent" value="${e.backnumberContent}">
         			<!-- ↓編集用ボタン（ここから）↓ -->
         			<input type="submit" name="submit" value="更新">
@@ -402,13 +422,13 @@ input[name="tab_item"] {
  	    });
  	    */
  	});
- 	
- 	
- 	
+
+
+
  	/*==============================
  	編集用のモーダルを表示するjs
  	==============================*/
- 	
+
  	/*
  // モーダルウィンドウとボタン、クローズアイコンの要素を取得
  	let edit_modal = document.getElementById("my_edit_Modal");
@@ -437,7 +457,7 @@ input[name="tab_item"] {
  	    }
  	}
  	*/
- /*	
+ /*
  // クリックイベントリスナーを関数にする
     function handleClick(event) {
         // クリックされた要素を取得
