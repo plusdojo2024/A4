@@ -134,8 +134,8 @@ public class ReviewsDAO{
 		return list;
 	}
 
-	//検索ページカテゴリーごとすべて
-	public ArrayList<Review> view3(int category2Id) {
+	//全体検索ページにおいてカテゴリー選択時かつ「検索ボタン」が押されていない時
+	public ArrayList<Review> view3(int userId, int category2Id) {
 
 		Connection conn = null;
 		ArrayList<Review> list = new ArrayList<>();
@@ -171,10 +171,16 @@ public class ReviewsDAO{
 					+ "LEFT OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
 					+ "LEFT OUTER JOIN users ON users.user_id = reviews.user_id "
 					+ "LEFT OUTER JOIN list ON list.list_id = list_reviews.list_id "
-					+ "WHERE users.privacy_flg = 1 and reviews.privacy_flg =1 and reviews.delete_flg and categorys2.category2_id = ?";
+					+ "WHERE"
+			        + " reviews.delete_flg = 1"
+					+ "AND"
+			        + "reviews.category2_id = ?"
+			        + "AND"
+					+ "reviews.user_id == ? OR (reviews.privacy_flg = 1 AND users.privacy_flg = 1)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			pStmt.setInt(1, category2Id);
+			pStmt.setInt(2, userId);
 
 			ResultSet rs = pStmt.executeQuery();
 
@@ -880,25 +886,25 @@ public class ReviewsDAO{
 			+ " LEFT OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
 			+ " LEFT OUTER JOIN users ON users.user_id = reviews.user_id "
 			+ " LEFT OUTER JOIN list ON list.list_id = list_reviews.list_id "
-					+ "WHERE reviews.user_id = ? "
-					+ " AND"
+					+ "WHERE"
 					+ " reviews.review_price between ? AND ? AND reviews_scores.score_avg between ? AND ? AND reviews.created_at between ? AND ?"
 					+ " AND"
 					+ " reviews.review_name LIKE ? AND reviews.review_comment LIKE ?"
 			        + " AND "
-			        + " reviews.delete_flg = 1";
-			System.out.println("全体検索："+sql);
-			System.out.println(freeWord+"aaaaaaaa");
+			        + " reviews.delete_flg = 1"
+			        + "AND"
+					+ "reviews.user_id == ? OR (reviews.privacy_flg = 1 AND users.privacy_flg = 1)";
+
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setInt(1, userId);
-			pStmt.setInt(2, priceA);//引数sqlにsetStringしてる
-			pStmt.setInt(3, priceB);
-			pStmt.setInt(4, evaA);
-			pStmt.setInt(5, evaB);
-			pStmt.setTimestamp(6, createdA);
-			pStmt.setTimestamp(7, createdB);
-			pStmt.setString(8, "%"+"aaa"+"%");
-			pStmt.setString(9, "%"+"aaa"+"%");
+			pStmt.setInt(1, priceA);//引数sqlにsetStringしてる
+			pStmt.setInt(2, priceB);
+			pStmt.setInt(3, evaA);
+			pStmt.setInt(4, evaB);
+			pStmt.setTimestamp(5, createdA);
+			pStmt.setTimestamp(6, createdB);
+			pStmt.setString(7, "%"+freeWord+"%");
+			pStmt.setString(8, "%"+freeWord+"%");
+			pStmt.setInt(9, userId);
 
 			// SQL文を実行し、結果表を取得する	検索して結果の表をrsに入れる構文
 			ResultSet rs = pStmt.executeQuery();
@@ -1019,25 +1025,26 @@ public class ReviewsDAO{
 			+ "LEFT OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
 			+ "LEFT OUTER JOIN users ON users.user_id = reviews.user_id "
 			+ "LEFT OUTER JOIN list ON list.list_id = list_reviews.list_id "
-					+ "WHERE reviews.user_id = ? "
+					+ "WHERE"
+					+ "reviews.review_price between ? AND ? AND reviews_scores.score_avg between ? AND ? AND reviews.created_at between ? AND ?"
 					+ "AND"
-					+ "reviews.review_price between ? AND ?, AND reviews_scores.score_avg between ? AND ?, AND reviews.created_at between ? AND ?"
-					+ "AND"
-					+ "reviews.category2_id = ? OR reviews.review_name like ? AND reviews.review_comment like ?"
+					+ "reviews.category2_id = ? AND reviews.review_name LIKE ? AND reviews.review_comment LIKE ?"
 			        + "AND "
-			        + "reviews.delete_flg = 1";
+			        + "reviews.delete_flg = 1"
+					+ "AND"
+					+ "reviews.user_id == ? OR (reviews.privacy_flg = 1 AND users.privacy_flg = 1)";
 
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setInt(1, userId);
-			pStmt.setInt(2, priceA);//引数sqlにsetStringしてる
-			pStmt.setInt(3, priceB);
-			pStmt.setInt(4, evaA);
-			pStmt.setInt(5, evaB);
-			pStmt.setTimestamp(6, createdA);
-			pStmt.setTimestamp(7, createdB);
-			pStmt.setInt(8, category2Id);
+			pStmt.setInt(1, priceA);//引数sqlにsetStringしてる
+			pStmt.setInt(2, priceB);
+			pStmt.setInt(3, evaA);
+			pStmt.setInt(4, evaB);
+			pStmt.setTimestamp(5, createdA);
+			pStmt.setTimestamp(6, createdB);
+			pStmt.setInt(7, category2Id);
+			pStmt.setString(8, "%"+freeWord+"%");
 			pStmt.setString(9, "%"+freeWord+"%");
-			pStmt.setString(10, "%"+freeWord+"%");
+			pStmt.setInt(10, userId);
 
 			// SQL文を実行し、結果表を取得する	検索して結果の表をrsに入れる構文
 			ResultSet rs = pStmt.executeQuery();
@@ -1160,7 +1167,7 @@ public class ReviewsDAO{
 					+ "LEFT OUTER JOIN list ON list.list_id = list_reviews.list_id "
 					+ " WHERE reviews.user_id = ? AND reviews.review_price between ? AND ? AND reviews_scores.score_avg between ? AND ? AND reviews.created_at between ? AND ?"
 					+ "AND"
-					+ "reviews.review_name = ? AND reviews.review_comment = ?"
+					+ "reviews.review_name LIKE ? AND reviews.review_comment LIKE ?"
 					+ "AND"
 					+ "reviews.delete_flg = 1"
 					+ "ORDER BY reviews.updated_at ASC";
@@ -1293,10 +1300,10 @@ public class ReviewsDAO{
 					+ "LEFT OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
 					+ "LEFT OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
 					+ "LEFT OUTER JOIN users ON users.user_id = reviews.user_id "
-					+ "LEFT OUTER JOIN list ON list.list_id = list_reviews.list_id "
+					+ "LEFT OUTER JOIN list ON list.list_id = list_reviewslist_id "
 					+ " WHERE reviews.user_id = ? AND reviews.review_price between ? AND ?, AND reviews_scores.score_avg between ? AND ?, AND reviews.created_at between ? AND ?"
 					+ "AND"
-					+ "reviews.review_name = ? AND reviews.review_comment = ?"
+					+ "reviews.review_name LIKE ? AND reviews.review_comment LIKE ?"
 					+ "AND reviews.delete_flg = 1"
 					+ "ORDER BY reviews.updated_at DESC";
 
@@ -1432,7 +1439,7 @@ public class ReviewsDAO{
 					+ "LEFT OUTER JOIN list ON list.list_id = list_reviews.list_id "
 					+ " WHERE reviews.user_id = ? AND reviews.review_price between ? AND ?, AND reviews_scores.score_avg between ? AND ?, AND reviews.created_at between ? AND ?"
 					+ "AND"
-					+ "reviews.review_name = ? AND reviews.review_comment = ?"
+					+ "reviews.review_name LIKE ? AND reviews.review_comment LIKE ?"
 					+ "AND reviews.delete_flg = 1"
 					+ "ORDER BY reviews.review_price ASC";
 
@@ -1568,7 +1575,7 @@ public class ReviewsDAO{
 					+ "LEFT OUTER JOIN list ON list.list_id = list_reviews.list_id "
 					+ " WHERE reviews.user_id = ? AND reviews.review_price between ? AND ?, AND reviews_scores.score_avg between ? AND ?, AND reviews.created_at between ? AND ?"
 					+ "AND"
-					+ "reviews.review_name = ?, reviews.review_comment = ?"
+					+ "reviews.review_name LIKE ? AND reviews.review_comment LIKE ?"
 					+ "AND reviews.delete_flg = 1"
 					+ "ORDER BY reviews.review_price DESC";
 
@@ -1704,7 +1711,7 @@ public class ReviewsDAO{
 					+ "LEFT OUTER JOIN list ON list.list_id = list_reviews.list_id "
 					+ " WHERE reviews.user_id = ? AND reviews.review_price between ? AND ?, AND reviews_scores.score_avg between ? AND ?, AND reviews.created_at between ? AND ?"
 					+ "AND"
-					+ "reviews.review_name = ?, reviews.review_comment = ?"
+					+ "reviews.review_name LIKE ? AND reviews.review_comment LIKE ?"
 					+ "AND reviews.delete_flg = 1"
 					+ "ORDER BY reviews_scores.score_avg ASC";
 
@@ -1840,7 +1847,7 @@ public class ReviewsDAO{
 					+ "LEFT OUTER JOIN list ON list.list_id = list_reviews.list_id "
 					+ " WHERE reviews.user_id = ? AND reviews.review_price between ? AND ?, AND reviews_scores.score_avg between ? AND ?, AND reviews.created_at between ? AND ?"
 					+ "AND"
-					+ "reviews.review_name = ?, reviews.review_comment = ?"
+					+ "reviews.review_name LIKE ? AND reviews.review_comment LIKE ?"
 					+ "AND reviews.delete_flg = 1"
 					+ "ORDER BY reviews_scores.score_avg DESC";
 
@@ -1976,7 +1983,7 @@ public class ReviewsDAO{
 					+ "LEFT OUTER JOIN list ON list.list_id = list_reviews.list_id "
 					+ " WHERE reviews.user_id = ? AND reviews.review_price between ? AND ?, AND reviews_scores.score_avg between ? AND ?, AND reviews.created_at between ? AND ?"
 					+ "AND"
-					+ "reviews.review_name = ?, reviews.review_comment = ?"
+					+ "reviews.review_name LIKE ? AND reviews.review_comment LIKE ?"
 					+ "AND reviews.delete_flg = 1"
 					+ "ORDER BY reviews.review_name ASC";
 
@@ -2112,7 +2119,7 @@ public class ReviewsDAO{
 					+ "LEFT OUTER JOIN list ON list.list_id = list_reviews.list_id "
 					+ " WHERE reviews.user_id = ? AND reviews.review_price between ? AND ?, AND reviews_scores.score_avg between ? AND ?, AND reviews.created_at between ? AND ?"
 					+ "AND"
-					+ "reviews.review_name = ?, reviews.review_comment = ?"
+					+ "reviews.review_name LIKE ? AND reviews.review_comment LIKE ?"
 					+ "AND reviews.delete_flg = 1"
 					+ "ORDER BY reviews.review_name DESC";
 
@@ -2250,7 +2257,7 @@ public class ReviewsDAO{
 					+ "AND"
 					+ "reviews.review_price between ? AND ?, AND reviews_scores.score_avg between ? AND ?, AND reviews.created_at between ? AND ?"
 					+ "AND"
-					+ "reviews.category2_id = ? AND reviews.review_name = ? AND reviews.review_comment = ?"
+					+ "reviews.category2_id = ? AND reviews.review_name LIKE ? AND reviews.review_comment LIKE ?"
 			        + "AND "
 			        + "reviews.delete_flg = 1"
 			        + "ORDER BY reviews.updated_at ASC";
@@ -2390,7 +2397,7 @@ public class ReviewsDAO{
 					+ "AND"
 					+ "reviews.review_price between ? AND ?, AND reviews_scores.score_avg between ? AND ?, AND reviews.created_at between ? AND ?"
 					+ "AND"
-					+ "reviews.category2_id = ? AND reviews.review_name = ? AND reviews.review_comment = ?"
+					+ "reviews.category2_id = ? AND reviews.review_name LIKE ? AND reviews.review_comment LIKE ?"
 			        + "AND "
 			        + "reviews.delete_flg = 1"
 			        + "ORDER BY reviews.updated_at DESC";
@@ -2530,7 +2537,7 @@ public class ReviewsDAO{
 					+ "AND"
 					+ "reviews.review_price between ? AND ?, AND reviews_scores.score_avg between ? AND ?, AND reviews.created_at between ? AND ?"
 					+ "AND"
-					+ "reviews.category2_id = ? AND reviews.review_name = ? AND reviews.review_comment = ?"
+					+ "reviews.category2_id = ? AND reviews.review_name LIKE ? AND reviews.review_comment LIKE ?"
 			        + "AND "
 			        + "reviews.delete_flg = 1"
 			        + "ORDER BY reviews.review_price ASC";
@@ -2670,7 +2677,7 @@ public class ReviewsDAO{
 					+ "AND"
 					+ " WHERE reviews.review_price between ? AND ?, AND reviews_scores.score_avg between ? AND ?, AND reviews.created_at between ? AND ?"
 					+ "AND"
-					+ "reviews.category2_id = ? AND reviews.review_name = ? AND reviews.review_comment = ?"
+					+ "reviews.category2_id = ? AND reviews.review_name LIKE ? AND reviews.review_comment LIKE ?"
 			        + "AND "
 			        + "reviews.delete_flg = 1"
 			        + "ORDER BY reviews.review_price DESC";
@@ -2810,7 +2817,7 @@ public class ReviewsDAO{
 					+ "AND"
 					+ " WHERE reviews.review_price between ? AND ?, AND reviews_scores.score_avg between ? AND ?, AND reviews.created_at between ? AND ?"
 					+ "AND"
-					+ "reviews.category2_id = ? AND reviews.review_name = ? AND reviews.review_comment = ?"
+					+ "reviews.category2_id = ? AND reviews.review_name LIKE ? AND reviews.review_comment LIKE ?"
 			        + "AND "
 			        + "reviews.delete_flg = 1"
 			        + "ORDER BY reviews_scores.score_avg ASC";
@@ -2950,7 +2957,7 @@ public class ReviewsDAO{
 					+ "AND"
 					+ " WHERE reviews.review_price between ? AND ?, AND reviews_scores.score_avg between ? AND ?, AND reviews.created_at between ? AND ?"
 					+ "AND"
-					+ "reviews.category2_id = ? AND reviews.review_name = ? AND reviews.review_comment = ?"
+					+ "reviews.category2_id = ? AND reviews.review_name LIKE ? AND reviews.review_comment LIKE ?"
 			        + "AND "
 			        + "reviews.delete_flg = 1"
 			        + "ORDER BY reviews_scores.score_avg DESC";
@@ -3090,7 +3097,7 @@ public class ReviewsDAO{
 					+ "AND"
 					+ " WHERE reviews.review_price between ? AND ?, AND reviews_scores.score_avg between ? AND ?, AND reviews.created_at between ? AND ?"
 					+ "AND"
-					+ "reviews.category2_id = ? AND reviews.review_name = ? AND reviews.review_comment = ?"
+					+ "reviews.category2_id = ? AND reviews.review_name LIKE ? AND reviews.review_comment LIKE ?"
 			        + "AND "
 			        + "reviews.delete_flg = 1"
 			        + "ORDER BY reviews.review_name ASC";
@@ -3230,7 +3237,7 @@ public class ReviewsDAO{
 					+ "AND"
 					+ " WHERE reviews.review_price between ? AND ?, AND reviews_scores.score_avg between ? AND ?, AND reviews.created_at between ? AND ?"
 					+ "AND"
-					+ "reviews.category2_id = ? AND reviews.review_name = ? AND reviews.review_comment = ?"
+					+ "reviews.category2_id = ? AND reviews.review_name LIKE ? AND reviews.review_comment LIKE ?"
 			        + "AND "
 			        + "reviews.delete_flg = 1"
 			        + "ORDER BY reviews.review_name DESC";

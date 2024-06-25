@@ -206,7 +206,7 @@ public class SearchServlet extends HttpServlet {
 			} else {
 
 			    //カテゴリー選択時かつ「検索ボタン」が押されていない時の表示用データをlistに格納
-				ArrayList<Review> rlist = rdao.view3(category2Id);
+				ArrayList<Review> rlist = rdao.view3(user.getUserId(), category2Id);
 
 				//レビュー項目をrlistに追加
 				for (Review r : rlist) {

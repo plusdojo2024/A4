@@ -192,7 +192,7 @@ public class ListReviewsDAO {
 					+ "LEFT OUTER JOIN list ON list.list_id = list_reviews.list_id "
 					+ "WHERE reviews.delete_flg = 1"
 			        + "AND list.list_id = ?"
-			        + "ORDER BY list_reviews.list ASC";
+			        + "ORDER BY list_reviews.list_review_id DESC";
 
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
