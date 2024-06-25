@@ -30,10 +30,12 @@
 				<a>すべて</a>
 			</h2>
 			<div class="search_drop" >
+				<form method="post" action="/A4/SearchServlet">
 				<input type="checkbox" id="search_drop" class="search_drop">
       			<label for="search_drop">検索</label>
       		
 				<!-- ↓レビューアイテムのモーダルのエリア↓ -->
+				
 				<ul id="search_drop_menu" class="search_drop_menu">
 					<li>
 						<input type="checkbox" id="search_drop" class="search_drop">
@@ -48,23 +50,21 @@
 						<input class="search_input" type="text" name="price_b">
 					</li>
 					<li>
-						<input list="eva_list_a" id="eva_list_a" class="search_input" name="eva_a">
-						<datalist id="eva_list_a">
-							<option value="1"></option>
-							<option value="2"></option>
-							<option value="3"></option>
-							<option value="4"></option>
-							<option value="5"></option>
-						</datalist>
+						<SELECT class="search_input" id="eva_list_a" name="eva_a">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+						</SELECT>
 						<h1>～</h1>
-						<input list="eva_list_b" id="eva_list_b" class="search_input" name="eva_b">
-						<datalist id="eva_list_b">
-							<option value="1"></option>
-							<option value="2"></option>
-							<option value="3"></option>
-							<option value="4"></option>
-							<option value="5"></option>
-						</datalist>
+						<SELECT class="search_input" id="eva_list_b" name="eva_b">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+						</SELECT>
 					</li>
 					<li>
 						<input class="search_input" type="date" name="created_a">
@@ -73,6 +73,7 @@
 					</li>
 					<li><input class="search_btn" type="submit" name="search" value="検索"></li>
 				</ul>
+				</form>
 				<!-- ↑レビューアイテムのモーダルのエリア↑ -->
 			</div>
 			<div class="container">
