@@ -258,6 +258,31 @@ public class MyReviewServlet extends HttpServlet {
 //		d4.insert(reviewsId,引数);
 		//-------------
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		//↓レビュー表示用
+
+
+
 		//価格検索のテキストの内容を取得する文
 		int category2Id = Integer.parseInt(request.getParameter("category"));
 		String freeWord = request.getParameter("freeWord");
@@ -294,11 +319,9 @@ public class MyReviewServlet extends HttpServlet {
 		Timestamp createdB = new Timestamp(parsedDate.getTime());
 
 
-		//↓レビュー表示用
 
-
-		//Userビーンズをインスタンス化
-		UsersDAO uDao = new UsersDAO();
+		//Review.javaをインスタンス化
+		Review review = new Review();
 
 		//ReviewsDAOをインスタンス化
 		ReviewsDAO rDao = new ReviewsDAO();
@@ -309,56 +332,7 @@ public class MyReviewServlet extends HttpServlet {
 		//ReviewScoresDAOをインスタンス化
 		ReviewsScoresDAO rscoreDao  = new ReviewsScoresDAO();
 
-		//Reviewビーンズを５個作成
-		Review review1 = new Review();
-		Review review2 = new Review();
-		Review review3 = new Review();
-		Review review4 = new Review();
-		Review review5 = new Review();
-
-		//レビュー項目１のデータを格納
-		review1 = ritemDao.viewItem1(reviewId);
-
-		//レビュー項目１スコアのデータを格納
-		rscoreDao.viewScore1(review1);
-
-
-		//レビュー項目２のデータを格納
-		review2 = ritemDao.viewItem2(reviewId);
-
-		//レビュー項目２スコアのデータを格納
-		rscoreDao.viewScore2(review2);
-
-		//レビュー項目３のデータを格納
-		review3 = ritemDao.viewItem3(reviewId);
-
-		//レビュー項目３スコアのデータを格納
-		rscoreDao.viewScore3(review3);
-
-		//レビュー項目４のデータを格納
-		review4 = ritemDao.viewItem4(reviewId);
-
-		//レビュー項目４スコアのデータを格納
-		rscoreDao.viewScore4(review4);
-
-		//レビュー項目５のデータを格納
-		review5 = ritemDao.viewItem5(reviewId);
-
-		//レビュー項目１スコアのデータを格納
-		rscoreDao.viewScore5(review5);
-
-		//レビュー項目１、レビュー項目１スコアのデータをスコープに格納
-		request.setAttribute("review1", review1);
-		//レビュー項目２、レビュー項目２スコアのデータをスコープに格納
-	    request.setAttribute("review2", review2);
-	    //レビュー項目３、レビュー項目３スコアのデータをスコープに格納
-	    request.setAttribute("reveiw3", review3);
-	    //レビュー項目４、レビュー項目４スコアのデータをスコープに格納
-	    request.setAttribute("review4", review4);
-	    //レビュー項目５、レビュー項目５スコアのデータをスコープに格納
-	    request.setAttribute("review5", review5);
-
-	    //ログイン時に受け取ったユーザー情報を取得する
+		//ログイン時に受け取ったユーザー情報を取得する
 	    User user = (User)session.getAttribute("user");
 
 		//↓全体検索画面のレビュー表示について
@@ -382,12 +356,32 @@ public class MyReviewServlet extends HttpServlet {
 	    			if (request.getParameter("search") != null) {
 	    				ArrayList<Review> rlist = rDao.ascWordSearch(user.getUserId(), freeWord, priceA, priceB, evaA, evaB, createdA, createdB);
 
+	    				//レビュー項目をrlistに追加
+	    				for (Review r : rlist) {
+	    					ritemDao.view(r.getReviewId(), r);
+	    				}
+
+	    				//レビュースコアをrlistに追加
+	    				for (Review r: rlist) {
+	    					rscoreDao.view(r.getReviewId(), r);
+	    				}
+
 	    				//スコープに格納
 	    				request.setAttribute("rlist", rlist);
 
 	    			//「すべて」「昇順」「五十音」にならべる
 	    			} else {
 	    				ArrayList<Review> rlist = rDao.ascWordView(user.getUserId());
+
+	    				//レビュー項目をrlistに追加
+	    				for (Review r : rlist) {
+	    					ritemDao.view(r.getReviewId(), r);
+	    				}
+
+	    				//レビュースコアをrlistに追加
+	    				for (Review r: rlist) {
+	    					rscoreDao.view(r.getReviewId(), r);
+	    				}
 
 	    				//スコープに格納
 	    				request.setAttribute("rlist", rlist);
@@ -401,12 +395,32 @@ public class MyReviewServlet extends HttpServlet {
 	    			if (request.getParameter("search") != null) {
 	    				ArrayList<Review> rlist = rDao.ascPriceSearch(user.getUserId(), freeWord, priceA, priceB, evaA, evaB, createdA, createdB);
 
+	    				//レビュー項目をrlistに追加
+	    				for (Review r : rlist) {
+	    					ritemDao.view(r.getReviewId(), r);
+	    				}
+
+	    				//レビュースコアをrlistに追加
+	    				for (Review r: rlist) {
+	    					rscoreDao.view(r.getReviewId(), r);
+	    				}
+
 	    				//スコープに格納
 	    				request.setAttribute("rlist", rlist);
 
 	    			//「すべて」「昇順」「価格」にならべる
 	    			} else {
 	    				ArrayList<Review> rlist = rDao.ascPriceView(user.getUserId());
+
+	    				//レビュー項目をrlistに追加
+	    				for (Review r : rlist) {
+	    					ritemDao.view(r.getReviewId(), r);
+	    				}
+
+	    				//レビュースコアをrlistに追加
+	    				for (Review r: rlist) {
+	    					rscoreDao.view(r.getReviewId(), r);
+	    				}
 
 	    				//スコープに格納
 	    				request.setAttribute("rlist", rlist);
@@ -420,12 +434,32 @@ public class MyReviewServlet extends HttpServlet {
 	    			if (request.getParameter("search") != null) {
 	    				ArrayList<Review> rlist = rDao.ascDateSearch(user.getUserId(), freeWord, priceA, priceB, evaA, evaB, createdA, createdB);
 
+	    				//レビュー項目をrlistに追加
+	    				for (Review r : rlist) {
+	    					ritemDao.view(r.getReviewId(), r);
+	    				}
+
+	    				//レビュースコアをrlistに追加
+	    				for (Review r: rlist) {
+	    					rscoreDao.view(r.getReviewId(), r);
+	    				}
+
 	    				//スコープに格納
 	    				request.setAttribute("rlist", rlist);
 
 	    			//「すべて」「昇順」「更新日」にならべる
 	    			} else {
 	    				ArrayList<Review> rlist = rDao.ascDateView(user.getUserId());
+
+	    				//レビュー項目をrlistに追加
+	    				for (Review r : rlist) {
+	    					ritemDao.view(r.getReviewId(), r);
+	    				}
+
+	    				//レビュースコアをrlistに追加
+	    				for (Review r: rlist) {
+	    					rscoreDao.view(r.getReviewId(), r);
+	    				}
 
 	    				//スコープに格納
 	    				request.setAttribute("rlist", rlist);
@@ -439,12 +473,32 @@ public class MyReviewServlet extends HttpServlet {
 	    			if (request.getParameter("search") != null) {
 	    				ArrayList<Review> rlist = rDao.ascEvaSearch(user.getUserId(), freeWord, priceA, priceB, evaA, evaB, createdA, createdB);
 
+	    				//レビュー項目をrlistに追加
+	    				for (Review r : rlist) {
+	    					ritemDao.view(r.getReviewId(), r);
+	    				}
+
+	    				//レビュースコアをrlistに追加
+	    				for (Review r: rlist) {
+	    					rscoreDao.view(r.getReviewId(), r);
+	    				}
+
 	    				//スコープに格納
 	    				request.setAttribute("rlist", rlist);
 
 	    			//「すべて」「昇順」「評価」にならべる
 	    			} else {
 	    				ArrayList<Review> rlist = rDao.ascEvaView(user.getUserId());
+
+	    				//レビュー項目をrlistに追加
+	    				for (Review r : rlist) {
+	    					ritemDao.view(r.getReviewId(), r);
+	    				}
+
+	    				//レビュースコアをrlistに追加
+	    				for (Review r: rlist) {
+	    					rscoreDao.view(r.getReviewId(), r);
+	    				}
 
 	    				//スコープに格納
 	    				request.setAttribute("rlist", rlist);
@@ -461,12 +515,32 @@ public class MyReviewServlet extends HttpServlet {
 	    			if (request.getParameter("search") != null) {
 	    				ArrayList<Review> rlist = rDao.descWordSearch(user.getUserId(), freeWord, priceA, priceB, evaA, evaB, createdA, createdB);
 
+	    				//レビュー項目をrlistに追加
+	    				for (Review r : rlist) {
+	    					ritemDao.view(r.getReviewId(), r);
+	    				}
+
+	    				//レビュースコアをrlistに追加
+	    				for (Review r: rlist) {
+	    					rscoreDao.view(r.getReviewId(), r);
+	    				}
+
 	    				//スコープに格納
 	    				request.setAttribute("rlist", rlist);
 
 	    			//「すべて」「降順」「五十音」にならべる
 	    			} else {
 	    				ArrayList<Review> rlist = rDao.descWordView(user.getUserId());
+
+	    				//レビュー項目をrlistに追加
+	    				for (Review r : rlist) {
+	    					ritemDao.view(r.getReviewId(), r);
+	    				}
+
+	    				//レビュースコアをrlistに追加
+	    				for (Review r: rlist) {
+	    					rscoreDao.view(r.getReviewId(), r);
+	    				}
 
 	    				//スコープに格納
 	    				request.setAttribute("rlist", rlist);
@@ -480,12 +554,30 @@ public class MyReviewServlet extends HttpServlet {
 	    			if (request.getParameter("search") != null) {
 	    				ArrayList<Review> rlist = rDao.descPriceSearch(user.getUserId(), freeWord, priceA, priceB, evaA, evaB, createdA, createdB);
 
+	    				//レビュー項目をrlistに追加
+	    				for (Review r : rlist) {
+	    					ritemDao.view(r.getReviewId(), r);
+	    				}
+
+	    				//レビュースコアをrlistに追加
+	    				for (Review r: rlist) {
+	    					rscoreDao.view(r.getReviewId(), r);
+	    				}
+
 	    				//スコープに格納
 	    				request.setAttribute("rlist", rlist);
 
 	    			//「すべて」「降順」「価格」にならべる
 	    			} else {
-	    				ArrayList<Review> rlist = rDao.descPriceView(user.getUserId());
+	    				ArrayList<Review> rlist = rDao.descPriceView(user.getUserId());//レビュー項目をrlistに追加
+	    				for (Review r : rlist) {
+	    					ritemDao.view(r.getReviewId(), r);
+	    				}
+
+	    				//レビュースコアをrlistに追加
+	    				for (Review r: rlist) {
+	    					rscoreDao.view(r.getReviewId(), r);
+	    				}
 
 	    				//スコープに格納
 	    				request.setAttribute("rlist", rlist);
@@ -499,12 +591,32 @@ public class MyReviewServlet extends HttpServlet {
 	    			if (request.getParameter("search") != null) {
 	    				ArrayList<Review> rlist = rDao.descDateSearch(user.getUserId(), freeWord, priceA, priceB, evaA, evaB, createdA, createdB);
 
+	    				//レビュー項目をrlistに追加
+	    				for (Review r : rlist) {
+	    					ritemDao.view(r.getReviewId(), r);
+	    				}
+
+	    				//レビュースコアをrlistに追加
+	    				for (Review r: rlist) {
+	    					rscoreDao.view(r.getReviewId(), r);
+	    				}
+
 	    				//スコープに格納
 	    				request.setAttribute("rlist", rlist);
 
 	    			//「すべて」「降順」「更新日」にならべる
 	    			} else {
 	    				ArrayList<Review> rlist = rDao.descDateView(user.getUserId());
+
+	    				//レビュー項目をrlistに追加
+	    				for (Review r : rlist) {
+	    					ritemDao.view(r.getReviewId(), r);
+	    				}
+
+	    				//レビュースコアをrlistに追加
+	    				for (Review r: rlist) {
+	    					rscoreDao.view(r.getReviewId(), r);
+	    				}
 
 	    				//スコープに格納
 	    				request.setAttribute("rlist", rlist);
@@ -518,12 +630,32 @@ public class MyReviewServlet extends HttpServlet {
 	    			if (request.getParameter("search") != null) {
 	    				ArrayList<Review> rlist = rDao.descEvaSearch(user.getUserId(), freeWord, priceA, priceB, evaA, evaB, createdA, createdB);
 
+	    				//レビュー項目をrlistに追加
+	    				for (Review r : rlist) {
+	    					ritemDao.view(r.getReviewId(), r);
+	    				}
+
+	    				//レビュースコアをrlistに追加
+	    				for (Review r: rlist) {
+	    					rscoreDao.view(r.getReviewId(), r);
+	    				}
+
 	    				//スコープに格納
 	    				request.setAttribute("rlist", rlist);
 
 	    			//「すべて」「降順」「評価」にならべる
 	    			} else {
 	    				ArrayList<Review> rlist = rDao.descEvaView(user.getUserId());
+
+	    				//レビュー項目をrlistに追加
+	    				for (Review r : rlist) {
+	    					ritemDao.view(r.getReviewId(), r);
+	    				}
+
+	    				//レビュースコアをrlistに追加
+	    				for (Review r: rlist) {
+	    					rscoreDao.view(r.getReviewId(), r);
+	    				}
 
 	    				//スコープに格納
 	    				request.setAttribute("rlist", rlist);
@@ -546,12 +678,32 @@ public class MyReviewServlet extends HttpServlet {
 	    			if (request.getParameter("search") != null) {
 	    				ArrayList<Review> rlist = rDao.ascWordSearch2(user.getUserId(), category2Id, freeWord, priceA, priceB, evaA, evaB, createdA, createdB);
 
+	    				//レビュー項目をrlistに追加
+	    				for (Review r : rlist) {
+	    					ritemDao.view(r.getReviewId(), r);
+	    				}
+
+	    				//レビュースコアをrlistに追加
+	    				for (Review r: rlist) {
+	    					rscoreDao.view(r.getReviewId(), r);
+	    				}
+
 	    				//スコープに格納
 	    				request.setAttribute("rlist", rlist);
 
 	    			//「小カテゴリー」「昇順」「五十音」にならべる
 	    			} else {
 	    				ArrayList<Review> rlist = rDao.ascWordView2(user.getUserId(), category2Id);
+
+	    				//レビュー項目をrlistに追加
+	    				for (Review r : rlist) {
+	    					ritemDao.view(r.getReviewId(), r);
+	    				}
+
+	    				//レビュースコアをrlistに追加
+	    				for (Review r: rlist) {
+	    					rscoreDao.view(r.getReviewId(), r);
+	    				}
 
 	    				//スコープに格納
 	    				request.setAttribute("rlist", rlist);
@@ -565,12 +717,32 @@ public class MyReviewServlet extends HttpServlet {
 	    			if (request.getParameter("search") != null) {
 	    				ArrayList<Review> rlist = rDao.ascPriceSearch2(user.getUserId(), category2Id, freeWord, priceA, priceB, evaA, evaB, createdA, createdB);
 
+	    				//レビュー項目をrlistに追加
+	    				for (Review r : rlist) {
+	    					ritemDao.view(r.getReviewId(), r);
+	    				}
+
+	    				//レビュースコアをrlistに追加
+	    				for (Review r: rlist) {
+	    					rscoreDao.view(r.getReviewId(), r);
+	    				}
+
 	    				//スコープに格納
 	    				request.setAttribute("rlist", rlist);
 
 	    			//「すべて」「昇順」「価格」にならべる
 	    			} else {
 	    				ArrayList<Review> rlist = rDao.ascPriceView2(user.getUserId(), category2Id);
+
+	    				//レビュー項目をrlistに追加
+	    				for (Review r : rlist) {
+	    					ritemDao.view(r.getReviewId(), r);
+	    				}
+
+	    				//レビュースコアをrlistに追加
+	    				for (Review r: rlist) {
+	    					rscoreDao.view(r.getReviewId(), r);
+	    				}
 
 	    				//スコープに格納
 	    				request.setAttribute("rlist", rlist);
@@ -584,12 +756,32 @@ public class MyReviewServlet extends HttpServlet {
 	    			if (request.getParameter("search") != null) {
 	    				ArrayList<Review> rlist = rDao.ascDateSearch2(user.getUserId(), category2Id, freeWord, priceA, priceB, evaA, evaB, createdA, createdB);
 
+	    				//レビュー項目をrlistに追加
+	    				for (Review r : rlist) {
+	    					ritemDao.view(r.getReviewId(), r);
+	    				}
+
+	    				//レビュースコアをrlistに追加
+	    				for (Review r: rlist) {
+	    					rscoreDao.view(r.getReviewId(), r);
+	    				}
+
 	    				//スコープに格納
 	    				request.setAttribute("rlist", rlist);
 
 	    			//「小カテゴリー」「昇順」「更新日」にならべる
 	    			} else {
 	    				ArrayList<Review> rlist = rDao.ascDateView2(user.getUserId(), category2Id);
+
+	    				//レビュー項目をrlistに追加
+	    				for (Review r : rlist) {
+	    					ritemDao.view(r.getReviewId(), r);
+	    				}
+
+	    				//レビュースコアをrlistに追加
+	    				for (Review r: rlist) {
+	    					rscoreDao.view(r.getReviewId(), r);
+	    				}
 
 	    				//スコープに格納
 	    				request.setAttribute("rlist", rlist);
@@ -603,12 +795,35 @@ public class MyReviewServlet extends HttpServlet {
 	    			if (request.getParameter("search") != null) {
 	    				ArrayList<Review> rlist = rDao.ascEvaSearch2(user.getUserId(), category2Id, freeWord, priceA, priceB, evaA, evaB, createdA, createdB);
 
+	    				//レビュー項目をrlistに追加
+	    				for (Review r : rlist) {
+	    					ritemDao.view(r.getReviewId(), r);
+	    				}
+
+	    				//レビュースコアをrlistに追加
+	    				for (Review r: rlist) {
+	    					rscoreDao.view(r.getReviewId(), r);
+	    				}
+
 	    				//スコープに格納
 	    				request.setAttribute("rlist", rlist);
 
 	    			//「小カテゴリー」「昇順」「評価」にならべる
 	    			} else {
 	    				ArrayList<Review> rlist = rDao.ascEvaView2(user.getUserId(), category2Id);
+
+	    				//レビュー項目をrlistに追加
+	    				for (Review r : rlist) {
+	    					ritemDao.view(r.getReviewId(), r);
+	    				}
+
+	    				//レビュースコアをrlistに追加
+	    				for (Review r: rlist) {
+	    					rscoreDao.view(r.getReviewId(), r);
+	    				}
+
+	    				//スコープに格納
+	    				request.setAttribute("rlist", rlist);
 	    			}
  	    		}
 
@@ -622,12 +837,32 @@ public class MyReviewServlet extends HttpServlet {
 	    			if (request.getParameter("search") != null) {
 	    				ArrayList<Review> rlist = rDao.descWordSearch2(user.getUserId(), category2Id, freeWord, priceA, priceB, evaA, evaB, createdA, createdB);
 
+	    				//レビュー項目をrlistに追加
+	    				for (Review r : rlist) {
+	    					ritemDao.view(r.getReviewId(), r);
+	    				}
+
+	    				//レビュースコアをrlistに追加
+	    				for (Review r: rlist) {
+	    					rscoreDao.view(r.getReviewId(), r);
+	    				}
+
 	    				//スコープに格納
 	    				request.setAttribute("rlist", rlist);
 
 	    			//「小カテゴリー」「降順」「五十音」にならべる
 	    			} else {
 	    				ArrayList<Review> rlist = rDao.descWordView2(user.getUserId(), category2Id);
+
+	    				//レビュー項目をrlistに追加
+	    				for (Review r : rlist) {
+	    					ritemDao.view(r.getReviewId(), r);
+	    				}
+
+	    				//レビュースコアをrlistに追加
+	    				for (Review r: rlist) {
+	    					rscoreDao.view(r.getReviewId(), r);
+	    				}
 
 	    				//スコープに格納
 	    				request.setAttribute("rlist", rlist);
@@ -641,12 +876,32 @@ public class MyReviewServlet extends HttpServlet {
 	    			if (request.getParameter("search") != null) {
 	    				ArrayList<Review> rlist = rDao.descPriceSearch2(user.getUserId(), category2Id, freeWord, priceA, priceB, evaA, evaB, createdA, createdB);
 
+	    				//レビュー項目をrlistに追加
+	    				for (Review r : rlist) {
+	    					ritemDao.view(r.getReviewId(), r);
+	    				}
+
+	    				//レビュースコアをrlistに追加
+	    				for (Review r: rlist) {
+	    					rscoreDao.view(r.getReviewId(), r);
+	    				}
+
 	    				//スコープに格納
 	    				request.setAttribute("rlist", rlist);
 
 	    			//「小カテゴリー」「降順」「価格」にならべる
 	    			} else {
 	    				ArrayList<Review> rlist = rDao.descPriceView2(user.getUserId(), category2Id);
+
+	    				//レビュー項目をrlistに追加
+	    				for (Review r : rlist) {
+	    					ritemDao.view(r.getReviewId(), r);
+	    				}
+
+	    				//レビュースコアをrlistに追加
+	    				for (Review r: rlist) {
+	    					rscoreDao.view(r.getReviewId(), r);
+	    				}
 
 	    				//スコープに格納
 	    				request.setAttribute("rlist", rlist);
@@ -660,12 +915,32 @@ public class MyReviewServlet extends HttpServlet {
 	    			if (request.getParameter("search") != null) {
 	    				ArrayList<Review> rlist = rDao.descDateSearch2(user.getUserId(), category2Id, freeWord, priceA, priceB, evaA, evaB, createdA, createdB);
 
+	    				//レビュー項目をrlistに追加
+	    				for (Review r : rlist) {
+	    					ritemDao.view(r.getReviewId(), r);
+	    				}
+
+	    				//レビュースコアをrlistに追加
+	    				for (Review r: rlist) {
+	    					rscoreDao.view(r.getReviewId(), r);
+	    				}
+
 	    				//スコープに格納
 	    				request.setAttribute("rlist", rlist);
 
 	    			//「小カテゴリー」「降順」「更新日」にならべる
 	    			} else {
 	    				ArrayList<Review> rlist = rDao.descDateView2(user.getUserId(), category2Id);
+
+	    				//レビュー項目をrlistに追加
+	    				for (Review r : rlist) {
+	    					ritemDao.view(r.getReviewId(), r);
+	    				}
+
+	    				//レビュースコアをrlistに追加
+	    				for (Review r: rlist) {
+	    					rscoreDao.view(r.getReviewId(), r);
+	    				}
 
 	    				//スコープに格納
 	    				request.setAttribute("rlist", rlist);
@@ -679,12 +954,32 @@ public class MyReviewServlet extends HttpServlet {
 	    			if (request.getParameter("search") != null) {
 	    				ArrayList<Review> rlist = rDao.descEvaSearch2(user.getUserId(), category2Id, freeWord, priceA, priceB, evaA, evaB, createdA, createdB);
 
+	    				//レビュー項目をrlistに追加
+	    				for (Review r : rlist) {
+	    					ritemDao.view(r.getReviewId(), r);
+	    				}
+
+	    				//レビュースコアをrlistに追加
+	    				for (Review r: rlist) {
+	    					rscoreDao.view(r.getReviewId(), r);
+	    				}
+
 	    				//スコープに格納
 	    				request.setAttribute("rlist", rlist);
 
 	    			//「小カテゴリー」「降順」「評価」にならべる
 	    			} else {
 	    				ArrayList<Review> rlist = rDao.descEvaView2(user.getUserId(), category2Id);
+
+	    				//レビュー項目をrlistに追加
+	    				for (Review r : rlist) {
+	    					ritemDao.view(r.getReviewId(), r);
+	    				}
+
+	    				//レビュースコアをrlistに追加
+	    				for (Review r: rlist) {
+	    					rscoreDao.view(r.getReviewId(), r);
+	    				}
 
 	    				//スコープに格納
 	    				request.setAttribute("rlist", rlist);

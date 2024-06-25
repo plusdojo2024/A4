@@ -1022,7 +1022,7 @@ public class ReviewsDAO{
 					+ "AND"
 					+ "reviews.review_price between ? AND ?, AND reviews_scores.score_avg between ? AND ?, AND reviews.created_at between ? AND ?;"
 					+ "AND"
-					+ "reviews.category2_id = ? AND reviews.review_name = ? AND reviews.review_comment = ?"
+					+ "reviews.category2_id = ? OR reviews.review_name like ? AND reviews.review_comment like ?"
 			        + "AND "
 			        + "reviews.delete_flg = 1";
 
