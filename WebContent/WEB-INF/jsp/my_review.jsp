@@ -222,6 +222,8 @@ input[name="tab_item"] {
         						<div class = categorys>${e.reviewItem4}</div>
         						<div class = categorys>${e.reviewItem5}</div>
         						<h1 class="avg">総合評価${e.scoreAvg}</h1>
+
+        						<input type="submit" class="hensyu" value="編集">
         					</div>
         				</div>
         			</div>
