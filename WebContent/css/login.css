@@ -18,7 +18,7 @@ div.logo {
   padding: 5vh;
 }
 .login {
-  max-width: 400px;
+  width: 250px;
   margin: 0 auto;
   padding: 20px;
   border-radius: 10px;
@@ -30,25 +30,24 @@ div.logo {
   display: block;
   font-weight: bold;
 }
-.input-group input {
-  width: 91%;
-  padding: 10px;
-  border: 1px solid #ffbc61; /* 枠色 */
-  border-radius: 5px;
-  margin-top: 5px;
+input {
+ text-align: center;
+ outline: 0;
+ background-color: #ffffff;
+ border: 2px solid transparent;
+ border-radius: 3px;
+ font-size: 16px;
+ font-weight: 200;
+ padding: 10px 0;
+ width: 250px;
+ transition: all 0.5s 0s ease;
 }
-.sinki-button {
-  background-color: #ffc679; /* 新規登録ボタンの色 */
-  color: black;
-  border: none;
-  border-radius: 5px;
-  padding: 10px;
-  cursor: pointer;
+
+input:focus {
+border: 2px solid #ffc679;
+box-shadow: none;
 }
-.register-link{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-}
+
 .register-link {
   text-align: center;
   margin-top: 10px;
@@ -91,11 +90,21 @@ div.logo {
   box-shadow: none;
   transition: 0.25s;
   display: block;
-  width: 250px;
+  width: 150px;
   margin: 0 auto;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .sinki-button:hover {
 	box-shadow: 7px 7px 3px #666666;
+}
+
+/* エラーメッセージ */
+#error_message {
+  text-align: center;
+  color: red;
+}
+.error_message {
+  text-align: center;
+  color: red;
 }

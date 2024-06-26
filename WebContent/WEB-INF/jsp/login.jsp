@@ -13,13 +13,16 @@
 		<div class="logo">
 			<img src="/A4/img/logo.png" width="200" alt="A reviewのロゴ">
 		</div>
-		<span>${message}</span>
+		<div class ="error_message">
+		<span id="error_message">${message}</span>
+		</div>
 		<div class="login">
-			<div class="input-group">
 			<form method="post" action="/A4/LoginServlet">
-				<input type="email" id="email" name="email" placeholder="メールアドレス">
 				<div class="input-group">
-					<input type="password" id="password" name="password" placeholder="パスワード">
+				<input type="email" id="email" name="email" placeholder="メールアドレス" class="input-in">
+				</div>
+				<div class="input-group">
+					<input type="password" id="password" name="password" placeholder="パスワード" class="input-in">
 				</div>
 				<div class="register-link">
 					<input type="submit" class="login-button" value="ログイン">
@@ -27,7 +30,6 @@
 			</form>
 			<button class="sinki-button" onclick="location.href='/A4/NewUserServlet'">新規登録</button>
 			</div>
-		</div>
 	</div>
 </body>
 </html>
