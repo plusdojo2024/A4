@@ -133,14 +133,22 @@ public class MyReviewServlet extends HttpServlet {
 			ReviewsDAO rDao = new ReviewsDAO();
 			int result1 = rDao.insert(category2Id,reviewName,reviewPrice,reviewComment,id,privacyFlg);
 
+
+
+
+			Review review = rDao.selectId();
+			int rid = review.getReviewId();
+
+
+
 			ReviewsImgsDAO rimgsDao = new ReviewsImgsDAO();
-			int result2 = rimgsDao.insert(rDao.selectId(), reviewImg);
-System.out.println(rDao.selectId());
+			int result2 = rimgsDao.insert(rid, reviewImg);
+
 			ReviewsItemsDAO ritemDao = new ReviewsItemsDAO();
-			int result3 = ritemDao.insert(rDao.selectId(), reviewItem1, reviewItem2, reviewItem3, reviewItem4, reviewItem5);
+			int result3 = ritemDao.insert(rid, reviewItem1, reviewItem2, reviewItem3, reviewItem4, reviewItem5);
 
 			ReviewsScoresDAO rSDao = new ReviewsScoresDAO();
-			int result4 = rSDao.insert(rDao.selectId(),reviewItem1Score, reviewItem2Score, reviewItem3Score, reviewItem4Score, reviewItem5Score);
+			int result4 = rSDao.insert(rid,reviewItem1Score, reviewItem2Score, reviewItem3Score, reviewItem4Score, reviewItem5Score);
 
 			if (result1 == 1 &&result2 == 1 &&result3 == 1 &&result4 == 1) {
 //			if (result1 == 1) {

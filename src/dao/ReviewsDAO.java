@@ -267,9 +267,8 @@ public class ReviewsDAO{
 	}
 
 	//
-	public int selectId() {
-		int reviewId= 0;
-
+	public Review selectId() {
+		Review review = null;
 		Connection conn = null;
 		//準備②地図を書き込む白紙のメモを用意する	使い終わったら破棄しないといけないのでtryの外
 		//準備③は省略
@@ -280,11 +279,12 @@ public class ReviewsDAO{
 
 			String id="sa";
 			String pw="";
-			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4DB",id,pw);
+			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4db",id,pw);
 			//準備⑤地図を完成させ、通行証も同梱する　データベースに接続する
 
 			//一番新しいところを選んできている
-			String sql = "SELECT max(review_id) from reviews";
+			//max(review_id)という名前で出てきてくれる
+			String sql = "SELECT max(review_id)as ma from reviews";
 
 			//準備⑥必要なものリストを用意する　ページで検索欄に入れたものが？に入る
 
@@ -297,16 +297,17 @@ public class ReviewsDAO{
 
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
-				reviewId = rs.getInt("review_id");
+				review = new Review();
+				review.setReviewId(rs.getInt("ma"));
 			}
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
-			reviewId = 0;
+			review = null;
 		}
 		catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			reviewId = 0;
+			review = null;
 		}
 		finally {
 			// データベースを切断
@@ -316,13 +317,13 @@ public class ReviewsDAO{
 				}
 				catch (SQLException e) {
 					e.printStackTrace();
-					reviewId = 0;
+					review = null;
 				}
 			}
 		}
 
 	// 結果を返す
-		return reviewId;
+		return review;
 	}
 
 	//マイページレビュー一覧（すべて）
