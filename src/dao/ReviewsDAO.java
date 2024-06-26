@@ -40,21 +40,21 @@ public class ReviewsDAO{
 					+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.created_at,backnumbers.updated_at,"
 					+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
 					+ "users.user_email,users.user_password,users.user_id,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at,"
-					+ "list.list_name FROM reviews "
-					+ "LEFT OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
-					+ "LEFT OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
-					+ "LEFT OUTER JOIN reviews_items ON reviews_items.review_id = reviews.review_id "
-					+ "LEFT OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
-					+ "LEFT OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
-					+ "LEFT OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
-					+ "LEFT OUTER JOIN users ON users.user_id = reviews.user_id "
-					+ "LEFT OUTER JOIN list ON list.list_id = list_reviews.list_id "
-					+ "WHERE reviews.delete_flg=1"
-					+ "AND"
-					+ "reviews.user_id == ? OR (reviews.privacy_flg = 1 AND users.privacy_flg = 1)";
+					+ " list.list_name FROM reviews "
+					+ " LEFT OUTER JOIN reviews_imgs ON reviews.review_id = reviews_imgs.review_id "
+					+ " LEFT OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
+					+ " LEFT OUTER JOIN reviews_items ON reviews_items.review_id = reviews.review_id "
+					+ " LEFT OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
+					+ " LEFT OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
+					+ " LEFT OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
+					+ " LEFT OUTER JOIN users ON users.user_id = reviews.user_id "
+					+ " LEFT OUTER JOIN list ON list.list_id = list_reviews.list_id "
+					+ " WHERE reviews.delete_flg=1"
+					+ " AND "
+					+ " reviews.user_id = ? OR (reviews.privacy_flg = 1 AND users.privacy_flg = 1)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-
+			pStmt.setInt(1, userId);
 			ResultSet rs = pStmt.executeQuery();
 
 			// 結果表をコレクションにコピーする
@@ -178,7 +178,7 @@ public class ReviewsDAO{
 					+ "AND"
 			        + "reviews.category2_id = ?"
 			        + "AND"
-					+ "reviews.user_id == ? OR (reviews.privacy_flg = 1 AND users.privacy_flg = 1)";
+					+ "reviews.user_id = ? OR (reviews.privacy_flg = 1 AND users.privacy_flg = 1)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			pStmt.setInt(1, category2Id);
@@ -1015,8 +1015,8 @@ public class ReviewsDAO{
 					+ " reviews.review_name LIKE ? AND reviews.review_comment LIKE ?"
 			        + " AND "
 			        + " reviews.delete_flg = 1"
-			        + "AND"
-					+ "reviews.user_id == ? OR (reviews.privacy_flg = 1 AND users.privacy_flg = 1)";
+			        + " AND"
+					+ " reviews.user_id = ? OR (reviews.privacy_flg = 1 AND users.privacy_flg = 1)";
 
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setInt(1, priceA);//引数sqlにsetStringしてる
@@ -1155,7 +1155,7 @@ public class ReviewsDAO{
 			        + "AND "
 			        + "reviews.delete_flg = 1"
 					+ "AND"
-					+ "reviews.user_id == ? OR (reviews.privacy_flg = 1 AND users.privacy_flg = 1)";
+					+ "reviews.user_id = ? OR (reviews.privacy_flg = 1 AND users.privacy_flg = 1)";
 
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setInt(1, priceA);//引数sqlにsetStringしてる

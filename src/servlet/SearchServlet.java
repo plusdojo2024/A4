@@ -55,7 +55,18 @@ public class SearchServlet extends HttpServlet {
 		Count co = new Count();
 
 		//「すべて」選択時かつ「検索ボタン」が押されていない時の表示用レビューデータをrlistに格納
-		ArrayList<Review> rlist = rdao.view(user.getUserId());
+		ArrayList<Review> rlist0 = rdao.view(user.getUserId());
+
+		ArrayList<Review> rlist = new ArrayList<Review>();
+		int tai = 0;
+		//重複するものを排除
+		for(Review r : rlist0) {
+			if(r.getReviewId()!=tai) {
+				tai = r.getReviewId();
+				rlist.add(r);
+			}
+		}
+
 
 		//レビュー項目をrlistに追加
 		for (Review r : rlist) {
@@ -68,7 +79,7 @@ public class SearchServlet extends HttpServlet {
 		}
 
 		//「すべて」選択時かつ「検索ボタン」が押されていない時の表示用ユーザーデータをulistに格納
-		ArrayList<User> ulist = udao.view(user.getUserId());
+//		ArrayList<User> ulist = udao.view(user.getUserId());
 
 		//「すべて」選択時のレビューの検索結果の数を数える
 		int sum1 = rlist.size();
@@ -77,16 +88,16 @@ public class SearchServlet extends HttpServlet {
 		co.setReviewSearchCount(sum1);
 
 		//「すべて」選択時のユーザーの検索結果の数を数える
-		int sum2 = ulist.size();
+//		int sum2 = ulist.size();
 
 		//Count.javaのuserSearchCountに数えた数を格納
-		co.setUserSearchCount(sum2);
+//		co.setUserSearchCount(sum2);
 
 		//「すべて」選択時かつ「検索ボタン」が押されていない時のレビューデータをスコープに格納
 		request.setAttribute("rlist", rlist);
 
 		//「すべて」選択時かつ「検索ボタン」が押されていない時のユーザーデータをスコープに格納
-		request.setAttribute("ulist", ulist);
+//		request.setAttribute("ulist", ulist);
 
 		//カテゴリー選択時に置けるレビューの検索結果の数をスコープに格納
 		request.setAttribute("count", co);
@@ -307,7 +318,17 @@ public class SearchServlet extends HttpServlet {
 				Timestamp createdB = new Timestamp(parsedDate.getTime());
 
 				//「すべて」選択時の検索結果のレビューデータをrlistに格納
-				ArrayList<Review> rlist = rdao.wholeSearch1(user.getUserId(), freeWord, priceA, priceB, evaA, evaB, createdA, createdB);
+				ArrayList<Review> rlist0 = rdao.wholeSearch1(user.getUserId(), freeWord, priceA, priceB, evaA, evaB, createdA, createdB);
+
+				ArrayList<Review> rlist = new ArrayList<Review>();
+				int tai = 0;
+				//重複するものを排除
+				for(Review r : rlist0) {
+					if(r.getReviewId()!=tai) {
+						tai = r.getReviewId();
+						rlist.add(r);
+					}
+				}
 
 				//レビュー項目をrlistに追加
 				for (Review r : rlist) {
@@ -329,16 +350,16 @@ public class SearchServlet extends HttpServlet {
 				co.setReviewSearchCount(sum1);
 
 				//「すべて」選択時のユーザーの検索結果の数を数える
-				int sum2 = ulist.size();
+//				int sum2 = ulist.size();
 
 				//Count.javaのuserSearchCountに数えた数を格納
-				co.setUserSearchCount(sum2);
+//				co.setUserSearchCount(sum2);
 
 				//「すべて」選択時におけるレビュー検索結果をスコープに格納
 				request.setAttribute("rlist", rlist);
 
 				//「すべて」選択時におけるユーザー検索結果をスコープに格納
-				request.setAttribute("ulist", ulist);
+//				request.setAttribute("ulist", ulist);
 
 				//カテゴリー選択時に置けるレビューの検索結果の数をスコープに格納
 				request.setAttribute("count", co);
@@ -358,7 +379,7 @@ public class SearchServlet extends HttpServlet {
 				}
 
 				//「すべて」選択時かつ「検索ボタン」が押されていない時の表示用ユーザーデータをulistに格納
-				ArrayList<User> ulist = udao.view(user.getUserId());
+//				ArrayList<User> ulist = udao.view(user.getUserId());
 
 				//「すべて」選択時のレビューの検索結果の数を数える
 				int sum1 = rlist.size();
@@ -367,16 +388,16 @@ public class SearchServlet extends HttpServlet {
 				co.setReviewSearchCount(sum1);
 
 				//「すべて」選択時のユーザーの検索結果の数を数える
-				int sum2 = ulist.size();
+//				int sum2 = ulist.size();
 
 				//Count.javaのuserSearchCountに数えた数を格納
-				co.setUserSearchCount(sum2);
+//				co.setUserSearchCount(sum2);
 
 				//「すべて」選択時かつ「検索ボタン」が押されていない時のレビューデータをスコープに格納
 				request.setAttribute("rlist", rlist);
 
 				//「すべて」選択時かつ「検索ボタン」が押されていない時のユーザーデータをスコープに格納
-				request.setAttribute("ulist", ulist);
+//				request.setAttribute("ulist", ulist);
 
 				//カテゴリー選択時に置けるレビューの検索結果の数をスコープに格納
 				request.setAttribute("count", co);

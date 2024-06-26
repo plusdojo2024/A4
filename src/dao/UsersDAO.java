@@ -413,7 +413,7 @@ public class UsersDAO {
 			Class.forName("org.h2.Driver");
 			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4db","sa","");
 
-			String sql = "SELECT user_id, user_name, user_img FROM users WHERE user_id == ? OR (privacy_flg = 1)";
+			String sql = "SELECT user_id, user_name, user_img FROM users WHERE user_id = ? OR (privacy_flg = 1)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setInt(1, userId);
 
@@ -460,7 +460,7 @@ public class UsersDAO {
 			Class.forName("org.h2.Driver");
 			conn=DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4db","sa","");
 
-			String sql = "SELECT user_id, user_name, user_img FROM users WHERE user_name = ? AND user_id == ? OR (privacy_flg = 1)";
+			String sql = "SELECT user_id, user_name, user_img FROM users WHERE user_name = ? AND user_id = ? OR (privacy_flg = 1)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, "%"+freeWord+"%");
 			pStmt.setInt(2, userId);
