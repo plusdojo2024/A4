@@ -133,7 +133,7 @@ public class UsersDAO {
 			Class.forName("org.h2.Driver");
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4db", "sa", "");
 
-			String sql = "INSERT INTO users (USER_EMAIL, USER_PASSWORD, USER_NAME, USER_IMG, PRIVACY_FLG) VALUES (?, ?, ?,'/A4/img/defoicon.png', 1)";
+			String sql = "INSERT INTO users (USER_EMAIL, USER_PASSWORD, USER_NAME, USER_IMG) VALUES (?, ?, ?,'/A4/img/defoicon.png')";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる

@@ -20,7 +20,7 @@ public class LoginServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//JSPに処理を委譲
+			//JSPに処理を委譲
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
 		dispatcher.forward(request, response);
 
@@ -31,6 +31,7 @@ public class LoginServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String userEmail = request.getParameter("email");
 		String userPassword = request.getParameter("password");
+
 
 		// UsersDao をインスタンス化
 		UsersDAO uDao = new UsersDAO();
@@ -45,8 +46,8 @@ public class LoginServlet extends HttpServlet {
 			response.sendRedirect("/A4/MyReviewServlet");
 
 		} else {
-            String message = "ログイン失敗";
-            request.setAttribute("message", message);
+	        String message = "ログインに失敗しました。";
+	        request.setAttribute("message", message);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
 			dispatcher.forward(request, response);
 		}

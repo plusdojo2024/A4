@@ -11,8 +11,9 @@
 <body>
 	<div class="loginb">
 		<div class="logo">
-			<img src="/A4/img/logo.png" width="250" height="300" alt="A review">
+			<img src="/A4/img/logo.png" width="200" alt="A reviewのロゴ">
 		</div>
+		<span>${message}</span>
 		<div class="login">
 			<div class="input-group">
 			<form method="post" action="/A4/LoginServlet">
@@ -22,15 +23,11 @@
 				</div>
 				<div class="register-link">
 					<input type="submit" class="login-button" value="ログイン">
-					<button class="sinki-button" onclick="location.href='/A4/NewUserServlet'">新規登録</button>
-					<div class="register-link2">
-						<br> <a href="#">パスワードを忘れた場合</a>
-					</div>
 				</div>
 			</form>
+			<button class="sinki-button" onclick="location.href='/A4/NewUserServlet'">新規登録</button>
 			</div>
 		</div>
 	</div>
-	<p>${message}</p>
 </body>
 </html>

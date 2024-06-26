@@ -11,26 +11,26 @@
 <body>
 <div class="loginb">
 	<div class ="logo">
-      <img src="/A4/img/logo.png" width="250" height="300" alt="A review">
+      <img src="/A4/img/logo.png" width="200" alt="A reviewのロゴ">
 	</div>
+	<span>${message}</span>
 	<form method="post" action="/A4/NewUserServlet">
     <div class="login">
         <div class="input-group">
-	        <input type="email" id="email" name="email" placeholder="メールアドレス">
+	        <input type="email" id="email" name="email" value="${param.email}" placeholder="メールアドレス">
         </div>
         <div class="input-group">
-            <input type="password" id="password" name="password" placeholder="パスワード">
+            <input type="password" id="password" name="password" value="${param.password}" placeholder="パスワード">
         </div>
         <div class="input-group">
-            <input type="text" id="username" name="username" placeholder="ユーザーネーム">
+            <input type="text" id="username" name="username" value="${param.username}" placeholder="ユーザーネーム">
         </div>
         <div class="register-link">
         <input type="submit" class="login-button" value="登録">
-	    <button class="sinki-button" onclick="location.href='/A4/LoginServlet'">戻る</button>
         </div>
     </div>
     </form>
+    <button class="sinki-button" onclick="location.href='/A4/LoginServlet'">戻る</button>
 </div>
-<p>${message}</p>
 </body>
 </html>
