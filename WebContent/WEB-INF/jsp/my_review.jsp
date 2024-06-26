@@ -187,47 +187,42 @@ input[name="tab_item"] {
         					<!-- ↓これが俺たちのIDだーーーー！！！↓ -->
         					<input type="text" name="reviewId" value="${e.reviewId}">
         					<input type="text" name="category2Id" value="${e.category2Id}">
-        					<input type="text" name="reviewName" value="${e.reviewName}">
+
         					<input type="text" name="reviewPrice" value="${e.reviewPrice}">
         					<input type="text" name="reviewComment" value="${e.reviewComment}">
         					<input type="text" name="rPrivacyFlg" value="${e.rPrivacyFlg}">
         					<input type="text" name="UpDatedAt" value="${e.rUpdatedAt}">
-        					<input type="text" name="reviewItem1Score" value="${e.reviewItem1Score}">
-        					<input type="text" name="reviewItem2Score" value="${e.reviewItem2Score}">
-        					<input type="text" name="reviewItem3Score" value="${e.reviewItem3Score}">
-        					<input type="text" name="reviewItem4Score" value="${e.reviewItem4Score}">
-        					<input type="text" name="reviewItem5Score" value="${e.reviewItem5Score}">
         					<input type="text" name="backnumberContent" value="${e.backnumberContent}">
         					<input type="text" name="backnumberId" value="${e.backnumberId}">
 
         					<!-- ↑これが俺たちのIDだーーーー！！！↑ -->
 
         					<p class="create_at">${e.rCreatedAt}</p>
-        					<h1 class="modal_title">${e.reviewName}</h1>
+        					<h1 class="modal_title"><input type="text" name="reviewName" value="${e.reviewName}"></h1>
         					<input type="text" name="reviewName" value="${e.reviewName}">
         				</div>
         				<div class="modal_grid">
         					<div class="modal_grid_left">
         						<table class="eva">
         							<tr>
-        								<td>${e.reviewItem1}</td>
-        								<td>${e.reviewItem1Score}</td>
+        								<td><input type="text" name="reviewItem1" value="${e.reviewItem1}"></td>
+        								<td><input type="text" name="reviewItem1Score" value="${e.reviewItem1Score}"></td>
         							</tr>
         							<tr>
-        								<td>${e.reviewItem2}</td>
-        								<td>${e.reviewItem2Score}</td>
+        								<td><input type="text" name="reviewItem2" value="${e.reviewItem2}"></td>
+        								<td><input type="text" name="reviewItem2Score" value="${e.reviewItem2Score}"></td>
         							</tr>
         							<tr>
-        								<td>${e.reviewItem3}</td>
-        								<td>${e.reviewItem3Score}</td>
+        								<td><input type="text" name="reviewItem3" value="${e.reviewItem3}"></td>
+        								<td><input type="text" name="reviewItem3Score" value="${e.reviewItem3Score}"></td>
         							</tr>
         							<tr>
-        								<td>${e.reviewItem4}</td>
-        								<td>${e.reviewItem4Score}</td>
+        								<td>$<input type="text" name="reviewItem4" value="${e.reviewItem4}"></td>
+        								<td><input type="text" name="reviewItem4Score" value="${e.reviewItem4Score}"></td>
         							</tr>
         							<tr>
-        								<td>${e.reviewItem5}</td>
-        								<td>${e.reviewItem5Score}</td>
+        								<td><input type="text" name="reviewItem5" value="${e.reviewItem5}"></td>
+        								<td><input type="text" name="reviewItem5Score" value="${e.reviewItem5Score}"></td>
         							</tr>
         						</table>
         					</div>
@@ -277,7 +272,7 @@ input[name="tab_item"] {
     </c:forEach>
         			<!-- ↓編集用ボタン（ここから）↓ -->
         			<input type="submit" name="submit" value="更新">
-        			<!-- ↑編集用ボタン（ここから）↑ -->
+        			<!-- ↑編集用ボタン（ここまで）↑ -->
         		</div>
     		</form>
 		</div>
@@ -301,23 +296,41 @@ input[name="tab_item"] {
 	  			<img src="/A4/img/removebg-preview.png">
 	  		</div>
 		</button>
-		<!-- ↑ここまで投稿用モーダルのエリア↑ -->
+		<!-- ↑ここまで投稿用ボタンのエリア↑ -->
 
 	  	<!-- ↓投稿用モーダルのエリア↓ -->
-		<div id="my_post_Modal" class="icon_modal">
-    		<div class="icon_modal_content">
-        		<span id="close_post_Modal">&times;</span>
-        		<div class ="icon_modal_box">
-        			<img class="modal_myicon" src="/A4/img/myicon.jpg">
-        			<div class="name_box">名前</div>
-        			<div class="re_btn">ボタン</div>
-        			<div class="icon_flex">
-        				<div class="change">変更</div>
-        				<div class="logout"><a href="/A4/LoginServlet">ログアウト</a></div>
-        			</div>
-        		</div>
-    		</div>
-		</div>
+	  	<div id="myModal${status.index}" class="modal">
+		<form class="modal-content" method="post" action="/A4/MyReviewServlet">
+		<span id="closeModal${status.index}" class="closeModal" onclick="closeM(${status.index})">&times;</span>
+				<div id="my_post_Modal" class="icon_modal">
+		    		<div class="icon_modal_content">
+		        		<span id="close_post_Modal">&times;</span>
+		        		<div class ="icon_modal_box">
+		        			<img class="modal_myicon" src="/A4/img/myicon.jpg">
+		        					<input type="text" name="reviewId" value="${e.reviewId}">
+		        					<input type="text" name="category2Id" value="${e.category2Id}">
+		        					<input type="text" name="reviewName" value="${e.reviewName}">
+		        					<input type="text" name="reviewPrice" value="${e.reviewPrice}">
+		        					<input type="text" name="reviewComment" value="${e.reviewComment}">
+		        					<input type="text" name="rPrivacyFlg" value="${e.rPrivacyFlg}">
+		        					<input type="text" name="UpDatedAt" value="${e.rUpdatedAt}">
+		        					<input type="text" name="reviewItem1Score" value="${e.reviewItem1Score}">
+		        					<input type="text" name="reviewItem2Score" value="${e.reviewItem2Score}">
+		        					<input type="text" name="reviewItem3Score" value="${e.reviewItem3Score}">
+		        					<input type="text" name="reviewItem4Score" value="${e.reviewItem4Score}">
+		        					<input type="text" name="reviewItem5Score" value="${e.reviewItem5Score}">
+		        					<input type="text" name="backnumberContent" value="${e.backnumberContent}">
+		        					<input type="text" name="backnumberId" value="${e.backnumberId}">
+		        			<div class="icon_flex">
+		        			<!-- ↓新規登録用ボタン（ここから）↓ -->
+		        			<input type="submit" name="submit" value="新規登録">
+		        			<!-- ↑新規登録用ボタン（ここまで）↑ -->
+
+	        			</div>
+	        		</div>
+	    		</div>
+			</div>
+		</form>
 		<!-- ↑ここまで投稿用モーダルのエリア↑ -->
 
 	</div>

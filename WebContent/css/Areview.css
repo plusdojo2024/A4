@@ -198,12 +198,12 @@ header .headline{
 
 /* 画面をモーダルで上書き */
 .icon_modal {
-	display: none; 
- position: fixed; 
-  top: 0; 
+	display: none;
+ position: fixed;
+  top: 0;
   left: 0;
-  width: 100%; 
-  height: 100%; 
+  width: 100%;
+  height: 100%;
   background-color: rgba(0,0,0,0.7);
   z-index: 999;
 }
@@ -220,7 +220,7 @@ header .headline{
   width: 50%;
   height: 80%;
   border-radius: 20px;
-  background-color:#fff4e0; 
+  background-color:#fff4e0;
 }
 
 
@@ -564,12 +564,12 @@ button{
 
 /* モーダルウィンドウの基本スタイル */
 .modal {
-	display: none; 
- position: fixed; 
-  top: 0; 
+	display: none;
+ position: fixed;
+  top: 0;
   left: 0;
-  width: 100%; 
-  height: 100%; 
+  width: 100%;
+  height: 100%;
   background-color: rgba(0,0,0,0.7);
   z-index: 999;
 }
@@ -585,7 +585,7 @@ button{
   width: 80%;
   height: 80%;
   border-radius: 20px;
-  background-color:#fff4e0; 
+  background-color:#fff4e0;
 }
 
 
@@ -600,7 +600,7 @@ button{
 }
 
 /* モーダル一番外側の要素 */
-.modal_box{
+.modal_box,my_post_Modal{
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	justify-items: center;
