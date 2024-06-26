@@ -557,58 +557,295 @@ section:nth-child(2n){
 
 
 
-/* === モーダル非表示（初期） ============================== */
-.modalNoDisp {
-  display : none;
+/*==============================
+ここからレビューモーダルのCSS
+==============================*/
+
+/* モーダルを開くための要素の設定 */
+button{
+	background-color: transparent;
+	appearance: auto;
+    text-rendering: auto;
+    color: buttontext;
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: center;
+    align-items: flex-start;
+    cursor: pointer;
+    box-sizing: border-box;
+    margin: 0.5em;
+    padding-block: 0px;
+    padding-inline: 0px;
+    border-width: 0px;
+    border-style: outset;
+    border-color: buttonborder;
+    border-image: initial;
 }
 
-/* === モーダルバックグランド ============================== */
-.modalBg {
-  position   : fixed;
-  overflow   : hidden;
-  top        : 0;
-  right      : 0;
-  bottom     : 0;
-  left       : 0;
-  background : radial-gradient(circle at 50% 50%,
-                               rgba(0, 0, 0, 0.90),
-                               rgba(0, 0, 0, 0.70));
-  z-index    : 10;
+/* モーダルウィンドウの基本スタイル */
+.modal {
+	display: none; 
+ position: fixed; 
+  top: 0; 
+  left: 0;
+  width: 100%; 
+  height: 100%; 
+  background-color: rgba(0,0,0,0.7);
+  z-index: 999;
 }
 
-/* === モーダルバックグランド：OPEN時のアニメーション ====== */
-.modalBgOpen {
-  animation  : bgOpenAnime 0.3s ease;
-}
-@keyframes bgOpenAnime {                     /* フェードイン */
-   0% { opacity: 0 }
- 100% { opacity: 1 }
-}
-
-/* === モーダルバックグランド：CLOSE時のアニメーション ===== */
-.modalBgClose {
-  bottom     : 100%;
-  animation  : bgCloseAnime 0.3s ease;
-}
-@keyframes bgCloseAnime {                     /* フェードイン */
-   0% { opacity: 1; bottom: 0 }
- 100% { opacity: 0; bottom: 0 }
+.modal-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: #fefefe;
+  border: 1px solid #888;
+  width: 80%;
+  height: 80%;
+  border-radius: 20px;
+  background-color:#fff4e0; 
 }
 
-/* === モーダルウインド ==================================== */
-.modalBg .modalWindow {
-                             /* モーダルウインドを中心に表示 */
-  position      : absolute;
-  top           : 50%;
-  left          : 50%;
-  transform     : translate(-50%, -50%);
-  z-index       : 11;
-           /* ↓モーダルウインドウの見た目：変更してください */
-  width         : 300px;
-  min-height    : 220px;
-  background    : #fff;
-  border        : 3px solid #35557f;
-  border-radius : 10px;
-  font-size     : 16pt;
-  text-align    : center;
+
+/*==============================
+モーダルcloseボタンのCSS
+==============================*/
+.closeModal {
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* モーダル一番外側の要素 */
+.modal_box{
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	justify-items: center;
+	overflow-y: scroll;
+	height: 100%;
+}
+
+/* モーダル左側 */
+.modal_img{
+	width: 80%;
+	height: 80%;
+	margin: auto;
+}
+
+/* モーダル右側 */
+.modal_text{
+	width:100%;
+	display: grid;
+	grid-template-rows: 1fr 3fr;
+}
+
+/* 作成日時 */
+.create_at{
+	text-align: center;
+}
+
+.modal_title{
+	text-align: center;
+}
+
+.modal_grid{
+	display:grid;
+	grid-template-columns: 1fr 1fr;
+	justify-content: space-between;
+}
+
+/* 評価項目CSS */
+.eva{
+	width: 100%;
+	text-align: justify;
+}
+
+/* 公開・非公開,リスト項目,総合評価 */
+.modal_grid_right {
+	display: grid;
+	grid-template-rows: 1fr 1fr;
+}
+
+/*==============================
+公開・非公開のボタンCSS
+==============================*/
+
+.switch {
+  /* switch */
+  --switch-width: 46px;
+  --switch-height: 24px;
+  --switch-bg: rgb(131, 131, 131);
+  --switch-checked-bg: rgb(0, 218, 80);
+  --switch-offset: calc((var(--switch-height) - var(--circle-diameter)) / 2);
+  --switch-transition: all .2s cubic-bezier(0.27, 0.2, 0.25, 1.51);
+  /* circle */
+  --circle-diameter: 18px;
+  --circle-bg: #fff;
+  --circle-shadow: 1px 1px 2px rgba(146, 146, 146, 0.45);
+  --circle-checked-shadow: -1px 1px 2px rgba(163, 163, 163, 0.45);
+  --circle-transition: var(--switch-transition);
+  /* icon */
+  --icon-transition: all .2s cubic-bezier(0.27, 0.2, 0.25, 1.51);
+  --icon-cross-color: var(--switch-bg);
+  --icon-cross-size: 6px;
+  --icon-checkmark-color: var(--switch-checked-bg);
+  --icon-checkmark-size: 10px;
+  /* effect line */
+  --effect-width: calc(var(--circle-diameter) / 2);
+  --effect-height: calc(var(--effect-width) / 2 - 1px);
+  --effect-bg: var(--circle-bg);
+  --effect-border-radius: 1px;
+  --effect-transition: all .2s ease-in-out;
+}
+
+.switch input {
+  display: none;
+}
+
+.switch {
+  display: inline-block;
+}
+
+.switch svg {
+  -webkit-transition: var(--icon-transition);
+  -o-transition: var(--icon-transition);
+  transition: var(--icon-transition);
+  position: absolute;
+  height: auto;
+}
+
+.switch .checkmark {
+  width: var(--icon-checkmark-size);
+  color: var(--icon-checkmark-color);
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+}
+
+.switch .cross {
+  width: var(--icon-cross-size);
+  color: var(--icon-cross-color);
+}
+
+.slider {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: var(--switch-width);
+  height: var(--switch-height);
+  background: var(--switch-bg);
+  border-radius: 999px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  position: relative;
+  -webkit-transition: var(--switch-transition);
+  -o-transition: var(--switch-transition);
+  transition: var(--switch-transition);
+  cursor: pointer;
+}
+
+.circle {
+  width: var(--circle-diameter);
+  height: var(--circle-diameter);
+  background: var(--circle-bg);
+  border-radius: inherit;
+  -webkit-box-shadow: var(--circle-shadow);
+  box-shadow: var(--circle-shadow);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-transition: var(--circle-transition);
+  -o-transition: var(--circle-transition);
+  transition: var(--circle-transition);
+  z-index: 1;
+  position: absolute;
+  left: var(--switch-offset);
+}
+
+.slider::before {
+  content: "";
+  position: absolute;
+  width: var(--effect-width);
+  height: var(--effect-height);
+  left: calc(var(--switch-offset) + (var(--effect-width) / 2));
+  background: var(--effect-bg);
+  border-radius: var(--effect-border-radius);
+  -webkit-transition: var(--effect-transition);
+  -o-transition: var(--effect-transition);
+  transition: var(--effect-transition);
+}
+
+/* actions */
+
+.switch input:checked+.slider {
+  background: var(--switch-checked-bg);
+}
+
+.switch input:checked+.slider .checkmark {
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+
+.switch input:checked+.slider .cross {
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+}
+
+.switch input:checked+.slider::before {
+  left: calc(100% - var(--effect-width) - (var(--effect-width) / 2) - var(--switch-offset));
+}
+
+.switch input:checked+.slider .circle {
+  left: calc(100% - var(--circle-diameter) - var(--switch-offset));
+  -webkit-box-shadow: var(--circle-checked-shadow);
+  box-shadow: var(--circle-checked-shadow);
+}
+
+
+
+
+/* 総合評価CSS */
+.avg{
+	align-self: end;
+}
+
+/* 備考CSS */
+.remarks{
+	width: 90%;
+	background-color: #fff;
+	border: 1px solid #000;
+	justify-items:center;
+	margin-top: 20px;
+	grid-column-start: 2;
+	grid-column-end: 3;
+}
+
+/* バックナンバーCSS */
+
+.back_number{
+	width: 90%;
+	grid-column-start: 1;
+	grid-column-end: 3;
+	background-color: #fff;
+	border: 1px solid #000;
+	margin-top: 20px;
 }

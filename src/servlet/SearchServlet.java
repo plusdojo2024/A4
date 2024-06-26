@@ -291,12 +291,12 @@ public class SearchServlet extends HttpServlet {
 
 
 				//日付検索のテキストの内容を取得する文
-				String stcreatedA ="0001-01-01:00:00:00";
+				String stcreatedA ="0001-01-01";
 				if(!request.getParameter("created_a").equals("")) {
 					stcreatedA = request.getParameter("created_a");
 				}
 
-				SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd:HH:mm:ss");
+				SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
 				java.util.Date parsedDate = null;
 				try {
 				 	parsedDate = f.parse(stcreatedA);
@@ -305,7 +305,7 @@ public class SearchServlet extends HttpServlet {
 					e.printStackTrace();
 				}
 				Timestamp createdA = new Timestamp(parsedDate.getTime());
-				String stcreatedB ="9999-12-12:00:00:00";
+				String stcreatedB ="9999-12-12";
 				if(!request.getParameter("created_b").equals("")) {
 					stcreatedB = request.getParameter("created_b");
 				}

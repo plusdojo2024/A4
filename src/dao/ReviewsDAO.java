@@ -977,7 +977,8 @@ public class ReviewsDAO{
 
 		ArrayList<Review> list = new ArrayList<>();
 		Connection conn = null;
-
+		
+		System.out.println(freeWord);
 		try {
 			// JDBCドライバを読み込む
 			Class.forName("org.h2.Driver");
@@ -1010,13 +1011,19 @@ public class ReviewsDAO{
 			+ " LEFT OUTER JOIN users ON users.user_id = reviews.user_id "
 			+ " LEFT OUTER JOIN list ON list.list_id = list_reviews.list_id "
 					+ "WHERE"
-					+ " reviews.review_price between ? AND ? AND reviews_scores.score_avg between ? AND ? AND reviews.created_at between ? AND ?"
-					+ " AND"
-					+ " reviews.review_name LIKE ? AND reviews.review_comment LIKE ?"
+					+ " reviews.review_price between ? AND ? "
+					+ "AND reviews_scores.score_avg between ? AND ? "
+					+ "AND reviews.created_at between ? AND ?"
+
 			        + " AND "
 			        + " reviews.delete_flg = 1"
 			        + " AND"
-					+ " reviews.user_id = ? OR (reviews.privacy_flg = 1 AND users.privacy_flg = 1)";
+					+ " reviews.privacy_flg = 1 AND users.privacy_flg = 1"
+					+ " AND"
+					+ " reviews.review_name LIKE ? "
+					+ "OR reviews.review_comment LIKE ?";
+			
+			
 
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setInt(1, priceA);//引数sqlにsetStringしてる
@@ -1025,9 +1032,9 @@ public class ReviewsDAO{
 			pStmt.setInt(4, evaB);
 			pStmt.setTimestamp(5, createdA);
 			pStmt.setTimestamp(6, createdB);
-			pStmt.setString(7, "%"+freeWord+"%");
-			pStmt.setString(8, "%"+freeWord+"%");
-			pStmt.setInt(9, userId);
+			pStmt.setString(7, "%"+freeWord.trim()+"%");
+			pStmt.setString(8, "%"+freeWord.trim()+"%");
+			
 
 			// SQL文を実行し、結果表を取得する	検索して結果の表をrsに入れる構文
 			ResultSet rs = pStmt.executeQuery();
