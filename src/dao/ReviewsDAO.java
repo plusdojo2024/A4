@@ -13,7 +13,7 @@ import model.Review;
 public class ReviewsDAO{
 
 	//検索のときに使う全部ランダム検索
-	public ArrayList<Review> view() {
+	public ArrayList<Review> view(int userId) {
 
 		Connection conn = null;
 		ArrayList<Review> list = new ArrayList<>();
@@ -49,7 +49,9 @@ public class ReviewsDAO{
 					+ "LEFT OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
 					+ "LEFT OUTER JOIN users ON users.user_id = reviews.user_id "
 					+ "LEFT OUTER JOIN list ON list.list_id = list_reviews.list_id "
-					+ "WHERE users.privacy_flg = 1 and reviews.privacy_flg =1 and reviews.delete_flg=1";
+					+ "WHERE reviews.delete_flg=1"
+					+ "AND"
+					+ "reviews.user_id == ? OR (reviews.privacy_flg = 1 AND users.privacy_flg = 1)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 

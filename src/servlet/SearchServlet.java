@@ -36,6 +36,9 @@ public class SearchServlet extends HttpServlet {
 			return;
 		}
 
+		//ログイン時に受け取ったユーザー情報を取得する
+	    User user = (User)session.getAttribute("user");
+
 		//ReviewsDAOをインスタンス化
 		ReviewsDAO rdao = new ReviewsDAO();
 
@@ -52,7 +55,7 @@ public class SearchServlet extends HttpServlet {
 		Count co = new Count();
 
 		//「すべて」選択時かつ「検索ボタン」が押されていない時の表示用レビューデータをrlistに格納
-		ArrayList<Review> rlist = rdao.view();
+		ArrayList<Review> rlist = rdao.view(user.getUserId());
 
 		//レビュー項目をrlistに追加
 		for (Review r : rlist) {
@@ -65,7 +68,7 @@ public class SearchServlet extends HttpServlet {
 		}
 
 		//「すべて」選択時かつ「検索ボタン」が押されていない時の表示用ユーザーデータをulistに格納
-		ArrayList<User> ulist = udao.view();
+		ArrayList<User> ulist = udao.view(user.getUserId());
 
 		//「すべて」選択時のレビューの検索結果の数を数える
 		int sum1 = rlist.size();
@@ -180,7 +183,7 @@ public class SearchServlet extends HttpServlet {
 				}
 
 				//検索結果のユーザーデータをulistに格納
-				ArrayList<User> ulist = udao.search(freeWord);
+				ArrayList<User> ulist = udao.search(user.getUserId(), freeWord);
 
 				//レビューの検索結果の数を調べる
 				int sum1 = rlist.size();
@@ -219,7 +222,7 @@ public class SearchServlet extends HttpServlet {
 				}
 
 				//すべてのユーザー情報をlistに格納
-				ArrayList<User> ulist = udao.view();
+				ArrayList<User> ulist = udao.view(user.getUserId());
 
 				//選択したカテゴリーの検索結果のレビュー数を調べる
 				int sum1 = rlist.size();
@@ -317,7 +320,7 @@ public class SearchServlet extends HttpServlet {
 				}
 
 				//「すべて」選択時の検索結果のユーザーデータをulistに格納
-				ArrayList<User> ulist = udao.search(freeWord);
+				ArrayList<User> ulist = udao.search(user.getUserId(), freeWord);
 
 				//「すべて」選択時のレビューの検索結果の数を数える
 				int sum1 = rlist.size();
@@ -342,7 +345,7 @@ public class SearchServlet extends HttpServlet {
 
 			} else {
 				//「すべて」選択時かつ「検索ボタン」が押されていない時の表示用レビューデータをrlistに格納
-				ArrayList<Review> rlist = rdao.view();
+				ArrayList<Review> rlist = rdao.view(user.getUserId());
 
 				//レビュー項目をrlistに追加
 				for (Review r : rlist) {
@@ -355,7 +358,7 @@ public class SearchServlet extends HttpServlet {
 				}
 
 				//「すべて」選択時かつ「検索ボタン」が押されていない時の表示用ユーザーデータをulistに格納
-				ArrayList<User> ulist = udao.view();
+				ArrayList<User> ulist = udao.view(user.getUserId());
 
 				//「すべて」選択時のレビューの検索結果の数を数える
 				int sum1 = rlist.size();
