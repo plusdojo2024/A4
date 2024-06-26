@@ -35,7 +35,17 @@ public class MyReviewServlet extends HttpServlet {
 
 //URLにID,PWに乗っちゃう　
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//大カテゴリー、小カテゴリーの内容を取得
+	    Categorys1DAO ca1dao = new Categorys1DAO();
+	    ArrayList<Category> calist = ca1dao.AllSelectCategory();
 
+	    // 大カテゴリー、小カテゴリーのデータをリクエストスコープに格納する
+	    request.setAttribute("calist", calist);
+	    System.out.println(calist.size());
+
+		
+		
 		 //もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
 		if (session.getAttribute("user") == null) {
