@@ -284,7 +284,7 @@ public class ReviewsDAO{
 			//準備⑤地図を完成させ、通行証も同梱する　データベースに接続する
 
 			//一番新しいところを選んできている
-			String sql = "SELECT max(reviews_id) from reviews";
+			String sql = "SELECT max(review_id) from reviews";
 
 			//準備⑥必要なものリストを用意する　ページで検索欄に入れたものが？に入る
 
@@ -297,7 +297,7 @@ public class ReviewsDAO{
 
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
-				reviewId = rs.getInt(" max(reviews_id)");
+				reviewId = rs.getInt("review_id");
 			}
 		}
 		catch (SQLException e) {
@@ -977,7 +977,7 @@ public class ReviewsDAO{
 
 		ArrayList<Review> list = new ArrayList<>();
 		Connection conn = null;
-		
+
 		System.out.println(freeWord);
 		System.out.println(createdA);
 		System.out.println(createdB);
@@ -1024,7 +1024,7 @@ public class ReviewsDAO{
 					+ " AND"
 					+ " (reviews.review_name LIKE ? "
 					+ "OR reviews.review_comment LIKE ?)";
-			
+
 			System.out.println(sql);
 
 			PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -1036,7 +1036,7 @@ public class ReviewsDAO{
 			pStmt.setTimestamp(6, createdB);
 			pStmt.setString(7, "%"+freeWord.trim()+"%");
 			pStmt.setString(8, "%"+freeWord.trim()+"%");
-			
+
 
 			// SQL文を実行し、結果表を取得する	検索して結果の表をrsに入れる構文
 			ResultSet rs = pStmt.executeQuery();
