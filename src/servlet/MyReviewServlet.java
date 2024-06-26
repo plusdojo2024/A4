@@ -35,7 +35,7 @@ public class MyReviewServlet extends HttpServlet {
 
 //URLにID,PWに乗っちゃう　
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 
 		 //もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
@@ -43,7 +43,7 @@ public class MyReviewServlet extends HttpServlet {
 			response.sendRedirect("/A4/LoginServlet");
 			return;
 		}
-		
+
 		//大カテゴリー、小カテゴリーの内容を取得
 	    Categorys1DAO ca1dao = new Categorys1DAO();
 	    ArrayList<Category> calist = ca1dao.AllSelectCategory();
@@ -135,15 +135,15 @@ public class MyReviewServlet extends HttpServlet {
 
 			ReviewsImgsDAO rimgsDao = new ReviewsImgsDAO();
 			int result2 = rimgsDao.insert(rDao.selectId(), reviewImg);
-//
-//			ReviewsItemsDAO ritemDao = new ReviewsItemsDAO();
-//			int result3 = ritemDao.insert(category2Id, reviewItem1, reviewItem2, reviewItem3, reviewItem4, reviewItem5);
-//
-//			ReviewsScoresDAO rSDao = new ReviewsScoresDAO();
-//			int result4 = rSDao.insert(reviewId,reviewItem1Score, reviewItem2Score, reviewItem3Score, reviewItem4Score, reviewItem5Score);
+System.out.println(rDao.selectId());
+			ReviewsItemsDAO ritemDao = new ReviewsItemsDAO();
+			int result3 = ritemDao.insert(rDao.selectId(), reviewItem1, reviewItem2, reviewItem3, reviewItem4, reviewItem5);
 
-//			if (result1 == 1 &&result2 == 1 &&result3 == 1 &&result4 == 1) {
-			if (result1 == 1) {
+			ReviewsScoresDAO rSDao = new ReviewsScoresDAO();
+			int result4 = rSDao.insert(rDao.selectId(),reviewItem1Score, reviewItem2Score, reviewItem3Score, reviewItem4Score, reviewItem5Score);
+
+			if (result1 == 1 &&result2 == 1 &&result3 == 1 &&result4 == 1) {
+//			if (result1 == 1) {
 				request.setAttribute("result", "登録しました。");
 			} else {
 				request.setAttribute("result", "登録できませんでした");
