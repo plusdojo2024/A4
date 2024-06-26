@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ page import="java.util.*,model.Bean" %>
+<%@ page import="java.util.*,model.Bean" %>
+<%@ page import ="java.util.ArrayList" %>
+<%@ page import = "java.util.List" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -41,16 +43,40 @@
 				request.setAttribute("list", list);
 			%>
 
+			<!-- 大項目と小項目を考えて表示 -->
+			
 			<c:forEach var="nav" items="${calist}">
-				<p class="navi-open">表示</p>
-				<nav>
-				<table class="test_table">
-					<tr>
-						<th></th>
-					</tr>
-				</table>
-				</nav>
+				<c:choose>
+					<%-- ${e.big}==${taihi}と同じ --%>
+					<c:when test="${nav.category1Name !=taihi}">
+						<!-- 大項目を表示する -->
+						<p class="navi-open">${nav.category1Name}</p>
+						<!-- taihiに大項目のデータを入れる -->
+						<!-- 小項目を表示する -->
+						<nav>
+							<table class="test_table">
+								<tr>
+									<th>${nav.category2Name}</th>
+								</tr>
+							</table>
+						</nav>
+					</c:when>
+					<c:when test="${nav.category1Name ==taihi}">
+						<!-- 小項目を表示する -->
+						<nav>
+							<table class="test_table">
+								<tr>
+									<th>${nav.category2Name}</th>
+								</tr>
+							</table>
+						</nav>
+					</c:when>
+				</c:choose>
+
+				<%-- request.setAttribute("taihi",${nav.category1Name});と同じ処理 --%>
+				<c:set var="taihi" value="${nav.category1Name}" />
 			</c:forEach>
+			<!-- ↑全体検索左側のエリア（ここまで）↑ -->
 		</div>
 		<!-- ↑全体検索左側のエリア（ここまで）↑ -->
 		<div class="search_grid_right">

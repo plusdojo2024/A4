@@ -35,6 +35,14 @@ public class SearchServlet extends HttpServlet {
 			response.sendRedirect("/A4/LoginServlet");
 			return;
 		}
+		
+		//大カテゴリー、小カテゴリーの内容を取得
+	    Categorys1DAO ca1dao = new Categorys1DAO();
+	    ArrayList<Category> calist = ca1dao.AllSelectCategory();
+
+	    // 大カテゴリー、小カテゴリーのデータをリクエストスコープに格納する
+	    request.setAttribute("calist", calist);
+	    System.out.println(calist.size());
 
 		//ログイン時に受け取ったユーザー情報を取得する
 	    User user = (User)session.getAttribute("user");
@@ -409,6 +417,7 @@ public class SearchServlet extends HttpServlet {
 
 	    // 大カテゴリー、小カテゴリーのデータをリクエストスコープに格納する
 	    request.setAttribute("calist", calist);
+	    System.out.println(calist.size());
 
 	    // 全体検索ページにフォワードする
 	    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/search.jsp");
