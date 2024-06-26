@@ -44,7 +44,7 @@
 			%>
 
 			<!-- 大項目と小項目を考えて表示 -->
-			
+
 			<c:forEach var="nav" items="${calist}">
 				<c:choose>
 					<%-- ${e.big}==${taihi}と同じ --%>
@@ -53,28 +53,21 @@
 						<p class="navi-open">${nav.category1Name}</p>
 						<!-- taihiに大項目のデータを入れる -->
 						<!-- 小項目を表示する -->
-						<nav>
-							<table class="test_table">
-								<tr>
-									<th>${nav.category2Name}</th>
-								</tr>
-							</table>
-						</nav>
+						<p>${nav.category2Name}</p>
+
 					</c:when>
 					<c:when test="${nav.category1Name ==taihi}">
 						<!-- 小項目を表示する -->
-						<nav>
-							<table class="test_table">
-								<tr>
-									<th>${nav.category2Name}</th>
-								</tr>
-							</table>
-						</nav>
+						<p>${nav.category2Name}</p>
 					</c:when>
 				</c:choose>
 
 				<%-- request.setAttribute("taihi",${nav.category1Name});と同じ処理 --%>
 				<c:set var="taihi" value="${nav.category1Name}" />
+			</c:forEach>
+			<c:forEach var="li" items="${calist}">
+				<p>${li.category1Name}</p>
+				<p>${li.category2Name}</p>
 			</c:forEach>
 			<!-- ↑全体検索左側のエリア（ここまで）↑ -->
 		</div>
@@ -131,8 +124,8 @@
 				<!-- ↑全体検索のアコーディオン表示（ここから）↑ -->
 			</div>
 			<!-- ↑検索の要素（ここまで）↑ -->
-			
-			
+
+
 			<!-- ↓レビューアイテムの要素（ここから）↓ -->
 			<!-- ↓ここからレビューアイテムのエリア↓ -->
   <div class="container">
@@ -256,15 +249,15 @@
 		</c:forEach>
 		<!-- ↑ここまでモーダルウインドウのエリア↑ -->
 			<!-- ↑レビューアイテムの要素（ここまで）↑ -->
-			
-			
+
+
 		</div>
 	</div>
 	</div>
 	</div>
 	</div>
-	
-	
+
+
 <script>
 /*==============================
 	レビューアイテムのjs

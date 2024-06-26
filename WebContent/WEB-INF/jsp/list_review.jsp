@@ -28,13 +28,13 @@
 	</header>
 
 	<h2 class="my">
-		<a>リスト項目一覧</a>
+		<a>リスト追加レビュー一覧</a>
 	</h2>
 	<div class="container">
 		<div class="scroll">
 			<div class="flex-container">
 				<c:forEach var="li" items="${list}">
-					<div class="flex-item">${li.listName} ${li.listCount}</div>
+					<div class="flex-item"><button onclick="A4/'">ボタン</button>${li.listName} ${li.listCount}</div>
 				</c:forEach>
 			</div>
 		</div>
