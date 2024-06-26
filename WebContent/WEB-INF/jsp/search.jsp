@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/A4/css/search.css">
 <title>全体検索</title>
@@ -28,55 +29,31 @@
 	<div class="search_grid">
 		<!-- ↓全体検索左側のエリア（ここから）↓ -->
 		<div class="search_grid_left">
+			<!-- ここでアコーディオンが表示される -->
+
 			<%
-		ArrayList<Bean> list = new ArrayList<Bean>();
-		for(int i = 0;i<5;i++){
-			Bean b = new Bean();
-			b.setBig("1大");
-			b.setSmall("　1小");
+				//データ作ってるだけやで
+				ArrayList<String> list = new ArrayList<String>();
+				list.add("い～ち");
+				list.add("に～い");
+				list.add("さ～ん");
+				list.add("しぃ～");
+				request.setAttribute("list", list);
+			%>
 
-			list.add(b);
-		}
-		for(int i = 0;i<5;i++){
-			Bean b = new Bean();
-			b.setBig("2大");
-			b.setSmall("　2小");
-
-			list.add(b);
-		}
-		for(int i = 0;i<5;i++){
-			Bean b = new Bean();
-			b.setBig("3大");
-			b.setSmall("　3小");
-
-			list.add(b);
-		}
-
-		request.setAttribute("list",list);
-	%>
-		そのまま表示<br>
-		<c:forEach var="e" items="${list}" >
-			${e.big }<br>
-			${e.small }<br>
-		</c:forEach>
-
-		//大項目と小項目を考えて表示<br>
-		<c:forEach var="e" items="${list}" >
-			<%-- ${e.big}==${taihi}と同じ --%>
-			<c:if test="${e.big ==taihi}">
-				${e.small }<br>
-			</c:if>
-			<%-- ${e.big}!=${taihi}と同じ --%>
-			<c:if test="${e.big !=taihi}">
-				${e.big }<br>
-				${e.small }<br>
-			</c:if>
-
-			<%-- request.setAttribute("taihi",${e.big});と同じ処理 --%>
-			<c:set var="taihi" value="${e.big}" />
-		</c:forEach>
-		<!-- ↑全体検索左側のエリア（ここまで）↑ -->
+			<c:forEach var="num" items="${list}">
+				<p class="navi-open">クリックで表示</p>
+				<nav>
+				<table class="test_table">
+					<tr>
+						<th>数値</th>
+						<td>${num}</td>
+					</tr>
+				</table>
+				</nav>
+			</c:forEach>
 		</div>
+		<!-- ↑全体検索左側のエリア（ここまで）↑ -->
 		<div class="search_grid_right">
 			<h2 class="my">
 				<a>すべて</a>
@@ -259,6 +236,8 @@
 		</div>
 	</div>
 	</div>
+	</div>
+	</div>
 	
 	
 <script>
@@ -316,6 +295,26 @@ function closeModal(num, event) {
 
 // window にクリックイベントリスナーを追加
 window.onclick = handleClick;
+
+
+
+/*==============================
+アコーディオンのjQu
+==============================*/
+$(function(){
+    // クリックで動く
+    $('.navi-open').click(function(){
+        $(this).toggleClass('active');
+        $(this).next('nav').slideToggle();
+    });
+    /*
+    // ホバーで動く (一旦コメントアウトして動作確認)
+    $('.navi-open').hover(function(){
+        $(this).toggleClass('active');
+        $(this).next('navi').slideToggle();
+    });
+    */
+});
 		</script>
 </body>
 </html>
