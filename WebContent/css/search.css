@@ -172,9 +172,6 @@ header .headline{
 左側項目のアコーディオCSS
 ==============================*/
 
-nav {
-            display: none;
-        }
         .navi-open {
             padding: 15px;
             color: #333;
@@ -204,6 +201,17 @@ nav {
             text-align: left;
         }
 
+
+.s_ca_list{
+	display:none;
+}
+
+.s_ca_table {
+	display: block;
+	border-bottom: 1px solid #ccc;
+    padding: 0.5em;
+    text-align: left;
+}
 
 
 
@@ -715,4 +723,34 @@ button{
 	background-color: #fff;
 	border: 1px solid #000;
 	margin-top: 20px;
+}
+
+/*==============================
+ここからレビューモーダルのCSS
+==============================*/
+
+/* モーダルを開くための要素の設定 */
+button{
+	background-color: transparent;
+	appearance: auto;
+    text-rendering: auto;
+    color: buttontext;
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: center;
+    align-items: flex-start;
+    cursor: pointer;
+    box-sizing: border-box;
+    margin: 0.5em;
+    padding-block: 0px;
+    padding-inline: 0px;
+    border-width: 0px;
+    border-style: outset;
+    border-color: buttonborder;
+    border-image: initial;
 }

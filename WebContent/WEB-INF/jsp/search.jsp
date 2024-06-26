@@ -45,6 +45,8 @@
 
 			<!-- 大項目と小項目を考えて表示 -->
 
+
+
 			<c:forEach var="nav" items="${calist}">
 				<c:choose>
 					<%-- ${e.big}==${taihi}と同じ --%>
@@ -53,21 +55,16 @@
 						<p class="navi-open">${nav.category1Name}</p>
 						<!-- taihiに大項目のデータを入れる -->
 						<!-- 小項目を表示する -->
-						<p>${nav.category2Name}</p>
-
+						<p  class="s_ca_list">${nav.category2Name}</p>
 					</c:when>
 					<c:when test="${nav.category1Name ==taihi}">
 						<!-- 小項目を表示する -->
-						<p>${nav.category2Name}</p>
+						<p id="s_ca_list" class="s_ca_list">${nav.category2Name}</p>
 					</c:when>
 				</c:choose>
 
 				<%-- request.setAttribute("taihi",${nav.category1Name});と同じ処理 --%>
 				<c:set var="taihi" value="${nav.category1Name}" />
-			</c:forEach>
-			<c:forEach var="li" items="${calist}">
-				<p>${li.category1Name}</p>
-				<p>${li.category2Name}</p>
 			</c:forEach>
 			<!-- ↑全体検索左側のエリア（ここまで）↑ -->
 		</div>
@@ -80,8 +77,6 @@
 				<form method="post" action="/A4/SearchServlet">
 				<input type="checkbox" id="search_drop" class="search_drop">
       			<label for="search_drop">検索</label>
-
-
 
 				<!-- ↓全体検索のアコーディオン表示（ここから）↓ -->
 
@@ -321,20 +316,18 @@ window.onclick = handleClick;
 /*==============================
 アコーディオンのjQu
 ==============================*/
-$(function(){
-    // クリックで動く
-    $('.navi-open').click(function(){
-        $(this).toggleClass('active');
-        $(this).next('nav').slideToggle();
+$(document).ready(function() {
+    $('.navi-open').click(function() {
+        // すべての小項目を非表示にする
+        $('.s_ca_list').slideUp();
+
+        // 現在の大項目に対応する小項目をトグル表示
+        $(this).nextUntil('.navi-open').slideToggle();
     });
-    /*
-    // ホバーで動く (一旦コメントアウトして動作確認)
-    $('.navi-open').hover(function(){
-        $(this).toggleClass('active');
-        $(this).next('navi').slideToggle();
-    });
-    */
 });
+
+
+
 		</script>
 </body>
 </html>
