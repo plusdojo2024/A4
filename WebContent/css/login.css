@@ -37,14 +37,6 @@ div.logo {
   border-radius: 5px;
   margin-top: 5px;
 }
-.login-button {
-  background-color: #f99292; /* ログインボタンの色 */
-  color: black;
-  border: none;
-  border-radius: 5px;
-  padding: 10px;
-  cursor: pointer;
-}
 .sinki-button {
   background-color: #ffc679; /* 新規登録ボタンの色 */
   color: black;
@@ -60,4 +52,50 @@ div.logo {
 .register-link {
   text-align: center;
   margin-top: 10px;
+}
+
+/*ログインボタン*/
+.login-button {
+  background-color: #f99292; /* ログインボタンの色 */
+  border: 2px solid transparent;
+  color: #ffffff;
+  font-size: 16px;
+  line-height: 25px;
+  padding: 10px;
+  text-decoration: none;
+  text-shadow: none;
+  border-radius: 3px;
+  box-shadow: none;
+  transition: 0.25s;
+  display: block;
+  width: 250px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.login-button:hover {
+	box-shadow: 7px 7px 3px #666666;
+}
+
+/*新規登録ボタン*/
+.sinki-button {
+  background-color: #ffc679; /* 新規登録ボタンの色 */
+  border: 2px solid transparent;
+  color: #ffffff;
+  font-size: 16px;
+  line-height: 25px;
+  padding: 10px;
+  text-decoration: none;
+  text-shadow: none;
+  border-radius: 3px;
+  box-shadow: none;
+  transition: 0.25s;
+  display: block;
+  width: 250px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+.sinki-button:hover {
+	box-shadow: 7px 7px 3px #666666;
 }
