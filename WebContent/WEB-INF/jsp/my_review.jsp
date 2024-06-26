@@ -90,6 +90,7 @@ input[name="tab_item"] {
 		<li><a href="/A4/SearchServlet">全体検索</a></li>
 		<li><a href="/A4/ListServlet">リスト</a></li>
 	</ul>
+	
 	<button id="openiconModal">
 	  <figure class="icon-circle">
 	  	<img src="/A4/img/myicon.jpg" width="100" height="100" alt="マイアイコン">
@@ -299,14 +300,11 @@ input[name="tab_item"] {
 		<!-- ↑ここまで投稿用ボタンのエリア↑ -->
 
 	  	<!-- ↓投稿用モーダルのエリア↓ -->
-	  	<div id="myModal${status.index}" class="modal">
-		<form class="modal-content" method="post" action="/A4/MyReviewServlet">
-		<span id="closeModal${status.index}" class="closeModal" onclick="closeM(${status.index})">&times;</span>
-				<div id="my_post_Modal" class="icon_modal">
-		    		<div class="icon_modal_content">
-		        		<span id="close_post_Modal">&times;</span>
-		        		<div class ="icon_modal_box">
-		        			<img class="modal_myicon" src="/A4/img/myicon.jpg">
+	  	
+	  	<div id="my_post_Modal" class="modal">
+	  		<form class="modal-content" method="post" action="/A4/MyReviewServlet">
+			<span id="close_post_Modal" class="closeModal">&times;</span>
+		        	<div class ="icon_modal_box">
 		        					<input type="text" name="reviewId" value="${e.reviewId}">
 		        					<input type="text" name="category2Id" value="${e.category2Id}">
 		        					<input type="text" name="reviewName" value="${e.reviewName}">
@@ -328,9 +326,8 @@ input[name="tab_item"] {
 
 	        			</div>
 	        		</div>
-	    		</div>
-			</div>
-		</form>
+	    	</form>
+		</div>
 		<!-- ↑ここまで投稿用モーダルのエリア↑ -->
 
 	</div>
@@ -421,22 +418,6 @@ input[name="tab_item"] {
  	    }
  	}
 
- 	// モーダルの外側をクリックした時にモーダルを非表示
- 	$(function(){
- 	    // クリックで動く
- 	    $('.navi-open').click(function(){
- 	        $(this).toggleClass('active');
- 	        $(this).next('navi').slideToggle();
- 	    });
- 	    /*
- 	    // ホバーで動く (一旦コメントアウトして動作確認)
- 	    $('.navi-open').hover(function(){
- 	        $(this).toggleClass('active');
- 	        $(this).next('navi').slideToggle();
- 	    });
- 	    */
- 	});
-
 
 
  	/*==============================
@@ -523,16 +504,6 @@ input[name="tab_item"] {
  	      post_modal.style.display = "none";
  	    }
  	}
-
- 	// モーダルの外側をクリックした時にモーダルを非表示
- 	$(function(){
- 	    // クリックで動く
- 	    $('.navi-open').click(function(){
- 	        $(this).toggleClass('active');
- 	        $(this).next('navi').slideToggle();
- 	    });
-
- 	});
 
 	</script>
 </body>
