@@ -34,7 +34,7 @@
 		<div class="scroll">
 			<div class="flex-container">
 				<c:forEach var="li" items="${list}">
-					<div class="flex-item">${li.listName} ${li.listCount}</div>
+					<div class="flex-item" onclick="location.href='/A4/ListReviewServlet'">${li.listName} ${li.listCount}</div>
 				</c:forEach>
 			</div>
 		</div>
