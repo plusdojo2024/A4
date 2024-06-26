@@ -41,13 +41,12 @@
 				request.setAttribute("list", list);
 			%>
 
-			<c:forEach var="num" items="${list}">
-				<p class="navi-open">クリックで表示</p>
+			<c:forEach var="nav" items="${calist}">
+				<p class="navi-open">表示</p>
 				<nav>
 				<table class="test_table">
 					<tr>
-						<th>数値</th>
-						<td>${num}</td>
+						<th></th>
 					</tr>
 				</table>
 				</nav>
