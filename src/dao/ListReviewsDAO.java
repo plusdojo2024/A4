@@ -118,7 +118,7 @@ public class ListReviewsDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/simpleBC", "sa", "");
 
 			// SELECT文を準備する
-			String sql = "SELECT COUNT(*) list_review_id FROM list_reviews WHERE list_id = ?";
+			String sql = "SELECT COUNT(*) FROM list_reviews WHERE list_id = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setInt(1, list.getListId());
 

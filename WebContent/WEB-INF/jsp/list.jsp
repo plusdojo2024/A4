@@ -9,9 +9,6 @@
 <title>リスト</title>
 </head>
 <body>
-	<c:forEach var="list" items="${list}">
-		<h2>${list.listName}</h2>
-	</c:forEach>
 	<!-- タブヘッダー（ここから） -->
 	<header>
 		<h1 class="headline">
@@ -36,13 +33,9 @@
 	<div class="container">
 		<div class="scroll">
 			<div class="flex-container">
-				<br> <br> <br>
-				<div class="flex-item">子要素1</div>
-				<div class="flex-item">子要素2</div>
-				<div class="flex-item">子要素3</div>
-				<div class="flex-item">子要素4</div>
-				<div class="flex-item">子要素5</div>
-				<div class="flex-item">子要素6</div>
+				<c:forEach var="li" items="${list}">
+					<div class="flex-item">${li.listName} ${li.listCount}</div>
+				</c:forEach>
 			</div>
 		</div>
 	<div class="bo">

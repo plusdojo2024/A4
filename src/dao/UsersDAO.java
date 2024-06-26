@@ -125,7 +125,7 @@ public class UsersDAO {
 
 
 	//ユーザーを新規追加
-	public int insert(String newEmail, String newPassword, String newName,String img) {
+	public int insert(String newEmail, String newPassword, String newName) {
 		Connection conn = null;
 		int num = 0;
 
@@ -133,14 +133,13 @@ public class UsersDAO {
 			Class.forName("org.h2.Driver");
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/A4db", "sa", "");
 
-			String sql = "INSERT INTO users (USER_EMAIL, USER_PASSWORD, USER_NAME, USER_IMG, PRIVACY_FLG) VALUES (?, ?, ?, ?, 1)";
+			String sql = "INSERT INTO users (USER_EMAIL, USER_PASSWORD, USER_NAME, USER_IMG, PRIVACY_FLG) VALUES (?, ?, ?,'/A4/img/defoicon.png', 1)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
 			pStmt.setString(1, newEmail);
 			pStmt.setString(2, newPassword);
 			pStmt.setString(3, newName);
-			pStmt.setString(4, img); //ユーザーの画像名を入れる
 
 			// SQL文を実行する
 			num = pStmt.executeUpdate();
