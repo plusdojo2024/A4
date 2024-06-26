@@ -979,6 +979,8 @@ public class ReviewsDAO{
 		Connection conn = null;
 		
 		System.out.println(freeWord);
+		System.out.println(createdA);
+		System.out.println(createdB);
 		try {
 			// JDBCドライバを読み込む
 			Class.forName("org.h2.Driver");
@@ -1020,10 +1022,10 @@ public class ReviewsDAO{
 			        + " AND"
 					+ " reviews.privacy_flg = 1 AND users.privacy_flg = 1"
 					+ " AND"
-					+ " reviews.review_name LIKE ? "
-					+ "OR reviews.review_comment LIKE ?";
+					+ " (reviews.review_name LIKE ? "
+					+ "OR reviews.review_comment LIKE ?)";
 			
-			
+			System.out.println(sql);
 
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setInt(1, priceA);//引数sqlにsetStringしてる
