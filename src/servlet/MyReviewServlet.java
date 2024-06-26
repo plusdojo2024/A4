@@ -90,7 +90,6 @@ public class MyReviewServlet extends HttpServlet {
 
 		//レビュー新規登録
 		if (request.getParameter("submit")!=null && request.getParameter("submit").equals("新規登録")) {
-			int reviewId = Integer.parseInt(request.getParameter("reviewId"));
 			int category2Id = Integer.parseInt(request.getParameter("category2Id"));
 			String reviewName = request.getParameter("reviewName");
 			int reviewPrice = Integer.parseInt(request.getParameter("reviewPrice"));

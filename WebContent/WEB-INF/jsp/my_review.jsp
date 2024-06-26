@@ -90,7 +90,7 @@ input[name="tab_item"] {
 		<li><a href="/A4/SearchServlet">全体検索</a></li>
 		<li><a href="/A4/ListServlet">リスト</a></li>
 	</ul>
-	
+
 	<button id="openiconModal">
 	  <figure class="icon-circle">
 	  	<img src="/A4/img/myicon.jpg" width="100" height="100" alt="マイアイコン">
@@ -300,25 +300,27 @@ input[name="tab_item"] {
 		<!-- ↑ここまで投稿用ボタンのエリア↑ -->
 
 	  	<!-- ↓投稿用モーダルのエリア↓ -->
-	  	
+
 	  	<div id="my_post_Modal" class="modal">
 	  		<form class="modal-content" method="post" action="/A4/MyReviewServlet">
 			<span id="close_post_Modal" class="closeModal">&times;</span>
 		        	<div class ="icon_modal_box">
-		        					<input type="text" name="reviewId" value="${e.reviewId}">
-		        					<input type="text" name="category2Id" value="${e.category2Id}">
-		        					<input type="text" name="reviewName" value="${e.reviewName}">
-		        					<input type="text" name="reviewPrice" value="${e.reviewPrice}">
-		        					<input type="text" name="reviewComment" value="${e.reviewComment}">
-		        					<input type="text" name="rPrivacyFlg" value="${e.rPrivacyFlg}">
-		        					<input type="text" name="UpDatedAt" value="${e.rUpdatedAt}">
-		        					<input type="text" name="reviewItem1Score" value="${e.reviewItem1Score}">
-		        					<input type="text" name="reviewItem2Score" value="${e.reviewItem2Score}">
-		        					<input type="text" name="reviewItem3Score" value="${e.reviewItem3Score}">
-		        					<input type="text" name="reviewItem4Score" value="${e.reviewItem4Score}">
-		        					<input type="text" name="reviewItem5Score" value="${e.reviewItem5Score}">
-		        					<input type="text" name="backnumberContent" value="${e.backnumberContent}">
-		        					<input type="text" name="backnumberId" value="${e.backnumberId}">
+		        					<input type="text" name="category2Id" placeholder="category2Id">
+		        					<input type="text" name="reviewName"  placeholder="reviewName">
+		        					<input type="text" name="reviewPrice" placeholder="reviewPrice" >
+		        					<input type="text" name="reviewComment" placeholder="reviewComment">
+		        					<input type="text" name="rPrivacyFlg" placeholder="rPrivacyFlg">
+		        					<input type="text" name="UpDatedAt"  placeholder="UpDatedAt">
+		        					<input type="text" name="reviewItem1" placeholder="reviewItem1">
+		        					<input type="text" name="reviewItem2"  placeholder="reviewItem2">
+		        					<input type="text" name="reviewItem3" placeholder="reviewItem3">
+		        					<input type="text" name="reviewItem4" placeholder="reviewItem4">
+		        					<input type="text" name="reviewItem5" placeholder="reviewItem5">
+		        					<input type="text" name="reviewItem1Score" placeholder="reviewItem1Score">
+		        					<input type="text" name="reviewItem2Score" placeholder="reviewItem2Score">
+		        					<input type="text" name="reviewItem3Score" placeholder="reviewItem3Score">
+		        					<input type="text" name="reviewItem4Score" placeholder="reviewItem4Score">
+		        					<input type="text" name="reviewItem5Score" placeholder="reviewItem5Score">
 		        			<div class="icon_flex">
 		        			<!-- ↓新規登録用ボタン（ここから）↓ -->
 		        			<input type="submit" name="submit" value="新規登録">
