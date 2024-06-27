@@ -169,8 +169,8 @@ input[name="tab_item"] {
     			<div class="grid_item2">
     				<h1>${e.reviewName}</h1>
 
-    				<p class= "item_text">テキスト</p>
-    				<p class= "item_text">テキスト</p>
+    				<p class= "item_text">${e.reviewPrice}</p>
+    				<p class= "item_text">総合評価${e.scoreAvg}/5</p>
     			</div>
 			</div>
 		</button>
