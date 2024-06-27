@@ -13,7 +13,9 @@
 	<div class ="logo">
       <img src="/A4/img/logo.png" width="200" alt="A reviewのロゴ">
 	</div>
-	<span>${message}</span>
+	<div class ="error_message">
+	<span id="error_message">${message}</span>
+	</div>
 	<form method="post" action="/A4/NewUserServlet">
     <div class="login">
         <div class="input-group">
