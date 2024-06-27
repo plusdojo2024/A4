@@ -754,3 +754,64 @@ button{
     border-color: buttonborder;
     border-image: initial;
 }
+
+/* 作成日時 */
+.create_at{
+	text-align: center;
+}
+
+.title_box {
+	display: grid;
+	grid-template-rows: 1fr 1fr;
+	margin-bottom: 10px;
+}
+
+.modal_title{
+	text-align: center;
+	font-size: 32px;
+	width: 50%;
+	margin: 0 auto;
+}
+
+.modal_grid{
+	display:grid;
+	grid-template-columns: 1fr 1fr;
+	justify-content: space-between;
+	gap: 5%;
+}
+
+/* 評価項目CSS */
+.eva{
+	width: 100%;
+	text-align: justify;
+}
+
+/* 公開・非公開,リスト項目,総合評価 */
+.modal_grid_right {
+	display: grid;
+	grid-template-rows: 1fr 1fr 1fr;
+	text-align: left;
+}
+
+/* 項目、点数テーブルCSS */
+.modal_table {
+	width: 50%;
+}
+
+/* 更新削除ボタンCSS */
+.modal_btn {
+	width: 50%;
+	margin-top: 5%;
+	border-radius: 1rem;
+	cursor: pointer;
+}
+
+.btn_up {
+	background-color: #ffc679;
+}
+
+.kkk{
+	border: 1px solid #333;
+	background-color: #fff;
+	width: 90%;
+}
