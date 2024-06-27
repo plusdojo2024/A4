@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.ListReviewsDAO;
+import dao.ReviewsDAO;
 import dao.ReviewsItemsDAO;
 import dao.ReviewsScoresDAO;
 import model.Review;
@@ -31,32 +32,18 @@ public class ListReviewServlet extends HttpServlet {
 			return;
 		}
 
+		request.setCharacterEncoding("UTF-8");
+
 		int listId = Integer.parseInt(request.getParameter("list_id"));
 
 		//ListReviewsDAOをインスタンス化
-		ListReviewsDAO lrdao = new ListReviewsDAO();
-
-		//ReviewsItemsDAOをインスタンス化
-		ReviewsItemsDAO ridao = new ReviewsItemsDAO();
-
-		//ReviewsScoresDAOをインスタンス化
-		ReviewsScoresDAO rsdao = new ReviewsScoresDAO();
+		ReviewsDAO rdao = new ReviewsDAO();
 
 		//リスト用のレビューデータを格納
-		ArrayList<Review> rlist = lrdao.view(listId);
-
-		//レビュー項目をrlistに追加
-		for (Review r : rlist) {
-			ridao.view(r.getReviewId(), r);
-		}
-
-		//レビュースコアをrlistに追加
-		for (Review r: rlist) {
-			rsdao.view(r.getReviewId(), r);
-		}
+		ArrayList<Review> list = rdao.viewList(listId);
 
 		//スコープに格納
-		request.setAttribute("rlist", rlist);
+		request.setAttribute("list", list);
 
 
 		//JSPに処理を委譲

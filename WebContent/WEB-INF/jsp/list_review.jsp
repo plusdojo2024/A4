@@ -13,7 +13,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/A4/css/Areview.css">
-<title>マイレビューぺージ</title>
+<title>リスト追加レビュー一覧</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
 /*タブ切り替え全体のスタイル*/
@@ -86,9 +86,9 @@ input[name="tab_item"] {
     <a href="MyReviewServlet"><img src="/A4/img/logo.png" width="100" height="100" alt="A review"></a>
 	</h1>
 	<ul class ="tab">
-		<li class="selected"><a href="/A4/MyReviewServlet">マイレビュー</a></li>
+		<li><a href="/A4/MyReviewServlet">マイレビュー</a></li>
 		<li><a href="/A4/SearchServlet">全体検索</a></li>
-		<li><a href="/A4/ListServlet">リスト</a></li>
+		<li class="selected"><a href="/A4/ListServlet">リスト</a></li>
 	</ul>
 
 	<button id="openiconModal">
@@ -117,7 +117,7 @@ input[name="tab_item"] {
 <!-- タブヘッダー（ここまで） -->
 
 	<h2 class="my">
-	<a>マイレビュー</a>
+	<a>リスト追加レビュー</a>
 	</h2>
 	<span style="color:red">${result}</span>
 	<!-- ↓ドロップのエリア↓ -->
