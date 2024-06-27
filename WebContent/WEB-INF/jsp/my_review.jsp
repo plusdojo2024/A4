@@ -169,7 +169,7 @@ input[name="tab_item"] {
     			<div class="grid_item2">
     				<h1>${e.reviewName}</h1>
 
-    				<p class= "item_text">${e.reviewPrice}</p>
+    				<p class= "item_text">${e.reviewPrice}円</p>
     				<p class= "item_text">総合評価${e.scoreAvg}/5</p>
     			</div>
 			</div>
@@ -262,6 +262,9 @@ input[name="tab_item"] {
 													</label>
 									</div>
         						<%--  --%>
+        						</div>
+        						<div class="price_text">
+        							<input class="" type="text" name="reviewPrice" value="${e.reviewPrice}" ><p>円</p>
         						</div>
         						<h1 class="avg">総合評価${e.scoreAvg}/5</h1>
 							<!-- ↑ここまでモーダルウインドウのエリア↑ -->
