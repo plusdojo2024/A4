@@ -191,8 +191,9 @@ public class ListReviewsDAO {
 					+ "LEFT OUTER JOIN users ON users.user_id = reviews.user_id "
 					+ "LEFT OUTER JOIN list ON list.list_id = list_reviews.list_id "
 					+ "WHERE reviews.delete_flg = 1"
-			        + "AND list.list_id = ?"
-			        + "ORDER BY list_reviews.list_review_id DESC";
+			        + " AND list_reviews"
+			        + ".list_id = ? "
+			        + " ORDER BY list_reviews.list_review_id DESC ";
 
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 

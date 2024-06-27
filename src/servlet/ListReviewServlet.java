@@ -11,13 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.ListDAO;
 import dao.ListReviewsDAO;
 import dao.ReviewsItemsDAO;
 import dao.ReviewsScoresDAO;
-import model.List;
 import model.Review;
-import model.User;
+
 
 @WebServlet("/ListReviewServlet")//ここを変える
 public class ListReviewServlet extends HttpServlet {
@@ -28,29 +26,37 @@ public class ListReviewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
-		if (session.getAttribute("user") == null) {
+			if (session.getAttribute("user") == null) {
 			response.sendRedirect("/A4/LoginServlet");
 			return;
 		}
 
-		//ログイン時に受け取ったユーザー情報を取得する
-		User user = (User)session.getAttribute("user");
+		int listId = Integer.parseInt(request.getParameter("list_id"));
 
-		//リストDAOをインスタンス化
-		ListDAO ldao = new ListDAO();
+		//ListReviewsDAOをインスタンス化
+		ListReviewsDAO lrdao = new ListReviewsDAO();
 
-		//リストレビューズDAOをインスタンス化
-	    ListReviewsDAO lrdao = new ListReviewsDAO();
+		//ReviewsItemsDAOをインスタンス化
+		ReviewsItemsDAO ridao = new ReviewsItemsDAO();
 
-		//リスト項目の表示
-		ArrayList<List> list = ldao.view(user.getUserId());
+		//ReviewsScoresDAOをインスタンス化
+		ReviewsScoresDAO rsdao = new ReviewsScoresDAO();
 
-	    //リスト数を数えてlistに格納
-		for (List li : list) {
-			lrdao.countList(li);
+		//リスト用のレビューデータを格納
+		ArrayList<Review> rlist = lrdao.view(listId);
+
+		//レビュー項目をrlistに追加
+		for (Review r : rlist) {
+			ridao.view(r.getReviewId(), r);
 		}
 
-	    request.setAttribute("list", list);
+		//レビュースコアをrlistに追加
+		for (Review r: rlist) {
+			rsdao.view(r.getReviewId(), r);
+		}
+
+		//スコープに格納
+		request.setAttribute("rlist", rlist);
 
 
 		//JSPに処理を委譲
@@ -67,66 +73,32 @@ public class ListReviewServlet extends HttpServlet {
 			return;
 		}
 
-		//リストDAOをインスタンス化
-		ListDAO ldao = new ListDAO();
+		int listId = Integer.parseInt(request.getParameter("list_id"));
 
-		//リストレビューズDAOをインスタンス化
-	    ListReviewsDAO lrdao = new ListReviewsDAO();
+		//ListReviewsDAOをインスタンス化
+		ListReviewsDAO lrdao = new ListReviewsDAO();
 
-		//ログイン時に受け取ったユーザー情報を取得する
-		User user = (User)session.getAttribute("user");
-
-		//リスト項目DAOをインスタンス化
+		//ReviewsItemsDAOをインスタンス化
 		ReviewsItemsDAO ridao = new ReviewsItemsDAO();
 
-		//リストスコアDAOをインスタンス化
+		//ReviewsScoresDAOをインスタンス化
 		ReviewsScoresDAO rsdao = new ReviewsScoresDAO();
 
-		if (request.getParameter("submit") != null) {
+		//リスト用のレビューデータを格納
+		ArrayList<Review> rlist = lrdao.view(listId);
 
-			//リスト新規登録
-			if (request.getParameter("submit").equals("新規リスト登録")) {
-				String listName = request.getParameter("list_name");
-				ldao.insert(listName, user.getUserId());
-			}
-
+		//レビュー項目をrlistに追加
+		for (Review r : rlist) {
+			ridao.view(r.getReviewId(), r);
 		}
 
-
-		//個々のリストを押したとき
-		if (request.getParameter("list_id") != null) {
-
-			//Ajaxをもちいてlist_idを取得する
-			int listId = Integer.parseInt(request.getParameter("list_id"));
-			ArrayList<Review> rlist = lrdao.view(listId);
-
-			//レビュー項目をrlistに追加
-			for (Review r : rlist) {
-				ridao.view(r.getReviewId(), r);
-			}
-
-			//レビュースコアをrlistに追加
-			for (Review r: rlist) {
-				rsdao.view(r.getReviewId(), r);
-			}
-
-			//rlistをスコープに格納
-			request.setAttribute("rlist", rlist);
+		//レビュースコアをrlistに追加
+		for (Review r: rlist) {
+			rsdao.view(r.getReviewId(), r);
 		}
 
-
-		//リスト項目の表示
-		ArrayList<List> list = ldao.view(user.getUserId());
-
-		//リスト数を数えてlistに格納
-		for (List li : list) {
-			lrdao.countList(li);
-		}
-
-		request.setAttribute("list", list);
-
-
-		//↓マイレビューサーブレットと同じ
+		//スコープに格納
+		request.setAttribute("rlist", rlist);
 
 
 		//JSPに処理を委譲
