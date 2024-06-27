@@ -49,6 +49,9 @@ public class ListServlet extends HttpServlet {
 		for (List li : list) {
 			lrdao.countList(li);
 		}
+		for(List a:list) {
+			System.out.println("確認用:"+a.getListCount());
+		}
 
 	    request.setAttribute("list", list);
 
