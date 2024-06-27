@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.BacknumbersDAO;
 import dao.Categorys1DAO;
 import dao.FollowsDao;
 import dao.ReviewsDAO;
@@ -283,8 +282,8 @@ public class MyReviewServlet extends HttpServlet {
 			int reviewItem4Score = Integer.parseInt(request.getParameter("reviewItem4Score"));
 			int reviewItem5Score = Integer.parseInt(request.getParameter("reviewItem5Score"));
 
-			String backnumberContent = request.getParameter("backnumberContent");
-			int backnumberId = Integer.parseInt(request.getParameter("backnumberId"));
+//			String backnumberContent = request.getParameter("backnumberContent");
+//			int backnumberId = Integer.parseInt(request.getParameter("backnumberId"));
 
 			ReviewsDAO dao1 = new ReviewsDAO();
 			//とりあえず、全てのレビューの情報を取得してくる
@@ -302,19 +301,19 @@ public class MyReviewServlet extends HttpServlet {
 
 			ReviewsDAO rDao = new ReviewsDAO();
 			int result1 = rDao.update(category2Id,reviewName, reviewPrice, reviewComment, privacyFlg, upDatedAt, reviewId);
-			ReviewsImgsDAO rimgsDao = new ReviewsImgsDAO();
-			int result2 = rimgsDao.update(reviewId, reviewImg);
-			ReviewsItemsDAO ritemDao = new ReviewsItemsDAO();
-			int result3 = ritemDao.update(review.getReviewItemId(),review.getReviewId(), reviewItem1, reviewItem2, reviewItem3, reviewItem4, reviewItem5);
-			ReviewsScoresDAO rSDao = new ReviewsScoresDAO();
-			int result4 = rSDao.update(review.getReviewScoreId(),review.getReviewId(),reviewItem1Score, reviewItem2Score, reviewItem3Score, reviewItem4Score, reviewItem5Score);
-			BacknumbersDAO bDao = new BacknumbersDAO();
-			int result5 = bDao.insert(reviewId,backnumberContent);
+//			ReviewsImgsDAO rimgsDao = new ReviewsImgsDAO();
+//			int result2 = rimgsDao.update(reviewId, reviewImg);
+//			ReviewsItemsDAO ritemDao = new ReviewsItemsDAO();
+//			int result3 = ritemDao.update(review.getReviewItemId(),review.getReviewId(), reviewItem1, reviewItem2, reviewItem3, reviewItem4, reviewItem5);
+//			ReviewsScoresDAO rSDao = new ReviewsScoresDAO();
+//			int result4 = rSDao.update(review.getReviewScoreId(),review.getReviewId(),reviewItem1Score, reviewItem2Score, reviewItem3Score, reviewItem4Score, reviewItem5Score);
+//			BacknumbersDAO bDao = new BacknumbersDAO();
+//			int result5 = bDao.insert(reviewId,backnumberContent);
 			/*int result6 = bDao.delete(backnumberId);*/
 			/*int result7 = bDao.update(backnumberId, backnumberContent);
 			*/
 
-			if (result1 == 1 &&result2 == 1 &&result3 == 1 &&result4 == 1 &&result5 == 1) {
+			if (result1 == 1 /*&&result2 == 1 &&result3 == 1 &&result4 == 1 &&result5 == 1*/) {
 				request.setAttribute("result", "更新しました。");
 			} else {
 				request.setAttribute("result", "更新できませんでした");
@@ -349,38 +348,38 @@ public class MyReviewServlet extends HttpServlet {
 //			request.setAttribute("fUserList", fUserList);
 
 
-			//dogetの内容ここからーーーーーーーーー
-
-			//大カテゴリー、小カテゴリーの内容を取得
-		    Categorys1DAO ca1dao = new Categorys1DAO();
-		    ArrayList<Category> calist = ca1dao.AllSelectCategory();
-
-		    // 大カテゴリー、小カテゴリーのデータをリクエストスコープに格納する
-		    request.setAttribute("calist", calist);
-		    System.out.println(calist.size());
-
-
-			//すべてのレビューを持ってくる
-			ArrayList<Review> myAllReview0 = rDao.descDateView(id);
-			int tai=0;
-			ArrayList<Review> myAllReview = new ArrayList<>();
-			//重複するものを排除
-			for(Review r : myAllReview0) {
-				if(r.getReviewId()!=tai) {
-					tai = r.getReviewId();
-					myAllReview.add(r);
-				}
-			}
-			//大カテゴリー、小カテゴリーも一緒に持ってくる
-			Categorys1DAO dao = new Categorys1DAO();
-			ArrayList<Category> categoryList = (ArrayList<Category>)dao.AllSelectCategory();
-			//フォローしてる人を取ってくる
-			FollowsDao fDao = new FollowsDao();
-			ArrayList<User> fUserList = fDao.followSelect(id);
-			request.setAttribute("list", myAllReview);
-			request.setAttribute("categoryList", categoryList);
-			request.setAttribute("fUserList", fUserList);
-			//dogetの内容ここまでーーーーーーーーー
+//			//dogetの内容ここからーーーーーーーーー
+//
+//			//大カテゴリー、小カテゴリーの内容を取得
+//		    Categorys1DAO ca1dao = new Categorys1DAO();
+//		    ArrayList<Category> calist = ca1dao.AllSelectCategory();
+//
+//		    // 大カテゴリー、小カテゴリーのデータをリクエストスコープに格納する
+//		    request.setAttribute("calist", calist);
+//		    System.out.println(calist.size());
+//
+//
+//			//すべてのレビューを持ってくる
+//			ArrayList<Review> myAllReview0 = rDao.descDateView(id);
+//			int tai=0;
+//			ArrayList<Review> myAllReview = new ArrayList<>();
+//			//重複するものを排除
+//			for(Review r : myAllReview0) {
+//				if(r.getReviewId()!=tai) {
+//					tai = r.getReviewId();
+//					myAllReview.add(r);
+//				}
+//			}
+//			//大カテゴリー、小カテゴリーも一緒に持ってくる
+//			Categorys1DAO dao = new Categorys1DAO();
+//			ArrayList<Category> categoryList = (ArrayList<Category>)dao.AllSelectCategory();
+//			//フォローしてる人を取ってくる
+//			FollowsDao fDao = new FollowsDao();
+//			ArrayList<User> fUserList = fDao.followSelect(id);
+//			request.setAttribute("list", myAllReview);
+//			request.setAttribute("categoryList", categoryList);
+//			request.setAttribute("fUserList", fUserList);
+//			//dogetの内容ここまでーーーーーーーーー
 
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/my_review.jsp");
