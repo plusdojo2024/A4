@@ -53,6 +53,11 @@ public class MyReviewServlet extends HttpServlet {
 
 		User user = (User)session.getAttribute("user");
 		int id = user.getUserId();
+		String name = user.getUserName();
+		String img = user.getUserImg();
+
+		request.setAttribute("name", name);
+		request.setAttribute("img", img);
 
 		//すべてのレビューを持ってくる
 		ReviewsDAO rDao = new ReviewsDAO();

@@ -43,6 +43,7 @@ public class UsersDAO {
 				user.setUserName(rs.getString("user_name"));
 				user.setUserEmail(rs.getString("user_email"));
 				user.setUserId(rs.getInt("user_id"));
+				user.setUserImg(rs.getString("user_img"));
 			}
 		}
 		catch (SQLException e) {

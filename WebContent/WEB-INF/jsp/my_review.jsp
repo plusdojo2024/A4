@@ -90,10 +90,11 @@ input[name="tab_item"] {
 		<li><a href="/A4/SearchServlet">全体検索</a></li>
 		<li><a href="/A4/ListServlet">リスト</a></li>
 	</ul>
-
+<c:set var="name" value="${name}" />
+<c:set var="img" value="${img}" />
 	<button id="openiconModal">
 	  <figure class="icon-circle">
-	  	<img src="/A4/img/myicon.jpg" width="100" height="100" alt="マイアイコン">
+	  	<img src="${img}" width="100" height="100" alt="マイアイコン">
 	  </figure>
 	</button>
 	  <!-- ↓アイコンモーダルのエリア↓ -->
@@ -101,8 +102,8 @@ input[name="tab_item"] {
     		<div class="icon_modal_content">
         		<span id="closeiconModal">&times;</span>
         		<div class ="icon_modal_box">
-        			<img class="modal_myicon" src="/A4/img/myicon.jpg">
-        			<div class="name_box">名前</div>
+        			<img class="modal_myicon" src="${img}">
+        			<div class="name_box">${name}</div>
         			<div class="re_btn">ボタン</div>
         			<div class="icon_flex">
         				<div class="change">変更</div>
@@ -165,7 +166,7 @@ input[name="tab_item"] {
   	<c:forEach var="e" items="${list}" varStatus="status">
   		<button id="openModal${status.index}" onclick="openM(${status.index})">
     		<div class="flex-item">
-    			<div class= "item_img"><img src="/A4/img/myicon.jpg" width="100" height="100" alt="マイアイコン"></div>
+   			<div class= "item_img"><img src="${e.reviewImg}" width="100" height="100" alt="マイアイコン"></div>
     			<div class="grid_item2">
     				<h1>${e.reviewName}</h1>
 
@@ -180,7 +181,7 @@ input[name="tab_item"] {
 		<div id="myModal${status.index}" class="modal">
     		<form class="modal-content" method="post" action="/A4/MyReviewServlet">
     			<!-- ↓これが俺たちのIDだーーーー！！！↓ -->
-        					
+
         					<input type="hidden" name="reviewId" value="${e.reviewId}">
         					<input type="hidden" name="category2Id" value="${e.category2Id}">
         					<input type="hidden" name="reviewPrice" value="${e.reviewPrice}">
@@ -193,7 +194,7 @@ input[name="tab_item"] {
         					<!-- ↑これが俺たちのIDだーーーー！！！↑ -->
         		<span id="closeModal${status.index}" class="closeModal" onclick="closeM(${status.index})">&times;</span>
         		<div class="modal_box">
-        			<img class="modal_img" src="/A4/img/myicon.jpg">
+        			<img class="modal_img" src="${e.reviewImg}">
         			<div class="modal_text">
         				<div class="title_box">
         					<p class="create_at">${e.rCreatedAt}</p>
@@ -379,7 +380,7 @@ input[name="tab_item"] {
 		        					<input type="text" name="reviewComment" placeholder="備考">
 		        			</div>
 		        		</div>
-		        	</div>		
+		        	</div>
 		        			<!-- ↓新規登録用ボタン（ここから）↓ -->
 		        			<input class="modal_btn btn_up" type="submit" name="submit" value="新規登録">
 		        			<!-- ↑新規登録用ボタン（ここまで）↑ -->
@@ -393,6 +394,13 @@ input[name="tab_item"] {
 
 
  	<script>
+
+
+//入れた
+
+
+
+
 
  	/*==============================
  	レビューアイテムのjs
