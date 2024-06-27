@@ -949,7 +949,9 @@ public class ReviewsDAO{
 			pStmt.setInt(7, reviewId);
 
 			// SQL文を実行し、結果表を取得する	検索して結果の表をrsに入れる構文
-			num = pStmt.executeUpdate();
+			pStmt.executeUpdate();
+
+			num = 1;
 		}
 		catch (SQLException e) {
 			e.printStackTrace();

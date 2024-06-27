@@ -301,19 +301,19 @@ public class MyReviewServlet extends HttpServlet {
 
 			ReviewsDAO rDao = new ReviewsDAO();
 			int result1 = rDao.update(category2Id,reviewName, reviewPrice, reviewComment, privacyFlg, upDatedAt, reviewId);
-//			ReviewsImgsDAO rimgsDao = new ReviewsImgsDAO();
-//			int result2 = rimgsDao.update(reviewId, reviewImg);
-//			ReviewsItemsDAO ritemDao = new ReviewsItemsDAO();
-//			int result3 = ritemDao.update(review.getReviewItemId(),review.getReviewId(), reviewItem1, reviewItem2, reviewItem3, reviewItem4, reviewItem5);
-//			ReviewsScoresDAO rSDao = new ReviewsScoresDAO();
-//			int result4 = rSDao.update(review.getReviewScoreId(),review.getReviewId(),reviewItem1Score, reviewItem2Score, reviewItem3Score, reviewItem4Score, reviewItem5Score);
+			ReviewsImgsDAO rimgsDao = new ReviewsImgsDAO();
+			int result2 = rimgsDao.update(reviewId, reviewImg);
+			ReviewsItemsDAO ritemDao = new ReviewsItemsDAO();
+			int result3 = ritemDao.update(review.getReviewItemId(),review.getReviewId(), reviewItem1, reviewItem2, reviewItem3, reviewItem4, reviewItem5);
+			ReviewsScoresDAO rSDao = new ReviewsScoresDAO();
+			int result4 = rSDao.update(review.getReviewScoreId(),review.getReviewId(),reviewItem1Score, reviewItem2Score, reviewItem3Score, reviewItem4Score, reviewItem5Score);
 //			BacknumbersDAO bDao = new BacknumbersDAO();
 //			int result5 = bDao.insert(reviewId,backnumberContent);
 			/*int result6 = bDao.delete(backnumberId);*/
 			/*int result7 = bDao.update(backnumberId, backnumberContent);
 			*/
 
-			if (result1 == 1 /*&&result2 == 1 &&result3 == 1 &&result4 == 1 &&result5 == 1*/) {
+			if (result1 == 1 &&result2 == 1 &&result3 == 1 &&result4 == 1 /*&&result5 == 1*/) {
 				request.setAttribute("result", "更新しました。");
 			} else {
 				request.setAttribute("result", "更新できませんでした");
