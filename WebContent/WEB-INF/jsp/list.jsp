@@ -31,14 +31,12 @@
 		<a>リスト項目一覧</a>
 	</h2>
 	<div class="container">
-		<div class="scroll">
-			<div class="flex-container">
-				<c:forEach var="li" items="${list}">
-					<div class="flex-item">
-						<a href="/A4/ListReviewServlet?list_id=${li.listId}">${li.listName} ${li.listCount}</a>
-					</div>
-				</c:forEach>
-			</div>
+		<div class="flex-container">
+			<c:forEach var="li" items="${list}">
+				<div class="flex-item">
+					<a href="/A4/ListReviewServlet?list_id=${li.listId}">${li.listName} ${li.listCount}</a>
+				</div>
+			</c:forEach>
 		</div>
 	<div class="bo">
 		<div class="post-btn">

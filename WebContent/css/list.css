@@ -164,6 +164,7 @@ header .headline{
   box-sizing: border-box;
   border: 1px solid black;
   margin: 10px;
+  margin-left: 100px;
   padding: 10px;
 }
 .container {
