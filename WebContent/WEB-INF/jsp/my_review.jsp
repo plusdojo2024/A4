@@ -343,8 +343,8 @@ input[name="tab_item"] {
         							</tr>
 		        				</table>
 		        				<p><input type="text" name="reviewPrice" placeholder="価格">円</p>
-		        				<input type="text" name="category2Id" placeholder="カテゴリーID" >
-		        				<input type="text" name="reviewImg" placeholder="/A4/img/myicon.jpg" value = "/A4/img/酒.png">
+		        				<input type="hidden" name="category2Id" placeholder="カテゴリーID" >
+		        				<input type="hidden" name="reviewImg" placeholder="/A4/img/myicon.jpg" value = "/A4/img/酒.png">
 		        				<input type="hidden" name="rPrivacyFlg" value=1>
 		        			</div>
 		        			<div class="modal_grid_right">
@@ -382,6 +382,7 @@ input[name="tab_item"] {
 		        	</div>
 		        			<!-- ↓新規登録用ボタン（ここから）↓ -->
 		        			<input class="modal_btn btn_up" type="submit" name="submit" value="新規登録">
+		        			<input id="close_post" class="modal_btn btn_dl" type="button" name="" value="キャンセル">
 		        			<!-- ↑新規登録用ボタン（ここまで）↑ -->
 	        		</div>
 	    	</form>
@@ -545,6 +546,7 @@ input[name="tab_item"] {
  	let post_modal = document.getElementById("my_post_Modal");
  	let post_btn = document.getElementById("open_post_Modal");
  	let post_span = document.getElementById("close_post_Modal");
+ 	let post_close = document.getElementById("close_post");
 
  	// ボタンがクリックされた時にモーダルを表示
  	post_btn.onclick = function() {
@@ -555,6 +557,11 @@ input[name="tab_item"] {
  	post_span.onclick = function() {
  		post_modal.style.display = "none";
  	}
+ 	
+ // ×（クローズアイコン）がクリックされた時にモーダルを非表示
+ 	post_close.onclick = function() {
+ 		post_modal.style.display = "none";
+ 	}
 
  	// モーダルの外側をクリックした時にモーダルを非表示
  	window.onclick = function(event) {
@@ -562,6 +569,7 @@ input[name="tab_item"] {
  	      post_modal.style.display = "none";
  	    }
  	}
+ 	
 
 	</script>
 </body>

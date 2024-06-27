@@ -32,10 +32,9 @@ label {
 header {
 	display : grid;
 	grid-template-columns: 1fr 3fr 1fr;
-  	height: auto;
+  	height: 120px;
   	width: 100%;
-  	padding-top: 2vh;
-  	margin-bottom: 2vh;
+  	padding-top: 10px;
   	background-color: #ffc679;
  	 color: black;
 	margin: 0 auto;
@@ -57,7 +56,7 @@ header .headline{
     margin: 0 auto;
     padding: 0;
     position: relative;
-    height: 100%;
+    height: 88px;
     justify-items: center;
   	align-items: center;
   	width: 70%;
@@ -814,4 +813,5 @@ button{
 	border: 1px solid #333;
 	background-color: #fff;
 	width: 90%;
+	height: 120px;
 }
