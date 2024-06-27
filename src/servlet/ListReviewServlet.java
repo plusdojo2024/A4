@@ -42,6 +42,23 @@ public class ListReviewServlet extends HttpServlet {
 		//リスト用のレビューデータを格納
 		ArrayList<Review> list = rdao.viewList(listId);
 
+		//ReviewItemsDAOをインスタンス化
+		ReviewsItemsDAO ridao = new ReviewsItemsDAO();
+
+		//ReviewScoresDAOをインスタンス化
+		ReviewsScoresDAO rsdao  = new ReviewsScoresDAO();
+
+		//レビュー項目をrlistに追加
+		for (Review r : list) {
+			ridao.view(r.getReviewId(), r);
+		}
+
+		//レビュースコアをrlistに追加
+		for (Review r: list) {
+			rsdao.view(r.getReviewId(), r);
+		}
+
+
 		//スコープに格納
 		request.setAttribute("list", list);
 
