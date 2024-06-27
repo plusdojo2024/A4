@@ -25,7 +25,7 @@
 	</ul>
 
 	  <figure class="icon-circle">
-	  <a href="/A4/LogoutServlet"><img src="A4/img/myicon.jpg" width="100" height="100" alt="マイアイコン"></a></figure>
+	  <a href="/A4/LogoutServlet"><img src="/A4/img/満夫.png" width="100" height="100" alt="マイアイコン"></a></figure>
 
 </header>
 	<div class="search_grid">

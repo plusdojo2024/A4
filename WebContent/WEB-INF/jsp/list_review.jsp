@@ -93,7 +93,7 @@ input[name="tab_item"] {
 
 	<button id="openiconModal">
 	  <figure class="icon-circle">
-	  	<img src="A4/img/myicon.jpg" width="100" height="100" alt="マイアイコン">
+	  	<img src="/A4/img/満夫.png" width="100" height="100" alt="マイアイコン">
 	  </figure>
 	</button>
 	  <!-- ↓アイコンモーダルのエリア↓ -->
@@ -101,7 +101,7 @@ input[name="tab_item"] {
     		<div class="icon_modal_content">
         		<span id="closeiconModal">&times;</span>
         		<div class ="icon_modal_box">
-        			<img class="modal_myicon" src="A4/img/myicon.jpg">
+        			<img class="modal_myicon" src="/A4/img/満夫.png">
         			<div class="name_box">名前</div>
         			<div class="re_btn">ボタン</div>
         			<div class="icon_flex">

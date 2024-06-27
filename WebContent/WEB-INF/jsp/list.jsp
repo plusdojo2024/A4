@@ -22,7 +22,7 @@
 		</ul>
 
 		<figure class="icon-circle">
-			<a href="/A4/LogoutServlet"><img src="/A4/img/myicon.jpg"
+			<a href="/A4/LogoutServlet"><img src="/A4/img/満夫.png"
 				width="100" height="100" alt="マイアイコン"></a>
 		</figure>
 	</header>
