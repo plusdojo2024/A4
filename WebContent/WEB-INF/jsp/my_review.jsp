@@ -322,23 +322,23 @@ input[name="tab_item"] {
         								<td><p>評価点数</p></td>
         							</tr>
         							<tr>
-        								<td><input class="modal_table" type="text" name="reviewItem1" placeholder="立地"></td>
+        								<td><input class="modal_table" type="text" name="reviewItem1" placeholder="評価項目1"></td>
         								<td><input class="modal_table" type="text" name="reviewItem1Score" placeholder="1～5で入力"></td>
         							</tr>
 		        					<tr>
-        								<td><input class="modal_table" type="text" name="reviewItem2"  placeholder="雰囲気"></td>
+        								<td><input class="modal_table" type="text" name="reviewItem2"  placeholder="評価項目2"></td>
         								<td><input class="modal_table" type="text" name="reviewItem2Score" placeholder="1～5で入力"></td>
         							</tr>
 		        					<tr>
-        								<td><input class="modal_table" type="text" name="reviewItem3" placeholder="営業時間"></td>
+        								<td><input class="modal_table" type="text" name="reviewItem3" placeholder="評価項目3"></td>
         								<td><input class="modal_table" type="text" name="reviewItem3Score" placeholder="1～5で入力"></td>
         							</tr>
 		        					<tr>
-        								<td><input class="modal_table" type="text" name="reviewItem4" placeholder="料理"></td>
+        								<td><input class="modal_table" type="text" name="reviewItem4" placeholder="評価項目4"></td>
         								<td><input class="modal_table" type="text" name="reviewItem4Score" placeholder="1～5で入力"></td>
         							</tr>
 		        					<tr>
-        								<td><input class="modal_table" type="text" name="reviewItem5" placeholder="コスパ"></td>
+        								<td><input class="modal_table" type="text" name="reviewItem5" placeholder="評価項目5"></td>
         								<td><input class="modal_table" type="text" name="reviewItem5Score" placeholder="1～5で入力"></td>
         							</tr>
 		        				</table>
@@ -557,7 +557,7 @@ input[name="tab_item"] {
  	post_span.onclick = function() {
  		post_modal.style.display = "none";
  	}
- 	
+
  // ×（クローズアイコン）がクリックされた時にモーダルを非表示
  	post_close.onclick = function() {
  		post_modal.style.display = "none";
@@ -569,7 +569,7 @@ input[name="tab_item"] {
  	      post_modal.style.display = "none";
  	    }
  	}
- 	
+
 
 	</script>
 </body>
