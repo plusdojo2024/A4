@@ -1014,19 +1014,19 @@ public class ReviewsDAO{
 //			+ " LEFT OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
 			+ " LEFT OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
 			+ " LEFT OUTER JOIN users ON users.user_id = reviews.user_id "
-			+ " LEFT OUTER JOIN list ON list.list_id = list_reviews.list_id ";
-//					+ "WHERE"
-//					+ " reviews.review_price between ? AND ? "
-//					+ "AND reviews_scores.score_avg between ? AND ? "
-//					+ "AND reviews.created_at between ? AND ?"
-//
-//			        + " AND "
-//			        + " reviews.delete_flg = 1"
-//			        + " AND"
-//					+ " reviews.privacy_flg = 1 AND users.privacy_flg = 1"
-//					+ " AND"
-//					+ " (reviews.review_name LIKE ? "
-//					+ "OR reviews.review_comment LIKE ?)";
+			+ " LEFT OUTER JOIN list ON list.list_id = list_reviews.list_id "
+					+ "WHERE"
+					+ " reviews.review_price between ? AND ? "
+					+ "AND reviews_scores.score_avg between ? AND ? "
+					+ "AND reviews.created_at between ? AND ?"
+
+			        + " AND "
+			        + " reviews.delete_flg = 1"
+			        + " AND"
+					+ " reviews.privacy_flg = 1 AND users.privacy_flg = 1"
+					+ " AND"
+					+ " (reviews.review_name LIKE ? "
+					+ "OR reviews.review_comment LIKE ?)";
 
 			System.out.println(sql);
 
@@ -1080,10 +1080,10 @@ public class ReviewsDAO{
 				review.setScoreAvg(rs.getInt("reviews_scores.score_avg"));
 				review.setRsCreatedAt(rs.getTimestamp("reviews_scores.created_at"));
 				review.setRsUpdatedAt(rs.getTimestamp("reviews_scores.updated_at"));
-				review.setBacknumberId(rs.getInt("backnumbers.backnumber_id"));
-				review.setBacknumberContent(rs.getString("backnumbers.backnumber_content"));
-				review.setbCreatedAt(rs.getTimestamp("backnumbers.created_at"));
-				review.setbUpdatedAt(rs.getTimestamp("backnumbers.updated_at"));
+//				review.setBacknumberId(rs.getInt("backnumbers.backnumber_id"));
+//				review.setBacknumberContent(rs.getString("backnumbers.backnumber_content"));
+//				review.setbCreatedAt(rs.getTimestamp("backnumbers.created_at"));
+//				review.setbUpdatedAt(rs.getTimestamp("backnumbers.updated_at"));
 				review.setLrListId(rs.getInt("list_reviews.list_id"));
 				review.setLrCreatedAt(rs.getTimestamp("list_reviews.created_at"));
 				review.setLrUpdatedAt(rs.getTimestamp("list_reviews.updated_at"));
