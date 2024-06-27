@@ -179,56 +179,58 @@ input[name="tab_item"] {
 		<!-- ↓レビューアイテムのモーダルのエリア↓ -->
 		<div id="myModal${status.index}" class="modal">
     		<form class="modal-content" method="post" action="/A4/MyReviewServlet">
+    			<!-- ↓これが俺たちのIDだーーーー！！！↓ -->
+        					
+        					<input type="hidden" name="reviewId" value="${e.reviewId}">
+        					<input type="hidden" name="category2Id" value="${e.category2Id}">
+        					<input type="hidden" name="reviewPrice" value="${e.reviewPrice}">
+        					<input type="hidden" name="reviewComment" value="${e.reviewComment}">
+        					<input type="hidden" name="rPrivacyFlg" value="${e.rPrivacyFlg}">
+        					<input type="hidden" name="UpDatedAt" value="${e.rUpdatedAt}">
+        					<input type="hidden" name="backnumberContent" value="${e.backnumberContent}">
+        					<input type="hidden" name="backnumberId" value="${e.backnumberId}">
+
+        					<!-- ↑これが俺たちのIDだーーーー！！！↑ -->
         		<span id="closeModal${status.index}" class="closeModal" onclick="closeM(${status.index})">&times;</span>
         		<div class="modal_box">
         			<img class="modal_img" src="/A4/img/myicon.jpg">
         			<div class="modal_text">
         				<div class="title_box">
-
-        					<!-- ↓これが俺たちのIDだーーーー！！！↓ -->
-        					<input type="text" name="reviewId" value="${e.reviewId}">
-        					<input type="text" name="category2Id" value="${e.category2Id}">
-
-        					<input type="text" name="reviewPrice" value="${e.reviewPrice}">
-        					<input type="text" name="reviewComment" value="${e.reviewComment}">
-        					<input type="text" name="rPrivacyFlg" value="${e.rPrivacyFlg}">
-        					<input type="text" name="UpDatedAt" value="${e.rUpdatedAt}">
-        					<input type="text" name="backnumberContent" value="${e.backnumberContent}">
-        					<input type="text" name="backnumberId" value="${e.backnumberId}">
-
-        					<!-- ↑これが俺たちのIDだーーーー！！！↑ -->
-
         					<p class="create_at">${e.rCreatedAt}</p>
-        					<h1 class="modal_title"><input type="text" name="reviewName" value="${e.reviewName}"></h1>
-        					<input type="text" name="reviewName" value="${e.reviewName}">
+        					<input class="modal_title" type="text" name="reviewName" value="${e.reviewName}">
         				</div>
         				<div class="modal_grid">
         					<div class="modal_grid_left">
         						<table class="eva">
         							<tr>
-        								<td><input type="text" name="reviewItem1" value="${e.reviewItem1}"></td>
-        								<td><input type="text" name="reviewItem1Score" value="${e.reviewItem1Score}"></td>
+        								<td><p>カテゴリー</p></td>
+        								<td><p>評価点数</p></td>
         							</tr>
         							<tr>
-        								<td><input type="text" name="reviewItem2" value="${e.reviewItem2}"></td>
-        								<td><input type="text" name="reviewItem2Score" value="${e.reviewItem2Score}"></td>
+        								<td><input class="modal_table" type="text" name="reviewItem1" value="${e.reviewItem1}"></td>
+        								<td><input class="modal_table" type="text" name="reviewItem1Score" value="${e.reviewItem1Score}"></td>
         							</tr>
         							<tr>
-        								<td><input type="text" name="reviewItem3" value="${e.reviewItem3}"></td>
-        								<td><input type="text" name="reviewItem3Score" value="${e.reviewItem3Score}"></td>
+        								<td><input class="modal_table" type="text" name="reviewItem2" value="${e.reviewItem2}"></td>
+        								<td><input class="modal_table" type="text" name="reviewItem2Score" value="${e.reviewItem2Score}"></td>
         							</tr>
         							<tr>
-        								<td>$<input type="text" name="reviewItem4" value="${e.reviewItem4}"></td>
-        								<td><input type="text" name="reviewItem4Score" value="${e.reviewItem4Score}"></td>
+        								<td><input class="modal_table" type="text" name="reviewItem3" value="${e.reviewItem3}"></td>
+        								<td><input class="modal_table" type="text" name="reviewItem3Score" value="${e.reviewItem3Score}"></td>
         							</tr>
         							<tr>
-        								<td><input type="text" name="reviewItem5" value="${e.reviewItem5}"></td>
-        								<td><input type="text" name="reviewItem5Score" value="${e.reviewItem5Score}"></td>
+        								<td><input class="modal_table" type="text" name="reviewItem4" value="${e.reviewItem4}"></td>
+        								<td><input class="modal_table" type="text" name="reviewItem4Score" value="${e.reviewItem4Score}"></td>
+        							</tr>
+        							<tr>
+        								<td><input class="modal_table" type="text" name="reviewItem5" value="${e.reviewItem5}"></td>
+        								<td><input class="modal_table" type="text" name="reviewItem5Score" value="${e.reviewItem5Score}"></td>
         							</tr>
         						</table>
         					</div>
         					<div class="modal_grid_right">
         						<div class="up_box">
+        							<p class="open_close_title">公開・非公開</p>
         							<div class="open_close">
 													<label class="switch"> <input checked="true"
 														type="checkbox" name="ch" value="checked">
@@ -261,19 +263,20 @@ input[name="tab_item"] {
 									</div>
         						<%--  --%>
         						</div>
-        						<h1 class="avg">総合評価${e.scoreAvg}</h1>
+        						<h1 class="avg">総合評価${e.scoreAvg}/5</h1>
 							<!-- ↑ここまでモーダルウインドウのエリア↑ -->
         					</div>
         				</div>
         			</div>
-        			<input class="remarks" type="text" name="reviewComment" value="${e.reviewComment}">
+        			<input class="remarks" type="text" name="reviewComment" value="${e.reviewComment}" placeholder="備考">
 	<c:forEach var="e" items="${bkList}" varStatus="backnumber">
         			<input class="back_number" type="hidden" name="backnumberId" value="${e.backnumberId}">
         			<input class="back_number" type="text" name="backnumberContent" value="${e.backnumberContent}">
     </c:forEach>
-        			<!-- ↓編集用ボタン（ここから）↓ -->
-        			<input type="submit" name="submit" value="更新">
-        			<!-- ↑編集用ボタン（ここまで）↑ -->
+        			<!-- ↓更新用ボタン（ここから）↓ -->
+        			<input class="modal_btn btn_up" type="submit" name="submit" value="更新">
+        			<input class="modal_btn btn_dl" type="submit" name="submit" value="削除">
+        			<!-- ↑更新用ボタン（ここまで）↑ -->
         		</div>
     		</form>
 		</div>
@@ -283,7 +286,7 @@ input[name="tab_item"] {
 	</div>
 	<div class= "side">
   		<div class="sort">
-  			<img src="/A4/img/myicon.jpg" width="100" height="100" alt="マイアイコン">
+  			<img src="/A4/img/down.png" width="100" height="100" alt="マイアイコン">
   		</div>
   		<ul class="sort_item">
 			<li>五十音順</li>
@@ -304,29 +307,79 @@ input[name="tab_item"] {
 	  	<div id="my_post_Modal" class="modal">
 	  		<form class="modal-content" method="post" action="/A4/MyReviewServlet">
 			<span id="close_post_Modal" class="closeModal">&times;</span>
-		        	<div class ="icon_modal_box">
-		        					<input type="text" name="category2Id" placeholder="category2Id">
-		        					<input type="text" name="reviewName"  placeholder="reviewName">
-		        					<input type="text" name="reviewPrice" placeholder="reviewPrice" >
-		        					<input type="text" name="reviewComment" placeholder="reviewComment">
-		        					<input type="text" name="rPrivacyFlg" placeholder="rPrivacyFlg">
-		        					<input type="text" name="UpDatedAt"  placeholder="UpDatedAt">
-		        					<input type="text" name="reviewItem1" placeholder="reviewItem1">
-		        					<input type="text" name="reviewItem2"  placeholder="reviewItem2">
-		        					<input type="text" name="reviewItem3" placeholder="reviewItem3">
-		        					<input type="text" name="reviewItem4" placeholder="reviewItem4">
-		        					<input type="text" name="reviewItem5" placeholder="reviewItem5">
-		        					<input type="text" name="reviewItem1Score" placeholder="reviewItem1Score">
-		        					<input type="text" name="reviewItem2Score" placeholder="reviewItem2Score">
-		        					<input type="text" name="reviewItem3Score" placeholder="reviewItem3Score">
-		        					<input type="text" name="reviewItem4Score" placeholder="reviewItem4Score">
-		        					<input type="text" name="reviewItem5Score" placeholder="reviewItem5Score">
-		        			<div class="icon_flex">
+		        	<div class ="post_modal_box">
+		        		<img class="modal_img" src="/A4/img/add.png">
+		        		<div class="modal_text_box">
+		        			<input type="hidden" name="UpDatedAt"  placeholder="投稿日時">
+		        			<input class="modal_title" type="text" name="reviewName"  placeholder="レビュー名">
+		        		<div class="modal_grid">
+		        			<div class="modal_grid_left">
+		        				<table class="eva">
+		        					<tr>
+        								<td><p>カテゴリー</p></td>
+        								<td><p>評価点数</p></td>
+        							</tr>
+        							<tr>
+        								<td><input class="modal_table" type="text" name="reviewItem1" placeholder="項目1"></td>
+        								<td><input class="modal_table" type="text" name="reviewItem1Score" placeholder="評価点数"></td>
+        							</tr>
+		        					<tr>
+        								<td><input class="modal_table" type="text" name="reviewItem2"  placeholder="項目2"></td>
+        								<td><input class="modal_table" type="text" name="reviewItem2Score" placeholder="reviewItem2Score"></td>
+        							</tr>
+		        					<tr>
+        								<td><input class="modal_table" type="text" name="reviewItem3" placeholder="項目3"></td>
+        								<td><input class="modal_table" type="text" name="reviewItem3Score" placeholder="reviewItem3Score"></td>
+        							</tr>
+		        					<tr>
+        								<td><input class="modal_table" type="text" name="reviewItem4" placeholder="項目4"></td>
+        								<td><input class="modal_table" type="text" name="reviewItem4Score" placeholder="reviewItem4Score"></td>
+        							</tr>
+		        					<tr>
+        								<td><input class="modal_table" type="text" name="reviewItem5" placeholder="項目5"></td>
+        								<td><input class="modal_table" type="text" name="reviewItem5Score" placeholder="reviewItem5Score"></td>
+        							</tr>
+		        				</table>
+		        				<input type="text" name="reviewPrice" placeholder="reviewPrice" >
+		        				<input type="text" name="category2Id" placeholder="category2Id">
+		        				<input type="text" name="rPrivacyFlg" placeholder="rPrivacyFlg">
+		        			</div>
+		        			<div class="modal_grid_right">
+		        				<div class="modal_grid_right_top">
+		        				<p class="open_close_title">公開・非公開</p>
+		        				<div class="open_close">
+										<label class="switch"> <input checked="true" type="checkbox" name="ch" value="checked">
+											<div class="slider">
+												<div class="circle">
+													<svg class="cross" 	xml:space="preserve" style="enable-background: new 0 0 512 512"
+																		viewBox="0 0 365.696 365.696" y="0" x="0" height="6"
+																		width="6" xmlns:xlink="http://www.w3.org/1999/xlink"
+																		version="1.1" xmlns="http://www.w3.org/2000/svg">
+                										<g>
+                    										<path data-original="#000000" fill="currentColor" d="M243.188 182.86 356.32 69.726c12.5-12.5 12.5-32.766 0-45.247L341.238 9.398c-12.504-12.503-32.77-12.503-45.25 0L182.86 122.528 69.727 9.374c-12.5-12.5-32.766-12.5-45.247 0L9.375 24.457c-12.5 12.504-12.5 32.77 0 45.25l113.152 113.152L9.398 295.99c-12.503 12.503-12.503 32.769 0 45.25L24.48 356.32c12.5 12.5 32.766 12.5 45.247 0l113.132-113.132L295.99 356.32c12.503 12.5 32.769 12.5 45.25 0l15.081-15.082c12.5-12.504 12.5-32.77 0-45.25zm0 0"></path>
+                										</g>
+            										</svg>
+													<svg class="checkmark" 	xml:space="preserve"
+																			style="enable-background: new 0 0 512 512"
+																			viewBox="0 0 24 24" y="0" x="0" height="10" width="10"
+																			xmlns:xlink="http://www.w3.org/1999/xlink"
+																			version="1.1" xmlns="http://www.w3.org/2000/svg">
+                										<g>
+                    										<path class="" data-original="#000000" fill="currentColor" d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"></path>
+               					 						</g>
+            										</svg>
+												</div>
+											</div>
+										</label>
+									</div>
+									</div>
+		        					<input type="text" name="reviewComment" placeholder="備考">
+		        			</div>
+		        		</div>
+		        	</div>		
 		        			<!-- ↓新規登録用ボタン（ここから）↓ -->
-		        			<input type="submit" name="submit" value="新規登録">
+		        			<input class="modal_btn btn_up" type="submit" name="submit" value="新規登録">
 		        			<!-- ↑新規登録用ボタン（ここまで）↑ -->
-
-	        			</div>
 	        		</div>
 	    	</form>
 		</div>

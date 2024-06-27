@@ -1146,7 +1146,7 @@ public class ReviewsDAO{
 			+ "reviews_scores.review_score_id,"
 			+ "reviews_scores.review_item1_score,reviews_scores.review_item2_score,reviews_scores.review_item3_score,reviews_scores.review_item4_score,reviews_scores.review_item5_score,"
 			+ "reviews_scores.score_avg,reviews_scores.created_at,reviews_scores.updated_at,"
-			+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.created_at,backnumbers.updated_at,"
+//			+ "backnumbers.backnumber_id,backnumbers.backnumber_content,backnumbers.created_at,backnumbers.updated_at,"
 			+ "list_reviews.list_id,list_reviews.created_at,list_reviews.updated_at,"
 			+ "users.user_email,users.user_password,users.user_id,users.user_name,users.user_img,users.privacy_flg,users.created_at,users.updated_at,"
 			+ "list.list_name FROM reviews "
@@ -1154,18 +1154,18 @@ public class ReviewsDAO{
 			+ "LEFT OUTER JOIN categorys2 ON reviews.category2_id = categorys2.category2_id "
 			+ "LEFT OUTER JOIN reviews_items ON reviews_items.review_id = reviews.review_id "
 			+ "LEFT OUTER JOIN reviews_scores ON reviews_scores.review_id = reviews.review_id "
-			+ "LEFT OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
+//			+ "LEFT OUTER JOIN backnumbers ON backnumbers.review_id = reviews.review_id "
 			+ "LEFT OUTER JOIN list_reviews ON list_reviews.review_id = reviews.review_id "
 			+ "LEFT OUTER JOIN users ON users.user_id = reviews.user_id "
-			+ "LEFT OUTER JOIN list ON list.list_id = list_reviews.list_id "
-					+ "WHERE"
-					+ "reviews.review_price between ? AND ? AND reviews_scores.score_avg between ? AND ? AND reviews.created_at between ? AND ?"
-					+ "AND"
-					+ "reviews.category2_id = ? AND reviews.review_name LIKE ? AND reviews.review_comment LIKE ?"
-			        + "AND "
-			        + "reviews.delete_flg = 1"
-					+ "AND"
-					+ "reviews.user_id = ? OR (reviews.privacy_flg = 1 AND users.privacy_flg = 1)";
+			+ "LEFT OUTER JOIN list ON list.list_id = list_reviews.list_id ";
+//					+ "WHERE"
+//					+ "reviews.review_price between ? AND ? AND reviews_scores.score_avg between ? AND ? AND reviews.created_at between ? AND ?"
+//					+ "AND"
+//					+ "reviews.category2_id = ? AND reviews.review_name LIKE ? AND reviews.review_comment LIKE ?"
+//			        + "AND "
+//			        + "reviews.delete_flg = 1"
+//					+ "AND"
+//					+ "reviews.user_id = ? OR (reviews.privacy_flg = 1 AND users.privacy_flg = 1)";
 
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setInt(1, priceA);//引数sqlにsetStringしてる
