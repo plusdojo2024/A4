@@ -93,7 +93,7 @@ input[name="tab_item"] {
 
 	<button id="openiconModal">
 	  <figure class="icon-circle">
-	  	<img src="/A4/img/myicon.jpg" width="100" height="100" alt="マイアイコン">
+	  	<img src="A4/img/myicon.jpg" width="100" height="100" alt="マイアイコン">
 	  </figure>
 	</button>
 	  <!-- ↓アイコンモーダルのエリア↓ -->
@@ -101,7 +101,7 @@ input[name="tab_item"] {
     		<div class="icon_modal_content">
         		<span id="closeiconModal">&times;</span>
         		<div class ="icon_modal_box">
-        			<img class="modal_myicon" src="/A4/img/myicon.jpg">
+        			<img class="modal_myicon" src="A4/img/myicon.jpg">
         			<div class="name_box">名前</div>
         			<div class="re_btn">ボタン</div>
         			<div class="icon_flex">
@@ -165,7 +165,7 @@ input[name="tab_item"] {
   	<c:forEach var="e" items="${list}" varStatus="status">
   		<button id="openModal${status.index}" onclick="openM(${status.index})">
     		<div class="flex-item">
-    			<div class= "item_img"><img src="/A4/img/myicon.jpg" width="100" height="100" alt="マイアイコン"></div>
+    			<div class= "item_img"><img src="${e.reviewImg}" width="100" height="100" alt="マイアイコン"></div>
     			<div class="grid_item2">
     				<h1>${e.reviewName}</h1>
 
@@ -193,7 +193,7 @@ input[name="tab_item"] {
         					<!-- ↑これが俺たちのIDだーーーー！！！↑ -->
         		<span id="closeModal${status.index}" class="closeModal" onclick="closeM(${status.index})">&times;</span>
         		<div class="modal_box">
-        			<img class="modal_img" src="/A4/img/myicon.jpg">
+        			<img class="modal_img" src="${e.reviewImg}">
         			<div class="modal_text">
         				<div class="title_box">
         					<p class="create_at">${e.rCreatedAt}</p>
@@ -203,7 +203,7 @@ input[name="tab_item"] {
         					<div class="modal_grid_left">
         						<table class="eva">
         							<tr>
-        								<td><p>カテゴリー</p></td>
+        								<td><p>評価項目</p></td>
         								<td><p>評価点数</p></td>
         							</tr>
         							<tr>
@@ -298,11 +298,11 @@ input[name="tab_item"] {
 			<li>評価</li>
 		</ul>
 		<!-- ↓投稿用ボタンのエリア↓ -->
-		<button id="open_post_Modal">
+<!-- 		<button id="open_post_Modal">
 	  		<div class="post-btn">
 	  			<img src="/A4/img/removebg-preview.png">
 	  		</div>
-		</button>
+		</button> -->
 		<!-- ↑ここまで投稿用ボタンのエリア↑ -->
 
 	  	<!-- ↓投稿用モーダルのエリア↓ -->

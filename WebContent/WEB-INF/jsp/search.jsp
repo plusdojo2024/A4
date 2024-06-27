@@ -25,7 +25,7 @@
 	</ul>
 
 	  <figure class="icon-circle">
-	  <a href="/A4/LogoutServlet"><img src="/A4/img/myicon.jpg" width="100" height="100" alt="マイアイコン"></a></figure>
+	  <a href="/A4/LogoutServlet"><img src="A4/img/myicon.jpg" width="100" height="100" alt="マイアイコン"></a></figure>
 
 </header>
 	<div class="search_grid">
@@ -131,7 +131,7 @@
   	<c:forEach var="e" items="${rlist}" varStatus="status">
   		<button id="openModal${status.index}" onclick="openM(${status.index})">
     		<div class="flex-item">
-    			<div class= "item_img"><img src="/A4/img/myicon.jpg" width="100" height="100" alt="マイアイコン"></div>
+    			<div class= "item_img"><img src="${e.reviewImg}" width="100" height="100" alt="マイアイコン"></div>
     			<div class="grid_item2">
     				<h1>${e.reviewName}</h1>
 
@@ -146,7 +146,7 @@
 		<div id="myModal${status.index}" class="modal">
     		<form class="modal-content" method="post" action="/A4/MyReviewServlet">
     			<!-- ↓これが俺たちのIDだーーーー！！！↓ -->
-        					
+
         					<input type="hidden" name="reviewId" value="${e.reviewId}">
         					<input type="hidden" name="category2Id" value="${e.category2Id}">
         					<input type="hidden" name="reviewPrice" value="${e.reviewPrice}">
@@ -159,7 +159,7 @@
         					<!-- ↑これが俺たちのIDだーーーー！！！↑ -->
         		<span id="closeModal${status.index}" class="closeModal" onclick="closeM(${status.index})">&times;</span>
         		<div class="modal_box">
-        			<img class="modal_img" src="/A4/img/myicon.jpg">
+        			<img class="modal_img" src="${e.reviewImg}">
         			<div class="modal_text">
         				<div class="title_box">
         					<p class="create_at">${e.rCreatedAt}</p>
@@ -241,7 +241,7 @@
         				<p class="kkk">${e.reviewComment}"</p>
         			</div>
         			</div>
-        			
+
 	<c:forEach var="e" items="${bkList}" varStatus="backnumber">
         			<input class="back_number" type="hidden" name="backnumberId" value="${e.backnumberId}">
         			<input class="back_number" type="text" name="backnumberContent" value="${e.backnumberContent}">
@@ -258,10 +258,10 @@
   	</div>
 	</div>
 	</div>
-	
+
 	</div>
 	</div>
-	
+
 
 
 <script>

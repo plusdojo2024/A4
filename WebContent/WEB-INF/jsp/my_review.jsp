@@ -104,9 +104,7 @@ input[name="tab_item"] {
         		<div class ="icon_modal_box">
         			<img class="modal_myicon" src="${img}">
         			<div class="name_box">${name}</div>
-        			<div class="re_btn">ボタン</div>
         			<div class="icon_flex">
-        				<div class="change">変更</div>
         				<div class="logout"><a href="/A4/LoginServlet">ログアウト</a></div>
         			</div>
         		</div>
@@ -320,33 +318,33 @@ input[name="tab_item"] {
 		        			<div class="modal_grid_left">
 		        				<table class="eva">
 		        					<tr>
-        								<td><p>カテゴリー</p></td>
+        								<td><p>評価項目</p></td>
         								<td><p>評価点数</p></td>
         							</tr>
         							<tr>
-        								<td><input class="modal_table" type="text" name="reviewItem1" placeholder="項目1"></td>
-        								<td><input class="modal_table" type="text" name="reviewItem1Score" placeholder="評価点数"></td>
+        								<td><input class="modal_table" type="text" name="reviewItem1" placeholder="立地"></td>
+        								<td><input class="modal_table" type="text" name="reviewItem1Score" placeholder="1～5で入力"></td>
         							</tr>
 		        					<tr>
-        								<td><input class="modal_table" type="text" name="reviewItem2"  placeholder="項目2"></td>
-        								<td><input class="modal_table" type="text" name="reviewItem2Score" placeholder="reviewItem2Score"></td>
+        								<td><input class="modal_table" type="text" name="reviewItem2"  placeholder="雰囲気"></td>
+        								<td><input class="modal_table" type="text" name="reviewItem2Score" placeholder="1～5で入力"></td>
         							</tr>
 		        					<tr>
-        								<td><input class="modal_table" type="text" name="reviewItem3" placeholder="項目3"></td>
-        								<td><input class="modal_table" type="text" name="reviewItem3Score" placeholder="reviewItem3Score"></td>
+        								<td><input class="modal_table" type="text" name="reviewItem3" placeholder="営業時間"></td>
+        								<td><input class="modal_table" type="text" name="reviewItem3Score" placeholder="1～5で入力"></td>
         							</tr>
 		        					<tr>
-        								<td><input class="modal_table" type="text" name="reviewItem4" placeholder="項目4"></td>
-        								<td><input class="modal_table" type="text" name="reviewItem4Score" placeholder="reviewItem4Score"></td>
+        								<td><input class="modal_table" type="text" name="reviewItem4" placeholder="料理"></td>
+        								<td><input class="modal_table" type="text" name="reviewItem4Score" placeholder="1～5で入力"></td>
         							</tr>
 		        					<tr>
-        								<td><input class="modal_table" type="text" name="reviewItem5" placeholder="項目5"></td>
-        								<td><input class="modal_table" type="text" name="reviewItem5Score" placeholder="reviewItem5Score"></td>
+        								<td><input class="modal_table" type="text" name="reviewItem5" placeholder="コスパ"></td>
+        								<td><input class="modal_table" type="text" name="reviewItem5Score" placeholder="1～5で入力"></td>
         							</tr>
 		        				</table>
-		        				<input type="text" name="reviewPrice" placeholder="reviewPrice" >
-		        				<input type="text" name="category2Id" placeholder="category2Id">
-		        				<input type="text" name="rPrivacyFlg" placeholder="rPrivacyFlg">
+		        				<p><input type="text" name="reviewPrice" placeholder="価格">円</p>
+		        				<input type="text" name="category2Id" placeholder="カテゴリーID" value=1>
+		        				<input type="hidden" name="rPrivacyFlg" value=1>
 		        			</div>
 		        			<div class="modal_grid_right">
 		        				<div class="modal_grid_right_top">
@@ -394,13 +392,6 @@ input[name="tab_item"] {
 
 
  	<script>
-
-
-//入れた
-
-
-
-
 
  	/*==============================
  	レビューアイテムのjs
