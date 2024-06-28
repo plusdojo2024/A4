@@ -34,11 +34,11 @@
 		<div class="flex-container">
 			<c:forEach var="li" items="${list}">
 				<div class="flex-item">
-					<a href="/A4/ListReviewServlet?list_id=${li.listId}">${li.listName} ${li.listCount}</a>
+					<a href="/A4/ListReviewServlet?list_id=${li.listId}">${li.listName} （${li.listCount}）</a>
 				</div>
 			</c:forEach>
 		</div>
-	<div class="bo">
+	<div id="my_post" class="bo">
 		<div class="post-btn">
 			<a href="/"> <img src="/A4/img/sinkilist.png">
 			</a>
