@@ -343,7 +343,7 @@ input[name="tab_item"] {
         							</tr>
 		        				</table>
 		        				<p><input type="text" name="reviewPrice" placeholder="価格">円</p>
-		        				<input type="hidden" name="category2Id" placeholder="カテゴリーID" >
+		        				<input type="hidden" name="category2Id" placeholder="カテゴリーID" value = 1>
 		        				<input type="hidden" name="reviewImg" placeholder="/A4/img/myicon.jpg" value = "/A4/img/酒.png">
 		        				<input type="hidden" name="rPrivacyFlg" value=1>
 		        			</div>
